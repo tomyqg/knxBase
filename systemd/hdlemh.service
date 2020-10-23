@@ -1,0 +1,11 @@
+[Unit]
+Description=EIB/KNX system
+After=knx.service
+After=knxmon.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/hdlemh
+
+[Install]
+WantedBy=multi-user.target

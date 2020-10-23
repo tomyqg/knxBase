@@ -1,0 +1,190 @@
+.\" Copyright (c) 1983, 1990, 1993
+.\"	The Regents of the University of California.  All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\"	This product includes software developed by the University of
+.\"	California, Berkeley and its contributors.
+.\" 4. Neither the name of the University nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	@(#)telnet.1	8.6 (Berkeley) 6/1/94
+.\" $FreeBSD: src/crypto/telnet/telnet/telnet.1,v 1.4.2.9 2002/04/13 10:59:08 markm Exp $
+.\"
+.Dd January 27, 2000
+.Dt TELNET 1
+.Os
+.Sh NAME
+.Nm telnet
+.Nd user interface to the
+.Tn TELNET
+protocol
+.Sh SYNOPSIS
+.Nm
+.Op Fl 468EFKLNacdfruxy
+.Op Fl S Ar tos
+.Op Fl X Ar authtype
+.Op Fl e Ar escapechar
+.Op Fl k Ar realm
+.Op Fl l Ar user
+.Op Fl n Ar tracefile
+.Op Fl s Ar src_addr
+.Oo
+.Ar host
+.Op Ar port
+.Oc
+.Sh DESCRIPTION
+The
+.Nm
+command
+is used to communicate with another host using the
+.Tn TELNET
+protocol.
+If
+.Nm
+is invoked without the
+.Ar host
+argument, it enters command mode,
+indicated by its prompt
+.Pq Dq Li telnet\&> .
+In this mode, it accepts and executes the commands listed below.
+If it is invoked with arguments, it performs an
+.Ic open
+command with those arguments.
+.Pp
+Options:
+.Bl -tag -width indent
+.It Fl 4
+Forces
+.Nm
+to use IPv4 addresses only.
+.It Fl 6
+Forces
+.Nm
+to use IPv6 addresses only.
+.It Fl 8
+Specifies an 8-bit data path.  This causes an attempt to
+negotiate the
+.Dv TELNET BINARY
+option on both input and output.
+.It Fl E
+Stops any character from being recognized as an escape character.
+.It Fl F
+If Kerberos V5 authentication is being used, the
+.Fl F
+option allows the local credentials to be forwarded
+to the remote system, including any credentials that
+have already been forwarded into the local environment.
+.It Fl K
+Specifies no automatic login to the remote system.
+.It Fl L
+Specifies an 8-bit data path on output.  This causes the
+.Dv BINARY
+option to be negotiated on output.
+.It Fl N
+Prevents IP address to name lookup when destination host is given
+as an IP address.
+.It Fl S Ar tos
+Sets the IP type-of-service (TOS) option for the telnet
+connection to the value
+.Ar tos ,
+which can be a numeric TOS value
+or, on systems that support it, a symbolic
+TOS name found in the
+.Pa /etc/iptos
+file.
+.It Fl X Ar atype
+Disables the
+.Ar atype
+type of authentication.
+.It Ar host
+Indicates the official name, an alias, or the Internet address
+of a remote host.
+If
+.Ar host
+starts with a
+.Ql / ,
+.Nm
+establishes a connection to the corresponding named socket.
+.El
+.Pp
+When in rlogin mode, a line of the form ~.  disconnects from the
+remote host; ~ is the
+.Nm
+escape character.
+Similarly, the line ~^Z suspends the
+.Nm
+session.
+The line ~^] escapes to the normal
+.Nm
+escape prompt.
+.Pp
+In \*(Lqold line by line\*(Rq mode, all text is echoed locally,
+and (normally) only completed lines are sent to the remote host.
+The \*(Lqlocal echo character\*(Rq (initially \*(Lq^E\*(Rq) may be used
+to turn off and on the local echo
+(this would mostly be used to enter passwords
+without the password being echoed).
+.El
+.Sh ENVIRONMENT
+.Nm
+uses at least the
+.Ev HOME ,
+.Ev SHELL ,
+.Ev DISPLAY ,
+and
+.Ev TERM
+environment variables.
+Other environment variables may be propagated
+to the other side via the
+.Dv TELNET ENVIRON
+option.
+.Sh SEE ALSO
+.Xr knxipbridge 1 ,
+.Xr knxtrace 1 ,
+.Xr knxmon 1 ,
+.Xr knxwriteval 1 ,
+.Xr knxreadval 1
+.Sh FILES
+.Bl -tag -width ~/.telnetrc -compact
+.It Pa ~/.telnetrc
+user customized telnet startup values
+.El
+.Sh HISTORY
+The
+.Nm
+command appeared in
+.Bx 4.2 .
+.Pp
+IPv6 support was added by WIDE/KAME project.
+.Sh NOTES
+On some remote systems, echo has to be turned off manually when in
+\*(Lqold line by line\*(Rq mode.
+.Pp
+In \*(Lqold line by line\*(Rq mode or
+.Dv LINEMODE
+the terminal's
+.Ic eof
+character is only recognized (and sent to the remote system)
+when it is the first character on a line.

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro reserve="10">
+	<GroupAddress postfix="UPDOWN"			dpt="1.001" trigger="true" />
+	<GroupAddress postfix="STOP"			dpt="1.001" trigger="true" />
+	<GroupAddress postfix="SETPOSITION"		dpt="5.001" trigger="true" />
+	<GroupAddress postfix="ACTPOSITION"		dpt="5.001" trigger="false" />
+	<GroupAddress postfix="MODE_AUTO"		dpt="5.001" trigger="false" />
+	<GroupAddress postfix="MODE_AUTO_ON"	dpt="1.001" trigger="false" />
+	<GroupAddress postfix="START_REFERENCE"	dpt="1.001" trigger="false" />
+</macro>

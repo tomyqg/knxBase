@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="SETONOFF"			dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ACTONOFF"			dpt="1.001" trigger="true" />
+	<GroupAddress postfix="HANDLER_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="TIMER_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="FORCEON"				dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ALLOW_WATER"			dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ALLOW_HEATING"		dpt="1.001" trigger="true" />
+</macro>

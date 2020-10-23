@@ -1,0 +1,13 @@
+[Unit]
+Description=EIB/KNX heatpump energy handler
+After=knxmon.service
+BindsTo=knxmon.service
+BindsTo=knxtpbridge.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/hdlpellet -w
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=EIB/KNX bridge for eib/knx bus via serial line
+After=knxbackbone.service
+BindsTo=knxbackbone.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/knxtpbridge
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

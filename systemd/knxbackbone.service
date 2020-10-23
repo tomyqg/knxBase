@@ -1,0 +1,11 @@
+[Unit]
+Description=EIB/KNX internal backbone
+After=syslog.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/knxbackbone
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

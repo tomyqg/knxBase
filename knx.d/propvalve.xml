@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="OPENCLOSE"	dpt="1.001" trigger="true" />
+	<GroupAddress postfix="STOP"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="SETVALUE"	dpt="5.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE"	dpt="5.001" trigger="true" />
+</macro>

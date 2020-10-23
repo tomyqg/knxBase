@@ -1,0 +1,57 @@
+[fallback]
+id = office.left
+knxUp = 
+knxDown = 
+knxStop =
+knxPositionSet =
+rainCloseOn = yes
+rainMinDownTime = 0:15
+mode = time						# operation mode: time, brightness, sunrise
+upTime = 08:00					
+downTime = 22:00				
+brightUp = 0					
+brightDown = 0					
+brightHysteresis = 0			
+brightMinDownTime = 0:15		# minimum time before shade will be raised automatically
+brightMinUpTime = 0:15			# minimum time before shade will be lowered automatically
+sunriseOffsetRaise = -0:30		# 30 minutes before scheduled sunrise
+sunriseOffsetLower = 0:30		# 30 minutes after scheduled sunset
+
+[0]
+id = office.left
+knxUp = 
+knxDown = 
+knxStop =
+knxPositionSet =
+rainCloseOn = yes
+rainMinDownTime = 0:15
+mode = time						# operation mode: time, brightness, sunrise
+upTime = 08:00					
+downTime = 22:00				
+brightUp = 0					
+brightDown = 0					
+brightHysteresis = 0			
+brightMinDownTime = 0:15		# minimum time before shade will be raised automatically
+brightMinUpTime = 0:15			# minimum time before shade will be lowered automatically
+sunriseOffsetRaise = -0:30		# 30 minutes before scheduled sunrise
+sunriseOffsetLower = 0:30		# 30 minutes after scheduled sunset
+
+[1]
+id = office.right
+mode = brightness
+upTime = 00:00
+downTime = 00:00
+up = 100
+down = 200
+hysteresis = 20
+
+[2]
+id = storage
+mode = off
+upTime = 00:00
+downTime = 00:00
+up = 0
+down = 0
+hysteresis = 0
+
+

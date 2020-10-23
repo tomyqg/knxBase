@@ -1,0 +1,16 @@
+[Unit]
+Description=EIB/KNX tracer
+Wants=network-online.target
+After=knxmon.service
+After=network-online.target
+BindsTo=knxmon.service
+BindsTo=knxtpbridge.service
+TimeoutSec=30
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/knxmysqltrace
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

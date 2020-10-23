@@ -1,0 +1,12 @@
+[Unit]
+Description=EIB/KNX system
+After=knxmon.service
+After=mysql.service
+BindsTo=mysql.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/<executable>
+
+[Install]
+WantedBy=multi-user.target

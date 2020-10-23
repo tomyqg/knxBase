@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="SETONOFF"	dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ACTONOFF"	dpt="1.001" trigger="false" />
+	<GroupAddress postfix="SETVALUE"	dpt="9.001" trigger="false" />
+	<GroupAddress postfix="ACTVALUE"	dpt="9.001" trigger="false" />
+	<GroupAddress postfix="FORCE"		dpt="9.001" trigger="false" />
+	<GroupAddress postfix="VALRED"		dpt="9.001" trigger="false" />
+	<GroupAddress postfix="VALGREEN"	dpt="9.001" trigger="false" />
+	<GroupAddress postfix="VALBLUE"		dpt="9.001" trigger="false" />
+	<GroupAddress postfix="VALWW"		dpt="9.001" trigger="false" />
+	<GroupAddress postfix="VALCW"		dpt="9.001" trigger="false" />
+</macro>

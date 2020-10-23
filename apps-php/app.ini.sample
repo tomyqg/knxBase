@@ -1,0 +1,16 @@
+[dbSys]
+alias		=	"sys"
+host		=	"localhost"
+user		=	"user name"
+password	=	"password"
+name		=	"database name"
+driver		=	"mysql"
+prefix		=	""
+
+
+[dbRemote]
+url		=	"http://mas.wimtecc.de/***/knxUploadData.php"
+urlUser		=	"user"
+urlPassword	=	"password"
+dbUser		=	"user name remote database"
+dbPassword	=	"password remote database"

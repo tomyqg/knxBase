@@ -1,0 +1,113 @@
+[knxglobals]
+daemon = 1
+queueKey	=	10031
+
+[knxbackbone]
+
+[knxtpbridge]
+daemon = 1
+baudRate	=	19200
+bits		=	8
+parity		=	e
+stop		=	1
+serial		=	/dev/ttyAMA0
+
+[knxmqttbridge]
+daemon = 1
+useTLS	=	1
+host	=	a.b.c.d
+user	=	USER
+passwd	=	PASSWORD
+caCert	=	/etc/mosquitto/ca_certificates/ca.crt
+key	=	/etc/mosquitto/certs/device003.key
+cert	=	/etc/mosquitto/certs/device003.crt
+filter	=	baos
+
+[knxmon]
+daemon = 1
+dbHost		=	nas1
+dbUser		=	DBUSER
+dbPassword	=	DBPASSWORD
+dbName		=	DBNAME
+
+#
+# mode can be:
+#	server
+#	client
+#
+[knxipbridge]
+daemon = 1
+mode		=	server
+
+#
+# the next section is intended specifically for the tracer (knxtrace)
+#
+[knxtrace]
+daemon = 1
+dbHost		=	nas1
+dbUser		=	DBUSER
+dbPassword	=	DBPASSWORD
+dbName		=	DBNAME
+
+#
+# the next section is intended specifically for the mysql-tracer (knxmysqltrace)
+#
+[knxmysqltrace]
+daemon		=	1
+dbHost		=	nas1
+dbUser		=	DBUSER
+dbPassword	=	DBPASSWORD
+dbName		=	DBNAME
+
+[handler]
+
+[hdlheatpump]
+daemon = 1
+senderAddr	=	1025
+handleBuffer	=	1
+handleWater	=	0
+
+[hdlpellet]
+daemon = 1
+senderAddr	=	1026
+handleBuffer	=	0
+handleWater	=	1
+
+[hdlsolar]
+daemon = 1
+senderAddr	=	1027
+handleBuffer	=	1
+handleWater	=	1
+
+[hdlheating]
+daemon = 1
+senderAddr	=	1028
+
+[hdltempmon]
+daemon		=	0
+knxSenderAddr	=	1041
+sensor		=	-:-:28.FF6A4D901605
+sensor		=	-:-:28.FFDE4F901605
+sensor		=	temp1:6345:28.FFE06B911604
+sensor		=	temp2:6346:28.FFD1A2881603
+sensor		=	temp3:6347:28.FF654C901605
+sampleInterval	=	60
+dbHost		=	DBHOST
+dbUser		=	DBUSER
+dbPassword	=	DBPASSWORD
+dbName		=	DBNAME
+
+[sendb1]
+senderAddr	=	1057
+
+[sendb2]
+senderAddr	=	1058
+
+[sendu16]
+senderAddr	=	1059
+
+[sendf16]
+senderAddr	=	1060
+
+[sendtime]
+senderAddr	=	1061

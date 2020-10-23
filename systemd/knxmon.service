@@ -1,0 +1,15 @@
+[Unit]
+Description=EIB/KNX monitoring service
+Wants=network-online.target
+After=network-online.target
+After=knxbackbone.service
+BindsTo=knxbackbone.service
+TimeoutSec=30
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/knxmon
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

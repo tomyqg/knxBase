@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="SETONOFF"	dpt="1.001" trigger="true" mqtt="true" />
+	<GroupAddress postfix="ACTONOFF"	dpt="1.001" trigger="false" mqtt="true" />
+	<GroupAddress postfix="SETVALUE"	dpt="9.001" trigger="false" mqtt="true" />
+	<GroupAddress postfix="ACTVALUE"	dpt="9.001" trigger="false" mqtt="true" />
+</macro>

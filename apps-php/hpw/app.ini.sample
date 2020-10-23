@@ -1,0 +1,13 @@
+[dbSys]
+alias           =       "sys"
+host            =       "localhost"
+user            =       "writtelbrunft"
+password        =       "writtelbrunft"
+name            =       "knxlog"
+driver          =       "mysql"
+prefix          =       ""
+
+[dbRemote]
+url             =       "http://www.wimtecc.de/mas_r1/api/wapUploadData.php"
+user            =       "parkstrasse"
+password        =       "gauting"

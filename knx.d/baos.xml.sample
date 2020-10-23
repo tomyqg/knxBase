@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--								-->
+<!--	EXAMPLE object configuration file			-->
+<!--								-->
+<!-- edit this file as you see fit and save to:			-->
+<!--	 /etc/knx.d/baos.xml					-->
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<GroupAddress-Export xmlns="http://knx.org/xml/ga-export/01">
+	<GroupRange Name="Haupthaus" RangeStart="0/0/1" RangeEnd="0/7/255">
+		<GroupRange Name="Allgemein, Gruppenfunktionen" RangeStart="0/0/1" RangeEnd="0/0/255">
+			<GroupAddress id="0" Name="DATUM" alias="DATUM" Address="0/0/1" dpt="11.001" trigger="false" />
+			<GroupAddress id="0" Name="UHRZEIT" alias="DATUM" Address="0/0/2" dpt="10.001" trigger="false" />
+			<GroupAddress id="0" Name="DATUM_UHRZEIT" alias="DATUM" Address="0/0/3" dpt="12.001" trigger="false" />
+			<GroupAddress id="0" Name="SEND_TIME" alias="SEND_TIME" Address="0/0/4" dpt="1.001" trigger="false" />
+			<GroupAddress id="0" Name="TAG_NACHT" alias="DATUM" Address="0/0/10" dpt="1.001" trigger="false" />
+			<GroupAddress id="0" Name="MODUS_COMFORT" alias="DATUM" Address="0/0/11" dpt="1.001" trigger="false" />
+			<GroupAddress id="0" Name="MODUS_NACHT" alias="DATUM" Address="0/0/12" dpt="1.001" trigger="false" />
+			<macro name="/etc/knx.d/light.xml" prefix="ALL_LIGHTS_OUTSIDE" baseGroupAddress="0/0/100" />
+		</GroupRange>
+	</GroupRange>
+</GroupAddress-Export>

@@ -1,0 +1,13 @@
+[Unit]
+Description=EIB/KNX logic handler
+After=knxmon.service
+BindsTo=knxmon.service
+BindsTo=knxtpbridge.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/hdllogic
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

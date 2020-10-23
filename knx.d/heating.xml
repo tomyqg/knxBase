@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="SETTEMPERATURE"	dpt="9.001" trigger="true"		rem="aktuelle Soll Temperatur"		/>
+	<GroupAddress postfix="ACTTEMPERATURE"	dpt="9.001" trigger="false"		rem="aktuelle Ist Temperatur"		/>
+	<GroupAddress postfix="SETOPENCLOSE"	dpt="1.001" trigger="false"		rem="Sollwert für Ventil auf_zu"	/>
+	<GroupAddress postfix="ACTOPENCLOSE"	dpt="1.001" trigger="true"		rem="Istwert für Ventil auf_zu"		/>
+	<GroupAddress postfix="SETMODE"			dpt="5.001" trigger="false"		rem="Sollwert für Ventil auf_zu"	/>
+	<GroupAddress postfix="ACTMODE"			dpt="5.001" trigger="true"		rem="Istwert für Ventil auf_zu"		/>
+	<GroupAddress postfix="CONTROL_ACTIVE"	dpt="1.001" trigger="false"		rem=""								/>
+</macro>

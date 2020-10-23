@@ -1,0 +1,275 @@
+.\" Copyright (c) 2016
+.\"	Karl-Heinz Welter.  All rights reserved.
+.\"
+.\"     @(#)knxtpbridge.5	0.1 (KHW) 2/02/2016
+.\" $FreeBSD: src/bin/ls/ls.1,v 1.69 2002/08/21 17:32:34 trhodes Exp $
+.\"
+.Dd Feb 2, 2016
+.Dt knxtpbridge 5
+.Os
+.Sh NAME
+.Nm knxtpbridge
+.Nd simulate EIB/KNX bus on internal virtual bus
+.Sh SYNOPSIS
+.Nm knxtpbridge
+.Op Fl DQ
+.Op Ar
+.Sh DESCRIPTION
+Start a server process to create a server internal simulted EIB/KNX bus and transfer messages
+from a real serial device to this simulated EIB/KNX bus and vice versa
+.Pp
+The following options are available:
+.Bl -tag -width indent
+.It Fl Q Ar queueId
+Integer number as identifier for the internal queue.
+.El
+.El
+.Sh EXAMPLES
+The following is how to start a simple bridge service
+.Nm knxtpbridge
+start bridgeing process with intern queie id 10031
+.Pp
+.Dl "ls -lrS"
+.Sh DIAGNOSTICS
+.Ex -std
+.Sh ENVIRONMENT
+The following environment variables affect the execution of
+.Nm ls :
+.Bl -tag -width ".Ev CLICOLOR_FORCE"
+.It Ev BLOCKSIZE
+If the environment variable
+.Ev BLOCKSIZE
+is set, the block counts
+(see
+.Fl s )
+will be displayed in units of that size block.
+.It Ev CLICOLOR
+Use
+\*[Ai]
+color sequences to distinguish file types.
+See
+.Ev LSCOLORS
+below.
+In addition to the file types mentioned in the
+.Fl F
+option some extra attributes (setuid bit set, etc.) are also displayed.
+The colorization is dependent on a terminal type with the proper
+.Xr termcap 5
+capabilities.
+The default
+.Dq Li cons25
+console has the proper capabilities,
+but to display the colors in an
+.Xr xterm 1 ,
+for example,
+the
+.Ev TERM
+variable must be set to
+.Dq Li xterm-color .
+Other terminal types may require similar adjustments.
+Colorization
+is silently disabled if the output isn't directed to a terminal
+unless the
+.Ev CLICOLOR_FORCE
+variable is defined.
+.It Ev CLICOLOR_FORCE
+Color sequences are normally disabled if the output isn't directed to
+a terminal.
+This can be overridden by setting this flag.
+The
+.Ev TERM
+variable still needs to reference a color capable terminal however
+otherwise it is not possible to determine which color sequences to
+use.
+.It Ev COLUMNS
+If this variable contains a string representing a
+decimal integer, it is used as the
+column position width for displaying
+multiple-text-column output.
+The
+.Nm ls
+utility calculates how
+many pathname text columns to display
+based on the width provided.
+(See
+.Fl C
+and
+.Fl x . )
+.It Ev LANG
+The locale to use when determining the order of day and month in the long
+.Fl l
+format output.
+See
+.Xr environ 7
+for more information.
+.It Ev LSCOLORS
+The value of this variable describes what color to use for which
+attribute when colors are enabled with
+.Ev CLICOLOR .
+This string is a concatenation of pairs of the format
+.Ar f Ns Ar b ,
+where
+.Ar f
+is the foreground color and
+.Ar b
+is the background color.
+.Pp
+The color designators are as follows:
+.Pp
+.Bl -tag -width 4n -offset indent -compact
+.It Sy a
+black
+.It Sy b
+red
+.It Sy c
+green
+.It Sy d
+brown
+.It Sy e
+blue
+.It Sy f
+magenta
+.It Sy g
+cyan
+.It Sy h
+light grey
+.It Sy A
+bold black, usually shows up as dark grey
+.It Sy B
+bold red
+.It Sy C
+bold green
+.It Sy D
+bold brown, usually shows up as yellow
+.It Sy E
+bold blue
+.It Sy F
+bold magenta
+.It Sy G
+bold cyan
+.It Sy H
+bold light grey; looks like bright white
+.It Sy x
+default foreground or background
+.El
+.Pp
+Note that the above are standard
+\*[Ai]
+colors.
+The actual display may differ
+depending on the color capabilities of the terminal in use.
+.Pp
+The order of the attributes are as follows:
+.Pp
+.Bl -enum -offset indent -compact
+.It
+directory
+.It
+symbolic link
+.It
+socket
+.It
+pipe
+.It
+executable
+.It
+block special
+.It
+character special
+.It
+executable with setuid bit set
+.It
+executable with setgid bit set
+.It
+directory writable to others, with sticky bit
+.It
+directory writable to others, without sticky bit
+.El
+.Pp
+The default is
+.Qq "exfxcxdxbxegedabagacad" ,
+i.e. blue foreground and
+default background for regular directories, black foreground and red
+background for setuid executables, etc.
+.It Ev LS_COLWIDTHS
+If this variable is set, it is considered to be a
+colon-delimited list of minimum column widths.
+Unreasonable
+and insufficient widths are ignored (thus zero signifies
+a dynamically sized column).
+Not all columns have changeable widths.
+The fields are,
+in order: inode, block count, number of links, user name,
+group name, flags, file size, file name.
+.It Ev TERM
+The
+.Ev CLICOLOR
+functionality depends on a terminal type with color capabilities.
+.It Ev TZ
+The timezone to use when displaying dates.
+See
+.Xr environ 7
+for more information.
+.El
+.Sh COMPATIBILITY
+The group field is now automatically included in the long listing for
+files in order to be compatible with the
+.St -p1003.2
+specification.
+.Sh LEGACY DESCRIPTION
+In legacy mode, the
+.Fl f
+option does not turn on the
+.Fl a
+option and the
+.Fl g ,
+.Fl n ,
+and
+.Fl o
+options do not turn on the
+.Fl l
+option.
+.Pp
+Also, the
+.Fl o
+option causes the file flags to be included in a long (-l) output;
+there is no
+.Fl O
+option.
+.Pp
+When
+.Fl H
+is specified (and not overridden by
+.Fl L
+or
+.Fl P )
+and a file argument is a symlink
+that resolves to a non-directory file,
+the output will reflect the nature of the link,
+rather than that of the file.
+In legacy operation, the output will describe the file.
+.Pp
+For more information about legacy mode, see
+.Xr compat 5 .
+.Sh SEE ALSO
+.Xr chflags 1 ,
+.Xr chmod 1 ,
+.Xr sort 1 ,
+.Xr xterm 1 ,
+.Xr compat 5 ,
+.Xr termcap 5 ,
+.Xr symlink 7 ,
+.Xr sticky 8
+.Sh STANDARDS
+The
+.Nm ls
+utility conforms to
+.St -p1003.1-2001 .
+.Sh HISTORY
+An
+.Nm ls
+command appeared in
+.At v1 .
+.Sh BUGS
+To maintain backward compatibility, the relationships between the many
+options are quite complex.

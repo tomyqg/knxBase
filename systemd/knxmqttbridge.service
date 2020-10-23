@@ -1,0 +1,13 @@
+[Unit]
+Description=EIB/KNX monitoring service
+After=knxmon.service
+BindsTo=knxmon.service
+BindsTo=knxtpbridge.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/knxmqttbridge
+ExecStop=-/bin/kill -TERM
+
+[Install]
+WantedBy=multi-user.target

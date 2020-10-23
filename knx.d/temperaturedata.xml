@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="ZONE_1_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ZONE_2_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ZONE_3_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ZONE_4_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ZONE_5_ACTIVE"		dpt="1.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE_ZONE_1"		dpt="9.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE_ZONE_2"		dpt="9.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE_ZONE_3"		dpt="9.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE_ZONE_4"		dpt="9.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE_ZONE_5"		dpt="9.001" trigger="true" />
+</macro>

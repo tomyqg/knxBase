@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<macro>
+	<GroupAddress postfix="SETVALUE_SOLAR"		dpt="9.001" trigger="true" />
+	<GroupAddress postfix="SETVALUE_PELLET"		dpt="9.001" trigger="true" />
+	<GroupAddress postfix="SETVALUE_HEATPUMP"	dpt="9.001" trigger="true" />
+	<GroupAddress postfix="ACTVALUE"			dpt="9.001" trigger="true" />
+</macro>
