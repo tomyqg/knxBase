@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 wimtecc, Karl-Heinz Welter
+ * Copyright (c) 2015-2020 wimtecc, Karl-Heinz Welter
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,16 +29,21 @@
  *
  * date		rev.	who	what
  * ----------------------------------------------------------------------------
- * 2015-11-20	PA1	userId	inception;
+ * 2015-11-20	PA1	khw	inception;
+ * 2020-10-16	PA2	khw	added logit, function to log data to the system
+ *				logger;
  *
  */
 #include	<stdio.h>
-#include	<stdlib.h>
+#include	<stdbool.h>
 #include	<stdint.h>
+#include	<stdlib.h>
+#include	<stdarg.h>
 #include	<string.h>
 #include	<strings.h>
 #include	<time.h>
 #include	<math.h>
+#include	<syslog.h>
 #include	<sys/types.h>
 #include	<sys/ipc.h>
 #include	<sys/shm.h>
@@ -354,3 +359,56 @@ void	deletePIDFile( char *_progName, char *_apdx, pid_t _pid) {
 		_debug( 0, _progName, "can't delete PID file [`%s']", filename) ;
 	}
 }
+
+void	dumpHex( unsigned char *_buf, int _size, int _dest) {
+	int	i, posNo ;
+	unsigned	char	c, buf[8] ;
+	unsigned	char	lineBuf[128] ;
+	i	=	0 ;
+	while ( i < _size) {
+		posNo	=	i % 16 ;
+		if ( posNo == 0) {
+			sprintf( lineBuf, "0x%08lx%110s", i, "") ;
+		}
+		c	=	*_buf++ ;
+		sprintf( buf, "%02x", c) ;
+		memcpy( (void *) &lineBuf[ 12+posNo*3], (void *) buf, 2) ;
+		if ( c >= 0x20 && c <= 0x7f) {
+			lineBuf[64+posNo*2]	=	 c ;
+		} else {
+			lineBuf[64+posNo*2]	=	 '.' ;
+		}
+		i++ ;
+		if (( i % 16) == 0) {
+			if ( _dest > 0) {
+				logit( "%s", lineBuf) ;
+			} else {
+				printf( "%s\n", lineBuf) ;
+			}
+		}
+	}
+	if (( i % 16) != 0) {
+		if ( _dest > 0) {
+			logit( "%s", lineBuf) ;
+		} else {
+			printf( "%s\n", lineBuf) ;
+		}
+	}
+}
+
+/**
+ *
+ */
+void	logit( char *_fmt, ...) {
+	char	buffer[128] ;
+	va_list	arglist ;
+
+	va_start( arglist, _fmt );
+	vsprintf( buffer, _fmt, arglist) ;
+	va_end( arglist ) ;
+
+	openlog( NULL, LOG_PID|LOG_CONS, LOG_USER);
+	syslog( LOG_INFO, buffer) ;
+	closelog();
+}
+

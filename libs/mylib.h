@@ -78,6 +78,8 @@ extern	void	dumpData( node *, int, int, void *) ;
 extern	void	dumpDataAll( node *, int, void *, char *) ;
 extern	void	createCRF( node *, int, int *, void *) ;
 extern	int	getEntry( node *, int, char *) ;
+extern	void	dumpHex( unsigned char *, int, int) ;
+extern	void	logit( char *_fmt, ...) ;
 
 extern	char *base64Encode(const unsigned char *, size_t, size_t *) ;
 extern	unsigned	char *base64Decode(const char *, size_t, size_t *) ;
