@@ -51,6 +51,33 @@ typedef	enum	{
 		cmdEasunQPGS0
 }	easunCommand ;
 
+typedef	struct	easunQPIRI	{
+	float	gridRatingVoltage ;
+	float	gridRatingCurrent ;
+	float	acOutputRatingVoltage ;
+	float	acOutputRatingFrequency ;
+	float	acOutputRatingCurrent ;
+	float	acOutputRatingApparentPower ;
+	float	acOutputRatingActivePower ;
+	float	batteryRatingVoltage ;
+	float	batteryRechargeVoltage ;
+	float	batteryUnderVoltage ;
+	float	batteryBulkVoltage ;
+	float	batteryFloatVoltage ;
+	int	batteryType ;
+	int	maxACChargingCurrent ;
+	int	inputVoltageRange ;
+	int	outputSourcePriority ;
+	int	chargerSourcePriority ;
+	int	parallelMaxNum ;
+	int	machineType ;
+	int	topology ;
+	int	outputMode ;
+	int	batteryReDischargeVoltage ;
+	int	pvOkConditionForParallel ;
+	int	pvPowerBalance ;
+}	easunQPIRI ;
+
 typedef	struct	easunQPIGS	{
 	float	gridVoltage ;
 	float	gridFrequency ;
@@ -78,10 +105,20 @@ typedef	struct	easunQPIGS	{
 	bool	chargeModeAC ;
 }	easunQPIGS ;
 
+typedef	struct	easunQFLAG	{
+	bool	buzzerEnabled ;
+	bool	overloadBypassEnabled ;
+	bool	powerSavingEnabled ;
+	bool	lcdEscapeEnabled ;
+	bool	overloadRestartEnabled ;
+	bool	overTempRestartEnabled ;
+	bool	backlightEnabled ;
+	bool	alarmOnPirmInterruptEnabled ;
+	bool	faultCOdeRecordEnabled ;
+}	easunQFLAG ;
+
 typedef	struct	easunQMOD	{
 }	easunQMOD ;
-typedef	struct	easunQPIRI	{
-}	easunQPIRI ;
 typedef	struct	easunQPIWS	{
 }	easunQPIWS ;
 typedef	struct	easunQPI	{
@@ -136,12 +173,15 @@ extern	int	analyzeQVFW( unsigned char *, easunQVFW *) ;
 extern	int	analyzeQVFW2( unsigned char *, easunQVFW2 *) ;
 extern	int	analyzeQSID( unsigned char *, easunQVFW2 *) ;
 extern	int	analyzeQPGS0( unsigned char *, easunQVFW2 *) ;
+extern	int	analyzeQFLAG( unsigned char *, easunQFLAG *) ;
 extern	int	attachCRC( unsigned char *) ;
 
 extern	int	dataToDb( easunQPIGS *, easunQDI *) ;
 extern	int	dataToMQTT( easunQPIGS *, easunQDI *) ;
 
 extern	int	dumpQPIGS( easunQPIGS *) ;
+extern	int	dumpQPIRI( easunQPIRI *) ;
 extern	int	dumpQDI( easunQDI *) ;
+extern	int	dumpQFLAG( easunQFLAG *) ;
 
 #endif

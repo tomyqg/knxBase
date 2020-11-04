@@ -33,6 +33,8 @@
  * 2020-10-20	PA2	khw	signals SIGUSR1 and SIGUSR2 used to increase/reset
  *				tracing mode towards syslog;
  *				added native MQTT calls;
+ * 2020-10-28	PA3	khw	added QPIRI;
+ * 2020-10-29	PA4	khw	added QFLAG;
  *
  */
 #include	<stdio.h>
@@ -107,7 +109,6 @@ char	dbName[64]	=	"*" ;
 char	dbUser[64]	=	"*" ;
 char	dbPassword[64]	=	"*" ;
 struct	mosquitto	*mosq ;
-
 
 /**
  *
@@ -252,6 +253,8 @@ static uint64_t getNanos(void) {
  */
 int	main( int argc, char *argv[]) {
 	easunQPIGS	dataQPIGS ;
+	easunQPIRI	dataQPIRI ;
+	easunQFLAG	dataQFLAG ;
 	easunQDI	dataQDI ;
 	time_t	myTime, lastTime ;
 	uint64_t	sendTime, actTime, timeDiff, rcvTime ;
@@ -423,6 +426,16 @@ int	main( int argc, char *argv[]) {
 					queryState	=	10 ;
 					break ;
 
+				case	2	:
+					strcpy( msgOut, "QPIRI") ;
+					queryState	=	10 ;
+					break ;
+
+				case	3	:
+					strcpy( msgOut, "QFLAG") ;
+					queryState	=	10 ;
+					break ;
+
 				default	:
 					commandState	=	0 ;
 					break ;
@@ -498,6 +511,32 @@ int	main( int argc, char *argv[]) {
 						analyzeQDI( msgIn, &dataQDI) ;
 						if ( cfgTrace > 0) {
 							dumpQDI( &dataQDI) ;
+						}
+					} else {
+						dumpHex( msgIn, byteCnt, cfgTrace) ;
+					}
+					queryState	=	91 ;
+					commandState	=	2 ;
+					break ;
+
+				case	2	:
+					if ( byteCnt == 98) {
+						analyzeQPIRI( msgIn, &dataQPIRI) ;
+						if ( cfgTrace > 0) {
+							dumpQPIRI( &dataQPIRI) ;
+						}
+					} else {
+						dumpHex( msgIn, byteCnt, cfgTrace) ;
+					}
+					queryState	=	91 ;
+					commandState	=	3 ;
+					break ;
+
+				case	3	:
+					if ( byteCnt == 98) {
+						analyzeQFLAG( msgIn, &dataQFLAG) ;
+						if ( cfgTrace > 0) {
+							dumpQFLAG( &dataQFLAG) ;
 						}
 					} else {
 						dumpHex( msgIn, byteCnt, cfgTrace) ;
@@ -676,12 +715,57 @@ int	analyzeQPIGS( unsigned char *_msg, easunQPIGS *_data) {
 
 int	analyzeQMOD( unsigned char *_msg, easunQMOD *_data) {
 }
+
 int	analyzeQPIRI( unsigned char *_msg, easunQPIRI *_data) {
+	char	*dp ;
+	int	i ;
+
+	for ( dp = strtok( _msg, " ("), i = 0 ; dp ; dp = strtok( NULL, " ("), i++) {
+		if ( dp != NULL) {
+			switch ( i ) {
+			case	 0	:	_data->gridRatingVoltage		=	atof( dp) ;	break ; ;
+			case	 1	:	_data->gridRatingCurrent		=	atof( dp) ;	break ; ;
+			case	 2	:	_data->acOutputRatingVoltage		=	atof( dp) ;	break ; ;
+			case	 3	:	_data->acOutputRatingFrequency		=	atof( dp) ;	break ; ;
+			case	 4	:	_data->acOutputRatingCurrent		=	atof( dp) ;	break ; ;
+			case	 5	:	_data->acOutputRatingApparentPower	=	atof( dp) ;	break ; ;
+			case	 6	:	_data->acOutputRatingActivePower	=	atof( dp) ;	break ; ;
+			case	 7	:	_data->batteryRatingVoltage		=	atof( dp) ;	break ; ;
+			case	 8	:	_data->batteryRechargeVoltage		=	atof( dp) ;	break ; ;
+			case	 9	:	_data->batteryUnderVoltage		=	atof( dp) ;	break ; ;
+			case	10	:	_data->batteryBulkVoltage		=	atof( dp) ;	break ; ;
+			case	11	:	_data->batteryFloatVoltage		=	atof( dp) ;	break ; ;
+			case	12	:	_data->batteryType			=	atoi( dp) ;	break ; ;
+			case	13	:	_data->maxACChargingCurrent		=	atoi( dp) ;	break ; ;
+			case	14	:	_data->inputVoltageRange		=	atoi( dp) ;	break ; ;
+			case	15	:	_data->outputSourcePriority		=	atoi( dp) ;	break ; ;
+			case	16	:	_data->chargerSourcePriority		=	atoi( dp) ;	break ; ;
+			case	17	:	_data->parallelMaxNum			=	atoi( dp) ;	break ; ;
+			case	18	:	_data->machineType			=	atoi( dp) ;	break ; ;
+			case	19	:	_data->topology				=	atoi( dp) ;	break ; ;
+			case	20	:	_data->outputMode			=	atoi( dp) ;	break ; ;
+			case	21	:	_data->batteryReDischargeVoltage	=	atoi( dp) ;	break ; ;
+			case	22	:	_data->pvOkConditionForParallel		=	atoi( dp) ;	break ; ;
+			case	23	:	_data->pvPowerBalance			=	atoi( dp) ;	break ; ;
+			}
+		} else {
+			logit( "ERROR --- ERROR --- ERROR ---") ;
+		}
+	}
 }
+
+int	analyzeQFLAG( unsigned char *_msg, easunQFLAG *_data) {
+	char	*dp ;
+	int	i ;
+
+}
+
 int	analyzeQPIWS( unsigned char *_msg, easunQPIWS *_data) {
 }
+
 int	analyzeQPI( unsigned char *_msg, easunQPI *_data) {
 }
+
 int	analyzeQDI( unsigned char *_msg, easunQDI *_data) {
 	char	*dp ;
 	int	i ;
@@ -689,16 +773,16 @@ int	analyzeQDI( unsigned char *_msg, easunQDI *_data) {
 	for ( dp = strtok( _msg, " ("), i = 0 ; dp ; dp = strtok( NULL, " ("), i++) {
 		if ( dp != NULL) {
 			switch ( i ) {
-			case	0	:	_data->outputACVoltage			=	atof( dp) ;	break ;
-			case	1	:	_data->outputACFrequency 		=	atof( dp) ;	break ;
-			case	2	:	_data->chargingCurrentACMax 		=	atof( dp) ;	break ;
-			case	3	:	_data->batteryUndervoltage 		=	atof( dp) ;	break ;
-			case	4	:	_data->chargingFloatVoltage 		=	atof( dp) ;	break ;
-			case	5	:	_data->chargingBulkVoltage 		=	atof( dp) ;	break ;
-			case	6	:	_data->batteryDefaultRechargeVoltage 	=	atof( dp) ;	break ;
-			case	7	:	_data->chargingCurrentDCMax 		=	atof( dp) ;	break ;
-			case	8	:	_data->inputVoltageRange 		=	atoi( dp) ;	break ;
-			case	9	:	_data->outputSourcePriority 		=	atoi( dp) ;	break ;
+			case	 0	:	_data->outputACVoltage			=	atof( dp) ;	break ;
+			case	 1	:	_data->outputACFrequency 		=	atof( dp) ;	break ;
+			case	 2	:	_data->chargingCurrentACMax 		=	atof( dp) ;	break ;
+			case	 3	:	_data->batteryUndervoltage 		=	atof( dp) ;	break ;
+			case	 4	:	_data->chargingFloatVoltage 		=	atof( dp) ;	break ;
+			case	 5	:	_data->chargingBulkVoltage 		=	atof( dp) ;	break ;
+			case	 6	:	_data->batteryDefaultRechargeVoltage 	=	atof( dp) ;	break ;
+			case	 7	:	_data->chargingCurrentDCMax 		=	atof( dp) ;	break ;
+			case	 8	:	_data->inputVoltageRange 		=	atoi( dp) ;	break ;
+			case	 9	:	_data->outputSourcePriority 		=	atoi( dp) ;	break ;
 			case	10	:	_data->chargerSourcePriority 		=	atoi( dp) ;	break ;
 			case	11	:	_data->batteryType 			=	atoi( dp) ;	break ;
 			case	12	:	_data->enableBuzzer 			=	atoi( dp) ;	break ;
@@ -811,6 +895,45 @@ int	dataToMQTT( easunQPIGS *_qpigs, easunQDI *_qdi) {
 	sprintf( buf, "%5.2f", _qpigs->batteryChargingCurrent) ;	sendData( 30221, buf) ;
 	sprintf( buf, "%5.2f", _qpigs->pvInputVoltage) ;		sendData( 30222, buf) ;
 	sprintf( buf, "%5.2f", _qpigs->pvInputCurrent) ;		sendData( 30223, buf) ;
+}
+
+int	dumpQPIRI( easunQPIRI *_data) {
+	logit( "Grid rating voltage ....... : %5.2f \n", _data->gridRatingVoltage) ;
+	logit( "Grid rating current ....... : %5.2f \n", _data->gridRatingCurrent) ;
+	logit( "AC Output rating voltage .. : %5.2f \n", _data->acOutputRatingVoltage) ;
+	logit( "AC Output rating frequency  : %5.2f \n", _data->acOutputRatingFrequency) ;
+	logit( "AC Output rating current .. : %5.2f \n", _data->acOutputRatingCurrent) ;
+	logit( "AC Output apparent power .. : %5.2f \n", _data->acOutputRatingApparentPower) ;
+	logit( "AC Output active power .... : %5.2f \n", _data->acOutputRatingActivePower) ;
+	logit( "Battery rating voltage .... : %5.2f \n", _data->batteryRatingVoltage) ;
+	logit( "Battery recharge voltage .. : %5.2f \n", _data->batteryRechargeVoltage) ;
+	logit( "Battery under voltage...... : %5.2f \n", _data->batteryUnderVoltage) ;
+	logit( "Battery bulk voltage ...... : %5.2f \n", _data->batteryBulkVoltage) ;
+	logit( "Battery float voltage ..... : %5.2f \n", _data->batteryFloatVoltage) ;
+	logit( "Battery type .............. : %5d \n", _data->batteryType) ;
+	logit( "Max. AC Charging current .. : %5d \n", _data->maxACChargingCurrent) ;
+	logit( "Input voltage range ....... : %5d \n", _data->inputVoltageRange) ;
+	logit( "Output source priority .... : %5d \n", _data->outputSourcePriority) ;
+	logit( "Charger source priority ... : %5d \n", _data->chargerSourcePriority) ;
+	logit( "Parallel max. number ...... : %5d \n", _data->parallelMaxNum) ;
+	logit( "Machine type .............. : %5d \n", _data->machineType) ;
+	logit( "Topology .................. : %5d \n", _data->topology) ;
+	logit( "Output mode ............... : %5d \n", _data->outputMode) ;
+	logit( "Battery re-discharge volt.  : %5d \n", _data->batteryReDischargeVoltage) ;
+	logit( "PV Ok condition ........... : %5d \n", _data->pvOkConditionForParallel) ;
+	logit( "PV Power balance .......... : %5d \n", _data->pvPowerBalance) ;
+}
+
+int	dumpQFLAG( easunQFLAG *_data) {
+	logit( "Buzzer enabled ............ : %d \n", _data->buzzerEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->overloadBypassEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->powerSavingEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->lcdEscapeEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->overloadRestartEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->overTempRestartEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->backlightEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->alarmOnPirmInterruptEnabled) ;
+	logit( "Buzzer enabled ............ : %d \n", _data->faultCOdeRecordEnabled) ;
 }
 
 int	dumpQPIGS( easunQPIGS *_data) {
