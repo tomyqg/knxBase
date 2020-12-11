@@ -1,0 +1,632 @@
+#!/usr/bin/php5
+<?php
+
+//
+// Diese Script generiert den gesamten "statischen" web shop
+//
+ 
+//require_once( "pkgs/platform/FDbg.php") ; 
+//require_once( "pkgs/platform/FDb.php") ; 
+
+require_once( "global.inc.php") ; 
+require_once( "textools.inc.php") ; 
+
+require_once( "KatGr.php") ; 
+require_once( "ArtGr.php") ; 
+require_once( "Artikel.php") ; 
+require_once( "Texte.php") ; 
+require_once( "VKPreis.php") ; 
+require_once( "ArtKomp.php") ; 
+require_once( "ArtBild.php") ; 
+require_once( "ArtTexte.php") ; 
+require_once( "Lief.php") ; 
+require_once( "Currency.php") ; 
+
+$debugLevel	=	0 ;
+
+$mEh["lmm"]	=	"mm" ;
+$mEh["gmg"]	=	"mg" ;
+$mEh["ggr"]	=	"gr" ;
+$mEh["gkg"]	=	"kg" ;
+$mEh["vml"]	=	"ml" ;
+$mEh["vl"]	=	"L" ;
+$mEh["stro"]	=	"Rolle" ;
+$mEh["sthe"]	=	"Heft" ;
+$mEh["stst"]	=	"Streifen" ;
+$mEh["stsa"]	=	"Satz" ;
+$mEh["stdo"]	=	"Dose" ;
+$mEh["stfl"]	=	"Flasche" ;
+$mEh["stvd"]	=	"Vorratsdose" ;
+$mEh["stvf"]	=	"Vorratsflasche" ;
+$mEh["stpa"]	=	"Paket" ;
+$mEh["stam"]	=	"Ampulle" ;
+$mEh["stck"]	=	"St." ;
+
+// set some default value, mostly for parameters which should be set on the command line
+
+$filename	=	"modis-katalog" ;
+$chapter	=	"all" ;
+$artNr	=	"%" ;
+$liefNr	=	"%" ;
+$lang	=	"de" ;
+$market	=	"de" ;
+
+// evaluate command line parameters
+
+$i	=	1 ;
+while ( isset( $argv[$i])) {
+	if ( strcmp( $argv[ $i], "-d") == 0) {
+		$i++ ;
+		if ( isset( $argv[ $i])) {
+			$debugLevel	=	intval( $argv[ $i]) ;
+		} else {
+			printf( "PANIC.: -d muss gefolgt sein durch den Debug Level <br />\n") ;
+			die() ;
+		}
+	} else if ( strcmp( $argv[ $i], "-A") == 0) {
+		$i++ ;
+		$artNr	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-C") == 0) {
+		$i++ ;
+		$chapter	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-l") == 0) {
+		$i++ ;
+		$lang	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-L") == 0) {
+		$i++ ;
+		$liefNr	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-m") == 0) {
+		$i++ ;
+		$market	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-n") == 0) {
+		$i++ ;
+		$filename	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-?") == 0) {
+		$func	=	"" ;
+	}
+	$i++ ;
+}
+
+$langCode1	=	$lang ;
+$langCode2	=	$lang . "_" . $market ;
+
+/**
+ *
+ */
+printf("Pre-Execution Status:\n") ;
+printf("Der Katalog wird erzeugt fuer den Markt........:  %s\n", $market) ;
+printf("Der Katalog wird erzeugt in der Sprache........:  %s\n", $lang) ;
+printf("Suchstring fuer Texte..........................:  %s oder %s\n", $langCode1, $langCode2) ;
+printf("Die XML Dateien werden abgelegt in.............:  %s\n", $katalogPath) ;
+
+/**
+ *
+ */
+$myCatalog	=	new Katalog( $market, $lang) ;
+printf("Verwendeter Umrechnungskurs....................:  %f\n", $myCatalog->currFaktor) ;
+$xmlFile	=	$myCatalog->createCatalogue( $chapter) ;
+
+$sysCmd	=	"mv " . $xmlFile . " " . $katalogPath . $filename . ".xml" ;
+FDbg::dumpL( 0, "Performing SHELL actions .... %s \n", sprintf( "%s", $sysCmd)) ;
+system( $sysCmd) ;
+
+class	Katalog	{
+
+	private	$lang ;
+	private	$market ;
+	private	$langCode ;
+	public	$currFaktor ;
+
+	/**
+	 *
+	 */
+	function	__construct( $_market, $_lang) {
+		$this->lang	=	$_lang ;
+		$this->market	=	$_market ;
+		$this->langCode	=	$_lang . "_" . $_market ;
+		$myCurrency	=	new Currency() ;
+		try {
+			$myCurrency->setKeys( "EUR", "CLP", today()) ;
+			$this->currFaktor	=	$myCurrency->NachKurs ;
+		} catch ( Exception $e) {
+			FDbg::dumpF( "No valid currency conversion found.\n   Will simply die ... !\n") ;
+		}
+	}
+
+	/**
+	 *
+	 */
+	function	createCatalogue( $_filter) {
+
+		global	$debugLevel ;
+	
+		$myKatGr	=	new KatGr ; 
+		$myArtikel	=	new Artikel ; 
+
+		$myKatGrText	=	new Texte ;
+		$myArtGrText	=	new Texte ;
+		$myArtText	=	new Texte ;
+	
+		/**
+		 * here we pull together the search string for the Kat(alog)Gr(oups) so that we also see the respective
+		 * headings in the xml-file.
+		 * in case the catalog is broken up into chunks below level 3 it makes sense to skip the higher level
+		 * headings.
+		 */
+		$maxLevelUp	=	3 ;		// minimu level of the KatGr to appear in the text (
+		$maxLevelVal	=	$maxLevelUp * 3 + 1 ;
+		if ( strcmp( $_filter, "all") == 0) {
+			$myFilter	=	"%" ;
+			$filterUp	=	"" ;
+		} else {
+			$myFilter	=	$_filter . "%" ;
+			if ( strlen( $_filter) > $maxLevelVal) {
+				$filterUp	=	"( " ;
+				$filterUp	.=	"KatGrNr = '" . $_filter . "' " ;
+				while ( strlen( $_filter) > $maxLevelVal) {
+					$_filter	=	substr( $_filter, 0, strlen( $_filter) - 3) ;
+					$filterUp	.=	"or " ;
+					$filterUp	.=	"KatGrNr = '" . $_filter . "' " ;
+				}
+				$filterUp	.=	") " ;
+			} else {
+				$filterUp	=	"( " ;
+				$filterUp	.=	"KatGrNr = '" . $_filter . "' " ;
+				$filterUp	.=	") " ;
+			}
+		}
+		printf( "Filter: %s\n", $filterUp) ;
+
+		//
+	
+		$f_name		=	tempnam( "/tmp", "katalog-") ;
+		$xml_name	=	$f_name . ".xml" ;
+	
+		$myXMLFile	=	fopen( $xml_name, "w+") ;
+		if ( $myXMLFile) {
+			// generate the basic artikel data
+	
+			$query	=	"select * " ; 
+			$query	.=	"from KatGr " ; 
+			$query	.=	"where SeitenTyp = '1' " ; 
+			$query	.=	"and ( KatGrNr like '" . $myFilter . "' " ; 
+			if ( $filterUp != "") {
+				$query	.=	"or " . $filterUp . " " ;
+			}
+			$query	.=	") " ; 
+			$query	.=	"order by KatGrNr ASC " ; 
+				FDbg::dumpL( 0x00000001, "Query: %s", $query) ;
+			$sqlResult      =       FDb::query( $query) ; 
+			if ( !$sqlResult) { 
+				FDbg::dumpL( 0x00000001, "Query: %s", $query) ;
+				FDbg::dumpF( "genXMLR1A: Probleme mit query ... \n") ;
+				die() ;
+			}
+			
+			$numrows        =       FDb::rowCount() ; 
+			if ( $numrows < 1) {
+				FDbg::dumpF( "genXMLR1A: Keine Produkt Gruppen definiert ... \n") ;
+				die() ;
+			}
+			
+			// Fuer jeden Eintrag in "KatGr" muss eine statische Seite gebaut werden
+			
+			$myKatGr	=	new KatGr() ;
+			fwrite( $myXMLFile, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"?>\n") ;
+			fwrite( $myXMLFile, "<Root>\n") ;
+			fwrite( $myXMLFile, "<Textabschnitt>\n") ;
+			while ($row = mysql_fetch_assoc( $sqlResult)) {
+
+				/**
+				 *
+				 */
+				$myKatGr->assignFromRow( $row) ;
+				try {
+					$myKatGrText->setKeys( "KatGrName", $myKatGr->KatGrNr, $this->langCode) ;
+					$myKatGr->KatGrName	=	$myKatGrText->Volltext ;
+				} catch ( Exception $e) {
+					FDbg::dumpF( "genxmlR1A::Katalog::createCatalogue: exception '%s'", $e->getMessage()) ;
+					printf( "[%s][%s][%s]\n", "KatGrName", $myKatGr->KatGrNr, $this->langCode) ;
+				}
+				
+				switch ( $myKatGr->Level) {
+				case	0	:
+					FDbg::dumpL( 0x00000001, "Starting KatGr on Level 0 .... %s \n", sprintf( "%s, %s", $myKatGr->KatGrNr, $myKatGr->KatGrName)) ;
+					break ;
+				case	1	:
+					FDbg::dumpL( 1, "Starting KatGr on Level 1 .... %s \n", sprintf( "%s, %s", $myKatGr->KatGrNr, $myKatGr->KatGrName)) ;
+					fwrite( $myXMLFile, "<KatGrNameL1>" . $myKatGr->KatGrName . "</KatGrNameL1>\n") ;
+					if ( strlen( $myKatGr->Volltext) > 0) {
+					}
+					break ;
+				case	2	:
+					FDbg::dumpL( 1, "Starting KatGr on Level 2 .... %s \n", sprintf( "%s, %s", $myKatGr->KatGrNr, $myKatGr->KatGrName)) ;
+					fwrite( $myXMLFile, "<KatGrNameL2>" . $myKatGr->KatGrName . "</KatGrNameL2>\n") ;
+					if ( strlen( $myKatGr->Volltext) > 0) {
+					}
+					break ;
+				case	3	:
+					FDbg::dumpL( 1, "Starting KatGr on Level 3 .... %s \n", sprintf( "%s, %s", $myKatGr->KatGrNr, $myKatGr->KatGrName)) ;
+					if ( $myKatGr->SeitenTyp == 1) {
+						fwrite( $myXMLFile, "<KatGrNameL3>" . $myKatGr->KatGrName . "</KatGrNameL3>\n") ;
+						$this->writeKatGr( $myXMLFile, $myKatGr) ;
+					} else {
+					}
+					break ;
+				}
+	
+			}
+			fwrite( $myXMLFile, "</Textabschnitt>\n") ;
+			fwrite( $myXMLFile, "</Root>\n") ;
+	
+			//
+	
+			fclose( $myXMLFile) ;
+	
+		} else {
+			printf( "Problems to create output file ... \n") ;
+		}
+	
+		return $xml_name ;
+	}
+	
+	function	writeKatGr( $_oFile, $_prodGr) {
+	
+		/**
+		 *
+		 */
+		$myKatGrKomp	=	new KatGrKomp() ;
+		$myArtikel	=	new Artikel() ;
+		$myArtGr	=	new ArtGr() ;
+
+		$myKatGrText	=	new Texte ;
+		$myArtGrText	=	new Texte ;
+		$myArtText	=	new Texte ;
+		/**
+		 *
+		 */
+		$query	=	"select * " ; 
+		$query	.=	"from KatGrKomp " ; 
+		$query	.=	"where KatGrNr like " . "'" . $_prodGr->KatGrNr . "%' " ;
+		$query	.=	"order by " ;
+		$query	.=	" PosNr ASC " ; 
+		$query	.=	" , KatGrNr ASC " ; 
+		$sqlResult	=       FDb::query( $query) ; 
+		if ( !$sqlResult) { 
+			FDbg::dumpL( 0x00000001, "Query: %s", $query) ;
+			FDbg::dumpL( 0x00000001, "genxmlR1A: Probleme mit query ... \n") ;
+			die() ;
+		}
+		$numrows	=       FDb::rowCount() ; 
+		if ( $numrows < 1) {
+			fwrite( $_oFile, "In dieser Produkt Gruppen sind keine Produkte vorhanden.\n") ;
+		}
+		//
+		// Fuer jeden Eintrag in "KatGr" muss eine statische Seite gebaut werden
+		//
+		if ( strlen( $_prodGr->Volltext) > 0) {
+			FDbg::dumpL( 0x00000001, "------------------------_prodGr->Volltext------".$_prodGr->KatGrNr) ;
+			fwrite( $_oFile, $_prodGr->Volltext) ;
+		}
+		while ($row = mysql_fetch_assoc( $sqlResult)) {
+			$myKatGrKomp->assignFromRow( $row) ;
+			//
+			// wenn: neue ArtikelGruppe
+			//	wenn: alte ArtikelGruppe noch beendet werden muss
+			//		dann HTML fuer ArtikelGruppen Ende schreiben
+			//	dann HTML fuer ArtikelGruppen Anfang schreiben
+			//	Artikeldaten zuweisen
+			// Artikel ausgeben
+			// verschiedene Marker setzen
+			//
+			if ( $myKatGrKomp->KompArtNr != "") {	// eigenstaendiger Artikel
+				FDbg::dumpL( 1, "Starting Artikel .... %s \n", sprintf( "%s", $myKatGrKomp->KompArtNr)) ;
+				$myArtikel->ArtikelNr	=	$myKatGrKomp->KompArtNr ;
+				$myArtikel->fetchFromDb() ;
+				writeArt( $_oFile, $myArtikel) ;
+			} else {				// gruppierter Artikel
+				FDbg::dumpL( 1, "Starting ArtGr .... %s \n", sprintf( "%s", $myKatGrKomp->KompArtGrNrT)) ;
+				$myArtGr->ArtGrNrT	=	$myKatGrKomp->KompArtGrNrT ;
+				$myArtGr->fetchFromDb() ;
+				$this->writeArtGr( $_oFile, $myArtGr) ;
+			}
+		}
+	}
+	
+	function	writeArtGr( $_oFile, $_artGr) {
+		//
+		$myArtGrKomp	=	new ArtGrKomp() ;
+		$myArtikel	=	new Artikel() ;
+		$subArtGrKomp	=	new ArtGrKomp() ;
+		//
+		//
+		//
+		$this->artGruppeStart( $_oFile, $_artGr) ;
+		//
+		//
+		//
+		$query	=	"select * " ; 
+		$query	.=	"from ArtGrKomp " ; 
+		$query	.=	"where ArtGrNrT = " . "'" . $_artGr->ArtGrNrT . "' " ;
+		$query	.=	"order by " ;
+		$query	.=	" PosNr ASC " ; 
+		$query	.=	" , ArtGrNrT ASC " ; 
+		$sqlResult      =       FDb::query( $query) ; 
+		if ( !$sqlResult) { 
+			FDbg::dumpL( 0x00000001, "Query: %s ", $query) ;
+			printf( "004: Probleme mit query ... \n") ;
+			die() ;
+		}
+		$numrows	=	FDb::rowCount() ; 
+		while ($row = mysql_fetch_assoc( $sqlResult)) {
+			$myArtGrKomp->assignFromRow( $row) ;
+			if ( $myArtGrKomp->KompArtNr != "") {
+				FDbg::dumpL( 1, "Starting Artikel .... %s \n", sprintf( "%s", $myArtGrKomp->KompArtNr)) ;
+				if ( strpos( $myArtGrKomp->KompArtNr, "%") != 0) {
+					$query2	=	"select * " ; 								//	| | |
+					$query2	.=	"from Artikel " ; 							//	| | |
+					$query2	.=	"where ArtikelNr like " . "'" . $myArtGrKomp->KompArtNr . "' " ;	//	| | |
+					$query2	.=	"order by ArtikelNr ASC " ; 						//	| | |
+					$sqlResult2      =       FDb::query( $query2) ; 				//	| | |
+					if ( !$sqlResult2) { 									//	| | |
+						FDbg::dumpL( 0x00000001, "Query: %s", $query2) ;								//	| | |
+						printf( "005: Probleme mit query ... \n") ;					//	| | |
+						die() ;										//	| | |
+					}											//	| | |
+					$numrows	=	FDb::rowCount() ; 				//	| | |
+					while ($row2 = mysql_fetch_assoc( $sqlResult2)) {					//	| | |
+						$myArtikel->assignFromRow( $row2) ;
+						FDbg::dumpL( 0x00000001, "Adding: ... %s", $myArtikel->ArtikelNr) ;
+						$this->writeArtikel( $_oFile, $myArtikel) ;
+					}
+				} else {
+					$myArtikel->ArtikelNr	=	$myArtGrKomp->KompArtNr ;
+					$myArtikel->fetchFromDb() ;
+					$this->writeArtikel( $_oFile, $myArtikel) ;
+				}
+			} else if ( $myArtGrKomp->KompArtGrNrT != "") {
+	//			FDbg::dumpL( 1, "Starting ArtGrNrT .... %s \n", sprintf( "%s", $myArtGrKomp->KompArtGrNrT)) ;
+	//			$subArtGr	=	new ArtGr ;
+	//			$subArtGr->ArtGrNrT	=	$myArtGrKomp->KompArtGrNrT ;
+	//			$subArtGr->fetchFromDb() ;
+	//			$this->writeArtGr( $_oFile, $subArtGr) ;
+			}
+		}
+		//
+		//
+		//
+		$this->artGruppeEnd( $_oFile) ;
+		//
+	}
+	
+	function	writeArt( $_oFile, $_artikel) {
+		//
+		einzelArtikelStart( $_oFile, $_artikel) ;
+		//
+		//
+		//
+		$this->writeArtikel( $_oFile, $_artikel) ;
+		//
+		//
+		//
+		einzelArtikelEnd( $_oFile) ;
+		//
+	}
+	
+	function	artGruppeStart( $_oFile, $_artGr) {
+		//
+		global	$bilderPath ;
+
+		/**
+		 * check if we have the language / countryspecific text in the database
+		 * if so, overwrite the standard text,
+		 * if not, issue a warning and continue with the german text
+		 */
+		$myArtGrText	=	new Texte() ;
+		try {
+			$myArtGrText->setKeys( "ArtGrName", $_artGr->ArtGrNr, $this->langCode) ;
+			$_artGr->ArtGrName	=	$myArtGrText->Volltext ;
+		} catch ( Exception $e) {
+			FDbg::dumpF( "genxmlR1A::Katalog::createCatalogue: exception '%s'", $e->getMessage()) ;
+			printf( "[%s][%s][%s]\n", "ArtGrName", $_artGr->ArtGrNrT, $this->langCode) ;
+		}
+
+		/**
+		 *
+		 */
+		fwrite( $_oFile, sprintf( "<ArtGrName>%s</ArtGrName>\n", mTS( $_artGr->ArtGrName))) ;		//	AENDERUNG
+		if ( file_exists( $bilderPath . $_artGr->AGBildRef) && $_artGr->AGBildRef != "") {
+		} else {
+		}
+		if ( strlen( $_artGr->Volltext) > 0) {
+			FDbg::dumpL( 0x00000001, "------------------------_artGr->Volltext------%s", $_artGr->ArtGrNrT) ;
+			fwrite( $_oFile, $_artGr->Volltext) ;
+		}
+		//
+		//
+		//
+		fwrite( $_oFile, sprintf( "<table frame=\"all\">\n")) ;
+		fwrite( $_oFile, sprintf( "<tgroup cols=\"3\">\n")) ;
+		fwrite( $_oFile, sprintf( "<colspec colname=\"c1\" colwidth=\"70.0\">\n")) ;
+		fwrite( $_oFile, sprintf( "</colspec>\n")) ;
+		fwrite( $_oFile, sprintf( "<colspec colname=\"c2\" colwidth=\"140.0\">\n")) ;
+		fwrite( $_oFile, sprintf( "</colspec>\n")) ;
+		fwrite( $_oFile, sprintf( "<colspec colname=\"c3\" colwidth=\"40.0\">\n")) ;
+		fwrite( $_oFile, sprintf( "</colspec>\n")) ;
+		fwrite( $_oFile, sprintf( "<tbody>\n")) ;
+		fwrite( $_oFile, sprintf( "<row>\n")) ;
+		switch ( $this->lang) {
+		case	"de"	:
+			fwrite( $_oFile, sprintf( "<entry>Art.-Nr.</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Bezeichnung</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Preis</entry>\n")) ;
+			break ;
+		case	"en"	:
+			fwrite( $_oFile, sprintf( "<entry>No. Art.</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Descripcion</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Price</entry>\n")) ;
+			break ;
+		case	"es"	:
+			fwrite( $_oFile, sprintf( "<entry>Art.-Nr.</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Descripcion</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Precio</entry>\n")) ;
+			break ;
+		}
+		fwrite( $_oFile, sprintf( "</row>\n")) ;
+	}
+	
+	function	einzelArtikelStart( $_oFile, $_artikel) {
+		global	$bilderPath ;
+		if ( strlen( $_artikel->Volltext) > 0) {
+		FDbg::dumpL( 0x00000001, "------------------------_artikel->Volltext------%s", $_artikel->ArtikelNr) ;
+		}
+		//
+		//
+		//
+		if ( $_artikel->EinzelSeite) {
+		}
+		//
+		//
+		//
+		fwrite( $_oFile, sprintf( "<table frame=\"all\">\n")) ;
+		fwrite( $_oFile, sprintf( "<tgroup cols=\"4\">\n")) ;
+		fwrite( $_oFile, sprintf( "<colspec colname=\"c1\" colwidth=\"70.0\">\n")) ;
+		fwrite( $_oFile, sprintf( "</colspec>\n")) ;
+		fwrite( $_oFile, sprintf( "<colspec colname=\"c2\" colwidth=\"140.0\">\n")) ;
+		fwrite( $_oFile, sprintf( "</colspec>\n")) ;
+		fwrite( $_oFile, sprintf( "<colspec colname=\"c3\" colwidth=\"40.0\">\n")) ;
+		fwrite( $_oFile, sprintf( "</colspec>\n")) ;
+		fwrite( $_oFile, sprintf( "<tbody>\n")) ;
+		fwrite( $_oFile, sprintf( "<row>\n")) ;
+		switch ( $this->lang) {
+		case	"de"	:
+			fwrite( $_oFile, sprintf( "<entry>Art.-Nr.</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Bezeichnung</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Preis</entry>\n")) ;
+			break ;
+		case	"en"	:
+			fwrite( $_oFile, sprintf( "<entry>No. Art.</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Descripcion</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Price</entry>\n")) ;
+			break ;
+		case	"es"	:
+			fwrite( $_oFile, sprintf( "<entry>Art.-Nr.</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Descripcion</entry>\n")) ;
+			fwrite( $_oFile, sprintf( "<entry>Precio</entry>\n")) ;
+			break ;
+		}
+		fwrite( $_oFile, sprintf( "</row>\n")) ;
+	}
+	
+	function	writeArtikel( $_oFile, $_artikel) {
+		global	$mEh ;
+		$myVKPreis	=	new VKPreis() ;							//	| | |
+		$myVKPreis->ArtikelNr   =   $_artikel->ArtikelNr ;
+		$lastMengeProVPE	=	0 ;
+		try {
+			for ( $myVKPreis->firstFromView( "VKPreisCache") ;
+					$myVKPreis->_valid == 1 ;
+					$myVKPreis->nextFromView( "VKPreisCache")) {
+				if ( $myVKPreis->MengeProVPE != $lastMengeProVPE) {
+					$currCode	=	"EUR" ;
+					if ( $this->market == "cl") {
+						$currCode	=	"CLP" ;
+						$myVKPreis->Preis	=	$myVKPreis->Preis * $this->currFaktor ;
+						if ( $myVKPreis->Preis > 100000) {
+							$currCode	=	"UF" ;
+							$myVKPreis->Preis	=	$myVKPreis->Preis * $this->currFaktor / 20963.34 ;
+						}
+					} else {
+						$myVKPreis->Preis	=	$myVKPreis->Preis * $this->currFaktor ;
+					}
+					$this->writeVKPreis( $_oFile, $_artikel, $myVKPreis, "", $currCode) ;
+				}
+				$lastMengeProVPE	=	$myVKPreis->MengeProVPE ;
+			}											//	| | |
+		} catch ( Exception $e) {
+			FDbg::dumpF( "genxmlR1A::Katalog::writeArtikel: exception '%s'", $e->getMessage()) ;
+		}
+	//	$this->writeArtikelKomp( $_oFile, $_artikel) ;
+	}
+	
+	function	writeArtikelKomp( $_oFile, $_artikel) {
+		global $mEh ;
+		//
+		//
+		//
+		//
+		$query3	=	"select * " ; 								//	| | |
+		$query3	.=	"from ArtKomp " ; 							//	| | |
+		$query3	.=	"where ArtikelNr = " . "'" . $_artikel->ArtikelNr . "' " ;		//	| | |
+		$query3	.=	"order by PosNr ASC " ; 						//	| | |
+		$sqlResult3      =       FDb::query( $query3) ; 				//	| | |
+		if ( !$sqlResult3) { 									//	| | |
+			FDbg::dumpL( 0x00000001, "Query: %s", $query3) ;
+			printf( "005: Probleme mit query ... \n") ;					//	| | |
+			die() ;										//	| | |
+		}											//	| | |
+		$numrows3	=	FDb::rowCount() ; 				//	| | |
+		if ( $numrows3 > 0) {
+	//		printf( "[%s] yielded %3d rows ... \n", $query3, $numrows3) ;				//	| | |
+			$myArtikel	=	new Artikel() ;							//	| | |
+			$myArtKomp	=	new ArtKomp() ;							//	| | |
+			$myVKPreis	=	new VKPreis() ;							//	| | |
+			while ($row3 = mysql_fetch_assoc( $sqlResult3)) {					//	| | |
+				$myArtKomp->assignFromRow( $row3) ;					//	| | |
+				$myArtikel->ArtikelNr	=	$myArtKomp->CompArtikelNr ;				//	| | |
+				$myArtikel->fetchFromDb() ;						//	| | |
+				$myVKPreis->ArtikelNr	=	$myArtKomp->CompArtikelNr ;				//	| | |
+				$myVKPreis->fetchFromDb() ;						//	| | |
+				$this->writeVKPreis( $_oFile, $myArtikel, $myVKPreis, "+", "") ;			//	| | |
+			}											//	| | |
+		}
+	}
+	
+	/**
+	 *
+	 */
+	function	writeVKPreis( $_oFile, $_artikel, $_vkpreis, $_prefix, $_curr="") {
+		global $mEh ;
+
+		$myArtTexte	=	new ArtTexte() ;
+		try {
+			$myArtTexte->setArtikelNr( $_artikel->ArtikelNr, $this->langCode) ;
+			$_artikel->ArtikelBez1	=	$myArtTexte->ArtikelBez1 ;
+			$_artikel->ArtikelBez2	=	$myArtTexte->ArtikelBez2 ;
+			$_artikel->MengenText	=	$myArtTexte->MengenText ;
+		} catch ( Exception $e) {
+			FDbg::dumpF( "genxmlR1A::Katalog::writeVKPreis: exception '%s'", $e->getMessage()) ;
+			printf( "[%s][%s][%s]\n", "ArtTexte", $_artikel->ArtikelNr, $this->langCode) ;
+		}
+		
+		if ( strlen( $_artikel->ArtikelBez2) != 0) {
+			$artikelText	=	$_artikel->ArtikelBez2 ;
+		} else {
+			$artikelText	=	$_artikel->ArtikelBez1 ;
+		}
+		if ( strlen( $_artikel->MengenText) > 0) {
+			$artikelText	.=	", " . $_artikel->MengenText ;
+		}
+	//			mTS( textFromMenge( $_artikel->MengenEinheit, $_vkpreis->MengeProVPE)),
+		fwrite( $_oFile, sprintf( "<row>\n")) ;
+		fwrite( $_oFile, sprintf( "<entry align=\"left\">%s</entry>\n", $_artikel->ArtikelNr)) ;
+		fwrite( $_oFile, sprintf( "<entry align=\"left\">%s</entry>\n", $artikelText)) ;
+		fwrite( $_oFile, sprintf( "<entry align=\"left\">%s %9.2f</entry>\n", $_curr, $_vkpreis->Preis)) ;
+		fwrite( $_oFile, sprintf( "</row>\n")) ;
+	}
+	
+	function	einzelArtikelEnd( $_oFile) {
+		fwrite( $_oFile, sprintf( "</tbody>\n")) ;
+		fwrite( $_oFile, sprintf( "</tgroup>\n")) ;
+		fwrite( $_oFile, sprintf( "</table>\n")) ;
+	}
+	
+	function	artGruppeEnd( $_oFile) {
+		fwrite( $_oFile, sprintf( "</tbody>\n")) ;
+		fwrite( $_oFile, sprintf( "</tgroup>\n")) ;
+		fwrite( $_oFile, sprintf( "</table>\n")) ;
+	}
+
+}
+	
+?>

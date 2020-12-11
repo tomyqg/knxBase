@@ -1,0 +1,170 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModOperator" data-wap-screen="Client" data-wap-core-object="Client" data-wap-core-object-key="ClientId" >
+		<h1 class="page-title">Clients</h1>
+		<wap:key>
+			<wap:keyform id="ClientKeyData">
+				<wap:keyrow data-wap-label="Client no." data-wap-attr="ClientId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Name 1" data-wap-attr="Name1"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlClientMain" data-wap-active-tab-onload="tabPageClientSurveyEntry">
+			<wap:tabContentPane id="tabPageClientSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-object="Client" data-wap-grid-name="gridClientOV" data-wap-tab-onselect="tabPageClientMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="Client" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Client" data-wap-attr="ClientId" data-wap-label="Client Id." />
+					<wap:gridcol data-wap-obj="Client" data-wap-attr="Name1" data-wap-label="Name" data-wap-align="right"/>
+					<wap:gridcol data-wap-obj="Client" data-wap-attr="Name2" data-wap-label="more name ..." />
+					<wap:gridcol data-wap-obj="Client" data-wap-attr="Language" data-wap-label="Language" />
+					<wap:gridcol data-wap-obj="Client" data-wap-attr="Server" data-wap-label="Server" data-wap-edit-as="input" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageClientMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formClientMain">
+										<wap:rowinput data-wap-label="Client id." data-wap-attr="ClientId" />
+										<wap:row>
+											<wap:cellhelp rowspan="2" />
+											<wap:celllabel rowspan="2" data-wap-label="Name" />
+											<wap:cellinput data-wap-attr="Name1" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="Name2" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Street / No" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="Street" data-wap-mode="edit" />
+												<wap:input data-wap-attr="Number" size="6" max="8" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="ZIP / City" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="ZIP" size="6" max="8" data-wap-mode="edit" />
+												<wap:input data-wap-attr="City" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:rowoption data-wap-label="Language" data-wap-attr="Language" data-wap-mode="edit"
+											data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Language'" data-wap-order="'Key'" data-wap-def="de" />
+										<wap:rowoption data-wap-label="Country" data-wap-attr="Country" data-wap-mode="edit"
+											data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Country'" data-wap-order="'Key'" data-wap-def="de" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Contac Information</legend>
+									<wap:dataform id="formClientContactData">
+										<wap:rowinput data-wap-label="Phone" data-wap-attr="Phone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="FAX" data-wap-attr="FAX" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Cellphone" data-wap-attr="Cellphone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="URL" data-wap-attr="URL" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="eMail" data-wap-attr="eMail" data-wap-mode="edit" />
+									</wap:dataform>
+									</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Miscellaneous Information</legend>
+									<wap:dataform id="formClientMisc">
+										<wap:rowinput data-wap-label="TaxId" data-wap-attr="TaxId" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="OrgType" data-wap-attr="OrgType" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Miscellaneous Information</legend>
+									<wap:dataform id="formClientRem">
+										<wap:rowtext data-wap-label="Remark(s)" data-wap-attr="Rem" cols="64" rows="8" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formClientMain,formClientContactData,formClientMisc,formClientRem" />
+					<wap:btnUpdate data-wap-forms="formClientMain,formClientContactData,formClientMisc,formClientRem" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageClientContacts" data-wap-heading="Client Contacts">
+				<wap:data>
+					<fieldset>
+						<legend>Contacts (Table: ClientContact)</legend>
+						<wap:grid data-wap-object="ClientContact" data-wap-grid-name="gridClientContact" data-wap-adder="true" data-wap-editor="edtClientContact" data-wap-load-on-init="false">
+							<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+							<wap:gridcol data-wap-attr="Vorname" data-wap-label="Vorname" />
+							<wap:gridcol data-wap-attr="Name" data-wap-label="Name" />
+							<wap:gridcol data-wap-attr="Telefon" data-wap-label="Telefon" />
+							<wap:gridcol data-wap-attr="eMail" data-wap-label="eMail" />
+						</wap:grid>
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageClientApplications" data-wap-heading="Applications">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Applications (Table: ClientApplication)</legend>
+									<wap:grid data-wap-object="ClientApplication" data-wap-grid-name="gridClientApplications" data-wap-adder="true" data-wap-editor="edtClientApplication" data-wap-load-on-init="false">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="ApplicationSystemId" data-wap-label="Application System Id." data-wap-link-to="applicationSystem" />
+										<wap:gridcol data-wap-attr="ApplicationId" data-wap-label="Application Id." />
+										<wap:gridcol data-wap-attr="UserId" data-wap-label="UserId" />
+										<wap:gridcol data-wap-attr="PathConfig" data-wap-label="PathConfig" />
+										<wap:gridcol data-wap-attr="PathApplication" data-wap-label="PathApplication (Redirect)" />
+										<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<fieldset>
+									<legend>Configuration Objects (Table: SysConfigObj)</legend>
+									<wap:grid data-wap-object="SysConfigObj" data-wap-grid-name="gridSysConfigObj" data-wap-adder="true" data-wap-editor="false" data-wap-load-on-init="false">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="ClientId" data-wap-label="ClientId" />
+										<wap:gridcol data-wap-attr="ApplicationSystemId" data-wap-label="Application System Id." />
+										<wap:gridcol data-wap-attr="ApplicationId" data-wap-label="Application Id." />
+										<wap:gridcol data-wap-attr="Class" data-wap-label="Class" />
+										<wap:gridcol data-wap-attr="Block" data-wap-label="Block" />
+										<wap:gridcol data-wap-attr="Parameter" data-wap-label="Parameter" />
+										<wap:gridcol data-wap-attr="Value" data-wap-label="Value" />
+										<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageClientHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlClientHelpMain">
+					<wap:tabContentPane id="tabPageClientHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageClientHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageClientHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

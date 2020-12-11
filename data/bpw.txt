@@ -1,0 +1,33 @@
+<ApplicationSystem>
+  <Id type="int" title="Id"><![CDATA[1]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+  <Description1 type="varchar" title="Description1"><![CDATA[BPW Web Applications]]></Description1>
+  <VersionMajor type="int" title="VersionMajor"><![CDATA[0]]></VersionMajor>
+  <VersionMinor type="int" title="VersionMinor"><![CDATA[0]]></VersionMinor>
+  <VersionBuild type="int" title="VersionBuild"><![CDATA[0]]></VersionBuild>
+  <!--ADDITIONAL_DATA: ApplicationSystem-->
+</ApplicationSystem><Application>
+  <Id type="int" title="Id"><![CDATA[3]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+  <Description1 type="varchar" title="Description1"><![CDATA[Design Studie BrakeCalc R3]]></Description1>
+  <!--ADDITIONAL_DATA: Application-->
+</Application><Application>
+  <Id type="int" title="Id"><![CDATA[8]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+  <Description1 type="varchar" title="Description1"><![CDATA[Design Studie BrakeCalc R3 Editor]]></Description1>
+  <!--ADDITIONAL_DATA: Application-->
+</Application><Application>
+  <Id type="int" title="Id"><![CDATA[13]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+  <Description1 type="varchar" title="Description1"><![CDATA[Product Change Management]]></Description1>
+  <!--ADDITIONAL_DATA: Application-->
+</Application><Application>
+  <Id type="int" title="Id"><![CDATA[14]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+  <Description1 type="varchar" title="Description1"><![CDATA[Design Studie BrakeCalc R3 Calculation Design Study]]></Description1>
+  <!--ADDITIONAL_DATA: Application-->
+</Application>

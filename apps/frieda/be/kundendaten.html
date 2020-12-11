@@ -1,0 +1,241 @@
+﻿<h3>Kundendaten</h3>
+
+	<table class="standard-table">
+		<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+		<!--ZeilenID = KundenID aus Datenbank-->
+		<!--Todo: Reichen Eigenschaften? wenn nicht ggf mehr Spalten-->
+		<tr> <th class="create-date-column">Kundenname</th> <th>Adresse</th> <th class="company-column">Telefonnummer</th><th>Support</th><th>Eskalationsschema</th><th>Service Vertrag<br/>Stundensoll</th></tr>
+		<tr id="kunde-21414125" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">BPW</td> <td>Wiehl, ...</td> <td class="company-column">326590723</td><td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+20</td></tr>
+		<tr id="kunde-21414126" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Hegenscheidt</td> <td>Wo auch immer...</td> <td class="company-column">247509346931</td><td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+30</td></tr>
+		<tr id="kunde-21414127" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Sportpark</td> <td>Oberwiehl</td> <td class="company-column">325246</td> <td><img src="icons/Delete-256.png" class="support-icon" title="Support gesperrt"/></td><td>Standard</td><td>-15</td></tr>
+		<tr id="kunde-21414128" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td><td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+22</td></tr>
+		<tr id="kunde-21414129" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td> <td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+10</td></tr>
+		<tr id="kunde-21414130" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td> <td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+30</td></tr>
+		<tr id="kunde-21414131" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td> <td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+42</td></tr>
+		<tr id="kunde-21414132" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td><td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>-5</td></tr>
+		<tr id="kunde-21414133" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td> <td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>-23</td></tr>
+		<tr id="kunde-21414134" onclick="ClickCompanyEntry(this)"> <td class="create-date-column">Dummy</td> <td>Dummy</td> <td class="company-column">Dummy</td><td><img src="icons/Check-256.png" class="support-icon" title="Support besteht"/></td><td>Standard</td><td>+34</td></tr>
+	</table>
+	
+	<center>
+		<br/>
+		<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kundennr. <span id="kunde-nr-start">1</span> bis <span id="kunde-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+	</center>
+	
+	<div id="company-detail" style="display:none">
+		<br/>
+		<table>
+			<tr>
+				<td style="vertical-align:top;padding:10px;" colspan="2">
+					<span style="font-weight:bold">ausgewählter Kunde:</span><br/>
+					<table class="detail-table">
+						<tr>
+							<td colspan="2">
+								<p>Name</p>
+								<!--TODO: Zeilenumbrüche in <br/> umwandeln!-->
+								<span id="company-detail-name" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Adresse</p>
+								<span id="company-detail-adress" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;"></span>
+							</td>
+							<td>
+								<p>Telefonnummer</p>
+								<span id="company-detail-telephone" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;"></span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Ansprechpartner oder sonst was....</p>
+								<!--TODO: Klären welche Infos noch wichtig sind-->
+								<span id="company-detail-sonstiges" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">42</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Eskalationsschema</p>
+								<!--TODO: Klären welche Infos noch wichtig sind-->
+								<span id="company-detail-escalation" onclick="ClickSingleSelectEntry(this, 'company-escalation-data')" iseditable="false" style="cursor:pointer;">Standard</span>
+								
+								<datalist id="company-escalation-data">
+									<!--value will be sent back to the server-->
+									<!--fill datalist with customers from database, option-id should be role id from database-->
+									<option label="Standard" value="Standard" option-id="23523523">
+									<option label="für Hegenscheidt" value="für Hegenscheidt" option-id="23523524">
+									<option label="Schnell" value="Schnell" option-id="23523525">
+									<option label="mit Cheffe" value="mit Cheffe" option-id="23523526">
+								</datalist>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align:top;padding:10px;">
+					<span style="font-weight:bold">Ansprechpartner:</span><br/>
+					<!--ansprechpartner aus der Büwi, Ticketsystem legt keine Daten in der BüWi an!!
+					<fieldset>
+						<legend>Neuer Ansprechpartner</legend>
+						<form>
+							Vorname: <input id="new-customer-employee-firstname" size="20" placeholder="Friedbert"/><br/>
+							Nachname: <input id="new-customer-employee-secondname" size="20" placeholder="Schulze"/><br/>
+							Telefonnummer: <input id="new-customer-employee-telephone" size="20" placeholder="01XX/XXXXXXXX"/><br/>
+							Email: <input id="new-customer-employee-email" size="30" placeholder="vorname.nachname@firma.de"/><br/>
+							/*by default: is active = true*/
+							<input type="button" value="Erstellen">/*maybe change to type="button" and do custom submit + validation with javascript*/
+						</form>
+					</fieldset>
+					<br/>
+					-->
+					<table class="detail-table">
+						<tr>
+							<td>
+								<p>Vorname</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Meier</span>
+							</td>
+							<td>
+								<p>Nachname</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Schulze</span>
+							</td>
+						<tr>
+						</tr>
+							<td>
+								<p>Telefonnummer</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">123496103414</span>
+							</td>
+							<td>
+								<p>Email</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">meier.schulze@dau-gmbh.de</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Anschrift</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Oberwiehl, 23421 Wiehl</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Ist Aktiv</p>
+								<span onclick="ClickSingleSelectEntry(this, 'customer-employee-active')" iseditable="false" style="cursor:pointer;">Ja</span>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<table class="detail-table">
+						<tr>
+							<td>
+								<p>Vorname</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Ford</span>
+							</td>
+							<td>
+								<p>Nachname</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Prefect</span>
+							</td>
+						<tr>
+						</tr>
+							<td>
+								<p>Telefonnummer</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">123496103414</span>
+							</td>
+							<td>
+								<p>Email</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">ford.prefect@dau-gmbh.de</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Anschrift</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">---</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Ist Aktiv</p>
+								<span onclick="ClickSingleSelectEntry(this, 'customer-employee-active')" iseditable="false" style="cursor:pointer;">Nein</span>
+							</td>
+						</tr>
+					</table>					
+				</td>
+				<td style="vertical-align:top;padding:10px;">
+					<span style="font-weight:bold">Dienstleistungsverträge:</span><br/>
+
+					<fieldset>
+					<legend>Neuer Dienstleistungsvertrag</legend>
+						<form>
+							von: <input id="new-contract-start" size="20" placeholder="DD.MM.YYYY"/>&nbsp;&nbsp;&nbsp;&nbsp;bis: <input id="new-contract-end" size="20" placeholder="DD.MM.YYYY"/><br/>
+							Anzahl Stunden pro Monat: <input id="new-contract-volume" size="20" placeholder="XXX"/><br/>
+							sofort aktiv: 
+							<select id="new-contract-active">
+								<option value="Ja">Ja</option>
+								<option value="Nein">Nein</option>
+							</select><br/>
+							<input type="button" value="Erstellen"><!-- maybe change to type="button" and do custom submit + validation with javascript--> 
+						</form>
+					</fieldset>
+					<br/>
+					
+					<table class="detail-table">
+						<tr>
+							<td width="50%">
+								<p>von</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">24.1.2014</span>
+							</td>
+							<td width="50%">
+								<p>bis</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">24.8.2014</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="50%">
+								<p>Anzahl Stunden pro Monat</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">20</span>
+							</td>
+							<td width="50%">
+								<p>Aktuell Aktiv</p>
+								<span onclick="ClickSingleSelectEntry(this, 'contract-active')" iseditable="false" style="cursor:pointer;">Nein</span>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<table class="detail-table">
+						<tr>
+							<td width="50%">
+								<p>von</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">24.8.2014</span>
+							</td>
+							<td width="50%">
+								<p>bis</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">24.8.2015</span>
+							</td>
+						</tr>
+						<tr>
+							<td width="50%">
+								<p>Anzahl Stunden pro Monat</p>
+								<span onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">30</span>
+							</td>
+							<td width="50%">
+								<p>Aktuell Aktiv</p>
+								<span onclick="ClickSingleSelectEntry(this, 'contract-active')" iseditable="false" style="cursor:pointer;">Ja</span>
+							</td>
+						</tr>
+					</table>
+				
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+<datalist id="contract-active">
+	<!--value will be sent back to the server-->
+	<option label="Nein" value="Nein" option-id="23523523">
+	<option label="Ja" value="Ja" option-id="23523524">
+</datalist>
+
+<datalist id="customer-employee-active">
+	<!--value will be sent back to the server-->
+	<option label="Nein" value="Nein" option-id="23523523">
+	<option label="Ja" value="Ja" option-id="23523524">
+</datalist>

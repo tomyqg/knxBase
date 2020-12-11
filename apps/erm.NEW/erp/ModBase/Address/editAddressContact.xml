@@ -1,0 +1,43 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="AddressContact" data-wap-core-object="AddressContact" data-wap-core-object-key="Id" data-wap-parent-object="Address" w="500" h="300">
+		<wap:key>
+			<wap:keyform id="AddressContactKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="AddressContact" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formAddressContact" class="formCreate formUpdate" w="500" h="400">
+				<table>
+					<wap:rowdisplay data-wap-label="Address no." data-wap-obj="AddressContact" data-wap-attr="AddressNo" />
+					<wap:rowinput data-wap-label="Contact no" data-wap-obj="AddressContact" data-wap-attr="AddressContactNo" />
+					<wap:rowoption data-wap-label="Salutation" data-wap-obj="AddressContact" data-wap-attr="Salutation" data-wap-mode="edit"
+								   data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Salutation'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowoption data-wap-label="Title" data-wap-obj="AddressContact" data-wap-attr="Title" data-wap-mode="edit"
+								   data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Title'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowinput data-wap-label="First name" data-wap-obj="AddressContact" data-wap-attr="FirstName" />
+					<wap:rowinput data-wap-label="Last name" data-wap-obj="AddressContact" data-wap-attr="LastName" />
+					<wap:rowinput data-wap-label="Phone" data-wap-obj="AddressContact" data-wap-attr="Phone" />
+					<wap:rowinput data-wap-label="Fax" data-wap-obj="AddressContact" data-wap-attr="Fax" />
+					<wap:rowinput data-wap-label="E-Mail" data-wap-obj="AddressContact" data-wap-attr="eMail" />
+					<wap:rowoption data-wap-label="Function" data-wap-obj="AddressContact" data-wap-attr="Function" data-wap-mode="edit"
+								   data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'CCFunction'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowinput data-wap-label="Username" data-wap-obj="AddressContact" data-wap-attr="Username" />
+					<wap:rowinput data-wap-label="Password" data-wap-obj="AddressContact" data-wap-attr="Password" />
+					<wap:rowtext data-wap-label="Remark(s)" data-wap-obj="AddressContact" data-wap-attr="Remark" cols="64" rows="8" data-wap-mode="edit" />
+					<wap:rowtext data-wap-label="Mailing" data-wap-obj="AddressContact" data-wap-attr="Mailing" cols="64" rows="8" data-wap-mode="edit" />
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

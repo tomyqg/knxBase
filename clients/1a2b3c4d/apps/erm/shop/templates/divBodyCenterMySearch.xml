@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource name="divBodyCenter">
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<div id="bodyCenter">
+		<if var="action" eq="search">
+			<h2 class="page-title"><trans>SHOP-HEADER-SEARCH-SHOW</trans></h2>
+			<trans>SHOP-TEXT-SEARCH</trans>
+			<object class="MySearch" template="MySearchFormats.xml" />
+		</if>
+	</div>
+</resource>

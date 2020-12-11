@@ -1,0 +1,9 @@
+Clients Directory:
+==================
+
+Client Id.		Client Name
+---------------------------------------------------------------------------------
+1a2b3c4d		wimtecc - Karl-Heinz Welter
+2b3c4d5e		MODIS GmbH
+99999999		BPW - Bergische Achsen
+99aa88bb		Intersport

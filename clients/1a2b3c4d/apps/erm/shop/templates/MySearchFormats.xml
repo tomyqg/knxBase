@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="catalog">
+	<!--																-->
+	<!-- articleDetail													-->	
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="SearchResult">
+		<![CDATA[
+			<h2 class="page-title"><trans>Search Result</trans></h2>
+<!--			$PageSelector$		-->
+			<table class="tab_a">	<!-- catalog	-->
+				<tbody>
+					$ArticleList$
+				</tbody>
+			</table>				<!-- catalog	-->
+<!--			$PageSelector$		-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->	
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ArtSalesPricesTable">
+		<![CDATA[
+			<tr>
+				<td>
+					<table class="tab_i">	<!-- artSalesPriceTable				-->
+						<tbody>
+							<tr class="zeile_i_1">
+								<th class="zelle_i_1">Bild</th>
+								<th class="zelle_i_1">Artikel Nr.</th>
+								<th class="zelle_i_2">Bezeichnung/Variante</th>
+								<th class="zelle_i_3">&euro; inkl. Mwst.<br/>&euro; exkl. Mwst.</th>
+								<th class="zelle_i_4">bis zu</th>
+								<th class="zelle_i_5">Anzahl</th>
+							</tr>
+							$ArtSalesPricesList$
+						</tbody>
+					</table>				<!-- artSalesPriceTable				-->
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtSalesPriceLine												-->	
+	<!-- describes the layout for the description of a single article	-->
+	<!-- needs: LinkedArticleNo, Article, SalesPrice					-->
+	<!--																-->
+	<format name="ArtSalesPriceLine1st">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_i_1" rowspan="$iterCnt$">
+					<img class="art_pic" src="/Images/thumbs/$Article.BildRef$" alt="$Article.BildRef$" /><br/>
+				</td>
+				<td class="zelle_i_1">$LinkedArticleNo$</td>
+				<td class="zelle_i_2">$Article.ArtikelBez1$,<br/>$Article.ArtikelBez2$</td>
+				<td class="zelle_i_3">$SalesPrice.Preis$ / $SalesPrice.MengeProVPE$</td>
+				<td class="zelle_i_4">$SalesPrice.Rabatt$</td>
+				<td class="zelle_i_5">
+					<form class="eingabe1" method="post" id="Form$Article.ERPNo$_$SalesPrice.MengeProVPE$"
+						action="merkzettel.php" onsubmit="aufCuCart( 'Form$Article.ERPNo$_$SalesPrice.MengeProVPE$') ; return false ;">
+						<fieldset style="border: 0px">
+							<input type="hidden" name="_IArtikelNr" value="$Article.ArtikelNr$">
+							<input type="hidden" name="_IArtikelBez1" value="$Article.ArtikelBez1$">
+							<input type="hidden" name="_IF1" value="$SalesPrice.Rabatt$">
+							<input type="hidden" name="_IPreis" value="$SalesPrice.Preis$">
+							<input type="hidden" name="_IMengeProVPE" value="$SalesPrice.MengeProVPE$">
+							<input class="eingabe2" maxlength="3" size="3" name="_IMenge" value="$SalesPrice.MengeProVPE$">
+							<input class="eingabe3" type="button" name="submit" value="MERKEN"
+									onclick="aufCuCart( 'Form$Article.ERPNo$_$SalesPrice.Menge$') ; ">
+						</fieldset>
+					</form>
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtSalesPriceLine												-->	
+	<!-- describes the layout for the description of a single article	-->
+	<!-- needs: LinkedArticleNo, Article, SalesPrice					-->
+	<!--																-->
+	<format name="ArtSalesPriceLine">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_i_1">$LinkedArticleNo$</td>
+				<td class="zelle_i_2">$Article.ArtikelBez1$,<br/>$Article.ArtikelBez2$</td>
+				<td class="zelle_i_3">$SalesPrice.Preis$ / $SalesPrice.MengeProVPE$</td>
+				<td class="zelle_i_4">$SalesPrice.Rabatt$</td>
+				<td class="zelle_i_5">
+					<form class="eingabe1" method="post" id="Form$Article.ERPNo$_$SalesPrice.MengeProVPE$"
+						action="merkzettel.php" onsubmit="aufCuCart( 'Form$Article.ERPNo$_$SalesPrice.MengeProVPE$') ; return false ;">
+						<fieldset style="border: 0px">
+							<input type="hidden" name="_IArtikelNr" value="$Article.ArtikelNr$">
+							<input type="hidden" name="_IArtikelBez1" value="$Article.ArtikelBez1$">
+							<input type="hidden" name="_IF1" value="$SalesPrice.Rabatt$">
+							<input type="hidden" name="_IPreis" value="$SalesPrice.Preis$">
+							<input type="hidden" name="_IMengeProVPE" value="$SalesPrice.MengeProVPE$">
+							<input class="eingabe2" maxlength="3" size="3" name="_IMenge" value="$SalesPrice.MengeProVPE$">
+							<input class="eingabe3" type="button" name="submit" value="MERKEN"
+									onclick="aufCuCart( 'Form$Article.ERPNo$_$SalesPrice.Menge$') ; ">
+						</fieldset>
+					</form>
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtNoWLink														-->	
+	<!-- article number linking to the single page						-->
+	<!-- needs: ProdGr, Article											-->
+	<format name="ArticleNoWLink">
+		<![CDATA[
+			<a class="detail" href="/$ProdGr.ProdGrNo$/$Article.ArtikelNr$.html">
+				$Article.ArtikelNr$
+			</a>
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtNoWOLink													-->	
+	<!-- article number w/o link to single page							-->
+	<!-- needs: Article													-->
+	<!--																-->
+	<format name="ArticleNoWOLink">
+		<![CDATA[
+			$Article.ArtikelNr$
+		]]>
+	</format>
+</resource>

@@ -1,0 +1,291 @@
+Design Rules Brake Calculator Version 3
+=======================================
+=======================================
+
+1. Grundlage
+
+1.1	Sprache(n)
+
+2.	Begriffsdefinition, Terminologie
+
+Paket
+Ein Paket ist die Zusammenfassung funktional eng verzahnter Klassen und Funktionen.
+
+Deklaration
+Beispiel: Beschreibung einer Klasse in einer include-Datei.
+
+Definition
+Beispiel: Codierung einer Klasse in einer c++-Datei.
+
+Klasse
+Der Begriff der Klasse wird hier nicht weiter erläutert.
+Die Definition einer Klasse MUSS in einer einzigen Quelldatei und optional - falls erforderlich bzw. sinnvoll - einer
+getrenten Deklarationsdatei enthalten sein.
+Die einzige Ausnahme bilden die im Rahmen der C# Programmierung durch Visual C# (Visual Studio) automatisch erstellten
+Klassen für Objekte der grafischen Benutzeroberfläche!
+
+Modul
+Ein Modul ist eine Sammlung voneinander abh�ngiger Dateien die einen gemeinsamen Zweck erf�llen.
+
+Funktion
+
+Platform
+Eine Platform ist eine Sammlung von Modulen die unabh�ngig von der jeweiligen Anwendung bestimmte Funktionen erf�llen.
+Z.b. Datenbank Modul, PDF Modul, Debugging Modul.
+Ein Modul kann eine oder mehrere, in der Regel von einander abh�ngige Dateien beinhalten.
+
+Anwendung
+Eine Anwendung ist eine Sammlung von Modulen die eine spezielle Funktion erf�llen.
+
+MUSS
+
+SOLLTE
+
+KANN
+
+DARF NICHT
+
+2.	Allgemeine Designregeln
+
+2.1	Zeichens�tze und Kodierung
+
+Die bekanntesten Zeichensatz Kodierungen sind: 7-bit (US-ASCII), 8-bit ASCII (ISO-8859-1, Latin-1;
+ISO-8859-15, Latin-15, wie Latin-1 aber mit dem Euro Zeichen;) und UTF-8.
+
+Unterschiedliche Editoren und Tools reagieren teilweise sehr empfindlich auf nicht-ASCII Codes.
+Speziell UTF-8 stellt hier mit seiner speziellen Art der Kodierung ein Problem dar und kann nicht von
+allen Editoren korrekt dargestellt bzw. von Tools korrekt verarbeitet werden.
+Damit ist die Programmierung auf den kleinsten gemeinsamen Nenner zu bringen.
+Als Kodierung f�r die Programmierung, und damit ebenso f�r die Kommentierung des Quellcodes, DARF
+daher ausschliesslich 7- oder 8-bit ASCII (als ISO-8859-1) verwendet werden.
+
+2.2	Namensgebung
+
+Grunds�tzlich gilt, unabh�ngig von der vorgeschriebenen Kodierung, da� Namen - einschliesslich
+Dateinamen - ausschliesslich aus sichtbaren US-ASCII Zeichen ohne das Leerzeichen, d.h. '0'..'9',
+'_', 'A'..'Z' und 'a'..'z' aufgebaut sein D�RFEN.
+
+2.2.1	Klassen, Objekte, Variable
+
+2.2.2	Methoden, Funktionen
+
+2.2.3	�bergabeparameter (Funktions-, Methodenparameter)
+
+Namen von Parametern die an Methoden �bergeben werden sind h�ufig identisch mit den Namen der Attribute der Klasse, und werden
+folglich meistens in diesen Attributen gespeichert. Um diese identischen Namen unterscheiden zu k�nnen M�SSEN alle Parameter
+in der Parameterliste mit einem '_' (Unterstrich) beginnen.
+
+// C++ Beispiel:
+
+class	test	{
+	function	help( _a, _b, _c) {
+		this.a	=	_a ;
+		<statements> ;
+	}
+}
+
+// und NICHT:
+
+class	test	{
+	function	help( a, b, c) {
+		this.a	=	a ;
+		<statements> ;
+	}
+}
+
+2.3	Code Gliederung, Kommentierung
+
+2.4	Einr�ckungen
+
+Als Einr�ckungszeichen MUSS, soweit dies von dem verwendeten Editor unterst�tzt wird, das
+Tabulatorzeichen (hex 0x09) verwendet werden.
+
+Speziell bei "IF" Abfragen, aber auch bei Pre-Check Loops, MUSS in jedem Fall ein einzelnes,
+konditionales Statement in der nachfolgenden Zeile einger�ckt stehen.
+Dies gilt ebenfalls f�r optionale "ELSE" Statements.
+
+// Beispiel:
+
+if ( a == b)
+	c	=	a ;
+else
+	c	=	b ;
+
+// und NICHT:
+
+if ( a == b) c = a ;
+else c = b ;
+
+// und ebenfalls NICHT:
+
+if ( a == b) c = a ; else c = b ;
+
+2.5	Blockbegrenzung, Klammersetzung
+
+Obwohl die meisten Programmiersprachen gestatten einen Block der aus lediglich einen Statement
+besteht ohne umgebende Blockbegrenzer, z.B. '{' und '}' oder "BEGIN" und "END" ohne diese
+Blockbegrenzer zu schreiben SOLLTEN auch derartige
+Statements in Blockbregrenzer eingeschlossen sein.
+Diese vermindert das Risiko, da� bei einer Code�nderung innerhalb dieses Blockes ein Fehler entsteht.
+Compilierte Sprachen sind hier problemloser da die Syntax Probleme bereits bei der Compilierung
+erkannt werden.
+Bei interpretierten Sprachen wie z.B. JavaScript oder PHP jedoch k�nnen so schwer zu findende
+Fehler bereits beim Design vermieden werden.
+
+Bei Ausdr�cken in Klammern, dies gilt auch f�r Parameterlisten beim Aufruf von Funktionen oder
+Methoden, SOLLEN die einzelnen Parameter durch ein Leerzeichen links vom jeweiligen Parametr
+besser sichtbar gemacht werden.
+
+// Beispiel:
+
+function	test( _a, _b, _c) {
+	call( _a, _c) ;
+	<statements>
+}
+
+// und NICHT:
+
+function	test(_a,_b,_c) {
+	call(_a,_c) ;
+	<statements>
+}
+
+2.5
+
+11. Designregeln f�r spezielle Sprachen
+
+11.1	PHP
+
+11.2	JavaScript, jQuery, dojo
+
+11.2.1	JavaScript
+
+11.2.1.1	Vererbung
+
+JavaScript an sich kennt keine Vererbung.
+Vererbung kann jedoch leicht �ber entsprechende Konstrukte "simuliert" werden.
+Um eine Klasse "Derived" von einer Klasse "Base" abzuleiten MUSS folgendes, einfaches Konstrukt verwendet werden:
+(Das Prinzip funktioniert ebenso mit "mehrfacher Vererbung", auf die jedoch soweit m�glich verzichtet werden SOLLTE!)
+
+// Definition der Klasse "Base":
+
+function	Base( <_parameterlist>) {
+	<statements> ;
+	this.<method>	=	function( <_parameterlist>) {
+							<statementlist> ;
+						} ;
+}
+
+// Definition der Klasse "Derived"
+
+function	Derived( <_parameterlist>) {
+	Base.call( this, <parameterlist>) ;		// this will "inherit" everything from "Base"
+	<statements> ;
+	this.<method>	=	function( <_parameterlist>) {
+							<statements> ;
+						} ;
+}
+
+11.2.1.2	Objektverweise
+
+H�ufig wird bei Objekten eine Referenz auf das erzeugende Objekt ben�tigt, ebenso wie es notwendig sein kann, auf ein
+Objekt gezielt Zugriff zu haben, z.B. �ber ein assoziatives Array.
+Der Konstruktor einer Klasse MUSS daher als Parameter sowohl eine Objektreferenz als auch einen Objektnamen,
+und zwar in genau dieserr Reihenfolge, als erste Parameter aktzeptieren.
+
+// Definition der Klasse "Sample"
+
+function	Sample( _parent, _name, <_parameterlist>) {
+	this.parent	=	_parent ;
+	this.name	=	_name ;
+	<statements>
+}
+
+
+11.2.2	jQuery
+11.2.3	dojo
+
+11.3	C/C++/C#
+11.3.1	C
+11.3.2	C++
+11.3.3	C#
+
+11.4	SQL (Stored Procedures, Functions, Triggers)
+11.4.1	Stored Procedures
+11.4.2	Functions
+11.4.3	Triggers
+
+11.6	Visual BASIC
+
+12.	Designregeln f�r spezielle Projekte
+
+12.1	BPW: Brake Calculator
+
+12.1.1	phpDocumentor Struktur
+
+Pakete:
+	Core
+		Framework		- FDbg, FError, FDb
+		pdfdoc
+		DbObject
+		UIObject
+		AppObject
+		AppDepObject
+		Classes			- miscellaneous classes as part of the core, e.g. User, UserRole
+
+	BrakeCalc
+		CoreClasses, e.g. BCObject
+		Classes, e.g. Brake
+
+13.	Verzeichnisstrukturen
+
+14.	Versionskontrolle
+
+A. 	Tools
+
+A.1	Web Applications Development
+
+A.1.1	phpDocumentor
+
+phpDocumentor gestattet die Dokumentation im Quellcode zur Erstellung einer HTML basierten Dokumentation ebenso
+wie die Ausgabe in Form eines PDF Dokumentes.
+
+A.1.2	Mozilla Internet Browser
+
+A.1.2.1	Firebug
+
+A.1.2.2	Live HTTP Headers
+
+A.1.3	Internet Explorer Browser
+
+A.1.4	Safari Browser
+
+A.1.5	HTML Checker
+
+A.2	Versions Management
+
+Als Standard System zum Handling unterschiedlicher Software Versionen SOLLTE f�r den Bereich von Web Applikationen
+das SVN System verwendet werden.
+
+A.2.1	Subversion (SVN)
+
+A.2.2	Concurrent Version System (CVS)
+
+A.3	Integrated Development Environments (IDE)
+
+Als Standard System zur Erstellung und Wartung SOLLTE f�r den Bereich von Web Applikationen das Eclipse IDE verwendet werden.
+
+A.3.1	Eclipse
+
+A.3.2	Microsoft Visual Studio
+
+A.3.3	Trolltech Qt
+
+Das IDE von Trolltech ist geeignet zur Entwicklung von Anwendungen die auf den 3 derzeit verherrschenden Plattformen, i.e.
+Windows, MacOS und LINUX, verf�gbar sein m�ssen.
+
+A.3.4	XCode
+
+XCode ist das IDE zur Entwicklung von MacOS konformen Anwendungen sowie f�r Anwendungen f�r iPad und iPhone.
+
+B.

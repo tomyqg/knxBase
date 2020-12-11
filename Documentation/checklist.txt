@@ -1,0 +1,60 @@
+Checklist for mas core installation:
+====================================
+
+The mas application framework is sensitive when it comes to configuration. A configuration error
+will either not produce any output at all or lead to an error message in the logfile (typically /tmp/php.log)
+and/or in the browser.
+The configuration should be carefully examined in case the expected behaviour or output in the browser
+is not achieved.
+
+1. Check that "Config/config.ini" contains correct data for:
+	- database server
+	- following parameters need to be defined even if these are empty:
+		[dbSys]
+		alias		=	"sys"
+		host		=	"HOST"
+		user		=	"DBUSER"
+		password	=	"DBUSERPASSWORD"
+		name		=	"mas_sys"
+		driver		=	"mysql"
+		prefix		=	""
+	- following parameter related to server needs to be defined:
+		[server]
+		allowedHost	=	"wimtecc.de.local"
+	  if the URL you type in is: http://abc.def.de/ the string needs to be:
+		allowedHHost	=	"def.de"
+	- following parameter for session needs to be defined:
+		[session]
+		timeout		=	900		; session timeout in seconds; 900 = 15 minutes
+	- Try to "ping" the server HOST. If it does not respond ... fix it.
+
+2. Check that the mas_sys database on the server as configured per "Config/config.ini" contains correct data for:
+	- the table ApplicationSystem
+	- the table Application
+	- the table Client, especially the attribute "Server" needs to contain some valid part from the URL. If the URL
+	  you type is http://abc.def.de/ the the Server needs to contain a part which reads:
+		",abc,"
+	- the table ClientApplication needs an entry for every
+		ClientId / UserId / ApplicationSystemId / ApplicationId with a proper "PathApplication"
+	  combination which specifies which user is allowed to work for which client and use which application
+	- the table SysConfigObj contains a correct values for:
+		dbAlias, dbDriver, dbHost, dbName, dbPassword, dbPrefix, dbUser
+	  each for the Class="def" and Block="appSys" entries as well as the Class="def" and Block="def".
+	  There must be at least 14 (! 2 x 7) SysConfigObj entries for an application to work!
+	- the table SysUser needs an entry for every
+		UserId / ApplicationSystemId / ApplicationId / Password
+	  to allow this user to log in through the mas system OR an entry for
+		__appuser__ / ApplicationSystemId / ApplicationId / <Password not required>
+	  in case the use shall authenticate via the application system.
+	- the table SysUser also needs an entry in case job automation is required:
+		__steve__ / ApplicationSystemId / ApplicationId / __jobs__
+
+3. Check that the Apache web server configuration is ok.
+	- there MUST be an Alias for "/api" defined which points to base-directory/api
+		this ensures that api calls "land" in the proper directory
+	- DocumentRoot MUST point to base-directory/apps
+		this ensures that only data from this directory or from a directory below
+		can be served as answer to a request
+	- there MUST be a Directory entry for the base-directory
+
+Once the above mentioned checks have been positively confirmed there should be no reason why the application doesn't work.

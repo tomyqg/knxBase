@@ -1,0 +1,23 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h2 class="page-title">Select Article(s)</h2>
+		<fieldset>
+			<legend>Selection Criteria</legend>
+			<wap:dataform id="formSelArticleSalesPriceCacheFilter">
+				<wap:rowinput data-wap-label="Article no." data-wap-attr="ArticleNo" data-wap-mode="edit" />
+				<wap:rowinput data-wap-label="Description" data-wap-attr="Description" data-wap-mode="edit" />
+			</wap:dataform>
+		</fieldset>
+		<wap:grid data-wap-class="ArticleSalesPriceCache" data-wap-grid-name="gridArticleSalesPriceSelectOV">
+			<wap:gridcol data-wap-obj="ArticleSalesPriceCache" data-wap-attr="Id" data-wap-label="Id" />
+			<wap:gridcol data-wap-obj="ArticleSalesPriceCache" data-wap-attr="ArticleNo" data-wap-label="ArticleNo" />
+			<wap:gridcol data-wap-obj="ArticleSalesPriceCache" data-wap-attr="Description" data-wap-label="Description" />
+			<wap:gridcol data-wap-obj="MarketId" data-wap-attr="MarketId" data-wap-label="Market Id" />
+			<wap:gridcol data-wap-obj="ArticleSalesPriceCache" data-wap-attr="QuantityPerPU" data-wap-label="Quantity per PU" />
+			<wap:gridcol data-wap-obj="ArticleSalesPriceCache" data-wap-attr="Quantity" data-wap-label="Quantity" />
+			<wap:gridcol data-wap-obj="ArticleSalesPriceCache" data-wap-attr="Price" data-wap-label="Price" />
+		</wap:grid>
+	</div>
+</html>

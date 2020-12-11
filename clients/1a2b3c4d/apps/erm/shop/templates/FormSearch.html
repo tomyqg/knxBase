@@ -1,0 +1,8 @@
+<form id="search_mini_form" action="/index.php?webPage=MySearch&action=search" method="post">
+	<div class="form-search">
+		<label for="SearchTerm">$trans.SHOP-LBL-SEARCH$:</label>
+		<input id="SearchTerm" type="text" name="SearchTerm" value="$self.SearchTerm$" class="input-text" maxlength="128"
+				onClick="if ( this.value == '$self.SearchTermBase$') this.value = '' ;" />
+		<input type="image" onclick="submit() ;" src="/rsrc/img/search.png">
+	</div>
+</form>

@@ -1,0 +1,9 @@
+<ApplicationSystem type="class">
+  <Id type="int" title="Id"><![CDATA[5]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[frieda]]></ApplicationSystemId>
+  <Description1 type="varchar" title="Description1"><![CDATA[Frieda 0.1]]></Description1>
+  <VersionMajor type="int" title="VersionMajor"><![CDATA[0]]></VersionMajor>
+  <VersionMinor type="int" title="VersionMinor"><![CDATA[0]]></VersionMinor>
+  <VersionBuild type="int" title="VersionBuild"><![CDATA[0]]></VersionBuild>
+  <!--ADDITIONAL_DATA: ApplicationSystem-->
+</ApplicationSystem>

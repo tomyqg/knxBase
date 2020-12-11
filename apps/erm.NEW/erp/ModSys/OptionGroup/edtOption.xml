@@ -1,0 +1,27 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:dojo="http://www.openwap.org/dojo"
+	xmlns:wap="http://www.openwap.org/wap">
+<dojo:lbc style="width: 100%; height: 100%;">
+	<wap:data>
+		<table>
+			<tr>
+				<td valign="top">
+					<fieldset>
+						<legend>Editor: Option</legend>
+						<wap:dataform id="formOptionEdit">
+							<wap:rowdisplay wapLabel="OptionName" wapVar="OptionName" />
+							<wap:rowinput wapLabel="Key" wapVar="Key" />
+							<wap:rowinput wapLabel="Value" wapVar="Value" />
+							</wap:dataform>
+					</fieldset>
+				</td>
+			</tr>
+		</table>
+		<wap:btnCreateDep form="formOptionEdit" />
+		<wap:btnUpdateDep form="formOptionEdit" />
+		<wap:btnCancelDep form="formOptionEdit" />
+	</wap:data>
+</dojo:lbc>
+</html>
+

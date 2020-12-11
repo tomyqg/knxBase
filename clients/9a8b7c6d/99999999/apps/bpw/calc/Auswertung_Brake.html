@@ -1,0 +1,100 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+<br/><br/>
+<fieldset>
+	<legend>Abbremsung</legend>
+		<center>
+			<table>
+				<tr>
+					<td width=400>
+						<button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconInsertImage', showLabel: false" id="Auswertung_Brake_copy_image_left">bild kopieren</button>
+						<button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconCopy', showLabel: false" id="Auswertung_Brake_copy_data_left">daten kopieren</button>
+					</td>
+					<td width=400>
+						<input id="Auswertung_Abbremsung_Auslegungsbaender" data-dojo-type="dijit.form.CheckBox" value="Auslegungsbaender" checked="false"><label><font color="white">Auslegungsb&auml;nder einblenden</font></label></input>
+						<button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconInsertImage', showLabel: false" id="Auswertung_Brake_copy_image_right">bild kopieren</button>
+						<button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconCopy', showLabel: false" id="Auswertung_Brake_copy_data_right">daten kopieren</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<image src="diagramm_test_image.png"/>
+					</td>
+					<td>
+						<image src="diagramm_test_image.png"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<font color="white">
+							Kc min = 1,045 max = 1,07
+						</font>
+					</td>
+					<td>
+						<font color="white">
+							Kv min = 1,836 max = 1,856
+						</font>
+					</td>
+				</tr>
+			</table>
+		</center>
+</fieldset>
+
+<fieldset>
+		<legend>EBS Einstellungen</legend>
+		
+		<table border="0">
+			<tr>
+				<td></td>
+				<td><font color="white">pm [bar]</font></td>
+				<td>
+					<input style="width:75px" id="EBS_III_1_1" data-dojo-type="dijit.form.NumberSpinner" value="0.60" smallDelta="0.01" constraints="{min:0,max:4,places:2}"/>
+				</td>
+				<td><input style="width:75px" id="EBS_III_2_1" data-dojo-type="dijit.form.NumberSpinner" value="2" smallDelta="1" constraints="{min:0,max:10,places:0}"/></td>
+				<td><input type="text" style="width:75px" id="EBS_III_3_1" data-dojo-type="dijit.form.TextBox" value="3"/></td>
+				<td><input type="text" style="width:75px" id="EBS_III_4_1" data-dojo-type="dijit.form.TextBox" value="6,5"/></td>
+			</tr>
+			<tr>
+				<td><button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconUndo', showLabel: false" id="undo_5">undo</button></td>
+				<td><font color="white">z beladen</font></td>
+				<td></td>
+				<td><input style="width:75px" id="EBS_III_2_2" data-dojo-type="dijit.form.NumberSpinner" value="0.14" smallDelta="0.01" constraints="{min:0,max:1,places:2}"/></td>
+				<td></td>
+				<td><input style="width:75px" id="EBS_III_4_2" data-dojo-type="dijit.form.NumberSpinner" value="0.565" smallDelta="0.001" constraints="{min:0,max:1,places:3}"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font color="white">pZyl[bar]</font></td>
+				<td><input type="text" style="width:75px" id="EBS_III_1_3" data-dojo-type="dijit.form.TextBox" value="0,9"/></td>
+				<td><input type="text" style="width:75px" id="EBS_III_2_3" data-dojo-type="dijit.form.TextBox" value="2,2"/></td>
+				<td></td>
+				<td><input type="text" style="width:75px" id="EBS_III_4_3" data-dojo-type="dijit.form.TextBox" value="6,4"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th colspan="6" align="left"><input id="einst_leer_man_III" data-dojo-type="dijit.form.CheckBox" value="einst_leer_man" checked="true"><label><font color="white">Einstellung leer manuell</font></label></input></th>
+			</tr>
+			<tr>
+				<td><button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconUndo', showLabel: false" id="undo_6">undo</button></td>
+				<td><font color="white">z leer</font></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input style="width:75px" id="EBS_III_4_5" data-dojo-type="dijit.form.NumberSpinner" value="0.867" smallDelta="0.001" constraints="{min:0,max:1,places:3}"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font color="white">pZyl vorne [bar]</font></td>
+				<td><input type="text" style="width:75px" id="EBS_III_1_6" data-dojo-type="dijit.form.TextBox" value="0,9"/></td>
+				<td></td>
+				<td></td>
+				<td><input type="text" style="width:75px" id="EBS_III_4_6" data-dojo-type="dijit.form.TextBox" value="2,6"/></td>
+			</tr>
+		</table>
+</fieldset>

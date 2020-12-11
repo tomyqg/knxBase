@@ -1,0 +1,139 @@
+<?php 
+/**
+ * zeigeNeueArtikel.php
+ */
+require_once( $_SERVER["DOCUMENT_ROOT"]."/../Config/config.inc.php") ;
+/**
+ *
+ */
+$startrow	=	0 ;
+if ( isset( $_POST['startrow'])) {
+	$startrow	=	$_POST['startrow'] ;
+}
+echo "<h1>".FTr::tr( "Search result")."</h1>" ;
+echo FTr::tr( "SHOP-TEXT-NEWARTICLES") . "<br/>" ;
+/**
+ *
+ */
+writeNewArticles( $startrow) ;
+/**
+ *
+ * @param unknown_type $_startrow
+ */
+function	writeNewArticles( $_startrow) {
+	$myProdGr	=	new ProdGr() ;
+	/**
+	 *
+	 */
+	$query	=	"FROM Artikel " ;
+	$where	=	"(ErfDatum > DATE_SUB( CURDATE(), INTERVAL 1 MONTH)) " ;
+	$where	.=	"AND ShopArticle > 0 " ;
+	$where	.=	"AND LieferStatus < 9 " ;
+	$anzahlArtikel      =       FDb::getCount( $query . "WHERE " . $where) ;
+	echo FTr::tr( "In total #1 new articles could be found", array( "%d:".$anzahlArtikel)) . "<br/>" ;
+	/**
+	 * @var unknown_type
+	 */
+	$startrow	=	$_startrow ;
+	$rowcount	=	25 ;		// should be 25
+	$lowestrow	=	0 ;
+	if ( $startrow >= $rowcount)
+		$lowerrow	=	$startrow - $rowcount ;
+	else
+		$lowerrow	=	0 ;
+	if ( $startrow < ($anzahlArtikel - $rowcount))
+		$higherrow	=	$startrow + $rowcount ;
+	else
+		$higherrow	=	$anzahlArtikel - $rowcount ;
+	$highestrow	=	$anzahlArtikel - $rowcount ;
+
+	$pages	=	ceil( $anzahlArtikel / $rowcount) ;
+
+	$pageNr	=	ceil( $startrow / $rowcount) + 1 ;
+	echo FTr::tr( "You are on page #1 of #2", array( "%d:".$pageNr, "%d:".$pages)) . "<br/>" ;
+//	echo FTr::tr( "Sie sind auf Seite " . sprintf( "%d", ceil( $startrow / $rowcount)+1) . " von " . $pages . " Seiten<br/>\n" ;
+	if ( $pages > 1) {
+		echo "<table> \n" ;
+		echo "<tr> \n" ;
+		echo "<td> \n" ;
+		echo "<form method=\"post\" action=\"/NeuimSortiment.php\"> \n" ;
+		echo "<input type=\"hidden\" name=\"startrow\" value=\"" . $lowestrow . "\" /> \n" ;
+		echo "<input type=\"hidden\" name=\"rowcount\" value=\"" . $rowcount . "\" /> \n" ;
+		echo "<input type=\"submit\" name=\"submit\" value=\"<<\" /> \n" ;
+		echo "</form> \n" ;
+		echo "</td> \n" ;
+		$minShow	=	( $pageNr <= 2 ? 0 : ( $pageNr - 2)) ;
+		$maxShow	=	( $pageNr >= ( $pages - 2) ? $pages : $pageNr+2) ;
+//		echo "Min: $minShow . "<br/>" ;
+//		echo "Max: $maxShow . "<br/>" ;
+		if ( $minShow != 0) {
+			echo "<td> \n" ;
+			echo "<form method=\"post\" action=\"/NeuimSortiment.php\"> \n" ;
+			echo "<input type=\"hidden\" name=\"startrow\" value=\"" . $lowerrow . "\" /> \n" ;
+			echo "<input type=\"hidden\" name=\"rowcount\" value=\"" . $rowcount . "\" /> \n" ;
+			echo "<input type=\"submit\" name=\"submit\" value=\"<\" /> \n" ;
+			echo "</form> \n" ;
+			echo "</td> \n" ;
+		} else {
+			echo "<td>...</td>\n" ;
+		}
+		for ( $pagecount = $minShow ; $pagecount < $maxShow ; $pagecount++) {
+			$realpage	=	$pagecount + 1 ;
+			if ( $minShow <= $pagecount && $pagecount <= $maxShow) {
+				echo "<td> \n" ;
+				echo "<form method=\"post\" action=\"/NeuimSortiment.php\"> \n" ;
+				echo "<input type=\"hidden\" name=\"startrow\" value=\"" . $pagecount * $rowcount . "\" /> \n" ;
+				echo "<input type=\"hidden\" name=\"rowcount\" value=\"" . $rowcount . "\" /> \n" ;
+				echo "<input bgcolor=\"ff0000\" type=\"submit\" name=\"submit\" value=\"" . $realpage . "\" /> \n" ;
+				echo "</form> \n" ;
+				echo "</td> \n" ;
+			}
+		}
+		if ( $maxShow != $pages) {
+			echo "<td> \n" ;
+			echo "<form method=\"post\" action=\"/NeuimSortiment.php\"> \n" ;
+			echo "<input type=\"hidden\" name=\"startrow\" value=\"" . $higherrow . "\" /> \n" ;
+			echo "<input type=\"hidden\" name=\"rowcount\" value=\"" . $rowcount . "\" /> \n" ;
+			echo "<input type=\"submit\" name=\"submit\" value=\">\" /> \n" ;
+			echo "</form> \n" ;
+			echo "</td> \n" ;
+		} else {
+			echo "<td>...</td>\n" ;
+		}
+		echo "<td> \n" ;
+		echo "<form method=\"post\" action=\"/NeuimSortiment.php\"> \n" ;
+		echo "<input type=\"hidden\" name=\"startrow\" value=\"" . $highestrow . "\" /> \n" ;
+		echo "<input type=\"hidden\" name=\"rowcount\" value=\"" . $rowcount . "\" /> \n" ;
+		echo "<input type=\"submit\" name=\"submit\" value=\">>\" /> \n" ;
+		echo "</form> \n" ;
+		echo "</td> \n" ;
+		echo "</tr> \n" ;
+		echo "</table> \n" ;
+	}
+	/**
+	 * @var unknown_type
+	 */
+	$myArtikel	=	new Artikel() ;
+	$lastArtikelNr	=	"" ;
+	try {
+		$myProdGr->setProdGrNr( "00") ;
+		$rc	=	0 ;
+		printf( "<table class=\"tab_a\"> \n") ;
+		$where	.=	"ORDER BY ErfDatum DESC " ;
+		for ( $myArtikel->_firstFromDb( $where, $startrow) ;
+				$myArtikel->isValid() && $rc++ < $rowcount ;
+				$myArtikel->_nextFromDb()) {
+			if ( $myArtikel->ArtikelNr != $lastArtikelNr) {
+				einzelArtikelStart( $myProdGr, $myArtikel, 1) ;
+				writeArtikel( $myProdGr, $myArtikel, 0, 0) ;
+				einzelArtikelEnd( $myArtikel) ;
+			}
+			$lastArtikelNr	=	$myArtikel->ArtikelNr ;
+		}
+		printf( "</table> \n") ;
+	} catch ( Exception $e) {
+
+	}
+}
+
+?>

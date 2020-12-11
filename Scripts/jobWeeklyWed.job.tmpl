@@ -1,0 +1,12 @@
+echo "$0: starting off ....."
+echo "$0: in subdirectory: " `pwd`
+cd `dirname $0`
+echo "$0: in subdirectory: " `pwd`
+
+# send an E-Mail as reminder we are running
+
+./jobControl.php weeklyWed >> /tmp/jobControlWeeklyWed.log
+
+# 
+
+echo "$0: finishing ....."

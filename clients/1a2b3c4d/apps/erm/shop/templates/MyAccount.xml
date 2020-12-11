@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="pageMain">
+	<head>
+		<dynamic file="Header.html" />
+	</head>
+	<body>
+		<code codeFile="handleSession.php" />
+		<div id="page">
+			<if var="offline" eq="1">
+				<div id="header-status">
+					<object class="HeaderStatus" />
+				</div>
+			</if>
+			<div id="header">
+				<div id="headerLeft">
+					<dynamic file="HeaderLeft.html" />
+				</div>
+				<div id="headerRight">
+					<dynamic file="HeaderRight.html" />
+				</div>
+				<div id="headerSearch">
+					<dynamic file="FormSearch.html" />
+				</div>
+			</div>
+			<div id="centerContainer">
+				<div id="centerLeft">
+					<div id="content">
+						<template file="divBodyLeft.xml" />
+					</div>
+				</div>
+				<div id="centerRight">
+					<div id="content">
+						<template file="divBodyRight.xml" />
+					</div>
+				</div>
+				<div id="center">
+					<div id="content">
+						<template file="divBodyCenterMyAccount.xml" />
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+				<dynamic file="Footer.html" />
+			</div>
+		</div>
+	</body>
+</resource>

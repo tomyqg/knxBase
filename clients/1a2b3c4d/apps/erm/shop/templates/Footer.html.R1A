@@ -1,0 +1,14 @@
+<center>
+<p>&copy; 2007-$date$</p>
+The content of this website is intended solely for customers within Germany.<br/>
+<!--
+Other European Clients please refer to my <a href="/en_eu/">European Site</a> <a href="$main.urlContact$">$shop.siteName$</a><br/>
+Rest of the World Clients please refer to my <a href="/en_in/">Worldwide Site $date$</a><br/>
+ -->
+</center>
+<div>
+<g:plusone href="http://www.flaschen24.eu" size="small"></g:plusone>
+<script type="text/javascript">gapi.plusone.go();</script><br/>
+<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fflaschen24.eu&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:80px;" allowTransparency="true">
+</iframe>
+</div>

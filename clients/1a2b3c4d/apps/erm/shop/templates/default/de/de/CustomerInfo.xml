@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="pageMain">
+	<!--														-->
+	<!--														-->
+	<!--														-->
+	<!--														-->
+	<!--														-->
+	<format name="CustomerInfoLogin">
+		<![CDATA[
+		<div class="block block-list block-compare">
+			<div class="block block-cart">
+				<div class="block-title">
+					<strong>
+						<span>Registrierte Kunden:</span>
+					</strong>
+				</div>
+				<div class="block-content" id="CartInfo">
+					<form method="post">
+						<label for="CustId">EMail:</label>
+						<input id="CustId" name="CustId" size="15" maxlength="64" />
+						<label for="CustPwd">Passwort:</label>
+						<input id="CustPwd" name="CustPwd" size="15" maxlength="64" type="password" />
+						<input type="submit" name="Login" value="Login" />
+					</form>
+					<form method="post">
+						<input type="submit" value="Password forgotten" />
+					</form>
+				</div>
+			</div>
+			<form method="post" action="/index.php?webPage=NewUser">
+				<input type="submit" value="Register" />
+			</form>
+		</div>
+		]]>
+	</format>
+	<!--														-->
+	<!--														-->
+	<!--														-->
+	<!--														-->
+	<!--														-->
+	<format name="CustomerInfoLoggedIn">
+		<![CDATA[
+		<div class="block block-list block-compare">
+			<div class="block block-cart">
+				<div class="block-title">
+					<strong>
+						<span>Mein Konto</span>
+					</strong>
+				</div>
+				<div class="block-content" id="CartInfo">
+					$Customer.FirmaName1$<br/>
+					$Customer.Strasse$ $Customer.Hausnummer$<br/>
+					$Customer.PLZ$ $Customer.Ort$
+					<div class="block-content" id="CartInfo">
+						<a href="/index.php?webPage=MyAccount&show=MyAccount">Anschrift(en)</a><br/>
+						<a href="/index.php?webPage=MyAccount&show=MyOrders">Bestellungen</a><br/>
+						<a href="/index.php?webPage=MyAccount&show=MyCarts">Merkzettel</a>
+					</div>
+					<form method="post">
+						<input type="submit" name="Logoff" value="Logoff" />
+					</form>
+				</div>
+			</div>
+		</div>
+		]]>
+	</format>
+</resource>

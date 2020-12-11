@@ -1,0 +1,38 @@
+#
+# config.ini.example
+# ==================
+#
+# This is a sample configuration file where most values have to be set to reasonable values in YOUR context.
+# Please remember that this file contains core initialization data. Most data for the initialization of the
+# mas system and its applications come from the mas_sys database.
+#
+[dbSys]
+alias		=	"sys"		; DO NOT CHANGE; mas relies on this alias!
+host		=	"localhost"	; host where the system Db resides
+user		=	"PubUser"	; user in the Db
+password	=	"UserPub"	; password
+name		=	"mas_sys_example"	; should not change this
+driver		=	"mysql"		; mysql or mssql
+prefix		=	""		; prefix in case there's only one Db available
+numSpaceStart	=	900000		; should be (00)000000 - 89(99)9999 for back-end, i.e. erp, and
+numSpaceEnd	=	999999		; 90(00)0000 - 99(99)9999 for front-end, i.e. shop and stage
+[server]
+allowedHost	=	"COMPLETE_SERVER_NAME"
+[session]
+timeout		=	900		; session timeout in seconds; 900 = 15 minutes
+[debug]
+enabled	=	true			; debugger enabled false/true
+level	=	9			; debugger level
+mask	=	#ffffffff		; debugger mask, bit-pattern
+callerListExclude	=	""
+callerListExclude	=	""
+//fileListExclude	=	"EISSCoreObject.php,Config.php,config.inc.php,DbObject.php,Page.php,ProdGr.php,ArtGr.php,Navigator.php"
+//fileListExclude		=	"config.inc.php,EISSCoreObject.php,Config.php,DbObject.php,VKPreisCache.php,Price.php"
+//fileListExclude		=	"EISSCoreObject.php,Config.php,DbObject.php"
+fileListExclude	=	""
+fileListExclude	=	"EISSCoreObject.php,FDb.php,FSqlQuery.php,FSqlMySQLQuery.php,FSqlMSSQLQuery.php,FDbObject.php,"
+fileListExclude	=	"EISSCoreObject.php,FSqlQuery.phpp,UI_Module.php,UI_Screen.php,Config.php,HTML.php,HTMLdojo.php,HTMLwap.php"
+fileListExclude	=	"EISSCoreObject.php,FDb.php,FSqlQuery.php,FSqlMySQLQuery.php,FSqlMSSQLQuery.php,FTr.php,UI_Module.php,UI_Screen.php,Config.php,Trans.php,ShopSession.php,AppTrans.php,SysTrans.php,HTML.php,HTMLdojo.php,HTMLwap.php,AppObject.php"
+fileListExclude	=	"EISSCoreObject.php,FDb.php,FSqlQuery.php,FSqlMySQLQuery.php,FSqlMSSQLQuery.php,FDbObject.php,FTr.php,UI_Module.php,UI_Screen.php,Config.php,Trans.php,ShopSession.php,AppUser.php,AppUserRole.php,RoleProfile.php,ProfileAuthObject.php,AuthObject.php,AppTrans.php,SysTrans.php,HTML.php,HTMLwap.php,AppObjectCore.php,AppObject.php"
+moduleListExclude	=	""
+methodListExclude	=	""

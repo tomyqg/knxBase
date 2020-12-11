@@ -1,0 +1,13 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Brakes</h1>
+		<wap:key>
+			<wap:keyform id="AssessmentKeyData">
+				<wap:keyrow wapLabel="Assessment no." wapVar="AssessmentId" prev="true" next="true" select="true" />
+				<wap:keydisplay wapLabel="Description" wapVar="Description" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+	</div>
+</html>

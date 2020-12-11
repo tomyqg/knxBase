@@ -1,0 +1,228 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModBase" data-wap-screen="Artikel" data-wap-core-object="Artikel" data-wap-core-object-key="ERPNr" >
+		<h1 class="page-title">Artikel</h1>
+		<wap:key>
+			<wap:keyform id="ArtikelKeyData">
+				<wap:keyrow data-wap-label="ERP Nr." data-wap-attr="ERPNr" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Artikel Nr." data-wap-attr="ArtikelNr" colspan="4"/>
+				<wap:keydisplay data-wap-label="Bezeichnung" data-wap-attr="Bezeichnung1" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<!--
+			Contains the following tabs:
+				- Article Overview
+				- Article Main Data
+					Article Numbers, HMV Number, PZN Number
+				- Sales Price Calculation
+					Data concerning the calculation of sales prices
+				- Textual descriptions
+					In depth detailed description of articles; beyond the optionally connected data from suppliers or
+					HMV register
+				- Purchasing
+				- Sales
+				- Data Mining
+		-->
+		<wap:tabContainer id="tabCntrlArtikelMain" data-wap-active-tab-onload="tabPageArtikelSurveyEntry">
+			<wap:tabContentPane id="tabPageArtikelSurvey" data-wap-heading="Artikel Overview">
+				<wap:grid data-wap-object="Artikel" data-wap-grid-name="gridArtikelOV" data-wap-tab-onselect="tabPageArtikelMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="Artikel" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Artikel" data-wap-attr="ERPNr" data-wap-label="ERP Nr." />
+					<wap:gridcol data-wap-obj="Artikel" data-wap-attr="ArtikelNr" data-wap-label="Artikel Nr." />
+					<wap:gridcol data-wap-obj="Artikel" data-wap-attr="Bezeichnung1" data-wap-label="Beschreibung" />
+					<wap:gridcol data-wap-obj="Artikel" data-wap-attr="HMVNr" data-wap-label="HMV Nr." />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArtikelMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formArtikelMain" class="formCreate formUpdate">
+										<wap:row>
+											<wap:cellhelp rowspan="3" />
+											<wap:celllabel rowspan="3" data-wap-label="Description" />
+											<wap:cellinput data-wap-attr="Bezeichnung1" size="48" max="128" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="Bezeichnung2" size="48" max="128" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="Bezeichnung3" size="48" max="128" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="HMV Nr." />
+											<td class="fEdit">
+												<wap:input data-wap-attr="HMVNr" />
+												<wap:linkTo data-wap-link-to="HMV_EP" data-wap-link-ref-field="HMVNr" />
+											</td>
+										</wap:row>
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Information scope</legend>
+									<wap:dataform id="formArtikelScopeData">
+										<wap:rowflag data-wap-label="Show long text in offer" data-wap-attr="OfferLongText"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Show image in offer" data-wap-attr="OfferImage"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Show article in shop" data-wap-attr="ShopArtikel"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Single page for article" data-wap-attr="ShopSinglePage"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Show article in printed catalog" data-wap-attr="CatalogArtikel"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Single page for article in printed catalog" data-wap-attr="CatalogSinglePage"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowcheck data-wap-label="Rights" data-wap-attr="Rights"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'ArtikelRights'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption data-wap-label="Components" data-wap-attr="CompositionType"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'ArtikelCompositionType'" data-wap-order="Value" data-wap-def="default" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Statistical Information</legend>
+									<wap:dataform id="formArtikelStatistics" class="formCreate formUpdate">
+										<wap:rowdate data-wap-label="Registration date" data-wap-attr="DateRegistration" />
+										<wap:rowinput data-wap-label="Primary Artikel Group" data-wap-attr="PrimaryArtikelGroup" />
+										<wap:rowflag data-wap-label="Is Option" data-wap-attr="IsOption"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+<!--
+ 								<fieldset>
+									<legend>Imagery</legend>
+									<wap:dataform id="formArtikelImageData">
+										<wap:rowinput data-wap-label="Image" data-wap-attr="ImageReference" />
+										<wap:rowimage data-wap-label="Image" data-wap-attr="ImageReference" wapImageObj="Artikel" />
+									</wap:dataform>
+								</fieldset>
+ -->
+								<fieldset>
+									<legend>Imagery</legend>
+									<wap:dataform id="formArtikelImage">
+										<wap:rowinput data-wap-label="Image" data-wap-attr="ImageReference" />
+										<wap:rowimage data-wap-label="Image" data-wap-attr="ImageReference" data-wap-image-obj="Artikel" />
+										<wap:rowupload data-wap-label="Image" data-wap-attr="ImageReference" data-wap-upload-function="setImage" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate />
+					<wap:btnUpdate />
+					<wap:btnDelete />
+				    <wap:btnMisc data-wap-label="Create Label 11" data-wap-misc-function="createPDF" data-wap-val="11" />
+				    <wap:btnMisc data-wap-label="Create Label 12" data-wap-misc-function="createPDF" data-wap-val="12" />
+				    <wap:btnMisc data-wap-label="Create Label 13" data-wap-misc-function="createPDF" data-wap-val="13" />
+				    <wap:btnMisc data-wap-label="Create Label 14" data-wap-misc-function="createPDF" data-wap-val="14" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArtikelPriceCalcData" data-wap-heading="Abgabepreis">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Berechnung Abgabepreis</legend>
+									<wap:dataform id="formArtikelPriceCalcI" class="formCreate formUpdate">
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Statistical Information</legend>
+									<wap:dataform id="formArtikelPriceCalcII" class="formCreate formUpdate">
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Warengruppe</legend>
+									<wap:dataform id="formArtikelPriceCalcIII" class="formCreate formUpdate">
+										<wap:rowoption data-wap-label="Warengruppe" data-wap-attr="Warengruppe" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Warengruppe'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowinput data-wap-label="Warengruppe" data-wap-attr="WarenGruppe" />
+										<wap:rowinput data-wap-label="WarengruppeBezeichnung" data-wap-attr="WarenGruppeBezeichnung" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnUpdate />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArtikelText" data-wap-heading="Text">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Description in additional languages</legend>
+									<wap:grid data-wap-object="ArtikelText" data-wap-grid-name="gridArtikelText" data-wap-adder="true" data-wap-editor="edtArtikelText" data-wap-load-on-init="false">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="ArtikelNr" data-wap-label="Artikel no." />
+										<wap:gridcol data-wap-attr="Language" data-wap-label="Language" />
+										<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArtikelAttributes" data-wap-heading="Attributes">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Attributes</legend>
+									<wap:grid data-wap-object="Attribute" data-wap-grid-name="gridAttribute" data-wap-adder="true" data-wap-editor="edtAttribute" data-wap-load-on-init="false">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="RefNo" data-wap-label="Artikel no." />
+										<wap:gridcol data-wap-attr="ItemNo" data-wap-label="ItemNo" />
+										<wap:gridcol data-wap-attr="Attr" data-wap-label="Attribute" />
+										<wap:gridcol data-wap-attr="AttrValue" data-wap-label="Value" />
+										<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArtikelDataMining" data-wap-heading="Data Mining">
+				<wap:tabContainer id="tabCntrlArtikelDataMining">
+					<wap:tabContentPane id="tabPageArtikelLieferantAuftrag" data-wap-heading="Supplier Orders">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelLieferantLieferung" data-wap-heading="Supplier Deliveries">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelLieferantRechnung" data-wap-heading="Supplier Invoices">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelKundeAnfrage" data-wap-heading="Customer RFQ">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelKundeAuftrag" data-wap-heading="Customer Offer">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelkundeLieferung" data-wap-heading="Customer Order">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelKundeRechnung" data-wap-heading="Customer Delivery">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageArtikelCustomerInvoice" data-wap-heading="Customer INvoice">
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

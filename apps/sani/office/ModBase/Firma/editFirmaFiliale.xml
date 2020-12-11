@@ -1,0 +1,33 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="KundeNotiz" data-wap-core-object="KundeNotiz" data-wap-core-object-key="Id" data-wap-parent-object="Kunde" w="800" h="300">
+		<wap:key>
+			<wap:keyform id="KundeNotizKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="KundeNotiz" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formKundeNotiz" class="formCreate formUpdate" w="700" h="300">
+				<table>
+					<wap:rowinput data-wap-label="Notiz Nr." data-wap-obj="KundeNotiz" data-wap-attr="KundeNotizNr" size="8" max="16" />
+					<wap:rowinput data-wap-label="Notiz Typ" data-wap-obj="KundeNotiz" data-wap-attr="NotizTyp" size="8" max="16" />
+					<wap:rowinput data-wap-label="Notiz Typ Text" data-wap-obj="KundeNotiz" data-wap-attr="NotizTypText" size="8" max="16" />
+					<wap:rowoption data-wap-label="Hinweis" data-wap-attr="Hinweis" data-wap-mode="edit"
+							data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="0" />
+					<wap:rowtext data-wap-label="Notiz" data-wap-attr="Notiz" cols="64" rows="8" data-wap-mode="edit" />
+					<wap:rowtext data-wap-label="Bemerkung" data-wap-attr="Remark" cols="64" rows="8" data-wap-mode="edit" />
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

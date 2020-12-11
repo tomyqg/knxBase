@@ -1,0 +1,127 @@
+<style type="text/css">
+.bgimg {
+    background-image: url('/sani/rsrc/templates/rezept_rosa_muster_16_2004.png');
+	height: 1240px ;
+	width:	874px;
+	background-size: contain;
+	background-repeat:	no-repeat;
+	float:	left ;
+
+}
+.formRezept	{
+    position: absolute;
+}
+.divDisplayKTName	{
+    position: absolute;
+    top:	 60px;
+	left:	 60px ;
+}
+.divDisplayKunde	{
+    position: absolute;
+    top:	110px;
+	left:	 60px ;
+}
+.displayKunde	{
+    resize:	none;
+}
+.divInputKTIK	{
+    position: absolute;
+    top:	230px;
+	left:	 60px ;
+}
+.divInputLEIK	{
+    position: absolute;
+    top:	 60px;
+	left:	720px ;
+}
+.divInputRezeptDatum	{
+    position: absolute;
+    top:	275px;
+	left:	400px ;
+}
+.divDisplayZuzahlung	{
+    position: absolute;
+    top:	120px;
+	left:	560px ;
+}
+.divDisplayBezahlt	{
+    position: absolute;
+    top:	120px;
+	left:	670px ;
+}
+.divDisplayKTAnteil	{
+    position: absolute;
+    top:	120px;
+	left:	760px ;
+}
+.input	{
+	background: cyan;
+}
+.divTableArtikel	{
+    position: absolute;
+    top:	160px;
+	left:	550px ;
+}
+
+</style>
+<div id="mainRezept">
+	<h2>Rezepterfassung</h2>
+	<div id="formRezeptMain" name="formRezeptMain" class="formRezept">
+		<div class="bgimg">
+			<div class="divDisplayKTName"><input id="KVName" type="text" size="50" /></div>
+			<div class="divDisplayKunde"><textarea id="Kunde" cols="50" rows="5" class="displayKunde"></textarea></div>
+			<div class="divInputLEIK"><input id="LEIKNr" type="text" size="9" class="input" /></div>
+			<div class="divInputKTIK"><input id="KVIKNr" type="text" size="9" class="input" /></div>
+			<div class="divInputRezeptDatum"><input id="RezeptDatum" type="text" size="10" class="input" /></div>
+			<div class="divDisplayZuzahlung"><input id="Zuzahlung" type="text" size="4" class="input" value="10,00" /></div>
+			<div class="divDisplayBezahlt"><input id="Bezahlt" type="text" size="6" class="input" value="n.bez." /></div>
+			<div class="divDisplayKTAnteil"><input id="KTAnteil" type="text" size="6" class="input" value="123,45" /></div>
+			<div class="divTableArtikel">
+				<table style="width:600px;">
+					<tr>
+						<td style="width:170px;font-size:18px;"></td>
+						<td align="right" style="width:30px;font-size:18px;"></td>
+						<td align="right" style="width:80px;font-size:18px;"></td>
+						<td align="right" style="width:80px;font-size:18px;"></td>
+						<td align="right" style="width:80px;font-size:18px;">Zuz.</td>
+						<td align="right" style="width:80px;font-size:18px;">Eig.Ant.</td>
+						<td align="right" style="width:80px;font-size:18px;">Qal.Zul.</td>
+					</tr>
+					<tr>
+						<td style="width:170px;font-size:18px;">00/0803020001</td>
+						<td align="right" style="width:30px;font-size:18px;">1</td>
+						<td align="right" style="width:80px;font-size:18px;">59,64</td>
+						<td align="right" style="width:80px;font-size:18px;">65,64</td>
+						<td align="right" style="width:80px;font-size:18px;">10,00</td>
+						<td align="right" style="width:80px;font-size:18px;">6,00</td>
+						<td align="right" style="width:80px;font-size:18px;">10,00</td>
+					</tr>
+					<tr>
+						<td style="font-size:18px;">00/0899990001</td>
+						<td align="right" style="font-size:18px;">2</td>
+						<td align="right" style="font-size:18px;">3,64</td>
+					</tr>
+					<tr>
+						<td style="font-size:18px;">00/0899990001</td>
+						<td align="right" style="font-size:18px;">2</td>
+						<td align="right" style="font-size:18px;">59,64</td>
+					</tr>
+					<tr>
+						<td style="font-size:18px;">00/0899990001</td>
+						<td align="right" style="font-size:18px;">2</td>
+						<td align="right" style="font-size:18px;">59,64</td>
+					</tr>
+					<tr>
+						<td style="font-size:18px;">00/0899990001</td>
+						<td align="right" style="font-size:18px;">2</td>
+						<td align="right" style="font-size:18px;">59,64</td>
+					</tr>
+					<tr>
+						<td style="font-size:18px;">00/0899990001</td>
+						<td align="right" style="font-size:18px;">2</td>
+						<td align="right" style="font-size:18px;">59,64</td>
+					</tr>
+				</table>
+		</div>
+	</div>
+</div>

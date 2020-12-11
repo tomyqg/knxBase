@@ -1,0 +1,126 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned if not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModSales" data-wap-screen="KundeAuftrag" data-wap-core-object="KundeAuftrag" data-wap-core-object-key="ERPNr" >
+		<h1 class="page-title">Kundenauftrag</h1>
+		<wap:key>
+			<wap:keyform id="KundeAuftragKeyData">
+				<wap:keyrow data-wap-label="ERP Nr." data-wap-attr="ERPNr" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Auftrag Nr." data-wap-attr="AuftragNr" colspan="4" />
+				<wap:keydisplay data-wap-label="Name" data-wap-attr="KundeNr" colspan="4" />
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlKundeAuftragMain" data-wap-active-tab-onload="tabPageKundeAuftragSurveyEntry">
+			<wap:tabContentPane id="tabPageKundeAuftragSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-object="KundeAuftrag" data-wap-grid-name="gridKundeAuftragOV" data-wap-tab-onselect="tabPageKundeAuftragMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="KundeAuftrag" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="KundeAuftrag" data-wap-attr="ERPNr" data-wap-label="ERP Nr." />
+					<wap:gridcol data-wap-obj="KundeAuftrag" data-wap-attr="AuftragNr" data-wap-label="AuftragNr" />
+					<wap:gridcol data-wap-obj="KundeAuftrag" data-wap-attr="KundeNr" data-wap-label="KundeNr" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Hauptdaten</legend>
+									<wap:dataform id="formKundeAuftragMain" class="formCreate formUpdate">
+										<wap:rowinput data-wap-label="ERP Nr." data-wap-obj="KundeAuftrag" data-wap-attr="ERPNr" size="12" onkeyup="screenCurrent.hello() ;"/>
+										<wap:rowinput data-wap-label="Auftrag Nr." data-wap-obj="KundeAuftrag" data-wap-attr="AuftragNr" size="10" />
+										<wap:rowinput data-wap-label="Datum" data-wap-obj="KundeAuftrag" data-wap-attr="Datum" />
+										<wap:rowinput data-wap-label="Filiale Nr." data-wap-obj="KundeAuftrag" data-wap-attr="Filiale" />
+										<wap:rowinput data-wap-label="KT IK Nr." data-wap-obj="KundeAuftrag" data-wap-attr="IKNr_KK" size="9" />
+										<wap:rowinput data-wap-label="IK Nr. KV/eKV/VA/eVA" data-wap-obj="KundeAuftrag" data-wap-attr="IKNr_KVVA" size="9" />
+										<wap:rowinput data-wap-label="IK Nr. Rechnung" data-wap-obj="KundeAuftrag" data-wap-attr="IKNr_Rechnung" size="9" />
+										<wap:rowoption data-wap-label="Rechnung Patient" data-wap-attr="KVVAArt"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'PatientRechnung'" data-wap-order="Value" data-wap-def="0" />
+										<wap:rowoption data-wap-label="Rechnung Kostenträger" data-wap-attr="KVVAArt"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'KTRechnung'" data-wap-order="Value" data-wap-def="2" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Kunde</legend>
+									<wap:dataform id="formKundeAuftragKunde" class="formCreate formUpdate">
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Kunde Nr." />
+											<td class="fEdit">
+												<wap:input data-wap-attr="KundeNr" size="16" />
+												<wap:linkTo data-wap-link-to="Kunde" data-wap-link-ref-field="KundeNr" />
+											</td>
+										</wap:row>
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate />
+					<wap:btnUpdate />
+					<wap:btnDelete wap-auth-object="allowDelete" />
+					<wap:btnMisc data-wap-label="Create PDF" data-wap-misc-function="createPDF" />
+					<wap:btnMisc data-wap-label="Consolidate order" data-wap-misc-function="consolidate" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragPositions" data-wap-heading="Auftragspositionen">
+				<wap:btnJS data-wap-label="Open Article Selector ..." data-wap-misc-function="assignToProfile" data-wap-forms="KundeAuftragKeyData" />
+				<wap:btnMisc data-wap-label="Renumber items" data-wap-misc-function="renumberItems" />
+				<wap:btnMisc data-wap-label="Consolidate order" data-wap-misc-function="consolidate" />
+				<wap:grid data-wap-object="KundeAuftragPosition" data-wap-grid-name="gridKundeAuftragPosition2" data-wap-editor="KundeAuftragPosition" data-wap-load-on-init="false">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" data-wap-link-to="KundeAuftragPosition" />
+					<wap:gridcol data-wap-attr="AuftragNr" data-wap-label="Auftrag Nr." />
+					<wap:gridcol data-wap-attr="PosNr" data-wap-label="Item no." />
+					<wap:gridcol data-wap-attr="UPosNr" data-wap-label="Pos. Nr." />
+					<wap:gridcol data-wap-attr="ArtikelNr" data-wap-label="Artikel Nr." data-wap-link-to="Article" />
+					<wap:gridcol data-wap-attr="HMVNr" data-wap-label="HMV Nr." />
+					<wap:gridcol data-wap-attr="PZN" data-wap-label="PZN" />
+					<wap:gridcol data-wap-attr="Menge" data-wap-label="Menge" data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="AbgabePreisBrutto" data-wap-label="Preis Abgabe" data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="KTAnteilBrutto" data-wap-label="KT-Anteil" data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="Zuzahlung" data-wap-label="Zuzahlung" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="Eigenanteil" data-wap-label="Eigenanteil" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="Zulage" data-wap-label="Zulage" data-wap-size="8,16" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragKVVA" data-wap-heading="KV/eKV/eVA">
+				<wap:data>
+					<wap:dataform id="formKundeAuftragKVVA" class="formCreate formUpdate">
+						<wap:rowoption data-wap-label="KV/eKV/VA/eVA" data-wap-attr="KVVAArt"
+							data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'KVVAArt'" data-wap-order="Value" data-wap-def="2" />
+						<wap:rowinput data-wap-label="Datum" data-wap-obj="KundeAuftrag" data-wap-attr="KVVADatum" />
+						<wap:rowinput data-wap-label="Datum Versand" data-wap-obj="KundeAuftrag" data-wap-attr="KVVADatumVerschickt" />
+						<wap:rowinput data-wap-label="Datum Status" data-wap-obj="KundeAuftrag" data-wap-attr="KVVADatumUpdate" />
+						<wap:rowinput data-wap-label="Datum Genehmigt" data-wap-obj="KundeAuftrag" data-wap-attr="KVVADatumGenehmigung" />
+						<wap:rowoption data-wap-label="KV/eKV/VA/eVA" data-wap-attr="KVVAArt"
+							data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'KVVAStatus'" data-wap-order="Value" data-wap-def="1" />
+					</wap:dataform>
+					<wap:btnMisc data-wap-label="Consolidate order" data-wap-misc-function="consolidate" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragHilfsmittel" data-wap-heading="Hilfsmittel">
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragDokumente" data-wap-heading="Dokumente">
+				<wap:grid data-wap-object="KundeAuftragObjekt" data-wap-grid-name="gridKundeAuftragObjekt" data-wap-editor="KundeAuftragObjekt" data-wap-load-on-init="false">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="AuftragNr" data-wap-label="Auftrag Nr." />
+					<wap:gridcol data-wap-attr="ObjektTyp" data-wap-label="Objekt" />
+					<wap:gridcol data-wap-attr="Datei" data-wap-label="Datei" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragHelp" data-wap-heading="Help">
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

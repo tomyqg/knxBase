@@ -1,0 +1,49 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+<br/>
+
+<fieldset>
+	<legend>Fahrzeugtyp</legend>
+		<table border="0" style="color:white">
+			<tr>
+				<td width="300">
+					<input type="radio" data-dojo-type="dijit/form/RadioButton" name="anhaenger_radio" id="anhaenger_radio1" value="Deichselanhaenger" onclick="DeichselClicked();CheckTrailerType();overview_actualize();">Deichselanh&auml;nger</input>
+					<br/><br/>
+					<input type="radio" data-dojo-type="dijit/form/RadioButton" name="anhaenger_radio" id="anhaenger_radio2" checked="true" value="Sattelanhaenger" onclick="SattelClicked();CheckTrailerType();overview_actualize();">Sattelanh&auml;nger</input>
+					<br/><br/>
+					<input type="radio" data-dojo-type="dijit/form/RadioButton" name="anhaenger_radio" id="anhaenger_radio3" value="Zentralachsenanhaenger" onclick="ZentralClicked();CheckTrailerType();overview_actualize();">Zentralachsenanh&auml;nger</input> 
+					<br/><br/>
+					<input id="vier achs" data-dojo-type="dijit/form/CheckBox" value="vier achs" checked="false"><label>vier Bremsen pro Achslinie</label></input>
+				</td>
+				<td align="center" valign="top" width="250">
+					<p><font color="black">
+						<select style="width:250px" id="anhaenger_select_deichsel" size="5" data-dojo-type="dijit/form/Select" onchange="ChangeDeichselTrailerImage();CheckTrailerType();overview_actualize();" data-dojo-props="disabled:true" >
+							<option value="2-Achs-Deichselanh&auml;nger(1-1)">2-Achs-Deichselanh&auml;nger(1-1)</option>
+							<option value="3-Achs-Deichselanh&auml;nger(1-2)">3-Achs-Deichselanh&auml;nger(1-2)</option>
+							<option value="3-Achs-Deichselanh&auml;nger(2-1)">3-Achs-Deichselanh&auml;nger(2-1)</option>
+							<option value="4-Achs-Deichselanh&auml;nger(2-2)">4-Achs-Deichselanh&auml;nger(2-2)</option>
+							<option value="4-Achs-Deichselanh&auml;nger(1-3)">4-Achs-Deichselanh&auml;nger(1-3)</option>
+							<option value="5-Achs-Deichselanh&auml;nger(2-3)">5-Achs-Deichselanh&auml;nger(2-3)</option>
+						</select>
+						<select style="width:250px" id="anhaenger_select_sattel" size="5" data-dojo-type="dijit/form/Select" onchange="ChangeSattelTrailerImage();CheckTrailerType();overview_actualize();">
+							<option value="1-Achs-Sattelanh&auml;nger">1-Achs-Sattelanh&auml;nger</option>
+							<option value="2-Achs-Sattelanh&auml;nger">2-Achs-Sattelanh&auml;nger</option>
+							<option value="3-Achs-Sattelanh&auml;nger">3-Achs-Sattelanh&auml;nger</option>
+							<option value="4-Achs-Sattelanh&auml;nger">4-Achs-Sattelanh&auml;nger</option>
+							<option value="5-Achs-Sattelanh&auml;nger">5-Achs-Sattelanh&auml;nger</option>
+							<option value="6-Achs-Sattelanh&auml;nger">6-Achs-Sattelanh&auml;nger</option>
+							<option value="7-Achs-Sattelanh&auml;nger">7-Achs-Sattelanh&auml;nger</option>
+							<option value="8-Achs-Sattelanh&auml;nger">8-Achs-Sattelanh&auml;nger</option>
+						</select>
+						<select style="width:250px" id="anhaenger_select_zentral" size="5" data-dojo-type="dijit/form/Select" onchange="ChangeZentralTrailerImage();CheckTrailerType();overview_actualize();" data-dojo-props="disabled:true" >
+							<option value="1-Zentralachs-anh&auml;nger">1-Zentralachs-anh&auml;nger</option>
+							<option value="2-Zentralachs-anh&auml;nger">2-Zentralachs-anh&auml;nger</option>
+							<option value="3-Zentralachs-anh&auml;nger">3-Zentralachs-anh&auml;nger</option>
+						</select>
+					</font></p>
+				</td>
+				<td align="center" valign="top" width="280">
+					<img src="imgs_trailer/1_Achssattel_Rahmen.jpg" id="trailer_image" width="247">
+				</td>
+			</tr>
+		</table>
+</fieldset>

@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>==&gt; Login to ERP &lt;==</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" media="screen" href="/styles/v1.css" title="Version 1" />
+<script type="text/javascript">
+function	target_popup() {
+	if ( 1 == 2) {
+		myForm	=	document.forms[0] ;
+		office	=	myForm.selEnv.value ;
+		myURL	=	"/index.php" ;
+		myURL	+=	"?selEnv="+ myForm.selEnv.value ;
+		myURL	+=	"&selLang="+ myForm.selLang.value ;
+		myURL	+=	"&UserId="+ myForm.UserId.value ;
+		myURL	+=	"&Password="+ myForm.Password.value ;
+		window.open( myURL, 'formpopup', 'width=800,height=600');
+	} else {
+		document.forms[0].submit() ;
+	}
+}
+function	processOnEnter( _event) {
+	if ( _event.keyCode == 13) {
+		target_popup() ;
+	}
+}
+function	processClick() {
+	target_popup() ;
+}
+</script>
+</head>
+<body>
+	<form method="post" action="index.php" onsubmit="target_popup( this)">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="all_table">
+		<tr>
+			<td width="100%" height="950" align="center" valign="top" background="images/login/bg.gif" style="padding:230 0 0 0px">
+				<table width="570" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td align="left">
+							<select name="selEnv" id="selEnv">
+								<option value="office-sinspert">Sinspert</option>
+								<option value="office-bomig">Bomig</option>
+							</select>
+						</td>
+						<td align="right">
+							<select name="selLang" id="selLang">
+								<option value="-">Benutzer</option>
+								<option value="de">Deutsch</option>
+								<option value="en">English</option>
+								<option value="es">Espanol</option>
+								<option value="fr">Francais</option>
+								<option value="nl">Dutch</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+<table id="Table_01" width="571" height="275" border="0" cellpadding="0" cellspacing="0" style="background:url('../images/login/wimtecc_eap_pa2.gif'); background-repeat:no-repeat;">
+    <tr>
+        <td colspan="6">
+            <img src="images/login/images/wimtecc_eap_pa2_01.gif" width="570" height="104" alt=""></td>
+        <td>
+            <img src="images/login/images/spacer.gif" width="1" height="104" alt=""></td>
+    </tr>
+    <tr>
+        <td rowspan="5">
+            <img src="images/login/images/wimtecc_eap_pa2_02.gif" width="87" height="171" alt=""></td>
+        <td>
+            <img src="images/login/images/wimtecc_eap_pa2_03.gif" width="154" height="42" alt=""></td>
+        <td>
+        	<input onblur=";" name="UserId" type="text" class="inputtext_04" id="idInId" value="" size="18" maxlength="12"></td>
+        <td colspan="3" rowspan="2">
+            <img src="images/login/images/wimtecc_eap_pa2_05.gif" width="175" height="52" alt=""></td>
+        <td>
+            <img src="images/login/images/spacer.gif" width="1" height="42" alt=""></td>
+    </tr>
+    <tr>
+        <td rowspan="2">
+            <img src="images/login/images/wimtecc_eap_pa1_06.gif" width="154" height="42" alt=""></td>
+        <td rowspan="2">
+        	<input onblur=";" name="Password" type="password" class="inputtext_04" id="idInId" value="" size="18" maxlength="12" onkeydown="return processOnEnter(event);"></td>
+        <td>
+            <img src="images/login/images/spacer.gif" width="1" height="10" alt=""></td>
+    </tr>
+    <tr>
+        <td rowspan="3">
+            <img src="images/login/images/wimtecc_eap_pa2_08.gif" width="20" height="119" alt=""></td>
+        <td rowspan="2">
+            <img src="images/login/images/wimtecc_eap_pa2_09.gif" width="112" height="101" alt="" onclick="return processClick();"></td>
+        <td rowspan="3">
+            <img src="images/login/images/wimtecc_eap_pa2_10.gif" width="43" height="119" alt=""></td>
+        <td>
+            <img src="images/login/images/spacer.gif" width="1" height="32" alt=""></td>
+    </tr>
+    <tr>
+        <td colspan="2" rowspan="2">
+            <img src="images/login/images/wimtecc_eap_pa2_11.gif" width="308" height="87" alt=""></td>
+        <td>
+            <img src="images/login/images/spacer.gif" width="1" height="69" alt=""></td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/login/images/wimtecc_eap_pa2_12.gif" width="112" height="18" alt=""></td>
+        <td>
+            <img src="images/login/images/spacer.gif" width="1" height="18" alt=""></td>
+    </tr>
+</table>
+<!--
+				<table width="570" height="367px" border="0" cellspacing="0" cellpadding="0" style="background:url('../images/login/wimtecc_eap_pa1.gif'); background-repeat:no-repeat;">
+					<tr height="275px">
+						<td>
+							<table width="340px" height="150px" border="0" style="margin:20px 0 0 145px;">
+								<tr height="80px">
+									<td colspan="2"><img src="images/login/txt_login.gif"></td>
+									<td rowspan="3" width="80px" style="padding-top:65px"><img src="images/login/btn_login.gif"  onClick="check_info1();" style="cursor:pointer;"/></td>
+								</tr>
+								<tr height="30px">
+									<td><img src="images/login/txt_id.gif"></td>
+									<td width="140px"><input onblur=";" name="UserId" type="text" class="inputtext_04" id="idInId" value="" size="18" maxlength="12"></td>
+								</tr>
+								<tr height="40px">
+									<td><img src="images/login/txt_pw.gif"></td>
+									<td><input onfocus="this.value='';" onkeydown="return processOnEnter(event);" name="Password" type="password" class="inputtext_04" id="idInPw" value="" size="18" maxlength="20"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr><td><img src="images/login/form_shadow.gif" width="570" height="92" /></td></tr>
+				 </table>
+-->
+			</td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

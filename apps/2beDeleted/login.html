@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>==&gt; MAS Login &lt;==</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" media="screen" href="/api/loadCSS.php?css=wapBasic.css" title="Version 1" />
+<link rel="stylesheet" type="text/css" href="/api/loadCSS.php?css=wapBasic.css">
+<link rel="stylesheet" type="text/css" href="/api/loadCSS.php?css=wapPopup.css">
+<link rel="stylesheet" type="text/css" href="/api/loadCSS.php?css=wapBusy.css">
+<link rel="stylesheet" type="text/css" href="/api/loadCSS.php?css=wapGrid.css">
+<link rel="stylesheet" type="text/css" href="/api/loadCSS.php?css=wapTree.css">
+<!--
+	Load 3rd party JavaScript stuff and related stylesheets
+-->
+<link rel="stylesheet" href="http://www.khwelter.de.local/rsrc/js/jQuery/jquery-ui-1.12.1.custom/jquery-ui.css">
+<script src="http://www.khwelter.de.local/rsrc/js/jQuery/jquery-3.2.1.min.js"></script>
+<script src="http://www.khwelter.de.local/rsrc/js/jQuery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="http://www.khwelter.de.local/rsrc/js/jQuery/jquery.ui.autocomplete.html.js"></script>
+<!--
+	Load my own JavaScript stuff
+-->
+<script type="text/javascript" src="/api/debug.js" ></script>
+<script type="text/javascript" src="/api/loadScript.php?script=wapCommon.js" ></script>
+<script type="text/javascript" src="/api/loadScript.php?script=wapDataSource.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/loadScript.php?script=wapScreen.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/loadScript.php?script=wapSelect.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/loadScript.php?script=wapBusy.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/loadScript.php?script=wapPopup.js" ></script>	<!-- nothing to translate -->
+<script>
+sessionId	=	"login" ;
+screenTable		=	new Object() ;
+</script>
+<script type="text/javascript">
+/**
+ *
+ */
+$(function()	{
+	init() ;
+}) ;
+/**
+ *
+ */
+function	init() {
+	dBegin( 1, "index.html", "main", "init") ;
+console.log( "loading ... ") ;
+	var vars = [], hash;
+	vars[ 'clientId']	=	"" ;
+	vars[ 'applicationSystemId']	=	"" ;
+	vars[ 'applicationId']	=	"" ;
+	vars[ 'userId']	=	"TIPP-MAL-WIEDER" ;
+	var q	=	document.URL.split('?')[1];
+	if ( q != undefined) {
+		q	=	q.split('&');
+        	for(var i = 0; i < q.length ; i++) {
+        		hash	=	q[i].split( '=') ;
+        		vars.push( hash[1]) ;
+        		vars[ hash[ 0]]	=	hash[1] ;
+        	}
+	}
+	vars[ 'userId']	=	"TIPP-MAL-WIEDER" ;
+	if ( vars[ 'clientId'] != "") {
+		if ( vars[ 'userId'] != "") {
+			getFormField( 'ClientApplicationKeyData', 'UserId').value	=	vars[ 'userId'] ;
+		}
+	}
+	myClientSelect	=	new wapSelectXML( this, "mySelect", {
+						selectNode:	getFormField( "ClientApplicationKeyData", "ClientId", document)
+					,	object:		"Client"
+					,	key:		"ClientId"
+					,	value:		"Name1"
+					,	onDataSourceLoaded:	function( _parent, _data) {
+							dBegin( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+							this.show() ;
+							if ( vars[ 'clientId'] != "") {
+								if ( myClientSelect.setOption( vars[ 'clientId']) >= 0) {
+								} else {
+									alert( "preselected clientId not valid ...") ;
+								}
+							}
+							clientIdSelected( null) ;
+							dEnd( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+						}
+				}) ;
+	myApplicationSystemSelect	=	new wapSelectXML( this, "mySelect", {
+							selectNode:	getFormField( "ClientApplicationKeyData", "ApplicationSystemId", document)
+						,	object:		"ApplicationSystem"
+						,	key:		"ApplicationSystemId"
+						,	value:		"Description1"
+						,	onDataSourceLoaded:	function( _parent, _data) {
+								dBegin( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+								this.show() ;
+								if ( vars[ 'applicationSystemId'] != "") {
+									if ( myApplicationSystemSelect.setOption( vars[ 'applicationSystemId']) >= 0) {
+									} else {
+										alert( "preselected ApplicationSystemId not valid ...") ;
+									}
+								}
+								myApplicationSelect.dataSource.val	=	"APerClient" ;
+							 	myApplicationSelect.dataSource.dispatch( false, "getList", "ClientApplicationKeyData") ;
+								dEnd( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+							}
+				}) ;
+	myApplicationSelect	=	new wapSelectXML( this, "mySelect", {
+							selectNode:	getFormField( "ClientApplicationKeyData", "ApplicationId", document)
+						,	object:		"Application"
+						,	key:		"ApplicationId"
+						,	value:		"Description1"
+						,	onDataSourceLoaded:	function( _parent, _data) {
+								dBegin( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+								this.show() ;
+								if ( vars[ 'applicationId'] != "") {
+									if ( myApplicationSelect.setOption( vars[ 'applicationId']) >= 0) {
+									} else {
+										alert( "preselected ApplicationId not valid ...") ;
+									}
+								}
+								dEnd( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+							}
+					}) ;
+	myClientSelect.refresh() ;
+//	myApplicationSystemSelect.refresh() ;
+//	myApplicationSelect.refresh() ;
+//	dOpen( 999) ;
+	dEnd( 1, "index.html", "main", "init") ;
+}
+//
+//
+//
+function	onKeyClientId() {
+	dBegin( 2, "index.html", "main", "onClientChanged") ;
+//	scrLogin() ;
+	dEnd( 2, "index.html", "main", "onClientChanged") ;
+}
+//
+//
+//
+function	onKeyPassword( _event) {
+	dBegin( 1, "index.html", "main", "onKeyPassword()") ;
+	if ( _event.keyCode == 13) {
+		scrLogin() ;
+	}
+	dEnd( 1, "index.html", "main", "onKeyPassword()") ;
+}
+//
+//
+//
+function	scrLogin() {
+	dBegin( 1, "index.html", "scrLogin", "main()") ;
+//	wapScreen.call( this, "Client") ;
+	this.package	=	"ModLogin" ;
+	this.module	=	"Login" ;
+	this.coreObject	=	"ClientApplication" ;
+	this.keyForm	=	"ClientApplicationKeyData" ;
+	this.keyField	=	getFormField( 'ClientApplicationKeyData', 'ClientApplicationKey') ;
+	this.dataSource	=	new wapDataSource( this, {
+									object: "ClientApplication",
+									form:	"ClientApplicationKeyData",
+									fncGet:	"getAppData"
+								}) ;		// dataSource for display
+	this.onDataSourceLoaded	=	function( _scr, _xmlObj) {
+		clientApplication	=	_xmlObj.getElementsByTagName( "ClientApplication")[0] ;
+		pathApplication	=	clientApplication.getElementsByTagName( "PathApplication")[0].childNodes[0].nodeValue ;
+		document.ClientApplicationKeyData.action	=	pathApplication ;		// this.dataSource.objects.ClientApplication[0].PathApplication ;
+		document.ClientApplicationKeyData.submit() ;
+	} ;
+	myKey	=	new Array() ;
+	myKey[0]	=	getFormField( 'ClientApplicationKeyData', 'ClientId').value ;
+	myKey[1]	=	getFormField( 'ClientApplicationKeyData', 'UserId').value ;
+	myKey[2]	=	getFormField( 'ClientApplicationKeyData', 'ApplicationSystemId').value ;
+	myKey[3]	=	getFormField( 'ClientApplicationKeyData', 'ApplicationId').value ;
+	this.dataSource.key	=	myKey ;
+	this.dataSource.dispatch( false, "getAppData", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "main()") ;
+}
+function	clientIdSelected( _select) {
+	dBegin( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+	myApplicationSystemSelect.dataSource.val	=	"ASPerClient" ;
+	myApplicationSystemSelect.dataSource.dispatch( false, "getList", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+}
+function	applicationSystemIdSelected( _select) {
+	dBegin( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+	myApplicationSelect.dataSource.val	=	"APerClient" ;
+	myApplicationSelect.dataSource.dispatch( false, "getList", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+}
+</script>
+</head>
+<!--
+<body style="background-image:url(/api/loadImage.php?image=login_bg.jpg)" onLoad="init() ;">
+-->
+<body style="background-image:url(/api/loadImage.php?image=login_bg.jpg)"">
+	<table width="100%" height="100%">
+		<tbody>
+			<tr>
+				<td width="33%"></td>
+				<td width="33%" style="vertical-align: middle; align: center;">
+					<div id="Client">
+						<form id="ClientApplicationKeyData" name="ClientApplicationKeyData" class="wapForm" method="post">
+								<table border="0" cellspacing="0" cellpadding="0" >
+									<tr>
+										<td width="50%" style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Language:&nbsp;</td>
+										<td width="50%" style="color: black;">
+											<select id="selLang" name="selLang">
+												<option value="-">Benutzer</option>
+												<option value="de">Deutsch</option>
+												<option value="en">English</option>
+												<option value="es">Espanol</option>
+												<option value="fr">Francais</option>
+												<option value="nl">Dutch</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Environment:&nbsp;</td>
+										<td align="left">
+											<select id="selEnv" name="selEnv">
+												<option value="office">Büro</option>
+												<option value="home-office">Home-Office</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Client XId.:&nbsp;</td>
+							        	<td>
+							        		<input id="ClientApplicationKey" name="ClientApplicationKey" class="wapField" type="hidden" size="128" maxlength="123" />
+							        		<select id="ClientId" name="ClientId" class="wapField" data-wap-type="option" data-wap-attr="ClientId" data-wap-mode="edit" onchange="clientIdSelected( this) ;">
+							        		</select>
+							        	</td>
+							        </tr>
+<!--
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Client Id.:&nbsp;</td>
+							        	<td>
+							        		<input wapType="text" class="wapField" wapMode="edit" wapAttr="a" name="ClientId" id="ClientId" type="text" class="inputtext_04" placeholder="ClientId" size="18" maxlength="12" onKeypress="onKeyClientId() ;" />
+							        	</td>
+							        </tr>
+-->
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Application System Id.:&nbsp;</td>
+							        	<td>
+							        		<select id="ApplicationSystemId" name="ApplicationSystemId" class="wapField" data-wap-type="option" data-wap-attr="ApplicationSystemId" data-wap-mode="edit" onchange="applicationSystemIdSelected( this) ;">
+							        		</select>
+							        	</td>
+							        </tr>
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Application Id.:&nbsp;</td>
+							        	<td>
+							        		<select id="ApplicationId" name="ApplicationId" class="wapField" data-wap-type="option" data-wap-attr="ApplicationId" >
+							        		</select>
+							        	</td>
+							        </tr>
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">User Id.:&nbsp;</td>
+							        	<td><input onblur=";" name="UserId" class="wapField" id="UserId" type="text" class="inputtext_04" size="18" placeholder="UserId" maxlength="12"></td>
+							        </tr>
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Password:&nbsp;</td>
+							        	<td><input onblur=";" name="Password" id="Password" type="password" class="inputtext_04" size="18" maxlength="12"
+							        		onKeypress="onKeyPassword( event) ;" /></td>
+							        </tr>
+									<tr>
+										<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right"></td>
+							        	<td><input type="button" onclick="scrLogin() ;" value="Anmelden ..." /></td>
+							        </tr>
+								</table>
+						</form>
+					</div>
+				</td>
+				<td width="33%"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

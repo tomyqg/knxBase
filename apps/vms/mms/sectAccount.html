@@ -1,0 +1,136 @@
+<div id="sectAccount" class="container section inactive">
+	<!--																		-->
+	<!-- editor: member contact													-->
+	<!--																		-->
+
+	<!--																		-->
+	<!-- head, showing actual AccountNo and some name information				-->
+	<!--																		-->
+	<div id="headAccount">
+		<div class="ui labeled input">
+			<div class="ui label">Account No.:</div>&nbsp;
+			<button class="ui primary button" onCLick="getAccount( 'getJSONPrev') ;">&lt;</button>&nbsp;
+			<div class="ui icon input">
+				<input type="ui text" name="AccountNo" v-model.text="account.AccountNo" onkeyup="keyup( event) ;" />
+				<i class="search icon" onClick="getAccount( 'XXXX') ;"></i>
+			</div>
+			&nbsp;&nbsp;
+			<button class="ui primary button" onClick="getAccount( 'getJSONNext');">&gt;</button>&nbsp;
+			{{ account.Description }}
+		</div>
+	</div>
+	<div class="ui horizontal divider">Daten zu diesem Mitglied</div>
+	<div class="ui top attached tabular menu">
+		<div id="tabAccountList" class="item" onclick="showTab( 'AccountList') ;">Übersicht</div>
+		<div id="tabAccountMain" class="item active" onclick="showTab( 'AccountMain') ;">Konto</div>
+		<div id="tabAccountBookings" class="item" onclick="showTab( 'AccountBookings') ;">Buchungen</div>
+	</div>
+	<!--																		-->
+	<!-- tab: dataAccountList													-->
+	<!--		member survey													-->
+	<!--																		-->
+	<div id="dataAccountList" class="ui bottom attached tab segment">
+		<div class="ui small enabled button" onClick="getAccount( null, 'getList', 3) ;">
+			Refresh ...
+		</div>
+		<table class="ui striped table">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Konto Nr.</th>
+				<th>Beschreibung</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr v-for="account in accountList">
+				<td>{{ account.Id }}</td>
+				<td>{{ account.AccountNo }}</td>
+				<td>{{ account.Description }}</td>
+				<td v-bind:key="account.AccountNo" >{{ account.AccountNo }}
+					<div class="ui right floated small primary labeled icon button" v-bind:key="account.accountNo" v-on:click='selectAccount( account.AccountNo)'>
+						<i class="user icon"></i>Show details
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			<tfoot class="full-width">
+			<tr>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!--																		-->
+	<!-- tab: dataAccountMain													-->
+	<!--		member main data												-->
+	<!--																		-->
+	<div id="dataAccountMain" class="ui bottom attached tab active segment">
+		<form class="ui form" method="POST">
+			<div class="two fields">
+				<div class="field">
+					<label>Description</label>
+					<div class="two fields">
+						<div class="field">
+							<input type="text" name="Description" placeholder="Description" v-model.text="account.Description">
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="ui primary button" onclick="return( save( event)) ;">Aktualisieren</button>
+			<button class="ui button" onclick="return( saveAsNew( event)) ;">Neu anlegen</button>
+			<button class="ui button">Änderungen verwerfen</button>
+		</form>
+	</div>
+	<!--																		-->
+	<!-- data: dataAccountBookings												-->
+	<!--		account bookings												-->
+	<!--																		-->
+	<div id="dataAccountBookings" class="ui bottom attached tab segment">
+		<table class="ui striped table">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Datum</th>
+				<th>Description</th>
+				<th>Konto Soll</th>
+				<th>Konto Haben</th>
+				<th>Soll</th>
+				<th>Haben</th>
+				<th>Aktion</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr v-for="accountBooking in accountBookings">
+				<td>{{ accountBooking.Id }}</td>
+				<td>{{ accountBooking.Date }}</td>
+				<td>{{ accountBooking.Description }}</td>
+				<td>{{ accountBooking.AccountNoDebit }}</td>
+				<td>{{ accountBooking.AccountNoCredit }}</td>
+				<td>{{ accountBooking.AmountDebit }}</td>
+				<td>{{ accountBooking.AmountCredit }}</td>
+				<td>
+					<div class="ui right floated small primary labeled icon button" :data-id="accountBooking.Id" onclick="openEditor(event, 'AccountContact');">
+						<i class="user icon"></i>Edit
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			<tfoot class="full-width">
+			<tr>
+				<th></th>
+				<th colspan="7">
+					<div class="ui right floated small primary labeled icon button" :data-id="-1" onclick="openEditor( event, 'AccountBooking') ;">
+						<i class="user icon"></i> Add Booking
+					</div>
+					<div class="ui small  button">
+						Approve
+					</div>
+					<div class="ui small  disabled button">
+						Approve All
+					</div>
+				</th>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,309 @@
+<fmt>
+	<!--	define all formats			-->
+	<formats>
+		<!--	define character formats	-->
+		<charformats>
+			<charformat name="default">
+				<fontName>arial</fontName>
+				<charSize>10</charSize>
+			</charformat>
+			<charformat name="returnAddr">
+				<fontName>arialbi</fontName>
+				<rVal>255</rVal>
+				<gVal>255</gVal>
+				<bVal>0</bVal>
+				<charSize>6</charSize>
+				<charStretch>100</charStretch>
+			</charformat>
+			<charformat name="rcvr">
+				<fontName>arialbi</fontName>
+				<rVal>255</rVal>
+				<gVal>255</gVal>
+				<bVal>255</bVal>
+				<charSize>9</charSize>
+				<charStretch>100</charStretch>
+			</charformat>
+			<charformat name="info">
+				<fontName>Arial</fontName>
+				<charSize>9</charSize>
+				<rVal>204</rVal>
+				<gVal>204</gVal>
+				<bVal>204</bVal>
+			</charformat>
+			<charformat name="pageFooter">
+				<fontName>ariali</fontName>
+				<charSize>6</charSize>
+				<rVal>204</rVal>
+				<gVal>204</gVal>
+				<bVal>204</bVal>
+			</charformat>
+			<charformat name="reference">
+				<fontName>Arial</fontName>
+				<charSize>18</charSize>
+				<rVal>255</rVal>
+				<gVal>255</gVal>
+				<bVal>204</bVal>
+			</charformat>
+		</charformats>
+		<!--	define paragraph formats	-->
+		<parformats>
+			<parformat name="default">
+				<charFmt>default</charFmt>
+			</parformat>
+			<parformat name="returnAddr">
+				<charFmt>returnAddr</charFmt>
+				<lineSpacing>1.0</lineSpacing>
+			</parformat>
+			<parformat name="rcvr">
+				<charFmt>rcvr</charFmt>
+				<lineSpacing>1.5</lineSpacing>
+			</parformat>
+			<parformat name="info">
+				<charFmt>info</charFmt>
+				<tabs>
+					<tab type="r" pos="20" />
+				</tabs>
+				<lineSpacing>1.2</lineSpacing>
+			</parformat>
+			<parformat name="reference">
+				<charFmt>reference</charFmt>
+				<tabs>
+					<tab type="r" pos="20" />
+				</tabs>
+			</parformat>
+			<parformat name="header 1">
+			</parformat>
+			<parformat name="header 2">
+			</parformat>
+			<parformat name="header 3">
+			</parformat>
+			<parformat name="header 4">
+			</parformat>
+			<parformat name="tableCell">
+			</parformat>
+			<parformat name="pageHeader">
+				<charFmt>pageFooter</charFmt>
+				<lineSpacing>1.2</lineSpacing>
+				<tabs>
+					<tab type="c" pos="90" />
+					<tab type="r" pos="180" />
+				</tabs>
+			</parformat>
+			<parformat name="pageFooter">
+				<charFmt>pageFooter</charFmt>
+				<lineSpacing>1.2</lineSpacing>
+				<tabs>
+					<tab type="l" pos="25" />
+					<tab type="l" pos="55" />
+					<tab type="l" pos="100" />
+					<tab type="l" pos="130" />
+					<tab type="l" pos="165" />
+				</tabs>
+			</parformat>
+		</parformats>
+		<!--	define table formats	-->
+		<tableformats>
+			<tableformat name="serviceData">
+				<tablecolumns>
+					<tablecolumn name="Label1" width="20" />
+					<tablecolumn name="Data1" width="60" />
+					<tablecolumn name="Label2" width="20" />
+					<tablecolumn name="Data2" width="60" />
+				</tablecolumns>
+				<tablerows>
+					<tablerow rowType="tablestart">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="pagestart">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="carryfrom">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="data">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="carryto">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="pageend">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="tablestart">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+				</tablerows>
+			</tableformat>
+			<tableformat name="serviceInfo">
+				<tablecolumns>
+					<tablecolumn width="20">
+					</tablecolumn>
+					<tablecolumn width="60">
+					</tablecolumn>
+				</tablecolumns>
+				<tablerows>
+					<tablerow rowType="1">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="2">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="3">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="4">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="5">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="6">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+					<tablerow rowType="7">
+						<tablecells>
+							<tablecell />
+						</tablecells>
+					</tablerow>
+				</tablerows>
+			</tableformat>
+		</tableformats>
+	</formats>
+	<!--	define page layout			-->
+	<pages>
+		<page name="first">
+			<frames>
+				<frame name="HeaderFirst">
+					<flowName>Header</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>10</verOffs>
+					<width>180</width>
+					<height>22</height>
+				</frame>
+				<frame name="ReturnAddr">
+					<flowName>ReturnAddr</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>43</verOffs>
+					<width>85</width>
+					<height>5</height>
+				</frame>
+				<frame name="RcvrAddr">
+					<flowName>RcvrAddr</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>50</verOffs>
+					<width>85</width>
+					<height>30</height>
+				</frame>
+				<frame name="Info">
+					<flowName>Info</flowName>
+					<horOffs>125</horOffs>
+					<verOffs>85</verOffs>
+					<width>65</width>
+					<height>20</height>
+				</frame>
+				<frame name="Reference">
+					<flowName>Reference</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>90</verOffs>
+					<width>80</width>
+					<height>10</height>
+				</frame>
+				<frame name="default">
+					<flowName>default</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>110</verOffs>
+					<width>180</width>
+					<height>160</height>
+				</frame>
+				<frame name="Footer">
+					<flowName>Footer</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>270</verOffs>
+					<width>180</width>
+					<height>15</height>
+				</frame>
+			</frames>
+		</page>
+		<page name="right">
+			<frames>
+				<frame name="Header">
+					<flowName>Header</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>10</verOffs>
+					<width>180</width>
+					<height>12</height>
+				</frame>
+				<frame name="default">
+					<flowName>default</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>30</verOffs>
+					<width>180</width>
+					<height>230</height>
+				</frame>
+				<frame name="Footer">
+					<flowName>Footer</flowName>
+					<horOffs>20</horOffs>
+					<verOffs>275</verOffs>
+					<width>180</width>
+					<height>20</height>
+				</frame>
+			</frames>
+		</page>
+	</pages>
+	<flows>
+		<flow name="default">
+			<auto>true</auto>
+		</flow>
+	</flows>
+	<flows>
+		<flow name="Header">
+			<type></type>
+		</flow>
+	</flows>
+	<flows>
+		<flow name="Footer">
+		</flow>
+	</flows>
+	<flows>
+		<flow name="ReturnAddr">
+		</flow>
+	</flows>
+	<flows>
+		<flow name="RcvrAddr">
+		</flow>
+	</flows>
+	<flows>
+		<flow name="Info">
+		</flow>
+	</flows>
+	<flows>
+		<flow name="Reference">
+		</flow>
+	</flows>
+</fmt>

@@ -1,0 +1,42 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="KundeAdresse" data-wap-core-object="KundeAdresse" data-wap-core-object-key="Id" data-wap-parent-object="Kunde" w="800" h="300">
+		<wap:key>
+			<wap:keyform id="KundeAdresseKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="KundeAdresse" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formKundeAdresse" class="formCreate formUpdate" w="700" h="300">
+				<table>
+					<wap:rowinput data-wap-label="Kunde Nr." data-wap-attr="KundeNr" />
+					<wap:rowinput data-wap-label="Vorname" data-wap-attr="Vorname" />
+					<wap:row>
+						<wap:cellhelp rowspan="2" />
+						<wap:celllabel rowspan="2" data-wap-label="Name" />
+						<wap:cellinput data-wap-attr="Name1" data-wap-mode="edit" />
+					</wap:row>
+					<wap:row>
+						<wap:cellinput data-wap-attr="Name2" data-wap-mode="edit" />
+					</wap:row>
+					<wap:rowoption data-wap-label="Land" data-wap-attr="Land" data-wap-db="Option" data-wap-key="Key" data-wap-value="Value"
+							data-wap-cond="OptionName = 'Country'" data-wap-order="Value" data-wap-def="de" />
+					<wap:rowoption data-wap-label="Adress-Typ" data-wap-attr="AdressTyp" data-wap-db="Option" data-wap-key="Key" data-wap-value="Value"
+							data-wap-cond="OptionName = 'AdressTyp'" data-wap-order="Id" data-wap-def="de" />
+					<wap:rowoption data-wap-label="Adress-Art" data-wap-attr="AdressArt" data-wap-db="Option" data-wap-key="Key" data-wap-value="Value"
+							data-wap-cond="OptionName = 'AdressArt'" data-wap-order="Id" data-wap-def="1" />
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

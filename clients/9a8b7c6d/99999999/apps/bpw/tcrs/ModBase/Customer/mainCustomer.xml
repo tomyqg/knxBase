@@ -1,0 +1,217 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModBase" data-wap-screen="Customer" data-wap-core-object="Customer" data-wap-core-object-key="CustomerNo" >
+    	<h1 class="page-title">Customer</h1>
+    	<wap:key>
+    		<wap:keyform id="CustomerKeyData">
+    			<wap:keyrow data-wap-label="Customer no." data-wap-attr="CustomerNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+    			<wap:keydisplay data-wap-label="Name" data-wap-attr="CustomerName1" colspan="4"/>
+    		</wap:keyform>
+    	</wap:key>
+        <wap:tabContainer id="tabCntrlCustomerMain" data-wap-active-tab-onload="tabPageCustomerSurveyEntry">
+            <wap:tabContentPane id="tabPageCustomerSurvey" data-wap-heading="Overview">
+                <wap:grid data-wap-object="Customer" data-wap-grid-name="gridCustomerOV" data-wap-tab-onselect="tabPageCustomerMainDataEntry" data-wap-load-on-init="true">
+                    <wap:gridcol data-wap-obj="Customer" data-wap-attr="Id" data-wap-label="Id" />
+                    <wap:gridcol data-wap-obj="Customer" data-wap-attr="CustomerNo" data-wap-label="Customer No" />
+                    <wap:gridcol data-wap-obj="Customer" data-wap-attr="CustomerName1" data-wap-label="Customer Name" />
+                </wap:grid>
+            </wap:tabContentPane>
+            <wap:tabContentPane id="tabPageCustomerMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formCustomerMain">
+										<wap:row>
+											<wap:cellhelp rowspan="3" />
+											<wap:celllabel rowspan="3" data-wap-label="Company name" />
+											<wap:cellinput data-wap-attr="CustomerName1" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="CustomerName2" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="CustomerName3" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Street / No" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="Street" data-wap-mode="edit" />
+												<wap:input data-wap-attr="Number" size="6" max="8" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="ZIP / City" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="ZIP" size="6" max="8" data-wap-mode="edit" />
+												<wap:input data-wap-attr="City" data-wap-mode="edit" onkeypress="screenCurrent.onCityChanged() ;" />
+											</td>
+										</wap:row>
+										<wap:rowoption data-wap-label="Country" data-wap-attr="Country"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Country'" data-wap-order="Value" data-wap-def="de" />
+										<wap:rowinput data-wap-label="Phone" data-wap-attr="Phone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Fax" data-wap-attr="Fax" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Cellphone" data-wap-attr="Cellphone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="E-Mail" data-wap-attr="eMail" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="URL" data-wap-attr="URL" data-wap-mode="edit" />
+										<wap:rowflag data-wap-label="Tax" data-wap-attr="Tax" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption data-wap-label="Language" data-wap-attr="Language" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Language'" data-wap-order="Value" data-wap-def="de_DE" />
+										<wap:rowoption data-wap-label="Currency" data-wap-attr="Currency" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Currency'" data-wap-order="Value" data-wap-def="EUR" />
+										<wap:rowoption data-wap-label="Organization" data-wap-attr="Organization" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Organization'" data-wap-order="Value" data-wap-def="private" />
+										<wap:rowcheck data-wap-label="Rights" data-wap-attr="Rights" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'ArticleRights'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Modi</legend>
+									<wap:dataform id="formCustomerModi">
+										<wap:rowinput data-wap-label="Tax id. no." data-wap-attr="TaxId" />
+										<wap:rowinput data-wap-label="RMandant no." data-wap-attr="MandNr" />
+										<wap:rowflag data-wap-label="Internet order" data-wap-attr="ModeOrderInternet" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Order confirmation" data-wap-attr="ModeOrderConf" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption data-wap-label="Payment" data-wap-attr="ModePay" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'ModePay'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowinput data-wap-label="Discount" data-wap-attr="Discount" size="6" max="6" data-wap-mode="edit" />
+										<wap:rowtext data-wap-label="Remark(s)" data-wap-attr="Remark" cols="64" rows="8" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Access</legend>
+									<wap:data>
+										<wap:dataform id="formCustomerZugriff">
+											<wap:rowinput data-wap-label="Username" data-wap-attr="UserName" data-wap-mode="edit" />
+											<wap:rowdisplay data-wap-label="Password" data-wap-attr="Passwort" />
+											<wap:rowdisplay data-wap-label="Activationkey" data-wap-attr="ActivationKey" />
+										</wap:dataform>
+									</wap:data>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formCustomerMain,formCustomerModi,formCustomerZugriff" />
+					<wap:btnUpdate data-wap-forms="formCustomerMain,formCustomerModi,formCustomerZugriff" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageInvoicedItems" data-wap-heading="Invoiced Transport Containers">
+				<wap:grid data-wap-object="InvoicedItem" data-wap-grid-name="gridInvoicedItem" data-wap-form-name="formInvoicedItem" wapTableName="TableInvoicedItem" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="CustomerNo" data-wap-label="Customer no." />
+					<wap:gridcol data-wap-attr="CustomerName" data-wap-label="Customer name" />
+					<wap:gridcol data-wap-attr="InvoiceDate" data-wap-label="Invoice Date" />
+					<wap:gridcol data-wap-attr="PeriodStart" data-wap-label="From" />
+					<wap:gridcol data-wap-attr="PeriodEnd" data-wap-label="Until" />
+					<wap:gridcol data-wap-attr="MaterialNo" data-wap-label="Material no." />
+					<wap:gridcol data-wap-attr="QtyRef" data-wap-label="Base qty." />
+					<wap:gridcol data-wap-attr="QtyCurrent" data-wap-label="Actual qty.." />
+					<wap:gridcol data-wap-attr="QtyDiff" data-wap-label="Difference" />
+					<wap:gridcol data-wap-functions="edit" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageContainerMoves" data-wap-heading="Containers Movements">
+				<wap:grid data-wap-object="ContainerMove" data-wap-grid-name="gridContainerMove" data-wap-form-name="formContainerMove" wapTableName="TableContainerMove" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="CustomerNo" data-wap-label="Customer no." />
+					<wap:gridcol data-wap-attr="MaterialNo" data-wap-label="Material no." />
+					<wap:gridcol data-wap-attr="Date" data-wap-label="Date" />
+					<wap:gridcol data-wap-attr="Qty" data-wap-label="Quantity" />
+					<wap:gridcol data-wap-attr="DeliveryNo" data-wap-label="Delivery no." />
+					<wap:gridcol data-wap-functions="edit" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<!--
+			<wap:tabContentPane id="tabPageCustomerAddresses" data-wap-heading="Addresses">
+    			<fieldset>
+    				<legend>Delivery</legend>
+    					<wap:grid data-wap-object=="LiefCustomer" data-wap-adder="true">
+    						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+    						<wap:gridcol data-wap-attr="CustomerNo" data-wap-label="Cust.-No." />
+    						<wap:gridcol data-wap-attr="Company" data-wap-label="Company" />
+    						<wap:gridcol data-wap-attr="City" data-wap-label="City" />
+    						<wap:gridcol data-wap-attr="Address" data-wap-label="Address" />
+    						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+    					</wap:grid>
+    			</fieldset>
+    			<fieldset>
+    				<legend>Invoice</legend>
+    					<wap:grid data-wap-object=="RechCustomer" data-wap-adder="true">
+    						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+    						<wap:gridcol data-wap-attr="CustomerNo" data-wap-label="Cust.-No." />
+    						<wap:gridcol data-wap-attr="Company" data-wap-label="Company" />
+    						<wap:gridcol data-wap-attr="LastName" data-wap-label="LastName" />
+    						<wap:gridcol data-wap-attr="FirstName" data-wap-label="FirstName" />
+    						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+    					</wap:grid>
+    			</fieldset>
+    			<fieldset>
+    				<legend>Other</legend>
+    					<wap:grid data-wap-object=="AddCustomer" data-wap-adder="true">
+    						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+    						<wap:gridcol data-wap-attr="CustomerNo" data-wap-label="Cust.-No." />
+    						<wap:gridcol data-wap-attr="Company" data-wap-label="Company" />
+    						<wap:gridcol data-wap-attr="LastName" data-wap-label="LastName" />
+    						<wap:gridcol data-wap-attr="FirstName" data-wap-label="FirstName" />
+    						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+    					</wap:grid>
+    			</fieldset>
+			</wap:tabContentPane>
+-->
+			<wap:tabContentPane id="tabPageImport" data-wap-heading="Export- and Import">
+				<wap:data>
+					<fieldset>
+						<legend>Data Import: "Abrechnungszeitraum"</legend>
+						<wap:rowupload data-wap-label="Import File to upload" data-wap-attr="CSVData" data-wap-upload-function="importCSVAz" />
+					</fieldset>
+				</wap:data>
+				<wap:data>
+					<fieldset>
+						<legend>Data Import: "Bewegungen"</legend>
+						<wap:rowupload data-wap-label="Import File to upload" data-wap-attr="CSVData" data-wap-upload-function="importCSVB" />
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+            <wap:tabContentPane id="tabPageCustomerHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlCustomerHelpMain">
+					<wap:tabContentPane id="tabPageCustomerHelpDE" data-wap-heading="Deutsch">
+Fragen zum Thema:<br/>
+Die Bewegungsdatei und die Abrechnunsdatei bezieghen sich auf den selben Zeitraum, z.B.
+01.07.2015 - 15.08.2015. Die Spaltennamen in den Tabellen sind für mich (als nicht-Logistiker) nicht sinnvoll gewählt.
+Was ist, in der Datei Abrwechnungszeitraum, gemeint mit:<br/>
+Bestand ...<br/>
+Delta ...<br/>
+Miete / Stück (oder sollte das besser Anzahl für Miete heissen?) ...<br/>
+<br/>
+Die Abrechnungsdaten wü+rde ich interpretieren als "vom Rechnungswesen dem Kunden bereits in Rechnung gestellt".
+Wenn jetzt aber die Bewegungsdaten sich auf den gleichen Zeitraum beziehen, sind diese dann nicht bereits abgerechnet?<br/>
+
+ 				</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCustomerHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCustomerHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

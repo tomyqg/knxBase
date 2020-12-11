@@ -1,0 +1,181 @@
+#!/usr/bin/php5
+<?php
+
+//
+// gen_orders
+//
+// Diese Script erzeugt alle Bestellungen per 'orderinput' Datei in der Datenbank
+//
+// Aufruf:	gen_orders [debug_level]
+//
+//		Parameter	Default
+//		debug_level	0	>0 gibt zusaetzliche Diagnosemeldungen aus
+//
+// Verwendung:
+//		siehe gen_lfbest
+//
+ 
+require_once( "global.inc.php") ; 
+require_once( "Artikel.inc.php") ; 
+require_once( "ArtikelBestand.inc.php") ; 
+require_once( "ArtikelEKPreis.inc.php") ; 
+require_once( "PLfBest.inc.php") ; 
+require_once( "PLfBestPosten.inc.php") ; 
+require_once( "Lieferant.inc.php") ; 
+
+if ( isset( $argv[1])) {
+	$debugLevel	=	$argv[1] ;
+}
+
+$database	=	connectDatabase( $dbHost, $dbUser, $dbPasswd) ; 
+
+if ( ! mysql_select_db( $dbName)) { 
+	printf( "could not select database, will simply die ... \n") ;
+	$mainResult	=	-1004 ;	
+} else {
+//	echo "Database connection ok ... \n" ;
+}
+
+//
+
+$myLogFile	=	fopen( "/tmp/genorders.log", "w+") ;
+if ( ! $myLogFile) {
+	printf( "could not open log file, will simply die ... \n") ;
+	die() ;
+}
+
+//
+
+$myArtikel	=	new Artikel() ; 
+$myArtikelBestand	=	new ArtikelBestand() ; 
+
+// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+
+$myOrderFile	=	fopen( "orderinput", "r") ;
+
+if ( ! $myOrderFile) {
+	printf( "PANIC: could not open orderinput. \n") ;
+	die() ;
+}
+
+$sqlResult      =       mysql_query( "truncate table PLfBest", $database) ; 
+$sqlResult      =       mysql_query( "truncate table PLfBestPosten", $database) ; 
+
+$orderBuffer	=	fread( $myOrderFile, filesize( "orderinput")) ;
+
+$liefOrders	=	explode( ">", substr( $orderBuffer, 8)) ;
+$myLieferant	=	new Lieferant ;
+$lastLieferant	=	new Lieferant ;
+$myPLfBestPosten	=	new PLfBestPosten() ;
+while ( list( $eiv, $ec) = each( $liefOrders)) {
+	if ( strlen( $ec) > 10) {
+		myDebug( 1, "Bestellzeile fuer Lieferant ... :  [%s] \n", $ec) ;
+		$liefItems	=	explode( "&", $ec) ;
+		while ( list( $loi, $li) = each( $liefItems)) {
+			if ( strlen( $li) > 10) {
+				myDebug( 1, "Bestellposition fuer Lieferant ... :  [%s] \n", $li) ;
+				$liefPosition	=	explode( ":", $li) ;
+				myDebug( 1, "Artikel Nr........................ :  [%s] \n", $liefPosition[1]) ;
+				myDebug( 1, "Lieferant Nr...................... :  [%s] \n", $liefPosition[3]) ;
+				myDebug( 1, "Lieferant Artikel Nr.............. :  [%s] \n", $liefPosition[5]) ;
+				myDebug( 1, "Staffelmenge...................... :  [%s] \n", $liefPosition[7]) ;
+				myDebug( 1, "Staffelpreis...................... :  [%s] \n", $liefPosition[9]) ;
+				myDebug( 1, "Preisbasis........................ :  [%s] \n", $liefPosition[11]) ;
+				myDebug( 1, "Bestellmenge...................... :  [%s] \n", $liefPosition[13]) ;
+				$myLieferant->LieferantNr	=	$liefPosition[3] ;
+				$myLieferant->fetchFromDb( $database) ;
+				if ( strcmp( $myLieferant->LieferantNr, $lastLieferant->LieferantNr) != 0) {
+					$myPLfBest	=	new PLfBest() ;
+					$myPLfBest->getBestellungNr( $database) ;
+					$myPLfBest->LieferantNr	=	$myLieferant->LieferantNr ;
+					$myPLfBest->LiefKontaktNr	=	"000" ;			// immer an den "default" Kontakt
+					$myPLfBest->Datum	=	date("Y-m-d") ;
+					$myPLfBest->storeInDb( $database) ;
+				}
+
+				$myArtikel->ArtikelNr	=	$liefPosition[1] ;
+				$myArtikel->fetchFromDb( $database) ;
+
+				if ( strcmp( $myArtikel->ArtikelNrNeu, "") <> 0) {
+					if ( strcmp( $myArtikel->ArtikelNrNeu, $myArtikel->ArtikelNr) <> 0) {
+						$myArtikel->ArtikelNr	=	$myArtikel->ArtikelNrNeu ;
+						$myArtikel->fetchFromDb( $database) ;
+					}
+				}
+
+				$myArtikelBestand->ArtikelNr	=	$myArtikel->ArtikelNr ;
+				$myArtikelBestand->fetchFromDb( $database) ;
+
+				$myArtikelEKPreis	=	getArtikelEKPreis( $database, $liefPosition[5], $myLieferant, $myArtikel) ;
+
+//				if ( $myArtikelEKPreis->_valid == 1) {
+
+					$myPLfBestPosten->LfBestNr	=	$myPLfBest->LfBestNr ;
+					$myPLfBestPosten->getPLfBestPosNr( $database) ;
+					$myPLfBestPosten->ArtikelNr	=	$myArtikel->ArtikelNr ;
+					$myPLfBestPosten->LieferantArtikelNr	=	$myArtikelEKPreis->LiefArtNr ;
+					$myPLfBestPosten->Menge	=	intval( $liefPosition[13]) ;
+					if ( $liefPosition[11] == 1) {
+						$myPLfBestPosten->Preis	=	floatval( $liefPosition[9]) ;
+						$myPLfBestPosten->PreisProVPE	=	0.00 ;
+					} else {
+						$myPLfBestPosten->Preis	=	0.00 ;
+						$myPLfBestPosten->PreisProVPE	=	floatval( $liefPosition[9]) ;
+					}
+					$myPLfBestPosten->MengeProVPE	=	floatval( $liefPosition[7]) ;
+					$myPLfBestPosten->GesamtPreis	=	intval( $liefPosition[13]) * floatval( $liefPosition[9]) / floatval( $liefPosition[11]) ;
+					$myPLfBestPosten->storeInDb( $database) ;
+	
+					$myArtikelBestand->Bestellt	+=	$myPLfBestPosten->Menge ;
+//					$myArtikelBestand->updateInDb( $database) ;
+
+					$myPLfBest->GesamtPreis	+=	$myPLfBestPosten->GesamtPreis ;
+					$myPLfBest->Positionen++ ;
+					$myPLfBest->updateInDb( $database) ;
+
+					$lastLieferant->LieferantNr	=	$myLieferant->LieferantNr ;
+//				} else {
+//				}
+			}
+		}
+		reset( $liefItems) ;
+	}
+}
+reset( $liefOrders) ;
+
+fclose( $myOrderFile) ;
+
+fclose( $myLogFile) ;
+
+function	getArtikelEKPreis( $_database, $_liefArtNr, $_lieferant, $_artikel) {
+	//
+	$myArtikelEKPreis	=	new ArtikelEKPreis() ;
+	//
+	$subQuery	=	"select * " ; 
+	$subQuery	.=	"from ArtikelEKPreis " ; 
+	$subQuery	.=	"where LiefArtNr = '" . $_liefArtNr . "' " ; 
+	$subQuery	.=	"and LiefNr = '" . $_lieferant->LieferantNr . "' " ; 
+	$sqlResult      =       mysql_query( $subQuery, $_database) ; 
+	if ( !$sqlResult) { 
+		printf( "could not perform Db query for (Artikel)ArtikelEKPreis, will simply die ... \n") ;
+		die() ;
+	}
+	//
+	$coreNumRows        =       mysql_affected_rows( $_database) ; 
+	if ( $coreNumRows < 1) {
+		printf( "001: Kein ArtikelEKPreis Eintrag gefunden, ArtikelNr [%s:%s/%s] \n", $_artikel->ArtikelNr, $_lieferant->LieferantNr, $_artikel->ArtikelNr) ;
+		printf( "QRY: [%s] \n", $subQuery) ;
+	}
+
+	//
+	// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+	//
+
+	while ($coreRow = mysql_fetch_assoc( $sqlResult)) {
+		$myArtikelEKPreis->assignFromRow( $coreRow) ;
+	}
+
+	return $myArtikelEKPreis ;
+}
+
+?>

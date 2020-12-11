@@ -1,0 +1,104 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModBase" data-wap-screen="Arzt" data-wap-core-object="Arzt" data-wap-core-object-key="ERPNr" >
+		<h1 class="page-title">Arzt</h1>
+		<wap:key>
+			<wap:keyform id="ArztKeyData">
+				<wap:keyrow data-wap-label="ERP Nr." data-wap-attr="ERPNr" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Arzt Nr." data-wap-attr="ArztNr" colspan="4" />
+				<wap:keydisplay data-wap-label="Name" data-wap-attr="Name" colspan="4" />
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlArztMain" data-wap-active-tab-onload="tabPageArztSurveyEntry">
+			<wap:tabContentPane id="tabPageArztSurvey" data-wap-heading="Übersicht">
+				<wap:grid data-wap-object="Arzt" data-wap-grid-name="gridArztOV" data-wap-tab-onselect="tabPageArztMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="Arzt" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Arzt" data-wap-attr="ERPNr" data-wap-label="ERP Nr." />
+					<wap:gridcol data-wap-obj="Arzt" data-wap-attr="ArztNr" data-wap-label="Arzt Nr." />
+					<wap:gridcol data-wap-obj="Arzt" data-wap-attr="Name" data-wap-label="Name" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArztMainData" data-wap-heading="Hauptdaten">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formArztMain" class="formCreate formUpdate">
+										<wap:rowinput data-wap-label="Arzt Nr." data-wap-attr="ArztNr" />
+										<wap:rowinput data-wap-label="Vorname" data-wap-attr="Vorname" />
+										<wap:row>
+											<wap:cellhelp rowspan="2" />
+											<wap:celllabel rowspan="2" data-wap-label="Name" />
+											<wap:cellinput data-wap-attr="Name1" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="Name2" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Strasse / Nr" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="Strasse" data-wap-mode="edit" />
+												<wap:input data-wap-attr="Hausnummer" size="6" max="8" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="PLZ / Ort" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="PLZ" size="6" max="8" data-wap-mode="edit" />
+												<wap:input data-wap-attr="Ort" data-wap-mode="edit" onkeypress="screenCurrent.onOrtChanged() ;" />
+											</td>
+										</wap:row>
+										<wap:rowoption data-wap-label="Country" data-wap-attr="Country"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Country'" data-wap-order="Value" data-wap-def="de" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Arzt Details</legend>
+									<wap:dataform id="formArztModi" class="formCreate formUpdate">
+										<wap:rowinput data-wap-label="Betriebsstätte Nr." data-wap-attr="BetriebsstaetteNr" />
+										<wap:rowinput data-wap-label="IK Nr." data-wap-attr="IKNr" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate />
+					<wap:btnUpdate />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCustomerNotes" data-wap-heading="Notizen">
+				<wap:data>
+					<wap:grid data-wap-object="CustomerNote" data-wap-grid-name="gridCustomerNote" data-wap-editor="edtCustomerNote" data-wap-load-on-init="false">
+						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+						<wap:gridcol data-wap-attr="ArztNr" data-wap-label="Arzt no." />
+						<wap:gridcol data-wap-attr="Notiz" data-wap-label="Notiz (32 Stellen)" />
+						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Funktionen" />
+					</wap:grid>
+			</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArztDokumentation" data-wap-heading="Dokumentation">
+				<wap:data>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArztDataMining" data-wap-heading="Historie">
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageArztHelp" data-wap-heading="Hilfe">
+Deutsch Hilfe.
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

@@ -1,0 +1,9 @@
+.menu_background:hover{
+	background-color:blue;
+}
+.menu_background:hover a{
+	color:white;
+}
+.menu_background a{
+	color:blue;
+}

@@ -1,0 +1,27 @@
+<html
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="ArticleComponent" data-wap-core-object="ArticleComponent" data-wap-core-object-key="Id" data-wap-parent-object="Article" w="300" h="300">
+		<wap:key>
+			<wap:keyform id="ArticleComponentKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="ArticleComponent" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formArticleComponent" class="formCreate formUpdate" w="500" h="400">
+				<table>
+					<wap:rowdisplay data-wap-label="Id" data-wap-attr="Id" />
+					<wap:rowinput data-wap-label="Article no." data-wap-attr="ArticleNo" />
+					<wap:rowinput data-wap-label="Item no." data-wap-attr="ItemNo" />
+                    <wap:rowinput data-wap-label="Component article no." data-wap-attr="CompArticleNo" />
+					<wap:rowoption data-wap-label="Comp. type" data-wap-attr="CompType" data-wap-mode="edit"
+								   data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'ComponentType'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowdisplay data-wap-label="Quantity" data-wap-attr="CompQuantity" />
+				?>
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

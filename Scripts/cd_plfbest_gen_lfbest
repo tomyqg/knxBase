@@ -1,0 +1,578 @@
+#!/usr/bin/php5
+<?php
+
+//
+// gen_lfbest
+//
+// Diese Script erzeugt Bestelldatensaetze fuer alle Artikel deren 'reservierte' Menge groesser ist als 0
+//
+// Aufruf:	gen_lfbest [debug-level] [iterationen] [einkauf-kriter]
+//
+//		Parameter	Default	
+//		debug_level	0	> 0 gibt zusaetzliche Diagnose Meldungen auf der console aus
+//		iterationen	1	Anzahl der Bestellvarianten die durchprobiert werden
+//		einkauf_krit	2	Kriterium nach dem die EK Staffel ausgewaehlt wird
+//					0= groesste Menge UNTER der erforderlichen Menge
+//					1= kleinste Menge UEBER der erforderlichen Menge
+//					2= zufaellig UNTER oder UEBER
+//
+// Verwendung:
+//		gen_lfbest 0 100 2 | sort |head --lines=1 >orderinput		! danach steht die effizienteste order in 'orderinput'
+//		gen_orders 0							! danach sind alle Bestellungen in der Datenbank generiert
+//		prn_orders 0							! danach sind alle Bestellungen als PDF file generiert
+//
+ 
+require_once( "global.inc.php") ; 
+require_once( "Artikel.inc.php") ; 
+require_once( "ArtikelBestand.inc.php") ; 
+require_once( "ArtKomp.inc.php") ; 
+require_once( "ArtikelEKPreis.inc.php") ; 
+require_once( "VKPreis.inc.php") ; 
+require_once( "LfBest.inc.php") ; 
+require_once( "LfBestPosten.inc.php") ; 
+require_once( "Lieferant.inc.php") ; 
+
+$debugLevel	=	0 ;
+$iterationen	=	1 ;
+$einkaufKriterium	=	2 ;
+$lieferantNr	=	'%' ;
+$logFileName	=	'/dev/null' ;
+$outFileName	=	'/dev/null' ;
+
+$i	=	1 ;
+while ( isset( $argv[$i])) {
+	if ( strcmp( $argv[ $i], "-d") == 0) {
+		$i++ ;
+		if ( isset( $argv[ $i])) {
+			$debugLevel	=	intval( $argv[ $i]) ;
+		} else {
+			printf( "PANIC.: -d muss gefolgt sein durch den Debug Level <br />\n") ;
+		}
+	} else if ( strcmp( $argv[ $i], "-f") == 0) {
+		$i++ ;
+		if ( isset( $argv[ $i])) {
+			$lieferantNr	=	$argv[ $i] ;
+		} else {
+			printf( "PANIC.: -f muss gefolgt sein durch den Lieferantenfilter <br />\n") ;
+		}
+	} else if ( strcmp( $argv[ $i], "-i") == 0) {
+		$i++ ;
+		$iterationen	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-k") == 0) {
+		$i++ ;
+		$einkaufKriterium	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-L") == 0) {
+		$i++ ;
+		$logFileName	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-o") == 0) {
+		$i++ ;
+		$outFileName	=	$argv[ $i] ;
+	} else if ( strcmp( $argv[ $i], "-?") == 0) {
+		$func	=	"" ;
+	}
+	$i++ ;
+}
+
+$database	=	connectDatabase( $dbHost, $dbUser, $dbPasswd) ; 
+
+if ( ! mysql_select_db( $dbName)) { 
+	printf( "could not select database, will simply die ... \n") ;
+	$mainResult	=	-1004 ;	
+} else {
+//	echo "Database connection ok ... \n" ;
+}
+
+//
+
+$myLogFile	=	fopen( $logFileName, "w+") ;
+if ( ! $myLogFile) {
+	printf( "could not open log file, will simply die ... \n") ;
+	die() ;
+}
+
+//
+
+$myOutFile	=	fopen( $outFileName, "w+") ;
+if ( ! $myOutFile) {
+	printf( "could not open output file, will simply die ... \n") ;
+	die() ;
+}
+
+//
+
+$myArtikel	=	new Artikel() ; 
+$myArtikelBestand	=	new ArtikelBestand() ; 
+$newArtikelBestand	=	new ArtikelBestand() ; 
+
+// Artikel die eine NEUE Artikelnummer haben sollen ueber die NEUE Artikelnummer bestellt werden.
+// d.h., dass ggf. existierende Bestaende fuer den alten Artikel "umgebucht" werde muessen als Reserviert mit der neuen Artikelnummer
+
+myDebug( 1, "+------------------------------------------------------------------------------------------- \n", "") ;
+
+$coreQuery	=	"select ArtikelNrNeu, ArtikelNr " ; 
+$coreQuery	.=	"from Artikel as a " ; 
+$coreQuery	.=	"where ArtikelNrNeu <> '' " ;
+$sqlResult      =       mysql_query( $coreQuery, $database) ; 
+if ( !$sqlResult) { 
+	printf( "could not perform basic Db query for Artikel, will simply die ... \n") ;
+	die() ;
+}
+//
+$coreNumRows        =       mysql_affected_rows( $database) ; 
+while ($coreRow = mysql_fetch_assoc( $sqlResult)) {
+	myDebug( 1, "Artikel Nr (alt)......................: %s <br/>\n", $coreRow['ArtikelNr']) ;
+	myDebug( 1, "  Artikel Nr (neu)......................: %s <br/>\n", $coreRow['ArtikelNrNeu']) ;
+	$myArtikelBestand->ArtikelNr	=	$coreRow['ArtikelNr'] ;
+	$myArtikelBestand->fetchFromDb( $database) ;
+	$newArtikelBestand->ArtikelNr	=	$coreRow['ArtikelNrNeu'] ;
+	$newArtikelBestand->fetchFromDb( $database) ;
+	if ( $myArtikelBestand->_valid == 1) {
+		if ( $newArtikelBestand->_valid == 1) {
+			$newArtikelBestand->Lagerbestand	+=	$myArtikelBestand->Lagerbestand ;
+			$newArtikelBestand->Reserviert	+=	$myArtikelBestand->Reserviert ;
+			$newArtikelBestand->ReserviertDec	+=	$myArtikelBestand->ReserviertDec ;
+			$newArtikelBestand->Kommissioniert	+=	$myArtikelBestand->Kommissioniert ;
+			$newArtikelBestand->Bestellt	+=	$myArtikelBestand->Bestellt ;
+			if ( $newArtikelBestand->Mindestbestand == 0) {
+				$newArtikelBestand->Mindestbestand	=	$myArtikelBestand->Mindestbestand ;
+			}
+			$newArtikelBestand->updateInDb( $database) ;
+
+			$myArtikelBestand->Lagerbestand	=	0 ;
+			$myArtikelBestand->Reserviert	=	0 ;
+			$myArtikelBestand->ReserviertDec	=	0 ;
+			$myArtikelBestand->Kommissioniert	=	0 ;
+			$myArtikelBestand->Bestellt	=	0 ;
+			$myArtikelBestand->updateInDb( $database) ;
+		} else {
+			myDebug( 0, "> neuer Artikelbestand UNGUELTIG ! (Status: %d) <br/>\n", $newArtikelBestand->_status) ;
+			die() ;
+		}
+	} else {
+		myDebug( 0, "> alter Artikelbestand UNGUELTIG ! (Status: %d) <br/>\n", $myArtikelBestand->_status) ;
+		die() ;
+	}
+}
+
+myDebug( 1, "+------------------------------------------------------------------------------------------- \n", "") ;
+
+//
+// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+//
+
+$kritText	=	array( "Staffel mit der naechst KLEINEREN Menge",
+				"Staffel mit der naechst GROESSEREN Menge",
+				"Zufaellige Auswahl des Lieferanten") ;
+
+for ( $iteration = 0 ; $iteration < $iterationen ; $iteration++) {
+
+	//
+	//
+	//
+
+	$numLfBest	=	0 ;
+
+	$potMarge	=	0.0 ;
+	$summeEinkauf	=	0.0 ;
+	$summeErloesSofort	=	0.0 ;
+	$summeErloesPotential	=	0.0 ;
+	
+	$kombinationen	=	1 ;
+
+	$uniqueString	=	"" ;
+	
+	//
+	// generate the basic artikel data
+	//
+
+	$coreQuery	=	"select * " ; 
+	$coreQuery	.=	"from ArtikelBestand " ; 
+	$coreQuery	.=	"where (Lagerbestand + Bestellt - Reserviert - Mindestbestand) < 0 " ; 
+	$coreQuery	.=	"order by ArtikelNr ASC " ; 
+	$sqlResult      =       mysql_query( $coreQuery, $database) ; 
+	if ( !$sqlResult) { 
+		printf( "could not perform basic Db query for Artikel, will simply die ... \n") ;
+		die() ;
+	}
+	//
+	$coreNumRows        =       mysql_affected_rows( $database) ; 
+	if ( $coreNumRows < 1) {
+		printf( "001: Keine Artikel zu bestellen ... \n") ;
+		echo $query . "\n" ;
+		die() ;
+	}
+
+	while ($coreRow = mysql_fetch_assoc( $sqlResult)) {
+		$numLfBest++ ;
+		myDebug( 1, "+------------------------------------------------------------------------------------------- \n", "") ;
+		$myArtikelBestand->assignFromRow( $coreRow) ;
+		$myArtikel->ArtikelNr	=	$myArtikelBestand->ArtikelNr ;
+		$myArtikel->fetchFromDb( $database) ;
+		myDebug( 1, "  Betrachte Artikel Nr...........................: [%s] \n", $myArtikelBestand->ArtikelNr) ;
+		myDebug( 1, "    Artikel Bezeichnung..........................: [%s] \n", $myArtikel->ArtikelBez1) ;
+
+		if ( strcmp( $myArtikel->ArtikelNrNeu, "") <> 0) {
+			if ( strlen( $myArtikel->ArtikelNrNeu) > 0 && strcmp( $myArtikel->ArtikelNrNeu, $myArtikel->ArtikelNr) <> 0) {
+				$myArtikel->ArtikelNr	=	$myArtikel->ArtikelNrNeu ;
+				myDebug( 1, "    Artikel hat neuere Artikel Nr................: [%s] \n", $myArtikel->ArtikelNr) ;
+				$myArtikel->fetchFromDb( $database) ;
+
+				$newArtikelBestand->ArtikelNr	=	$myArtikel->ArtikelNr ;
+				$newArtikelBestand->fetchFromDb( $database) ;
+				$newArtikelBestand->Reserviert	+=	$myArtikelBestand->Reserviert ;
+				$newArtikelBestand->updateInDb( $database) ;
+				
+				$myArtikelBestand->Reserviert	=	0 ;
+				$myArtikelBestand->updateInDb( $database) ;
+
+				$myArtikelBestand->dup( $newArtikelBestand) ;
+			}
+		}
+
+		if ( $myArtikel->BestArt == 1 ) {
+	
+			//
+			// check how many ArtikelEKPreis we've got for this Artikel
+			//
+		
+			$verfuegbar	=	$myArtikelBestand->Lagerbestand + $myArtikelBestand->Bestellt ;
+			$erforderlich	=	$myArtikelBestand->Reserviert + $myArtikelBestand->Mindestbestand ;
+			if ( $verfuegbar >= $erforderlich) {
+				$zuBestellen	=	0 ;
+			} else {
+				$zuBestellen	=	$erforderlich - $verfuegbar ;
+			}
+		
+			myDebug( 2, "    Lagerbestand.................................: [%s] \n", $myArtikelBestand->Lagerbestand) ;
+			myDebug( 1, "    Reserviert (fuer Bestellunge erforderlich)...: [%s] \n", $myArtikelBestand->Reserviert) ;
+			myDebug( 2, "    Kommissioniert (bereits Bestellungen zugeord): [%s] \n", $myArtikelBestand->Kommissioniert) ;
+			myDebug( 2, "    Laufenden Bestellungen bei Lieferanten.......: [%s] \n", $myArtikelBestand->Bestellt) ;
+			myDebug( 2, "    Mindestbestand...............................: [%s] \n", $myArtikelBestand->Mindestbestand) ;
+			myDebug( 2, "    Mindestens zu bestellen......................: [%s] \n", $zuBestellen) ;
+		
+			$anzahlLief	=	myDistinctCount( $database, "select distinct LiefNr from EKPreisR where ArtikelNr = '" . $myArtikel->ArtikelNr . "' ") ;
+			myDebug( 1, "    Anzahl moeglicher Lieferanten................: [%d] \n", $anzahlLief) ;
+			$anzahlLief	=	myDistinctCount( $database,
+							"select a.LiefNr, a.LiefArtNr from EKPreisR a left join ArtikelEKPreis b on b.LiefNr = a.LiefNr and b.LiefArtNr = a.LiefArtNr where a.ArtikelNr = '" . $myArtikel->ArtikelNr . "' ") ;
+			myDebug( 1, "    Moegliche Einkaufsvarianten..................: [%d] \n", $anzahlLief) ;
+			$kombinationen	*=	$anzahlLief ;
+		
+			//
+			// check how many EKPreis we've got for this Artikel
+			//
+		
+//			$anzahl	=	myCount( $database, "select count(*) as Count from EKPreis where ArtikelNr = '" . $myArtikel->ArtikelNr . "' ") ;
+			$anzahl	=	$kombinationen ;
+//			myDebug( 1, "    Anzahl Einkaufspreise fuer Artikel...........: [%d] \n", $anzahl) ;
+		
+			//
+			// Jetzt geht's ans Eingemachte mit Martin's HiTec Formel :-)
+			//
+		
+			$mengeErforderlich	=	$zuBestellen ;
+			$myArtikelEKPreis	=	getEKPreis( $database, $myArtikel, $einkaufKriterium, $myArtikelBestand->Reserviert) ;
+	//		if ( $myArtikelEKPreis->Preis == 0) {
+	//			$myArtikelEKPreis->Preis	=	$myArtikelEKPreis->PreisProVPE / $myArtikelEKPreis->MengeProVPE ;
+	//		}
+			myDebug( 1,"      EK Preis (pro Artikel).....................: [%s] \n",
+					sprintf( "%9.4f bei Menge [%4d/%4d]", $myArtikelEKPreis->Preis, $myArtikelEKPreis->Menge, $myArtikelEKPreis->MengeProVPE)) ;
+			myDebug( 1,"      Lieferant..................................: [%s] \n",
+					$myArtikelEKPreis->LiefNr) ;
+			$liefTabelle[$myArtikelEKPreis->LiefNr]	=	$myArtikelEKPreis->LiefNr ;
+	
+			$myVKPreis	=	getVKPreis( $database, $myArtikel, 0) ;
+			myDebug( 1,"      VK Preis...................................: [%s] \n", sprintf( "%9.2f", $myVKPreis->Preis)) ;
+			myDebug( 1,"      Einzelstueckmarge..........................: [%s] \n", sprintf( "%9.2f", $myVKPreis->Preis - $myArtikelEKPreis->Preis)) ;
+		
+			//	Sofort Erloes
+		
+			if ( $myArtikelEKPreis->MengeProVPE == 1) {
+				$mengeBestell	=	$mengeErforderlich ;
+			} else if ( $mengeErforderlich == $myArtikelEKPreis->MengeProVPE) {
+				$mengeBestell	=	$mengeErforderlich ;
+			} else {
+				$mengeBestell	=	( floor($mengeErforderlich / $myArtikelEKPreis->MengeProVPE) + 1) * $myArtikelEKPreis->MengeProVPE ;
+			}
+	
+	//		if ( $myArtikelEKPreis->MengeProVPE == 1) {
+	//			$mengeBestell	=	$mengeBestell / $myArtikelEKPreis->MengeProVPE ;
+	//		}
+	
+			$preisBasis	=	$myArtikelEKPreis->MengeFuerPreis ;
+	
+			myDebug( 1, "      Wirkliche Bestellmenge.....................: [%s] \n", sprintf( "%5d", $mengeBestell)) ;
+		
+			// Bestimme den wirklichen Einkaufspreis
+		
+			$summeEinkauf	+=	( $mengeBestell * $myArtikelEKPreis->Preis) ;
+			if ( ! isset( $summeEinkaufL[$myArtikelEKPreis->LiefNr]))
+				$summeEinkaufL[$myArtikelEKPreis->LiefNr]	=	0.0 ;
+			$summeEinkaufL[$myArtikelEKPreis->LiefNr]	+=	( $mengeBestell * $myArtikelEKPreis->Preis) ;
+		
+			//	Sofort Erloes
+		
+			$erloesSofort	=	$myArtikelBestand->Reserviert * $myVKPreis->Preis ;
+			$summeErloesSofort	+=	$erloesSofort ;
+			if ( ! isset( $summeErloesS[$myArtikelEKPreis->LiefNr]))
+				$summeErloesS[$myArtikelEKPreis->LiefNr]	=	0.0 ;
+			$summeErloesS[$myArtikelEKPreis->LiefNr]	+=	$erloesSofort ;
+			myDebug( 1, "      Soforterloes...............................: [%s] \n", sprintf( "%9.2f ", $erloesSofort)) ;
+		
+			//	Erloespotential
+		
+			$erloesPotential	=	( $mengeBestell - $myArtikelBestand->Reserviert) * $myVKPreis->Preis ;
+			$summeErloesPotential	+=	$erloesPotential ;
+			if ( ! isset( $summeErloesP[$myArtikelEKPreis->LiefNr]))
+				$summeErloesP[$myArtikelEKPreis->LiefNr]	=	0.0 ;
+			$summeErloesP[$myArtikelEKPreis->LiefNr]	+=	$erloesPotential ;
+			myDebug( 1, "      potentieller Erloes........................: [%s] \n", sprintf( "%9.2f \n", $erloesPotential)) ;
+	
+			//
+			//
+			//
+	
+			if ( ! isset( $uniqueStringL[$myArtikelEKPreis->LiefNr])) {
+				$uniqueStringL[$myArtikelEKPreis->LiefNr]	=	"" ;
+			}
+			$uniqueStringL[$myArtikelEKPreis->LiefNr]	.=	"A:".$myArtikel->ArtikelNr.":" ;
+			$uniqueStringL[$myArtikelEKPreis->LiefNr]	.=	"L:".$myArtikelEKPreis->LiefNr.":" ;
+			$uniqueStringL[$myArtikelEKPreis->LiefNr]	.=	"LA:".$myArtikelEKPreis->LiefArtNr.":" ;
+			$uniqueStringL[$myArtikelEKPreis->LiefNr]	.=	"S:".$myArtikelEKPreis->MengeProVPE.":" ;
+			$uniqueStringL[$myArtikelEKPreis->LiefNr] .=      "P:".$myArtikelEKPreis->Preis.":B:".$preisBasis.":" ;
+			$uniqueStringL[$myArtikelEKPreis->LiefNr]	.=	"E:".$mengeBestell.":&" ;
+	
+		//LINEAL     ".................................................: "
+	
+		}
+
+	}
+
+	$summeVerkauf	=	$summeErloesSofort + $summeErloesPotential ;
+	$gesamtMarge	=	$summeVerkauf - $summeEinkauf ;
+	$gesamtMargeUp	=	$gesamtMarge / $summeEinkauf * 100.0 ;
+	$gesamtMargeDn	=	$gesamtMarge / $summeVerkauf * 100.0 ;
+
+	if ( $debugLevel > 0) {
+		echo "+==========================================================================================+ \n" ;
+		echo "|                 A N A L Y S I S   S U M M A R Y                                          | \n" ;
+		echo "+==========================================================================================+ \n" ;
+		echo "| Einkaufsvariante................................: " . $kritText[ $einkaufKriterium] . " \n" ;
+		echo "| Anzahl Artikel zu bestellen.....................: " . $coreNumRows . " \n" ;
+		echo "| Anzahl Bestellungen.............................: " . $numLfBest . " \n" ;
+		echo "| Anzahl Bestellkombinationen.....................: " . $kombinationen . " \n" ;
+		echo "| Gesamtsumme des Einkaufes.......................: " . sprintf( "%9.2f", $summeEinkauf) . " \n" ;
+		echo "| Soforterloes....................................: " . sprintf( "%9.2f", $summeErloesSofort) . " \n" ;
+		echo "| Potentialerloes.................................: " . sprintf( "%9.2f", $summeErloesPotential) . " \n" ;
+		echo "| Gesamtmarge.....................................: " . sprintf( "%9.2f", $gesamtMarge) . " \n" ;
+		echo "|   auf Einkaufspreis.............................: " . sprintf( "%9.2f", $gesamtMargeUp) . " \n" ;
+		echo "|   vom Verkaufspreis.............................: " . sprintf( "%9.2f", $gesamtMargeDn) . " \n" ;
+		echo "+------------------------------------------------------------------------------------------- \n" ;
+	}
+
+	$myLieferant	=	new Lieferant() ;
+	while ( list( $eiv, $ec) = each( $liefTabelle)) {
+		$myLieferant->LieferantNr	=	$ec ;
+		$myLieferant->fetchFromDb( $database) ;
+		if ( $debugLevel > 0) {
+			printf( "| Muss bestellen bei..............................: %s, %s, Euro: %9.2f \n", $ec, $myLieferant->FirmaName1, $summeEinkaufL[ $ec]) ;
+			printf( "|   Soforterloes..................................: Euro: %9.2f \n", $summeErloesS[ $ec]) ;
+			printf( "|   Potentialerloes...............................: Euro: %9.2f \n", $summeErloesP[ $ec]) ;
+			printf( "|   Gesamtmarge...................................: Euro: %9.2f \n", $summeErloesP[ $ec] + $summeErloesS[ $ec] - $summeEinkaufL[ $ec]) ;
+		}
+		$uniqueString	.=	$uniqueStringL[ $ec] ;
+		$uniqueString	.=	">" ;
+		unset( $liefTabelle[ $ec]) ;
+		unset( $summeEinkaufL[ $ec]) ;
+		unset( $summeErloesS[ $ec]) ;
+		unset( $summeErloesP[ $ec]) ;
+		unset( $uniqueStringL[ $ec]) ;
+	}
+	reset( $liefTabelle) ;
+	if ( $debugLevel > 0) {
+		echo "+------------------------------------------------------------------------------------------- \n" ;
+		fwrite( $myOutFile, printf( "Bestellformel: %6.2f:[%s] \n", $gesamtMargeUp, $uniqueString)) ;
+		echo "+==========================================================================================+ \n" ;
+	} else {
+	}
+	
+	fwrite( $myOutFile, printf( "%06.2f:[%s] \n", $gesamtMargeUp, $uniqueString)) ;
+	
+}
+
+fclose( $myOutFile) ;
+fclose( $myLogFile) ;
+
+function	getEKPreis( $_database, $_artikel, $_criterium, $_realeMenge) {
+	//
+	$myArtikelEKPreis	=	new ArtikelEKPreis() ;
+	//
+	$subQuery	=	"select * " ; 
+	$subQuery	.=	"from EKPreisR a " ; 
+	$subQuery	.=	"left join ArtikelEKPreis b on b.LiefNr = a.LiefNr and b.LiefArtNr = a.LiefArtNr " ;
+	$subQuery	.=	"where a.ArtikelNr = '" . $_artikel->ArtikelNr . "' " ; 
+	switch ( $_criterium) {
+	case	0	:			// groesste Staffel UNTER der Bedarfsmenge
+
+		$subQuery	.=	"and (b.Menge * b.MengeProVPE) <= '" . $_realeMenge . "' " ; 
+		$subQuery	.=	"order by b.MengeProVPE DESC, a.LiefNr ASC " ;
+
+		$nextSubQuery	=	"select * " ; 
+		$nextSubQuery	.=	"from EKPreisR a " ; 
+		$nextSubQuery	.=	"left join ArtikelEKPreis b on b.LiefNr = a.LiefNr and b.LiefArtNr = a.LiefArtNr " ;
+		$nextSubQuery	.=	"where a.ArtikelNr = '" . $_artikel->ArtikelNr . "' " ; 
+		$nextSubQuery	.=	"order by b.MengeProVPE DESC, a.LiefNr ASC " ;
+
+		break ;
+	case	1	:			// kleinste Staffel UEBER der Bedarfsmenge
+		$subQuery	.=	"and (Menge * MengeProVPE) >= " . sprintf( "%d", $_realeMenge) . " " ; 
+		$subQuery	.=	"order by (Menge * MengeProVPE) ASC " ;
+//		$subQuery	.=	"order by (Preis * " . sprintf( "%d", $_realeMenge) . ") ASC " ;
+//		$subQuery	.=	"limit 1 " ;
+		$nextSubQuery	=	"select * " ; 
+		$nextSubQuery	.=	"from EKPreis " ; 
+		$nextSubQuery	.=	"where ArtikelNr = '" . $_artikel->ArtikelNr . "' " ; 
+		$nextSubQuery	.=	"order by MengeProVPE DESC " ;
+		$nextSubQuery	.=	"limit 1 " ;
+		break ;
+	case	2	:			// kleinste Staffel UEBER der Bedarfsmenge
+		$subQuery	.=	"order by MengeProVPE ASC " ;
+		break ;
+	}
+	myDebug( 101, "Query: [%s] \n", $subQuery) ;
+	$sqlResult      =       mysql_query( $subQuery, $_database) ; 
+	if ( !$sqlResult) { 
+		printf( "could not perform Db query for (Artikel)EKPreis, will simply die ... \n") ;
+		die() ;
+	}
+	//
+	$coreNumRows        =       mysql_affected_rows( $_database) ; 
+	if ( $coreNumRows < 1) {
+		$sqlResult      =       mysql_query( $nextSubQuery, $_database) ; 
+		if ( !$sqlResult) { 
+			printf( "could not perform Db query for (Artikel)EKPreis, will simply die ... \n") ;
+			echo $subQuery . "\n" ;
+			echo $nextSubQuery . "\n" ;
+			die() ;
+		}
+		//
+		$coreNumRows        =       mysql_affected_rows( $_database) ; 
+		if ( $coreNumRows <= 0) { 
+			printf( "PANIK: Dieser Artikel hat keine Einkaufspreise ... !!! \n") ;
+			die() ;
+		}
+	}
+
+	myDebug( 11, "VARIATIONEN: Dieser Artikel hat [%3d] Einkaufspreise ... !!! \n", $coreNumRows) ;
+
+	switch ( $_criterium) {
+	case	0	:			// groesste Staffel UNTER der Bedarfsmenge
+		break ;
+	case	1	:			// groesste Staffel UNTER der Bedarfsmenge
+		break ;
+	case	2	:			// groesste Staffel UNTER der Bedarfsmenge
+		$rndIndex	=	rand( 0, $coreNumRows) ;
+		break ;
+	}
+	//
+	// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+	//
+
+	$tempArtikelEKPreis	=	new ArtikelEKPreis() ;
+	$rowCtr	=	0 ;
+	while ($coreRow = mysql_fetch_assoc( $sqlResult)) {
+		$tempArtikelEKPreis->assignFromRow( $coreRow) ;
+		if ( $rowCtr == 0) {
+			$myArtikelEKPreis->assignFromRow( $coreRow) ;
+		}
+		if ( $_criterium == 2 && $rndIndex == $rowCtr) {
+			$myArtikelEKPreis->assignFromRow( $coreRow) ;
+		}
+		myDebug( 11, "Wird geliefert von...........: [%s] \n", $tempArtikelEKPreis->LiefNr) ;
+		myDebug( 11, "..in der Mindestmenge von....: [%d] \n", $tempArtikelEKPreis->MengeProVPE * $tempArtikelEKPreis->Menge) ;
+		myDebug( 11, "..zum Preis von..............: [%9.2f] \n", $tempArtikelEKPreis->Preis) ;
+		myDebug( 11, "...pro Stueck................: [%10d] \n", $tempArtikelEKPreis->MengeFuerPreis) ;
+		myDebug( 11, "....Anzahl VPEs..............: [%d] \n", $tempArtikelEKPreis->Menge) ;
+		myDebug( 11, "....Stueck pro VPE...........: [%d] \n", $tempArtikelEKPreis->MengeProVPE) ;
+		$rowCtr++ ;
+	}
+
+	return $myArtikelEKPreis ;
+}
+
+function	getVKPreis( $_database, $_artikel, $_criterium) {
+	//
+	$myVKPreis	=	new VKPreis() ;
+	//
+	$subQuery	=	"select * " ; 
+	$subQuery	.=	"from VKPreis " ; 
+	$subQuery	.=	"where ArtikelNr = '" . $_artikel->ArtikelNr . "' " ; 
+	$sqlResult      =       mysql_query( $subQuery, $_database) ; 
+	if ( !$sqlResult) { 
+		printf( "could not perform Db query for (Artikel)VKPreis, will simply die ... \n") ;
+		die() ;
+	}
+	//
+	$coreNumRows        =       mysql_affected_rows( $_database) ; 
+	if ( $coreNumRows < 1) {
+		printf( "001: VK Preis existiert nicht fuer Artikel %s ... \n", $_artikel->ArtikelNr) ;
+		die() ;
+	}
+
+	//
+	// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+	//
+
+	while ($coreRow = mysql_fetch_assoc( $sqlResult)) {
+		$myVKPreis->assignFromRow( $coreRow) ;
+	}
+
+	return $myVKPreis ;
+}
+
+function	myCount( $_database, $_query) {
+	//
+	// generate the basic artikel data
+	//
+	$numrows	=	0 ;
+	$sqlResult      =       mysql_query( $_query, $_database) ; 
+	if ( !$sqlResult) { 
+		echo $_query . " \n" ;
+		printf( "001: Probleme mit query ... \n") ;
+		die() ;
+	} else {
+		$numRows        =       mysql_affected_rows( $_database) ; 
+		if ( $numRows < 1) {
+			printf( "002: Probleme mit query ... \n") ;
+			$numrows	=	-1 ;
+		} else {
+			$row	=	mysql_fetch_assoc( $sqlResult) ;
+			$numrows	=	intval( $row['Count']) ;
+		}
+		//
+		// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+		//
+	}
+	return( $numrows) ;
+}
+
+function	myDistinctCount( $_database, $_query) {
+	//
+	// generate the basic artikel data
+	//
+	$numrows	=	0 ;
+	$sqlResult      =       mysql_query( $_query, $_database) ; 
+	if ( !$sqlResult) { 
+		echo $_query . " \n" ;
+		printf( "001: Probleme mit query ... \n") ;
+		die() ;
+	} else {
+		$numRows        =       mysql_affected_rows( $_database) ; 
+		mysql_free_result( $sqlResult) ;
+	}
+	//
+	// Fuer jeden Eintrag in "ProdGr" muss eine statische Seite gebaut werden
+	//
+	return( $numRows) ;
+}
+
+?>

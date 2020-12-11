@@ -1,0 +1,95 @@
+.popup	{
+	display:	block ;
+	z-index:	-1 ;
+	position:	absolute ;
+	opacity:	0.85 ;
+	padding:	0px ;
+	font-size: 14px;
+	font-family: Helvetica, Arial, sans-serif;
+	border-radius:	10px;
+}
+.popupTitle	{
+	position:	absolute ;
+	left:		0px ;
+	top: 		0px ;
+	background-color: #002851;
+	color: 		#aeaaa7;
+	font-size: 	12px;
+	opacity:	1 ;
+	text-align:	center;
+	border-radius:	5px;
+    border: 1px solid #ddc;
+}
+.popupContent	{
+	background-color: #79bbc8;
+	border-radius:	10px;
+	position:	absolute ;
+	left:	0px ;
+	top:	20px ;
+	overflow: 	scroll;
+	padding:	10px ;
+	border-radius:	5px;
+    border: 1px solid #ddc;
+}
+.popupButtonArea	{
+	background-color: #aeaaa7;
+	position:	absolute ;
+	bottom: 20px ;
+	opacity:	1 ;
+	border-radius:	5px;
+    border: 1px solid #ddc;
+	float: right;
+}
+.popupButton	{
+	background-color: #79bbc8;
+	position:	relative ;
+	opacity:	0.8 ;
+	padding:	2px ;
+	font-size: 12px;
+	width:	100px ;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align:center;
+	float: right;
+	margin-top:	4px ;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 5px ;
+    border: 1px solid #5c2748;
+}
+.popupClose	{
+}
+.popupAbort	{
+}
+.popupGo	{
+}
+.popupStatus{
+	border-radius:	5px;
+	position:	absolute ;
+	right:		0px ;
+	bottom: 	0px ;
+	background-color: #5c2748;
+	opacity:	1 ;
+	color: 		#aeaaa7;
+	font-size: 	12px;
+	text-align:	left;
+	margin-left: 10px;
+}
+.popupResize{
+	border-radius:	10px;
+	position:	absolute ;
+	background-color: #002851;
+	opacity:	1 ;
+}
+.popupModal	{
+	background-color: #000000;
+	display:	block ;
+	z-index:	-1 ;
+	position:	absolute ;
+	opacity:	0.2 ;
+	top: 0% ;
+	left: 0% ;
+	width: 2100px ;
+	height: 1100px ;
+	margin-top: -100px ;
+	margin-left: -100px ;
+}

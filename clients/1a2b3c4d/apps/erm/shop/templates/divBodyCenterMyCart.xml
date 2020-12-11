@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource name="divBodyCenter">
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<div id="bodyCenter">
+		<if var="action" eq="show">
+			<h2 class="page-title"><trans>SHOP-HEADER-CUCART-SHOW</trans></h2>
+			<trans>SHOP-TEXT-SHOWCART</trans>
+			<h3 class="section-title"><trans>CuCart</trans></h3>
+			<object class="MyCart" template="MyCartFormats.xml" />
+			<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+			<dynamic file="MyCartSelMode.html" />
+		</if>
+		<if var="action" eq="RFQ">
+			<if var="customerValid" eq="0">
+				<dynamic file="LoginOrRegister.html" />
+			</if>
+			<if var="customerValid" eq="1">
+				<h2 class="page-title"><trans>SHOP-HEADER-CURFQ-STEP1</trans></h2>
+				<trans>SHOP-TEXT-CURFQ-MAIN</trans>
+				<h3 class="section-title"><trans>CuCart</trans></h3>
+				<object class="MyCart" template="MyCartFormats.xml" />
+				<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+				<if var="step" eq="1">
+					<dynamic file="MyCartRFQQuest1.html" />
+				</if>
+				<if var="step" eq="2">
+					<object class="MyCart" method="handleRFQ" template="MyCartFormats.xml" />
+				</if>
+			</if>
+		</if>
+		<if var="action" eq="order">
+			<if var="customerValid" eq="0">
+				<dynamic file="LoginOrRegister.html" />
+			</if>
+			<if var="custValid" eq="1">
+				<h2 class="page-title"><trans>SHOP-HEADER-CUORDR</trans></h2>
+				<trans>SHOP-TEXT-CUORDR-MAIN</trans>
+				<if var="step" eq="1">
+					<h3 class="section-title"><trans>CuCart</trans></h3>
+					<object class="MyCart" template="MyCartFormats.xml" />
+					<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+					<dynamic file="MyCartOrderQuest1.html" />
+				</if>
+				<if var="step" eq="2">
+					<h3 class="section-title"><trans>CuCart</trans></h3>
+					<object class="MyCart" template="MyCartFormats.xml" />
+					<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+					<dynamic file="MyCartOrderQuest2.html" />
+				</if>
+				<if var="step" eq="3">
+					<h3 class="section-title"><trans>CuCart</trans></h3>
+					<object class="MyCart" template="MyCartFormats.xml" />
+					<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+					<dynamic file="MyCartOrderQuest3.html" />
+				</if>
+				<if var="step" eq="31">
+					<h3 class="section-title"><trans>CuCart</trans></h3>
+					<object class="MyCart" template="MyCartFormats.xml" />
+					<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+					<dynamic file="MyCartOrderQuest3.html" />
+				</if>
+				<!--	Step 04:	forward to payment intermediate			-->
+				<if var="step" eq="4">
+					<h3 class="section-title"><trans>SHOP-HEADER-FORWARDFUNCTION</trans></h3>
+					<object class="MyCart" method="forward" template="MyCartFormats.xml" />
+				</if>
+				<if var="step" eq="5">
+					<h3 class="section-title"><trans>CuCart</trans></h3>
+					<object class="MyCart" template="MyCartFormats.xml" />
+					<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+					<dynamic file="MyCartOrderQuest5.html" />
+					<object class="MyCart" method="handlePayment" template="MyCartFormats.xml" />
+				</if>
+			</if>
+		</if>
+		<if var="action" eq="store">
+			<h2 class="page-title"><trans>SHOP-HEADER-CUCART-STORE</trans></h2>
+			<trans>SHOP-TEXT-SHOWCART</trans>
+			<h3 class="section-title"><trans>CuCart</trans></h3>
+			<object class="MyCart" template="MyCartFormats.xml" />
+			<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+			<dynamic file="MyCartSelMode.html" />
+
+		</if>
+		<if var="action" eq="delete">
+			<h2 class="page-title"><trans>SHOP-HEADER-CUCART-DELETE</trans></h2>
+			<trans>SHOP-TEXT-SHOWCART</trans>
+			<h3 class="section-title"><trans>CuCart</trans></h3>
+			<object class="MyCart" template="MyCartFormats.xml" />
+			<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+			<dynamic file="MyCartSelMode.html" />
+
+		</if>
+		<if var="action" eq="notify">
+			<if var="step" eq="99">
+				<object class="MyCart" method="notify" template="MyCartFormats.xml" />
+			</if>
+		</if>
+	</div>
+</resource>

@@ -1,0 +1,30 @@
+<table>
+	<tr>
+		<td>
+			<form method="post" action="htmlMan/prnMZ.php" target="pdfwin">
+				<input type="hidden" name="action" value="wlGetPDF" />
+				<input type="submit" value="$trans.SHOP-BTN-PRINTCART$" class="buttonBasic" />
+			</form>
+		</td>
+		<td>
+			<form method="post" action="/index.php?webPage=MyCart&action=RFQ&step=1">
+				<input type="submit" value="$trans.SHOP-BTN-RFQCART$" class="buttonBasic" />
+			</form>
+		</td>
+		<td>
+			<form method="post" action="/index.php?webPage=MyCart&action=order&step=1">
+				<input type="submit" value="$trans.SHOP-BTN-ORDERCART$" class="buttonBasic" />
+			</form>
+		</td>
+		<td>
+			<form method="post" action="/index.php?webPage=MyCart&action=store">
+				<input type="submit" value="$trans.SHOP-BTN-STORECART$" class="buttonBasic" />
+			</form>
+		</td>
+		<td>
+			<form method="post" action="/index.php?webPage=MyCart&action=delete">
+				<input type="submit" value="$trans.SHOP-BTN-DELETECART$" class="buttonBasic" />
+			</form>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,169 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:module name="ModAdmin" />
+	<wap:screen name="databaseTable" />
+	<div>
+		<h1 class="page-title">Database Tables (Viewing only)</h1>
+		<wap:key>
+			<wap:keyform id="DatabaseTableKeyData">
+				<wap:keyrow data-wap-label="DatabaseTable id." data-wap-attr="TableName" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlDatabaseTableMain">
+			<wap:tabContentPane id="tabPageDatabaseTableSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="DatabaseTable" data-wap-grid-name="gridDatabaseTableOV"  >
+					<wap:gridcol data-wap-obj="DatabaseTable" data-wap-attr="DataBaseName" data-wap-label="Database" />
+					<wap:gridcol data-wap-obj="DatabaseTable" data-wap-attr="TableName" data-wap-label="Table" data-wap-align="left" data-wap-link-to="databaseTable" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageDatabaseTableMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formDatabaseTableMain">
+										<wap:rowinput data-wap-label="Authorization Object id." data-wap-attr="DatabaseTableId" data-wap-mode="edit" />
+										<wap:rowoption data-wap-label="Context" data-wap-attr="Context" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'DatabaseTableContext'" data-wap-order="Value" data-wap-def="app" />
+										<wap:rowoption data-wap-label="Authorization object type" data-wap-attr="DatabaseTableType" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'DatabaseTableType'" data-wap-order="Value" data-wap-def="scr" />
+										<wap:rowinput data-wap-label="Object name" data-wap-attr="ObjectName" data-wap-mode="edit" />
+										<wap:rowoption data-wap-label="Grant" data-wap-attr="ObjectAttribute" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'DatabaseTableAttribute'" data-wap-order="Value" data-wap-def="revoked" />
+										<wap:rowinput data-wap-label="Attribute value (opt.)" data-wap-attr="AttrValue" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Miscellaneous Information</legend>
+									<wap:dataform id="formDatabaseTableMisc">
+										<wap:rowtext data-wap-label="Description" data-wap-attr="Description" cols="64" rows="8" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formDatabaseTableMain,formDatabaseTableMisc" />
+					<wap:btnUpdate data-wap-forms="formDatabaseTableMain,formDatabaseTableMisc" />
+					<wap:btnDelete data-wap-forms="formDatabaseTableMain" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageDatabaseTableSpecialFunctions" data-wap-heading="Global functions">
+				<wap:data>
+					<table>
+						<tr>
+							<td>
+								<fieldset>
+									<legend>Create Authorization Objects</legend>
+									<wap:dataform id="formDatabaseTableCreateSpecial">
+										<wap:rowinput data-wap-label="Database alias" data-wap-attr="DatabaseAlias" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Prefix" data-wap-attr="Prefix" data-wap-mode="edit" value="dbt_" />
+										<wap:rowflag data-wap-label="Execute creation" data-wap-attr="ExecuteI"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+									<wap:btnMisc data-wap-label="Create non-existing dbt_&lt;Table&gt;_* entries" data-wap-misc-function="createDefaultDBT" data-wap-forms="formDatabaseTableCreateSpecial" />
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<fieldset>
+									<legend>Assign Authorization Objects to Profile</legend>
+									<wap:dataform id="formDatabaseTableAssignToProfile">
+										<wap:rowinput data-wap-label="Database alias" data-wap-attr="DatabaseAlias" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Prefix" data-wap-attr="Prefix" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="ProfileId" data-wap-attr="ProfileId" data-wap-mode="edit" />
+										<wap:rowflag data-wap-label="Execute creation" data-wap-attr="ExecuteII"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+									<wap:btnMisc data-wap-label="Assign Authorization Objects for all def-dbt to a Profile" data-wap-misc-function="assignToProfile" data-wap-forms="formDatabaseTableAssignToProfile" />
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageProfileWithDatabaseTable" data-wap-heading="Profile with this Authorization Object">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Profile (Table: RoleProfile)</legend>
+									<wap:grid data-wap-class="ProfileWithDatabaseTable" data-wap-grid-name="gridProfileWithDatabaseTable" data-wap-adder="true" >
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="ProfileId" data-wap-label="Profile id" data-wap-link-to="profile" wap-auth-object="gridRoleWithProfile" />
+										<wap:gridcol data-wap-attr="Name" data-wap-label="Profile name" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageDatabaseTableHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlDatabaseTableHelpMain">
+					<wap:tabContentPane id="tabPageDatabaseTableHelpDE" data-wap-heading="Deutsch">
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageDatabaseTableHelpEN" data-wap-heading="English">
+This screen shows details about "Authorization Objects", i.e. the objects which specify what can be done on/with particular instances of:
+<ul>
+	<li>database tables,</li>
+	<li>database attributes,</li>
+	<li>user interface elements and</li>
+	<li>application objects.</li>
+</ul>
+The following tabs are available with the respective infomration as shown below:
+<table>
+	<tr>
+		<th>Tab title</th>
+		<th>Information contained in tab</th>
+	</tr>
+	<tr>
+		<td onclick="showTab( 'tabPageDatabaseTableSurveyEntry') ;">Overview</td>
+		<td>Contains an ordered list of all <i>Authorization Objects</i> in the database user as appSys for the current application.</td>
+	</tr>
+	<tr>
+		<td onclick="showTab( 'tabPageDatabaseTableMainDataEntry') ;">MainData</td>
+		<td>Shows detailed information pertaining to a particular <i>Authorization Object</i>.</td>
+	</tr>
+	<tr>
+		<td onclick="showTab( 'tabPageProfileWithDatabaseTableEntry') ;">Profile with this Authorization Object</td>
+		<td>Show a list of all Authorization Profiles which contain, or refer to, this Authorization Object.</td>
+	</tr>
+</table>
+Information about the individual detailed information elements:
+<table>
+	<tr>
+		<th>Attribute</th>
+		<th>Meaning</th>
+	</tr>
+	<tr>
+		<td>DatabaseTable.Context</td>
+		<td>Describes the primary operational context, i.e. where this authorization object is to be used. Possible options are:
+			<p>"Operation Management" - operational management of the MAS application systems platform;</p>
+			<p>"System Administration" - system management as carried out by the application system administrator</p>
+			<p>"Application" - system usage as carried out by the user of an application system / application</p>
+		</td>
+	</tr>
+</table>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageDatabaseTableHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

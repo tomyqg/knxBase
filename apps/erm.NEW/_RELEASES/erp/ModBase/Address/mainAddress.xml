@@ -1,0 +1,101 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:module name="ModBase" />
+	<wap:screen name="mainAddress" />
+	<div>
+		<h1 class="page-title">Address</h1>
+		<wap:key>
+			<wap:keyform id="AddressKeyData">
+				<wap:keyrow data-wap-label="Address no." data-wap-obj="Address" data-wap-attr="AddressNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Name" data-wap-obj="Address" data-wap-attr="Name1" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlAddressMain">
+			<wap:tabContentPane id="tabPageAddressSurvey" data-wap-heading="Address Survey">
+				<wap:grid data-wap-class="Address" data-wap-grid-name="gridAddressOV">
+					<wap:gridcol data-wap-obj="Address" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Address" data-wap-attr="AddressNo" data-wap-label="AddressNo" />
+					<wap:gridcol data-wap-obj="Address" data-wap-attr="AddressName" data-wap-label="Name" />
+					<wap:gridcol data-wap-obj="Address" data-wap-attr="Name" data-wap-label="Name" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAddressMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formAddressMain">
+										<wap:row>
+											<wap:cellhelp rowspan="3" />
+											<wap:celllabel rowspan="3" data-wap-label="Company name" />
+											<wap:cellinput data-wap-obj="Address" data-wap-attr="Name1" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-obj="Address" data-wap-attr="Name2" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-obj="Address" data-wap-attr="Name3" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Street / No" />
+											<td class="fEdit">
+												<wap:input data-wap-obj="Address" data-wap-attr="Street" data-wap-mode="edit" />
+												<wap:input data-wap-obj="Address" data-wap-attr="Number" data-wap-mode="edit" size="6" max="8" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="ZIP / City" />
+											<td class="fEdit">
+												<wap:input data-wap-obj="Address" data-wap-attr="ZIP" data-wap-mode="edit" size="6" max="8" />
+												<wap:input data-wap-obj="Address" data-wap-attr="City" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:rowoption data-wap-label="Country" data-wap-obj="Address" data-wap-attr="Country" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Country'" data-wap-order="Value" data-wap-def="de" />
+										<wap:rowinput data-wap-label="Phone" data-wap-obj="Address" data-wap-attr="Phone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Fax" data-wap-obj="Address" data-wap-attr="Fax" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formAddressMain" />
+					<wap:btnUpdate data-wap-forms="formAddressMain" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAddressMisc" data-wap-heading="Miscellaneous">
+				<wap:data>
+					<wap:dataform id="formAddressMiscellaneous">
+						<wap:rowoption data-wap-label="Language" data-wap-obj="Address" data-wap-attr="Language" data-wap-mode="edit"
+							data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Language'" data-wap-order="Value" data-wap-def="de_DE" />
+						<wap:rowtext data-wap-label="Remark" data-wap-obj="Address" data-wap-attr="Remark" data-wap-mode="edit" cols="64" rows="8" />
+					</wap:dataform>
+					<wap:btnupdate data-wap-forms="formAddressMiscellaneous" />
+					<wap:btnmisc data-wap-forms="formAddressMiscellaneous" data-wap-label="Add Remark" data-wap-fnc="addRem" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAddressContacts" data-wap-heading="Contacts">
+				<wap:grid data-wap-class="AddressContact" data-wap-grid-name="gridAddressContact" adder="true">
+					<wap:gridcol data-wap-obj="AddressContact" data-wap-attr="Id" data-wap-label="Id" sort="gridAddressContact" />
+					<wap:gridcol data-wap-obj="AddressContact" data-wap-attr="AddressNo" data-wap-label="Item" />
+					<wap:gridcol data-wap-obj="AddressContact" data-wap-attr="AddressContactNo" data-wap-label="Contact No." />
+					<wap:gridcol data-wap-obj="AddressContact" data-wap-attr="LastName" data-wap-label="Last Name" sort="gridAddressContact" />
+					<wap:gridcol data-wap-obj="AddressContact" data-wap-attr="FirstName" data-wap-label="First Name" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" wap-auth-object="editAddressContact" />
+				</wap:grid>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

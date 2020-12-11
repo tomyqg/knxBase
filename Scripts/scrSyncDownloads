@@ -1,0 +1,2 @@
+rsync -q -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" /srv/www/vhosts/wimtecc.de/Downloads/* wwwrun@wimtecc.de::shopdemo/Downloads
+rsync -q -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" wwwrun@wimtecc.de::shopdemo/Downloads/* /srv/www/vhosts/wimtecc.de/Downloads

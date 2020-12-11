@@ -1,0 +1,138 @@
+﻿<h3>Reaktionsteams</h3>
+<br/>
+	<table class="standard-table">
+		<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+		<!--ZeilenID = MitarbeiterID aus Datenbank-->
+		<tr> <th width="200">Reaktionsteamname</th> <th>Anzahl an Mitgliedern</th></tr>
+		<tr id="reactionteam-21414125" onclick="ClickReactionTeamEntry(this)"><td>Datev</td><td>2</td></tr>
+		<tr id="reactionteam-21414126" onclick="ClickReactionTeamEntry(this)"><td>PRO.CAD</td><td>3</td></tr>
+		<tr id="reactionteam-21414127" onclick="ClickReactionTeamEntry(this)"><td>EGBrake</td><td>3</td></tr>
+		<tr id="reactionteam-21414128" onclick="ClickReactionTeamEntry(this)"><td>Drucker</td><td>3</td></tr>
+		<tr id="reactionteam-21414129" onclick="ClickReactionTeamEntry(this)"><td>Server</td><td>2</td></tr>
+		<tr id="reactionteam-21414130" onclick="ClickReactionTeamEntry(this)"><td>Kampf gegen das Böse</td><td>1</td></tr>
+		<tr id="reactionteam-21414131" onclick="ClickReactionTeamEntry(this)"><td>CAD</td><td>3</td></tr>
+		<tr id="reactionteam-21414132" onclick="ClickReactionTeamEntry(this)"><td>PRO.FILE</td><td>2</td></tr>
+		<tr id="reactionteam-21414133" onclick="ClickReactionTeamEntry(this)"><td>Antwort auf das Leben,...</td><td>1</td></tr>
+		<tr id="reactionteam-21414134" onclick="ClickReactionTeamEntry(this)"><td>Frieda</td><td>1</td></tr>
+	</table>
+	
+	<center>
+		<br/>
+		<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gruppennr. <span id="reactionteam-nr-start">1</span> bis <span id="reactionteam-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+	</center>
+	
+	<div>
+		<fieldset style="display:inline-block">
+			<legend>neues Reaktionsteam anlegen</legend>
+			<input type="button" value="neues Reaktionsteam" onclick="CreateNewReactionTream()">
+		</fieldset>
+	</div>
+	
+	<div id="reactionteam-detail" style="display:none">
+		<br/>
+		<span id="reactionteam-detail-label" style="font-weight:bold"></span><br/>
+		<table class="detail-table">
+			<tr>
+				<td colspan="2">
+					<p>Reaktionsteamname</p>
+					<span id="reactionteam-detail-name" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p>Supervisor</p>
+					<span id="reactionteam-detail-supervisor" onclick="ClickEditableCollectionEntry(this, 'employees')" iseditable="false" style="cursor:pointer;">Iron Man</span>
+					
+					<datalist id="employees">
+						<!--value will be sent back to the server-->
+						<!--fill datalist with employees from database, option-id should be employee id from database-->
+						<!--don't fill with employees who are already supervisor-->
+						<option label="" value="" option-id=""><!--empy option is really important to not automatically save the first option!!!! (if empty option is chosen, no new employee will be saved)-->
+						<option label="Frieda Müller" value="Frieda Müller" option-id="23523523">
+						<option label="Friedbert Meier" value="Friedbert Meier" option-id="23523524">
+						<option label="MASTER of the Universe" value="MASTER of the Universe" option-id="23523525">
+						<option label="Arthur Dent" value="Arthur Dent" option-id="23523526">
+						<option label="Ford Prefect" value="Ford Prefect" option-id="23523527">
+						<option label="Zaphod Beblebrox" value="Zaphod Beblebrox" option-id="23523528">
+						<option label="Trisha McMillan" value="Trisha McMillan" option-id="23523529">
+					</datalist>
+				</td>
+			</tr>
+			<tr>
+				<td width="50%">
+					<p>Mitglieder</p>
+					<span id="reactionteam-detail-members" onclick="ClickEditableCollectionEntry(this, 'employees')" iseditable="false" style="cursor:pointer;">Rosalina Super<br/>Mario Super</br>Iron Man</span>
+					
+					<datalist id="employees">
+						<!--value will be sent back to the server-->
+						<!--fill datalist with employees from database, option-id should be employee id from database-->
+						<!--don't fill with employees who are already in the reactionteam-->
+						<option label="" value="" option-id=""><!--empy option is really important!!!!-->
+						<option label="Frieda Müller" value="Frieda Müller" option-id="23523523">
+						<option label="Friedbert Meier" value="Friedbert Meier" option-id="23523524">
+						<option label="MASTER of the Universe" value="MASTER of the Universe" option-id="23523525">
+						<option label="Arthur Dent" value="Arthur Dent" option-id="23523526">
+						<option label="Ford Prefect" value="Ford Prefect" option-id="23523527">
+						<option label="Zaphod Beblebrox" value="Zaphod Beblebrox" option-id="23523528">
+						<option label="Trisha McMillan" value="Trisha McMillan" option-id="23523529">
+					</datalist>
+				</td>
+				<td width="50%">
+					<p>Gruppen</p>
+					<span id="reactionteam-detail-groups" onclick="ClickEditableCollectionEntry(this, 'groups')" iseditable="false" style="cursor:pointer;">Techniker<br/>Azubis</br>Apple</span>
+					
+					<datalist id="groups">
+						<!--value will be sent back to the server-->
+						<!--fill datalist with groups from database, option-id should be group id from database-->
+						<!--don't fill with groups who are already in the reactionteam-->
+						<option label="" value="" option-id=""><!--empy option is really important for editable collection !!!!-->
+						<option label="Ritter der Kokusnuss" value="Ritter der Kokusnuss" option-id="23523523">
+						<option label="Software" value="Software" option-id="23523524">
+						<option label="Horst" value="Horst" option-id="23523525">
+						<option label="Vertrieb" value="Vertrieb" option-id="23523526">
+						<option label="Server Guru" value="Server Guru" option-id="23523527">
+					</datalist>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p>Ist Aktiv?</p>
+					<span id="reactionteam-detail-active" onclick="ClickSingleSelectEntry(this, 'reactionteam-active-source')" iseditable="false" style="cursor:pointer;">Aktiv</span>
+					
+					<datalist id="reactionteam-active-source">
+						<!--value will be sent back to the server-->
+						<!--fill datalist with customers from database, option-id should be role id from database-->
+						<option label="Aktiv" value="Aktiv" option-id="23523523">
+						<option label="Nicht Aktiv" value="Nicht Aktiv" option-id="23523524">
+					</datalist>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>Kundenzuordnung (optional)</p>
+					<span id="reactionteam-detail-customer" onclick="ClickSingleSelectEntry(this, 'reactionteam-customer-source')" iseditable="false" style="cursor:pointer;">Hegenscheidt</span>
+					
+					<datalist id="reactionteam-customer-source">
+						<!--value will be sent back to the server-->
+						<!--fill datalist with customers from database, option-id should be role id from database-->
+						<option label="Hegenscheidt" value="Hegenscheidt" option-id="23523524"></option>
+						<option label="BPW"  value="BPW" option-id="23523525"></option>
+						<option label="Steinmüller"  value="Steinmüller" option-id="23523526"></option>
+						<option label="Fisia Babcock" value="Fisia Babcock" option-id="23523527"></option>
+					</datalist>
+				</td>
+				<td>
+					<p>Arbeitsmodus (falls für einen Kunden)</p>
+					<span id="reactionteam-detail-modus" onclick="ClickSingleSelectEntry(this, 'reactionteam-modus-source')" iseditable="false" style="cursor:pointer;">Kopie</span>
+					
+					<datalist id="reactionteam-modus-source">
+						<!--value will be sent back to the server-->
+						<!--fill datalist with customers from database, option-id should be role id from database-->
+						<option label="Kopie" value="Kopie" option-id="23523523">
+						<option label="Original" value="Original" option-id="23523524">
+					</datalist>
+				</td>
+			</tr>
+		</table>
+
+	</div>

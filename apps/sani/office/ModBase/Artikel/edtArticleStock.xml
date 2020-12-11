@@ -1,0 +1,36 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtArticleStock" class="wapForm">
+		<h2 class="page-title">Article Stock</h2>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Article Stock</legend>
+				<wap:dataform id="edtArticleStockMain">
+					<wap:rowdisplay data-wap-label="Id" data-wap-attr="Id" />
+					<wap:rowdisplay data-wap-label="Article no." data-wap-attr="ArticleNo" />
+					<wap:rowdisplay data-wap-label="Rev. code" data-wap-attr="RevCode" />
+					<wap:rowdisplay data-wap-label="Variant no." data-wap-attr="ArticleVariantNo" />
+					<wap:rowinput data-wap-label="Warehouse Id" data-wap-attr="WarehouseId" />
+					<wap:rowinput data-wap-label="Stock Id" data-wap-attr="StockId" />
+					<wap:rowinput data-wap-label="Shelf Id" data-wap-attr="ShelfId" />
+					<wap:rowinput data-wap-label="Location" data-wap-attr="Location" />
+					<wap:rowflag data-wap-label="Default" data-wap-attr="Default"
+						data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowinput data-wap-label="Stock Qty." data-wap-attr="Stock" />
+					<wap:rowinput data-wap-label="Reserved Qty." data-wap-attr="Reserved" />
+					<wap:rowinput data-wap-label="Picked Qty." data-wap-attr="Picked" />
+					<wap:rowinput data-wap-label="Ordered Qty." data-wap-attr="Ordered" />
+					<wap:rowinput data-wap-label="Minimum Qty." data-wap-attr="Minimum" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

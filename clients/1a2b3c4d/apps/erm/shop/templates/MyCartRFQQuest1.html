@@ -1,0 +1,33 @@
+<script>
+function enable( element) {
+        if ( document.formRFQ.AGBFrage[1].checked) {
+                document.formRFQ._ISubmitRFQ.disabled    =       false ;
+        } else {
+                document.formRFQ._ISubmitRFQ.disabled    =       true ;
+        }
+}
+</script>
+<form name="formRFQ" method="post" action="/index.php?webPage=MyCart&action=RFQ&step=2">
+	<table>
+		<tr>
+			<td colspan="5">Ich habe die <a class="hier" href="/hinweise.html" target="_subInfo" title="Wird in neuem Fenster ge&ouml;ffnet">AGB</a> (Allgemeinen Gesch&auml;ftsbedingungen) von mein-mikroskop.de Karl-Heinz Welter gelesen und erkenne diese an:
+			</td>
+			<td>
+				<input type="radio" name="AGBFrage" value="$trans.No$" checked onClick="enable( '_ISubmitRFQ') ; ">No</input>
+				<input type="radio" name="AGBFrage" value="$trans.Yes$" onClick="enable( '_ISubmitRFQ') ; ">Yes</input>
+			</td>
+		</tr>
+		<tr>
+			<td>$trans.SHOP-TEXT-OWN-REFERENCE-NO$</td>
+			<td colspan="4"><input type="text" name="CuRefNo" value="webShop" /></td>
+		</tr>
+		<tr>
+			<td>$trans.SHOP-TEXT-REMARK$</td>
+			<td colspan="4"><textarea name="CustRemark" cols="30" rows="4"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="5"></td>
+			<td><input name="_ISubmitRFQ" type="submit" value="$trans.SHOP-BTN-SUBMIT-RFQ$" disabled="1" class="buttonBasic" /></td>
+		</tr>
+	</table>
+</form>

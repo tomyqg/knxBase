@@ -1,0 +1,132 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="Logistics" data-wap-screen="Container" data-wap-core-object="Container" data-wap-core-object-key="MaterialNo" >
+    	<h1 class="page-title">Container</h1>
+    	<wap:key>
+    		<wap:keyform id="ContainerKeyData">
+    			<wap:keyrow data-wap-label="Container no." data-wap-attr="MaterialNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+    			<wap:keydisplay data-wap-label="Description" data-wap-attr="ContainerName1" colspan="4"/>
+    		</wap:keyform>
+    	</wap:key>
+        <wap:tabContainer id="tabCntrlContainerMain" data-wap-active-tab-onload="tabPageContainerSurveyEntry">
+            <wap:tabContentPane id="tabPageContainerSurvey" data-wap-heading="Overview">
+                <wap:grid data-wap-object="Container" data-wap-grid-name="gridContainerOV" data-wap-tab-onselect="tabPageContainerMainDataEntry" data-wap-load-on-init="true">
+                    <wap:gridcol data-wap-obj="Container" data-wap-attr="Id" data-wap-label="Id" />
+                    <wap:gridcol data-wap-obj="Container" data-wap-attr="MaterialNo" data-wap-label="Material no." />
+                    <wap:gridcol data-wap-obj="Container" data-wap-attr="Description" data-wap-label="Description" />
+                </wap:grid>
+            </wap:tabContentPane>
+            <wap:tabContentPane id="tabPageContainerMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formContainerMain">
+										<wap:rowinput data-wap-label="MaterialNo" data-wap-attr="MaterialNo" data-wap-mode="edit" />
+										<wap:rowtext data-wap-label="Description" data-wap-attr="Description" cols="48" rows="8" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formContainerMain" />
+					<wap:btnUpdate data-wap-forms="formContainerMain" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageContainerRent" data-wap-heading="Containers Rent">
+				<wap:grid data-wap-object="ContainerRent" data-wap-grid-name="gridContainerRent" data-wap-adder="true" data-wap-editor="edtContainerRent" data-wap-load-on-init="false">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="MaterialNo" data-wap-label="Material no." />
+					<wap:gridcol data-wap-attr="ValidFrom" data-wap-label="ValidFrom" />
+					<wap:gridcol data-wap-attr="ValidUntil" data-wap-label="ValidUntil" />
+					<wap:gridcol data-wap-attr="Amount" data-wap-label="Amount" />
+					<wap:gridcol data-wap-attr="Currency" data-wap-label="Currency" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageContainerMoves" data-wap-heading="Containers Movements">
+				<wap:grid data-wap-object="ContainerMove" data-wap-grid-name="gridContainerMove" data-wap-adder="true" data-wap-load-on-init="false">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="MaterialNo" data-wap-label="Material no." />
+					<wap:gridcol data-wap-attr="Date" data-wap-label="Date" />
+					<wap:gridcol data-wap-attr="Qty" data-wap-label="Quantity" />
+					<wap:gridcol data-wap-attr="DeliveryNo" data-wap-label="Delivery no." />
+				</wap:grid>
+			</wap:tabContentPane>
+			<!--
+			<wap:tabContentPane id="tabPageContainerAddresses" data-wap-heading="Addresses">
+    			<fieldset>
+    				<legend>Delivery</legend>
+    					<wap:grid data-wap-object=="LiefContainer" data-wap-adder="true">
+    						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+    						<wap:gridcol data-wap-attr="ContainerNo" data-wap-label="Cust.-No." />
+    						<wap:gridcol data-wap-attr="Company" data-wap-label="Company" />
+    						<wap:gridcol data-wap-attr="City" data-wap-label="City" />
+    						<wap:gridcol data-wap-attr="Address" data-wap-label="Address" />
+    						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+    					</wap:grid>
+    			</fieldset>
+    			<fieldset>
+    				<legend>Invoice</legend>
+    					<wap:grid data-wap-object=="RechContainer" data-wap-adder="true">
+    						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+    						<wap:gridcol data-wap-attr="ContainerNo" data-wap-label="Cust.-No." />
+    						<wap:gridcol data-wap-attr="Company" data-wap-label="Company" />
+    						<wap:gridcol data-wap-attr="LastName" data-wap-label="LastName" />
+    						<wap:gridcol data-wap-attr="FirstName" data-wap-label="FirstName" />
+    						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+    					</wap:grid>
+    			</fieldset>
+    			<fieldset>
+    				<legend>Other</legend>
+    					<wap:grid data-wap-object=="AddContainer" data-wap-adder="true">
+    						<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+    						<wap:gridcol data-wap-attr="ContainerNo" data-wap-label="Cust.-No." />
+    						<wap:gridcol data-wap-attr="Company" data-wap-label="Company" />
+    						<wap:gridcol data-wap-attr="LastName" data-wap-label="LastName" />
+    						<wap:gridcol data-wap-attr="FirstName" data-wap-label="FirstName" />
+    						<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+    					</wap:grid>
+    			</fieldset>
+			</wap:tabContentPane>
+-->
+			<wap:tabContentPane id="tabPageImport" data-wap-heading="Export- and Import">
+				<wap:data>
+					<fieldset>
+						<legend>Data Import: "Abrechnungszeitraum"</legend>
+						<wap:rowupload data-wap-label="Import File to upload" data-wap-attr="CSVData" data-wap-upload-function="importCSVAz" />
+					</fieldset>
+				</wap:data>
+				<wap:data>
+					<fieldset>
+						<legend>Data Import: "Bewegungen"</legend>
+						<wap:rowupload data-wap-label="Import File to upload" data-wap-attr="CSVData" data-wap-upload-function="importCSVB" />
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+            <wap:tabContentPane id="tabPageContainerHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlContainerHelpMain">
+					<wap:tabContentPane id="tabPageContainerHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageContainerHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageContainerHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

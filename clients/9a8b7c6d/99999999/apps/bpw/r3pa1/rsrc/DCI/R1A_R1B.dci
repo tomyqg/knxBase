@@ -1,0 +1,3 @@
+ALTER TABLE `AppUserRole` ADD `Active` INT(1) NOT NULL DEFAULT '1' ;
+ALTER TABLE `RoleProfile` ADD `Active` INT(1) NOT NULL DEFAULT '1' ;
+ALTER TABLE `ProfileAuthObject` ADD `Active` INT(1) NOT NULL DEFAULT '1' ;

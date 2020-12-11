@@ -1,0 +1,53 @@
+<html>
+	<form name="$self.wapFormName$Top" id="$self.wapFormName$Top" style="margin-top:0px;margin-bottom:0px;" wapConfirmDiscard="false">
+		<table style="border:0; width:100%">
+			<thead>
+				<tr>
+					<td align="left">
+						<input type="text" name="_SStartRow" wapType="text" wapMode="edit" wapAttr="StartRow" wapVar="_SStartRow" size="4" maxlength="4" value="0" tabindex="1">
+						</input>
+						<select id="_SRowCount" name="_SRowCount" wapType="option" wapMode="edit" wapAttr="RowCount">
+							<option value="1">1</option>
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option selected="true" value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+							<option value="1000">1000</option>
+							<option value="10000">10000</option>
+						</select>
+						<input type="text" name="_TotalRows" wapType="text" wapAttr="TotalRows" wapVar="_TotalRows" size="4" maxlength="12">
+						</input>
+						<input type="text" name="_SortOrder" wapType="text" wapMode="edit" wapAttr="SortOrder" wapVar="_SortOrder" size="48" maxlength="64">
+						</input>
+					</td>
+					<td align="center">
+						Search:
+						<input type="text" name="Search" id="Search" wapType="text" wapMode="edit" wapAttr="Search" wapVar="Search" onkeyup="wapGrids['$self.wapGridName$']._onRefresh() ;">
+						</input>
+					</td>
+	<!--
+	 				<td align="left">
+						<div class="memu-icon sprite-search" onclick="wapGrids['$self.wapGridName$'].searchWE() ;">
+						</div>
+					</td>
+	 -->
+					<td>
+						<div class="memu-icon sprite-dleft" onclick="wapGrids['$self.wapGridName$']._onFirstPage( '$self.wapFormName$Top') ;">
+						</div>
+						<div class="memu-icon sprite-left" onclick="wapGrids['$self.wapGridName$']._onPreviousPage( '$self.wapFormName$Top') ;">
+						</div>
+						<div class="memu-icon sprite-reload" onclick="wapGrids['$self.wapGridName$']._onRefresh( '$self.wapFormName$Top') ;">
+						</div>
+						<div class="memu-icon sprite-right" onclick="wapGrids['$self.wapGridName$']._onNextPage( '$self.wapFormName$Top') ;">
+						</div>
+						<div class="memu-icon sprite-dright" onclick="wapGrids['$self.wapGridName$']._onLastPage( '$self.wapFormName$Top') ;">
+						</div>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</form>
+</html>

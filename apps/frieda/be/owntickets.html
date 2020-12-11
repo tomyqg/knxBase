@@ -1,0 +1,279 @@
+﻿<h3>Eigene Tickets</h3>
+	<!-- zeige bei eigenen Tickets nur offene an
+	<p align="right">
+		<input type="radio" name="open-closed-tickets" value="open" checked>offene Tickets
+		<input type="radio" name="open-closed-tickets" value="closed">abgeschlossene Tickets
+	</p>
+	-->
+	neueste Tickets:<br/>
+	<table class="standard-table">
+		<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+		<!--ZeilenID = TicketID aus Datenbank-->
+		<!-- TODO: Erstelldatum = Job Erstelldatum oder Ticket Annahmedatum?-->
+		<!--Beschreibung erster Satz: versuche erste X Zeichen aus Beschreibung darzustellen-->
+		<!--Berichts-icon nur wenn Ticket fertig-->
+		<tr> <th class="create-date-column">Erstelldatum</th><th>Erstelluhrzeit</th><th class="company-column">Firma</th> <th class="description-column">Titel</th><th>Anzahl Activities</th></tr>
+		<tr id="ticket-21414125" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">17/2/2015</td><td class="create-date-column">12:00</td> <td class="company-column">BPW</td> <td class="description-column">EGBrake zeigt Fehlermeldung</td><td>0</td></tr>
+		<tr id="ticket-21414126" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">17/2/2015</td><td class="create-date-column">15:00</td><td class="company-column">Hegenscheidt</td> <td class="description-column">Drucker XY ist kaputt</td><td>4</td></tr>
+		<tr id="ticket-21414127" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">15/2/2015</td><td class="create-date-column">09:00</td><td class="company-column">Steinmüller</td> <td class="description-column">Server XY stürzt ab</td><td>6</td></tr>
+		<tr id="ticket-21414128" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">15/2/2015</td><td class="create-date-column">13:00</td><td class="company-column">BPW</td> <td class="description-column">Drucker XY ist kaputt</td><td>5</td></tr>
+		<tr id="ticket-21414129" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">14/2/2015</td><td class="create-date-column">14:15</td><td class="company-column">Steinmüller</td> <td class="description-column">EGBrake zeigt Fehlermeldung</td><td>2</td></tr>
+		<tr id="ticket-21414130" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">14/2/2015</td><td class="create-date-column">23:00</td><td class="company-column">Hegenscheidt</td> <td class="description-column">Server XY stürzt ab</td><td>1</td></tr>
+		<tr id="ticket-21414131" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">14/2/2015</td><td class="create-date-column">07:00</td><td class="company-column">BPW</td> <td class="description-column">Drucker XY ist kaputt</td><td>3</td></tr>
+		<tr id="ticket-21414132" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">12/2/2015</td><td class="create-date-column">16:45</td><td class="company-column">Hegenscheidt</td> <td class="description-column">EGBrake zeigt Fehlermeldung</td><td>4</td></tr>
+		<tr id="ticket-21414133" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">11/2/2015</td><td class="create-date-column">12:00</td><td class="company-column">BPW</td> <td class="description-column">Drucker XY ist kaputt</td><td>0</td></tr>
+		<tr id="ticket-21414134" class="ticket-unfinished" onclick="ClickTicketEntry(this)"> <td class="create-date-column">11/2/2015</td><td class="create-date-column">12:00</td><td class="company-column">Steinmüller</td> <td class="description-column">Server XY stürzt ab</td><td>5</td></tr>
+	</table>
+
+	<center>
+		<br/>
+		<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ticketnr. <span id="ticket-nr-start">1</span> bis <span id="ticket-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+	</center>
+
+	<div id="ticket-detail" style="display:none">
+	<br/>
+	<table>
+		<tr>
+			<td style="vertical-align:top;padding:10px;">
+				<span style="font-weight:bold">ausgewähltes Ticket:</span><br/>
+				<table class="detail-table">
+					<tr>
+						<td colspan="2">
+							<p>Titel</p>
+							<!--TODO: Zeilenumbrüche in <br/> umwandeln!-->
+							<span id="ticket-detail-description"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Firma</p>
+							<span id="ticket-detail-company"></span>
+						</td>
+						<td>
+							<p>Erstelldatum</p>
+							<span id="ticket-detail-date"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Beschreibung</p>
+							<!--TODO: Zeilenumbrüche in <br/> umwandeln!-->
+							<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Adresse</p>
+							<span>Waldweg 42</span>
+						</td>
+						<td>
+							<p>Ansprechpartner</p>
+							<span>Meier Müller Schulze</span>
+						</td>
+				</table>
+			</td>
+			<td style="vertical-align:top;padding:10px;">
+				<fieldset>
+					<legend>Ticket abgeben</legend>
+					abgeben an:
+					<select id="owntickets-newowner-select">
+						<!-- names from database-->
+						<option value="Rosalina">Rosalina</option>
+						<option value="Wario">Wario</option>
+						<option value="Bowser">Bowser</option>
+						<option value="Luigi">Luigi</option>
+						<option value="Toad">Toad</option>
+					</select>
+					<input type="button" value="Ticket abgeben" onclick="">
+					</fieldset><br/>
+					<fieldset>
+					<legend>Ticket abschließen</legend>
+					<input type="button" value="Ticket beenden" onclick="">
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;padding:10px;">
+				<span style="font-weight:bold">Activities des ausgewählten Tickets:</span><br/>
+				<table class="detail-table">
+					<tr>
+						<td>
+							<p>ActivityNr.</p>
+							<span>1</span>
+						</td>
+						<td>
+							<p>Bearbeiter</p>
+							<span>Friedbert Müller</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Titel</p>
+							<span>Teamviewer Session zur Analyse</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Beschreibung</p>
+							<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Startzeit</p>
+							<span>27.2.2015 13 Uhr</span>
+						</td>
+						<td>
+							<p>Endzeit</p>
+							<span>27.2.2015 15 Uhr</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Einsatzart</p>
+							<span>TeamViewer Session</span>
+						</td>
+						<td>
+							<p>Aktionen</p>
+							<span><input type="button" value="Service Bericht erstellen"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Angehängte Dokumente</p>
+							<span>---</span>
+						</td>
+					</tr>
+				</table>
+				<br/>
+				<table class="detail-table">
+					<tr>
+						<td>
+							<p>ActivityNr.</p>
+							<span>2</span>
+						</td>
+						<td>
+							<p>Bearbeiter</p>
+							<span>Friedbert Müller</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Titel</p>
+							<span>Kunde ist echt doof...</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Beschreibung</p>
+							<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Startzeit</p>
+							<span>27.2.2015 15 Uhr</span>
+						</td>
+						<td>
+							<p>Endzeit</p>
+							<span>27.2.2015 17 Uhr</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Einsatzart</p>
+							<span>Telefonsupport</span>
+						</td>
+						<td>
+							<p>Aktionen</p>
+							<span><input type="button" value="Service Bericht erstellen"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>Angehängte Dokumente</p>
+							<span><a href="test.txt"><img src="icons/Document-Download-256.png" width="15px"/> BlaBla.txt</a></span>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td style="vertical-align:top;padding:10px;">
+				<fieldset>
+					<legend>Neue Activity Zeit tracken</legend>
+					Startzeit: <span id="tracking-time-start"></span><br/>
+					Endzeit: <span id="tracking-time-end"></span><br/>
+					<input id="tracking-time-startbutton" type="button" value="Start" onclick="TimeTracking(this, 'tracking-time-start', 'tracking-time-end', 'tracking-time-getbutton')"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="tracking-time-getbutton" value="Zeiten übernehmen" disabled="disabled" onclick="getTrackingTime('tracking-time-start', 'tracking-time-end', 'new-event_starttime', 'new-event_endtime')"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="reset" onclick="TimeTrackingReset('tracking-time-start', 'tracking-time-end', 'tracking-time-startbutton', 'tracking-time-getbutton')"/>
+				</fieldset>
+				<br/>
+				<fieldset>
+					<legend>Neue Activity</legend>
+					<form>
+						<!-- Ticketnr automatisch-->
+						<!--aktueller User als default ausgewählt-->
+						Bearbeiter:<br/>
+						<span id="new-event-workers" onclick="ClickEditableCollectionEntry(this, 'employees')" iseditable="false" style="cursor:pointer;"> <!--style="background-color:white"-->Friedbert Meier</span>
+
+						<datalist id="employees">
+							<!--value will be sent back to the server-->
+							<!--fill datalist with employees from database, option-id should be employee id from database-->
+							<!--don't fill with employees who are already in the group-->
+							<option label="" value="" option-id=""><!--empy option is really important!!!!-->
+							<option label="Frieda Müller" value="Frieda Müller" option-id="23523523">
+							<option label="Friedbert Meier" value="Friedbert Meier" option-id="23523524">
+							<option label="MASTER of the Universe" value="MASTER of the Universe" option-id="23523525">
+							<option label="Arthur Dent" value="Arthur Dent" option-id="23523526">
+							<option label="Ford Prefect" value="Ford Prefect" option-id="23523527">
+							<option label="Zaphod Beblebrox" value="Zaphod Beblebrox" option-id="23523528">
+							<option label="Trisha McMillan" value="Trisha McMillan" option-id="23523529">
+						</datalist>
+						<br/>
+						Titel:
+						<input id="new-event_title" size="50" placeholder="Titel"/><br/>
+						Beschreibung:<br/>
+						<textarea id="new-event_text" rows="10" cols="50" placeholder="Activity Beschreibung"></textarea><br/>
+						Startzeit: <input id="new-event_starttime" size="20" placeholder="DD.MM.YYYY HH:MM"/>&nbsp;&nbsp;&nbsp;&nbsp;Endzeit: <input id="new-event_endtime" size="20" placeholder="DD.MM.YYYY HH:MM"/><br/>
+						Dauer: <input id="new-event_duration" placeholder="XX"/>&nbsp;&nbsp;Stunden<br/><!-- Default Wert aus Diff zwischen Startzeit und Endzeit-->
+						Einsatzart:
+						<select id="owntickets-newowner-select">
+							<!-- names from database-->
+							<!-- if changed: fill three checkboxes with default options for einsatzart-->
+							<option value="TeamViewer Session">TeamViewer Session</option>
+							<option value="Telefonsupport">Telefonsupport</option>
+							<option value="Vor Ort Service">Vor Ort Service</option>
+							<option value="Leben retten">Leben retten</option>
+							<option value="Programmierung">Programmierung</option>
+						</select><br/>
+						<input type="checkbox" value="Fahrtkosten" id="Fahrtkosten"/><label for="Fahrkosten">Fahrkosten</label><input type="checkbox" value="Berechenbar" id="Berechenbar"/><label for="Berechenbar">Berechenbar</label><input type="checkbox" value="Pauschale Berechnung" id="Pauschale Berechnung"/><label for="Pauschale Berechnung">Pauschale Berechnung</label>
+						<br/>
+						<br/>
+						verwendete Artikel:<br/>
+						<table class="simple-zebra-table" id="new-article-table">
+							<tr><th>ArtikelNr.</th><th>Bezeichnung</th><th>Seriennummer</th><th>Menge</th><th></th></tr>
+							<tr id="article-1"><td>234653462</td><td>Server A3532 Variante 12435</td><td>235235235235</td><td>3</td><td><input type="button" value="del" onclick="DeleteArticle('article-1')"/></td></tr>
+							<tr id="article-2"><td>3463463463</td><td>DeLorean TimeShift Premium</td><td>34634534523</td><td>1</td><td><input type="button" value="del" onclick="DeleteArticle('article-2')"/></td></tr>
+							<tr id="new-article"><td><input id="new-article-articleno" type="text" placeholder="12324124" size="10"/></td><td><input id="new-article-name" type="text" placeholder="ServerXY"/></td><td><input id="new-article-serialno" type="text" placeholder="12324124" size="10"/></td><td><input id="new-article-amount" type="text" placeholder="3" size="5"/></td><td><input type="button" value="add" onclick="AddArticle('new-article-articleno', 'new-article-name', 'new-article-serialno', 'new-article-amount', 'new-article', 'new-article-table')"/></td></tr>
+						</table>
+						<br/>
+						Der Activity eine Datei anhängen:<br/><input type="file"/><br/><br/>
+						<input type="button" value="Erstellen"><!--do custom submit + validation with javascript-->
+					</form>
+				</fieldset>
+				<br/>
+				<fieldset>
+					<legend>neuer Kommentar</legend>
+					<textarea id="new-event_text" rows="5" cols="50" placeholder="Kommentar über dies und jenes...."></textarea><br/>
+					<!--
+					Kommentar Datensatz automatisch ergänzen mit:
+					*Datum/Uhrzeit (Zeitpunkt der Erstellung)
+					*Nummer im Ticket (automatisch aus Ticket)
+					*Verfasser (aktueller User)
+					-->
+					<input type="button" value="Kommentar abgeben"/>
+				</fieldset>
+			</td>
+		</tr>
+	</table>
+
+	</div>

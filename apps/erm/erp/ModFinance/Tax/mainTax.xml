@@ -1,0 +1,50 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+    <div>
+    	<h1 class="page-title">Sales Taxes</h1>
+		<wap:key>
+			<wap:keyform id="TaxKeyData">
+				<wap:keyrow data-wap-label="Tax no." data-wap-attr="TaxClass" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+			</wap:keyform>
+		</wap:key>
+        <wap:tabContainer id="tabCntrlTaxMain">
+            <wap:tabContentPane id="tabPageTaxSurvey" data-wap-heading="Sales Taxes Survey">
+                <wap:grid data-wap-class="Tax" data-wap-grid-name="gridTaxOV">
+                    <wap:gridcol data-wap-obj="Tax" data-wap-attr="Id" data-wap-label="Id" />
+                    <wap:gridcol data-wap-obj="Tax" data-wap-attr="TaxClass" data-wap-label="Language" />
+                    <wap:gridcol data-wap-obj="Tax" data-wap-attr="Percentage" data-wap-label="Percentage" />
+                    <wap:gridcol data-wap-obj="Tax" data-wap-attr="AccountNo" data-wap-label="Account no." />
+                </wap:grid>
+            </wap:tabContentPane>
+            <wap:tabContentPane id="tabPageTaxMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formTaxMain">
+										<wap:rowdisplay data-wap-label="Tax class" data-wap-attr="TaxClass" />
+										<wap:rowinput data-wap-label="Percentage" data-wap-attr="Percentage" />
+										<wap:rowinput data-wap-label="Account no." data-wap-attr="AccountNo" />
+										<wap:rowinput data-wap-label="Remark " data-wap-attr="Remark" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formTaxMain" />
+					<wap:btnUpdate data-wap-forms="formTaxMain" />
+				</wap:data>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

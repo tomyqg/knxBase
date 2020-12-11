@@ -1,0 +1,100 @@
+<CompleteApplicationSystemData>
+  <ApplicationSystem type="class">
+    <Id type="int" title="Id"><![CDATA[7]]></Id>
+    <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+    <Description1 type="varchar" title="Description1"><![CDATA[Concept Office]]></Description1>
+    <VersionMajor type="int" title="VersionMajor"><![CDATA[0]]></VersionMajor>
+    <VersionMinor type="int" title="VersionMinor"><![CDATA[0]]></VersionMinor>
+    <VersionBuild type="int" title="VersionBuild"><![CDATA[0]]></VersionBuild>
+    <!--ADDITIONAL_DATA: ApplicationSystem-->
+    <Application type="class">
+      <Id type="int" title="Id"><![CDATA[12]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <Description1 type="varchar" title="Description1"><![CDATA[Web Frontend]]></Description1>
+      <!--ADDITIONAL_DATA: Application-->
+    </Application>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[51]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/ConceptOffice/WebFrontend/index.php]]></PathApplication>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[267]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[272]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[268]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[SQL1]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[269]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[ConceptOffice]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[270]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[Reader99]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[271]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[ConceptOffice]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[WebFrontend]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[00000000]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[reader]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+  </ApplicationSystem>
+</CompleteApplicationSystemData>

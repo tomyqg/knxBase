@@ -1,0 +1,6 @@
+echo $1
+php ./genkatR1A.php -n $1 -C $2
+makeindex -s index.ist $1
+latex $1.tex
+dvips $1.dvi
+ps2pdf $1.ps

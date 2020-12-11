@@ -1,0 +1,2689 @@
+<?php
+/**
+ * Copyright (c) 2015, 2016 wimtecc, Karl-Heinz Welter
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+/**
+ * FDbObject	-	Base Database Object Abstraction Class
+ *
+ * Versatile class representing objects stored in databases.
+ *
+ * Revision history
+ *
+ * Date			Rev.	Who		what
+ * ----------------------------------------------------------------------------
+ * 200x-xx-xx	PA1		khw		added to rev. control
+ * 2014-10-06	A		khw		frozen R1 base; start to replace the old
+ * 								mysql API with the new mysqli API
+ * 2015-01-26	PB1		khw		added special handling for null values;
+ * 								see note 1);
+ * 2015-04-02	PB2		khw		added further support for MSSQL database,
+ * 								which remains in experimental status!;
+ * 2015-04-13	PB3		khw		further comments;_
+ * 2015-10-15	PB4		khw		export functions improved, uses DOMDocument;
+ * 2016-01-19	PB5		khw		moved "'" bracketing values to the native
+ *						drivers (FSqlMSSQLQuery and FSqlMySQLQuery);
+ * 2016-06-02	PB6		khw		cleaned up exception handling, now this module only
+ *						issues FExc
+ *
+ * Notes:
+ * ======
+ *
+ * 1)	null values are supporteed now to some extend.
+ * 	create and update operation:
+ * 	IF an empty value is provided for an attribute which may be NULL
+ * 		=> the NULL value is written to the database.
+ * 	IF en empty value is provided for an attribute which may NOT be NULL
+ * 		=> the default value from the database structure is used
+ *
+ *
+ * @author	Karl-Heinz Welter <khwelter@icloud.com>
+ * @version 0.1
+ * @package wapCore
+ * @filesource
+ */
+require_once( "FSqlQuery.php") ;
+/**
+ * FDbObject
+ *
+ * Summary before class line ...
+ *
+ * @author	Karl-Heinz Welter <khwelter@icloud.com>
+ * @version 0.1
+ * @subpackage Database
+ */
+class FDbObject  extends	EISSCoreObject	implements Iterator {
+	/**
+	 *
+	 * Enter description here ...
+	 * @var unknown_type
+	 */
+	public	$className ;
+	public	$tableName ;
+	public	$keyCol ;
+	public	$complexKey ;
+	public	$ownAlias ;
+	/**
+	 *
+	 * Enter description here ...
+	 * @var unknown_type
+	 */
+	private	static	$names	=	array() ;		// names of attributes
+	private	static	$types	=	array() ;		// variable types of attributes
+	private	static	$nulls	=	array() ;		// boolean indicates can / can-not be null
+	private	static	$defaults	=	array() ;	// default values
+	protected	static	$db		=	array() ;
+	private	static	$idKey	=	array() ;		// attribute which indicates auto-increment id; defaults to "Id"
+	private	$attrNames	=	array() ;
+	private	$attrTypes	=	array() ;
+	private	$attrLens	=	array() ;
+	private	$attrNull	=	array() ;
+	private	$attrDefault	=	array() ;
+	private	$addAttrNames	= array() ;
+	private	$addAttrTypes	= array() ;
+	private	$attrAccess	=	array() ;
+	private	$addDataRem	=	"" ;
+	public	$startRow	=	0 ;					// default: start on 1st row
+	public	$rowCount	=	20 ;				// default: pick 20 lines
+	public	$step		=	"thisPage" ;		// default: refresh current page
+	var	$_status ;
+	var	$_valid	=	false ;
+	var	$_currRow ;
+	var	$_lastRow ;
+	var	$_where ;
+	var	$iterCond	=	"TRUE" ;
+	var	$iterOrder	=	"" ;
+	var	$iterJoin	=	"" ;
+	var	$iterJoinCols	=	"" ;
+	var	$iterQuery	=	null ;
+	var	$traceUpdate	=	false ;
+	/**
+	 * __construct( $_className, $_keyCol, $_db)
+	 *
+	 * Create an instance of the class and manifests its attributes
+	 * based on the table named $_className in the database specified
+	 * by $_db. The keycolumn for object access in the database table is
+	 * specified by $_keyCol.
+	 * if $_tableName is specified this name will be used as the table name in the database
+	 * instead of the provided $_className.
+	 * If no database is specified the database access will refer to the
+	 * default database 'def'.
+	 *
+	 * @param string $_className	database table name
+	 * @param string $_keyCol		database table key column
+	 * @param string $_db			database alias
+	 * @return void
+	 */
+	function	__construct( $_className, $_keyCol="Id", $_db="def", $_tableName="") {
+		if ( is_array( $_keyCol))  {
+			FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_className', '<_keyCol>', '$_db', '$_tableName')") ;
+		} else {
+			FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_className', '$_keyCol', '$_db', '$_tableName')") ;
+		}
+		parent::__construct( $_className) ;
+		$this->dataset	=	$_className ;
+		$this->level	=	0 ;
+		$this->maxLevel	=	0 ;
+		$this->ownAlias	=	$_db ;
+		if ( $_className != "") {
+			$this->className	=	$_className ;
+			if ( $_tableName != "") {
+				$this->tableName	=	$_tableName ;
+			} else {
+				$this->tableName	=	$this->className ;
+			}
+			$this->cacheName	=	$this->ownAlias . "_" . $this->tableName ;
+			$this->addDataRem	=	"ADDITIONAL_DATA: " . $this->className ;
+			$this->keyCol	=	$_keyCol ;
+			$this->_status	=	0 ;
+			$this->_valid	=	false ;
+			$this->_currRow	=	0 ;
+			$this->_lastRow	=	0 ;
+			if ( ! isset( self::$names[$this->cacheName])) {
+				self::$db[$this->cacheName]	=	$_db ;
+				self::$idKey[$this->cacheName]	=	"Id" ;
+				$myQuery	=	$this->getQueryObj( "Structure") ;
+				$result	=	FDb::query( $myQuery, $_db) ;
+				while ($row = FDb::getRow( $result, $_db)) {
+					$attrName	=	$row["Field"] ;
+					$attrTypeParts	=	explode( "(", $row["Type"]) ;
+					$attrType	=	$attrTypeParts[0] ;
+					$attrDescr	=	substr( $row["Type"], 0, 3) ;
+					$this->attrNames[]	=	$attrName ;
+					$this->attrTypes[ $attrName]	=	$attrType ;
+					$this->attrNull[ $attrName]	=	$row["Null"] ;
+					$this->attrDefault[ $attrName]	=	$row["Default"] ;
+					$this->attrAccess[ $attrName]	=	false ;
+				}
+				self::$names[$this->cacheName]	=	$this->attrNames ;
+				self::$types[$this->cacheName]	=	$this->attrTypes ;
+				self::$nulls[$this->cacheName]	=	$this->attrNull ;
+				self::$defaults[$this->cacheName]	=	$this->attrDefault ;
+				/**
+				 * here we need to include the authorization stuff
+				 * basically what we do here is to remove all attributes which the user is not even allowed to see
+				 */
+				/**
+				 *
+				 */
+			} else {
+				$this->attrNames	=	self::$names[$this->cacheName] ;
+				$this->attrTypes	=	self::$types[$this->cacheName] ;
+				$this->attrNull	=	self::$nulls[$this->cacheName] ;
+				$this->attrDefault	=	self::$defaults[$this->cacheName] ;
+			}
+			$this->clear() ;
+		} else {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_className', '$_key')",
+						"no valid className provided!") ;
+		}
+//		$this->iterQuery	=	new FSqlSelect( $_className) ;
+		$this->iterQuery	=	$this->getQueryObj( "Select") ;
+		FDbg::end() ;
+	}
+	function	defComplexKey( $_complexKey) {
+		$this->complexKey	=	$_complexKey ;
+	}
+	/**
+	 * setIdKey( $_idKey)
+	 *
+	 * Set the name of the table attribute which holds the unique auto-increment id
+	 * of this database table. The default is set to "Id" at instantiation time,
+	 * thus there should be no need to use this method.
+	 *
+	 * @param	string		$_id		name of the id attribute
+	 * @param	string		$_db		database alias
+	 * @return	void
+	 */
+	function	setIdKey( $_idKey="Id") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_idKey')") ;
+		self::$idKey[$this->cacheName]	=	$_idKey ;
+		FDbg::end( 0) ;
+		return 0 ;
+	}
+	/**
+	 * setId( $_id)
+	 *
+	 * Set the Id of an object to $_id and try to retrieve the object from the db
+	 *
+	 * This method sets the Id of the object to $_id and, if the $_id is
+	 * equal to or larger than 0, tries to retrieve the object from the db.
+	 *
+	 * @param	int 		$_id		id of the object to retrieve
+	 * @param	string 		$_db		database alias
+	 * @return	bool					success of the method
+	 *									false - no success
+	 *									true - success
+	 */
+	function	setId( $_id=-1) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( $_id)") ;
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		if ( $_id > -1) {
+			$this->$idKey	=	$_id ;
+			$this->fetchFromDbById( self::$db[$this->cacheName]) ;
+		} else {
+			$this->_valid	=	false ;
+		}
+		FDbg::end( $this->_valid) ;
+		return $this->_valid ;
+	}
+	/**
+	 * setKey( $_key)
+	 *
+	 * Set the Key of an object to $_key and try to retrieve the object from the db.
+	 * This method supports a key comprising multipl attributes.
+	 *
+	 * This method sets the Key of the object to $_key and, if the $_key is
+	 * longer than 0 characters, tries to retrieve the object from the db.
+	 *
+	 * @param	string	$_key			key of the object to retrieve
+	 * @param	string	$_db			database alias
+	* @return	bool					object validity after reload
+	 *									false - object(data) not valid
+	 *									true - object(data) is valid
+	 */
+	function	setKey( $_key) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '".(is_array($_key) ? print_r( $_key, true) : $_key)."')") ;
+		$keyCol	=	$this->keyCol ;
+		if ( is_array( $_key)) {
+			FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."()", "key := <Array>") ;
+			if ( is_array( $this->complexKey)) {
+				$this->keyArray	=	$_key ;
+				$this->reloadByComplexKey() ;
+			} else {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key')", "key given as array, expected as single-item") ;
+			}
+		} else {
+			if ( strlen( $_key) > 0) {
+				$this->$keyCol	=	$_key ;
+				$this->reload() ;
+			} else {
+				$this->_valid	=	false ;
+			}
+		}
+		FDbg::end( $this->_valid) ;
+		return $this->_valid ;
+	}
+	/**
+	 * Get the key of the current object
+	 *
+	 * Returns the Key of the object.
+	 *
+	 * @return mixed				value of the key field
+	 */
+	function	getKey() {
+		FDbg::begin( 1, "FDbObject.php", "FDbObject", "getKey( )") ;
+		$keyCol	=	$this->keyCol ;
+		return $this->$keyCol ;
+	}
+	/**
+	 * reload()
+	 *
+	 * Reload the object from the db.
+	 * This reload is handled through fetchFromDb(), which retrieves the data either by
+	 * the key(s) or the id.
+	 *
+	 * @return	bool					object validity after reload
+	 *									false - object(data) not valid
+	 *									true - object(data) is valid
+	 */
+	function	reload() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$res	=	$this->fetchFromDb() ;
+		FDbg::end() ;
+		return $res ;
+	}
+	/**
+	 * reload()
+	 *
+	 * Reload the object from the db.
+	 * This reload is handled through fetchFromDb(), which retrieves the data either by
+	 * the key(s) or the id.
+	 *
+	 * @return	bool					object validity after reload
+	 *									false - object(data) not valid
+	 *									true - object(data) is valid
+	 */
+	function	reloadByComplexKey() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$res	=	$this->fetchFromDbByComplexKey() ;
+		FDbg::end() ;
+		return $res ;
+	}
+	/**
+	 * getAsXML( $_key, $_id, $_val, $reply)
+	 *
+	 * Get the object as XML
+	 *
+	 * Returns the XML serialization of the object, without any LF ("\n") between the
+	 * XML attributes. This is nice to have the stuff more difficult to read.
+	 * The top level element of the XML tree is the class name. For special needs
+	 * this top level element can be replaced with $_className. This is useful for example
+	 * for a Customer object which might reference other Customer objects for delviery
+	 * or invoicing addresses.
+	 *
+	 * @param	string	$_className		alternative class name for the start element of the XML tree
+	 * @return	string					XML representation of the object
+	 */
+	function	getAsXML( $_key="", $_id=-1, $_val="", $reply=null) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val', <Reply>)") ;
+		if ( $reply == null)
+			$reply	=	new Reply( __class__, $this->className) ;
+		$reply->replyData	=	$this->getXMLF() ;
+		FDbg::end() ;
+		return $reply ;
+	}
+	/**
+	 * getXMLF()
+	 *
+	 * @deprecated	deprecated
+	 * @param	string				$_className
+	 * @return	string
+	 */
+	function	getXML( $_className = "") {
+		FDbg::begin( 1, "FDbObject.php", "FDbObject", "getXML( )") ;
+		FDbg::end() ;
+		return( $this->getXMLF( $_className)) ;
+	}
+	/**
+	 * getXMLF( $_className)
+	 *
+	 * Return a string with the XML representation of THIS object. If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 * This method uses the php::DOMDocument to construct the XML object.
+
+	 * @param	string 				$_className
+	 * @return	string				XML representation of the object
+	 */
+	function	getXMLF( $_className = "") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_className')") ;
+		$myXML	=	new DOMDocument() ;
+		$myXML->xmlStandAlone	=	false ;		// avoid the <?xml version="1.0"> line
+		$myXML->formatOutput	=	true ;		// make it readable
+//		if ( $_className == "") {
+//			$dataXML	=	$myXML->appendChild( $myXML->createElement( $this->className)) ;
+//			$this->addDataRem	=	"ADDITIONAL_DATA: " . $this->className ;
+//		} else {
+//			$dataXML	=	$myXML->appendChild( $myXML->createElement( $_className)) ;
+//			$this->addDataRem	=	"ADDITIONAL_DATA: " . $_className ;
+//		}
+//		$dataXML->setAttribute( "type", "class") ;
+		$startNode	=	$this->_exportXML( $myXML, $myXML) ;
+		FDbg::end() ;
+		return( $myXML->saveXML( $startNode)) ;
+	}
+	/**
+	 * getXMLF( $_className)
+	 *
+	 * Return a string with the XML representation of THIS object. If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 * This method uses the php::DOMDocument to construct the XML object.
+
+	 * @param	DOMDocument 		DOCDocument, must exist
+	 * @param
+	 * @return	string				XML representation of the object
+	 */
+	function	_exportXML( $_doc, $_node) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)") ;
+		$dataXML	=	$_node->appendChild( $_doc->createElement( $this->className)) ;
+		$dataXML->setAttribute( "type", "class") ;
+		$this->addDataRem	=	"ADDITIONAL_DATA: " . $this->className ;
+		foreach ( $this->attrNames as $colName) {
+			$dataNode	=	$dataXML->appendChild( $_doc->createElement( $colName)) ;
+			$dataNode->setAttribute( "type", $this->attrTypes[ $colName]) ;
+			$dataNode->setAttribute( "title", $colName) ;
+			switch ( $this->attrTypes[ $colName]) {
+			case	"money"	:							// groesster Schwachsinn der Welt von Microsoft!!!
+				$dataNode->appendChild( $_doc->createCDATASection( iconv( FDb::getCharset( self::$db[$this->cacheName]), "UTF-8", $this->$colName))) ;
+				break ;
+			case	"char"	:
+			case	"varchar"	:
+				$dataNode->appendChild( $_doc->createCDATASection( iconv( FDb::getCharset( self::$db[$this->cacheName]), "UTF-8", $this->$colName))) ;
+				break ;
+			case	"blob"	:
+			case	"tinyblob"	:
+			case	"mediumblob"	:
+			case	"longblob"	:
+				$dataNode->appendChild( $_doc->createCDATASection( "<<<NO *BLOB DATA PROVIDED >>>")) ;
+				break ;
+			case	"uniqueidentifier"	:
+				$dataNode->appendChild( $_doc->createCDATASection( mssql_guid_string( $this->$colName))) ;
+				break ;
+			default	:
+				$dataNode->appendChild( $_doc->createCDATASection( $this->$colName)) ;
+				break ;
+			}
+		}
+		$dataXML->appendChild( $_doc->createComment( $this->addDataRem)) ;
+		foreach ( $this->addAttrNames as $colName) {
+			$dataNode	=	$dataXML->appendChild( $_doc->createElement( $colName)) ;
+			$dataNode->setAttribute( "type", $this->addAttrTypes[ $colName]) ;
+			$dataNode->setAttribute( "title", $colName) ;
+			$dataNode->appendChild( $_doc->createCDATASection( $this->$colName)) ;
+		}
+//		$_node->appendChild( $myXML->createComment( $this->addDataRem)) ;
+		FDbg::end() ;
+		return( $dataXML) ;
+	}
+	/**
+	 * getXMLF( $_className)
+	 *
+	 * Return a string with the XML representation of THIS object. If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 * This method uses the php::DOMDocument to construct the XML object.
+
+	 * @param	DOMDocument 		DOCDocument, must exist
+	 * @param
+	 * @return	string				XML representation of the object
+	 */
+	function	_exportJSON() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)") ;
+		$subDataJSON	=	"" ;
+		foreach ( $this->attrNames as $colName) {
+			if ( $subDataJSON != "") {
+				$subDataJSON	.=	",\n" ;
+			}
+			$subDataJSON	.=	"\t\"" . $colName . "\":\"" . iconv( FDb::getCharset( self::$db[$this->cacheName]), "UTF-8", $this->$colName) . "\"" ;
+		}
+//		foreach ( $this->addAttrNames as $colName) {
+//			$dataNode	=	$dataXML->appendChild( $_doc->createElement( $colName)) ;
+//			$dataNode->setAttribute( "type", $this->addAttrTypes[ $colName]) ;
+//			$dataNode->setAttribute( "title", $colName) ;
+//			$dataNode->appendChild( $_doc->createCDATASection( $this->$colName)) ;
+//		}
+		$subDataJSON	.=	"\n" ;
+//		$dataJSON	=	"\"".$this->className."\":{\n" ;
+		$dataJSON	=	"{\n" ;
+		$dataJSON	.=	$subDataJSON ;
+		$dataJSON	.=	"}" ;
+//		$_node->appendChild( $myXML->createComment( $this->addDataRem)) ;
+		FDbg::end() ;
+		return( $dataJSON) ;
+	}
+	/**
+	 * getXMLF( $_className)
+	 *
+	 * Return a string with the XML representation of THIS object. If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 * This method uses the php::DOMDocument to construct the XML object.
+
+	 * @param	DOMDocument 		DOCDocument, must exist
+	 * @param
+	 * @return	string				XML representation of the object
+	 */
+	function	_importXML( $_doc, $_node, $_attribs=false) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)") ;
+		FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", ".......................: " . $_node->tagName) ;
+		$myNodes	=	$_node->childNodes ;
+//		FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", "sub-nodes available....: " . $myNodes->length) ;
+		if ( $_attribs) {
+			FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", "--> will check attributes ...") ;
+			if ( $_node->attributes->length > 0) {
+				FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", "--> there ARE attributes ...") ;
+				for ( $i=0 ; $i<$_node->attributes->length ; $i++) {
+					FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", "--> there IS AN attribute " . $_node->attributes->item( $i)->nodeName) ;
+					$attr	=	$_node->attributes->item( $i)->nodeName ;
+					$this->$attr	=	$_node->attributes->item( $i)->nodeValue ;
+				}
+			}
+		}
+		foreach ( $myNodes as $node) {
+			if ( $node->nodeType == 1) {
+				$attr	=	$node->tagName ;
+				if ( isset( $this->$attr)) {
+					FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", "--> " . $node->tagName . " := " . $node->firstChild->textContent) ;
+					$this->$attr	=	$node->firstChild->textContent ;
+				} else {
+					$myObj	=	new $attr() ;
+					$myObj->_importXML( $_doc, $node, $_attribs) ;
+				}
+			} else {
+//				FDbg::trace( 1, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( <_doc>, <_node>)", "--> " . $node->nodeType) ;
+			}
+		}
+		$this->Imported	=	1 ;
+		$this->storeInDb() ;
+		FDbg::end() ;
+	}
+	/**
+	 *
+	 */
+	function	getAddDataRem() {
+		return "<!--".$this->addDataRem."-->" ;
+	}
+	/**
+	 * getJSON( $_className)
+	 *
+	 * THIS METHOD is in status: EXPERIMENTAL!!!
+	 *
+	 * Return a string with the JSON representation of THIS object.
+	 * If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 *
+	 * @param	string 				$_className
+	 * @return	string				XML representation of the object
+	 */
+	function	getJSON( $_className = "") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$buffer	=	"" ;
+		foreach ( $this->attrNames as $colName) {
+			if ( $buffer != "")
+				$buffer	.=	",\n" ;
+			$buffer	.=	"\t\"" . $colName . "\" : " . json_encode( $this->$colName) ;
+		}
+		$buffer	.=	"\n" ;
+		FDbg::end() ;
+		return( $buffer) ;
+	}
+	/**
+	 * assignFromRow( $_row)
+	 *
+	 * Fetch the attributes from a MySQL result row
+	 *
+	 * This methods assigns all manifested attributes from the given MySQL row
+	 *
+	 * @param	array	$_row			MySQL row result set
+	 * @return	array	$_row			MySQL row result set
+	 */
+	function	assignFromRow( $_row) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_assignFromRow( $_row) ;
+		FDbg::end( 1) ;
+	}
+	/**
+	 * _assignFromRow( $_row)
+	 *
+	 * Fetch all defined attributes of THIS object from the associative array $_row.
+	 *
+	 * @param       array   $_row                   MySQL row result set
+	 * @return      array   $_row                   MySQL row result set
+	 */
+	function        _assignFromRow( $_row) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		foreach ( $_row as $colName => $value) {
+			if ( $value == null) {
+				FDbg::trace( 3, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "_assignFromRow()", "value of $colName === null !!!") ;
+				if ( $this->attrNull[$colName] == "YES")
+					FDbg::trace( 3, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "_assignFromRow()", "and that's ok") ;
+			} else {
+				FDbg::trace( 3, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "_assignFromRow()", "value of $colName !== null !!!") ;
+			}
+			if ( isset ( $this->$colName) && $value !== null) {
+				$buffer	=	"<" . $this->className . ">\n" ;
+				switch ( $this->attrTypes[ $colName]) {
+				case "smalldatetime"	:
+				case "datetime"	:
+					$this->$colName	=	FDb::getDateTime( self::$db[$this->cacheName], $value) ;
+					break ;
+				default	:
+					$this->$colName	=	$value ;
+					break ;
+				}
+			} else if ( $value === null) {
+				$this->$colName	=	"NULL" ;
+			}
+		}
+		FDbg::end() ;
+		reset( $_row) ;
+	}
+	/**
+	 * storeInDb( $_exec)
+	 *
+	 * Store the object in the database. In case the execution flag is set to FALSE, the command will not be
+	 * executed but the database query will be returned as a string. This is primarily a diagnostic feature!
+	 *
+	 * @param	bool	$_exec					execute the query
+	 *											false - query will not be executed but query string will be returned
+	 *											to the calling function
+	 *											true - execute the query
+	 * @return	bool							object validity after storage
+	 *											false - object(data) not valid
+	 *											true - object(data) is valid
+	 */
+	function	storeInDb( $_exec=true) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 *x
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".store" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to store an object of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		$myQuery	=	$this->getQueryObj( "Insert") ;
+		foreach ( $this->attrNames as $colName) {
+			if ( $colName != "Id" && $colName != "TimeStamp" && $this->attrTypes[ $colName] != "uniqueidentifier") {
+				$myQuery->addField( $colName) ;
+			}
+		}
+		reset( $this->attrNames) ;
+		foreach ( $this->attrNames as $colName) {
+			if ( $appUser) {
+				if ( ! $appUser->isValueGranted( "dbv", $this->className.".".$colName, FDb::escapeString( $this->$colName, self::$db[$this->cacheName]), false)) {
+					throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+								"value not allowed '".FDb::escapeString( $this->$colName, self::$db[$this->cacheName])."'!") ;
+				}
+			}
+			if ( $colName != "Id" && $colName != "TimeStamp" && $this->attrTypes[ $colName] != "uniqueidentifier") {
+				if ( ( $this->$colName === null || $this->$colName === "NULL") && $this->attrNull[$colName] == "YES")
+					$myQuery->addValue( "null") ;
+				else if ( $this->$colName === null)
+					$myQuery->addValue( "'".$this->attrDefault[$colName]. "'") ;
+				else
+					$myQuery->addValue( "'" . FDb::escapeString( $this->$colName, self::$db[$this->cacheName]) . "'") ;
+			}
+		}
+		reset( $this->attrNames) ;
+		if ( $_exec) {
+			$this->sqlResult	=	FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+			if ( !$this->sqlResult) {
+				$this->_status  =       -1 ;
+			} else {
+				$this->Id	=	FDb::insertId( self::$db[$this->cacheName]) ;
+				$this->_valid	=	true ;
+			}
+		} else {
+			FDbg::end() ;
+			return $myQuery->getQuery() ;
+		}
+		if ( $this->traceUpdate) {
+			$myFile	=	fopen( $this->path->Archive . "XML/Up/" . "myUpd.sql", "a+") ;
+			fwrite( $myFile, $query . "\n") ;
+			fclose( $myFile) ;
+		}
+		FDbg::end() ;
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromDb()
+	 *
+	 * Fetches the object from the database.
+	 *
+	 * This method fetches the object from the database by the key.
+	 *
+	 * @return	bool							object validity after storage
+	 *											false - object(data) not valid
+	 *											true - object(data) is valid
+	 */
+	function	fetchFromDb() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."' for user '" . $appUser->UserId . "'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$keyString	=	"" ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$keyCol	=	$this->keyCol ;
+		if ( isset( $this->keyArray)) {
+			FDbg::trace( 3, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."()", "key is array") ;
+			foreach ( $this->keyCol as $i => $v) {
+				$keyString	.=	"[$v] := '".$this->keyArray[$i]."' " ;
+				$myQuery->addWhere( "$v = '" . $this->keyArray[$i] . "' ") ;
+			}
+		} else if ( $keyCol != "") {
+			FDbg::trace( 3, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."()", "key is variable") ;
+			switch ( $this->attrTypes[ $keyCol]) {
+			case	"smallint"	:
+				$myQuery->addWhere( "$keyCol = " . $this->$keyCol . " ") ;
+				break ;
+			default	:
+				$myQuery->addWhere( "$keyCol = '" . $this->$keyCol . "' ") ;
+				break ;
+			}
+		} else {
+			FDbg::trace( 3, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."()", "key is void, using id") ;
+			$myQuery->addWhere( "Id = '" . $this->Id . "' ") ;
+		}
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =       FDb::getRow( $this->sqlResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} else if ( $numrows > 1) {
+				$this->_status  =       -3 ;
+			} else {
+				$this->_status  =       -2 ;
+				$this->_statusInfo	=	"Object['".$this->className."'], " . $keyString ;
+			}
+		}
+		FDbg::end( $this->_status) ;
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromDbById()
+	 *
+	 * This method fetches the object from the database by the Id.
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool							object validity after storage
+	 *											false - object(data) not valid
+	 *											true - object(data) is valid
+	 */
+	function	fetchFromDbById() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		$keyCol	=	$this->keyCol ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$myQuery->addWhere( $idKey."='" . $this->$idKey . "' ") ;
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =       FDb::getRow( $this->sqlResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} else {
+				$this->_status  =       -2 ;
+			}
+		}
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromDb()
+	 *
+	 * Fetches the object from the database.
+	 *
+	 * This method fetches the object from the database by the key.
+	 *
+	 * @return	bool							object validity after storage
+	 *											false - object(data) not valid
+	 *											true - object(data) is valid
+	 */
+	function	fetchFromDbByComplexKey() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$keyString	=	"" ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$complexKey	=	$this->complexKey ;
+		if ( isset( $this->keyArray)) {
+			foreach ( $this->complexKey as $i => $v) {
+				$keyString	.=	"[$v] := '".$this->keyArray[$i]."' " ;
+				$myQuery->addWhere( "$v = '" . $this->keyArray[$i] . "' ") ;
+			}
+		} else {
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)", "complex key expected!") ;
+		}
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =       FDb::getRow( $this->sqlResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} else if ( $numrows > 1) {
+				$this->_status  =       -3 ;
+			} else {
+				$this->_status  =       -2 ;
+				$this->_statusInfo	=	"Object['".$this->className."'], " . $keyString ;
+			}
+		}
+		FDbg::end( $this->_status) ;
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromDbAsArray( $_where, $_iCol)
+	 *
+	 * Fetches the object from the database
+	 *
+	 * This method fetches the object from the database by the key.
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	fetchFromDbAsArray( $_where, $_iCol="Parameter") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		$query	=	"SELECT * FROM " . FDb::fTableName( $this->className) . " " ;
+		$query	.=	$_where ;
+		$this->sqlResult      =       FDb::query( $query, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows >= 1) {
+				$this->data	=	array() ;
+				while ( $row = mysqli_fetch_assoc( $this->sqlResult)) {
+					$myObj	=	new FDbObject( $this->className, $this->keyCol) ;
+					$myObj->_assignFromRow( $row) ;
+					$this->data[ $myObj->$_iCol]	=	$myObj ;
+				}
+				$this->_valid   =       true ;
+			} else {
+				$this->_status  =       -2 ;
+			}
+		}
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromDbWgere( $_where, $_order)
+	 *
+	 * Fetches an object from the database
+	 *
+	 * This method fetches an object which matches the given condition $_condition from the db.
+	 * The condition must be given as a full WHERE statement, e.g. "WHERE CustNr = '123456' ".
+	 *
+	 * @param	string	$_where			condition for the object to be met including the "WHERE " statement
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	fetchFromDbWhere( $_where) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$keyString	=	"" ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$myQuery->addWhere( $_where) ;
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =       FDb::getRow( $this->sqlResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} else if ( $numrows > 1) {
+				$this->_status  =       -3 ;
+			} else {
+				$this->_status  =       -2 ;
+				$this->_statusInfo	=	"Object['".$this->className."'], " . $keyString ;
+			}
+		}
+		FDbg::end( $this->_status) ;
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromDbWgere( $_where, $_order)
+	 *
+	 * Fetches an object from the database
+	 *
+	 * This method fetches an object which matches the given condition $_condition from the db.
+	 * The condition must be given as a full WHERE statement, e.g. "WHERE CustNr = '123456' ".
+	 *
+	 * @param	string	$_where			condition for the object to be met including the "WHERE " statement
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	getCountWhere( $_where) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$keyString	=	"" ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$myQuery->addWhere( $_where) ;
+		$matchingRows	=	FDb::getCount( $myQuery, self::$db[$this->cacheName]) ;
+		FDbg::end( $this->_status) ;
+		return $matchingRows ;
+	}
+	/**
+	 * first( $_order)
+	 *
+	 * Fetches an object from the database
+	 *
+	 * This method fetches an object which matches the given condition $_condition from the db.
+	 * The condition must be given as a full WHERE statement, e.g. "WHERE CustNr = '123456' ".
+	 *
+	 * @param	string	$_where			condition for the object to be met including the "WHERE " statement
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	first( $_order="", $_where="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		$keyString	=	"" ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$myQuery->addWhere( $_where) ;
+		$myQuery->addOrder( $_order) ;
+		$myQuery->addLimit( new FSqlLimit( 0, 1)) ;
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =       FDb::getRow( $this->sqlResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} else if ( $numrows > 1) {
+				$this->_status  =       -3 ;
+			} else {
+				$this->_status  =       -2 ;
+				$this->_statusInfo	=	"Object['".$this->className."'], " . $keyString ;
+			}
+		}
+		FDbg::end( $this->_status) ;
+		return $this->_valid ;
+	}
+	/**
+	 * fetchFromXML( $_filemame)
+	 *
+	 * This methods populats the attributes from the given XML file.
+	 * The XML file needs to be in the exact format as the generated XML files
+	 * are. However, missing attributes in the XML file are *NOT* a reason for failure.
+	 * IMPORTANT: this method EXPECTS the XML input to be encoded in the UTF-8 charset.
+	 * If this is not the case than some iconv(...) needs to be added (as commented).
+	 *
+	 * @param	string	$_filename		name of the file
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	fetchFromXML( $_filename) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$iFile	=	fopen( $_filename, "r") ;
+		if ( $iFile) {
+			$contents	=	fread( $iFile, filesize( $_filename));
+			fclose( $iFile) ;
+			$xml	=	new XMLReader() ;
+			$xml->XML( $contents) ;
+			$objectValid	=	false ;
+			$buffer	=	"" ;
+			$this->_fetchFromXML( $xml) ;
+		} else {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_fileName')",
+					"object[".$this->cacheName."], can not open file '$_filename'") ;
+		}
+		$this->_valid	=	true ;
+		return true ;
+	}
+	/**
+	 * _fetchFromXML( $_xml)
+	 *
+	 * This methods populats the attributes from the given XML object.
+	 * However, missing attributes in the XML file are *NOT* a reason for failure.
+	 * IMPORTANT: this method EXPECTS the XML input to be encoded in the UTF-8 charset.
+	 * If this is not the case than some iconv(...) needs to be added (as commented).
+	 *
+	 * @param	string	$_filename		name of the file
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	_fetchFromXML( $_xml) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$inObject	=	false ;
+		$buffer	=	"" ;
+		$this->_valid	=	false ;
+		while ( $_xml->read() && ! $this->_valid) {
+			switch ( $_xml->nodeType) {
+			case	XmlReader::ELEMENT	:			// start element
+				if ( strcmp( $_xml->name, $this->className) == 0) {
+					$inObject	=	true ;
+				}
+				break ;
+			case	XmlReader::TEXT	:			// text node
+			case	XmlReader::CDATA	:
+				$buffer	=	$_xml->value ;
+				break ;
+			case	XmlReader::SIGNIFICANT_WHITESPACE	:			// whitespace node
+				break ;
+			case	XmlReader::END_ELEMENT	:			// end element
+				if ( strcmp( $_xml->name, $this->className) == 0) {
+					$inObject	=	false ;
+					$this->_valid	=	true ;
+				} else {
+					$colName	=	$_xml->name ;
+					if ( isset( $this->$colName)) {
+						$this->$colName	=	$buffer ;
+						$buffer	=	"" ;
+					}
+				}
+				break ;
+			case	XmlReader::END_ENTITY	:			// end entity
+				break ;
+			}
+		}
+		return $this->_valid ;
+	}
+	/**
+	 * existWhere( $_where)
+	 *
+	 * Checks how many objects with the given criteria exist in the database
+	 *
+	 * This method fetches an object which matches the given condition $_condition from the db.
+	 * The condition must be given as a full WHERE statement, e.g. "WHERE CustNr = '123456' ".
+	 *
+	 * @param	string	$_where			condition for the object to be met including the "WHERE " statement
+	 * @param	string	$_db			database alias
+	 * @return	int					number of objects
+	 */
+	function	existWhere( $_where) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_status	=	1 ;
+		$this->_valid	=	false ;
+		$myQuery	=	new FSqlSelect( $this->className) ;
+		$myQuery->addWhere( $_where) ;
+		$matchingRows	=	FDb::getCount( $myQuery, self::$db[$this->cacheName]) ;
+		FDbg::trace( 2, FDbg::mdTrcInfo1, basename( __FILE__), __CLASS__, __METHOD__."( '$_where')", "query := '$myQuery'") ;
+		$this->sqlResult	=	FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( ! $this->sqlResult) {
+			$this->_status	=	-1 ;
+			$matchingRows	=	-1 ;
+		} else {
+			$this->_valid   =       true ;
+		}
+		return $matchingRows ;
+	}
+	/**
+	 * addCol( $_attrName, $_attrType)ƒ
+	 *
+	 * Add columns to the list of manifested attributes
+	 * This methods adds an attribute with the name $_attrName and the type $_attrType
+	 * to the list of manifested attributes for the object.
+	 * This method is useful ONLY in preparation for a subsequent tableFromDb(...) operation.
+	 * After columns have been added to the manifest all subsequent calls to fetchFromDb(), storeInDb()
+	 * and fetchFromDb() will fail in the database engine since non-existing columns would be queried.
+	 *
+	 * @param	string	$_where			condition for the object to be met
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	addCol( $attrName, $attrType) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->addAttrNames[]	=	$attrName ;
+		$this->addAttrTypes[ $attrName]	=	$attrType ;
+		$this->$attrName	=	"" ;
+		FDbg::end() ;
+	}
+	/**
+	 *
+	 * @param int	$_startRow
+	 */
+	function	setStartRow( $_startRow) {	$this->startRow	=	$_startRow ;	}
+	function	setRowCount( $_rowCount) {	$this->rowCount	=	$_rowCount ;	}
+	function	getStartRow() {		return $this->startRow ;	}
+	function	getRowCount() {		return $this->rowCount ;	}
+	function	setPage( $_startRow, $_rowCount, $_step) {
+		$this->startRow	=	$_startRow ;
+		$this->rowCount	=	$_rowCount ;
+		$this->step		=	$_step ;
+	}
+	function	getCount( $_query) {
+		return FDb::getCount( $_query, self::$db[$this->cacheName]) ;
+	}
+	function	getSum( $_query, $_sumcolumn) {
+		return FDb::getSum( $_query, self::$db[$this->cacheName], $_sumcolumn) ;
+	}
+	/**
+	 * tableFromQuery( $_query, $_asXML, $_db)
+	 *
+	 * Return a string containing an XML formatted table with all records resulting from the given
+	 * $_query from the database alias $_db.
+	 * If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 * @param FSqlQuery $_query
+	 * @param string $_db
+	 * @throws FException
+	 * @return string
+	 */
+	function	tableFromQuery( $_query, $_className="", $_db="def") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_query', '$_className', '$_db')") ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$this->pageCount	=	-1 ;
+		$ret	=	"" ;
+		/**
+		 *
+		 */
+//		$this->className	=	$_query->table ;
+		/**
+		 * figure out how many matching lines there are
+		 */
+		$matchingRows	=	FDb::getCount( $_query, self::$db[$this->cacheName]) ;
+		if ( ! isset( $this->step)) {
+			$this->step	=	"thisPage" ;
+			if ( isset( $_POST['step'])) {
+				$this->step	=	$_POST['step'] ;
+			}
+		}
+		/**
+		 *
+		 */
+		switch ( $this->step) {
+			case	"firstPage"	:
+				$this->startRow	=	0 ;
+				break ;
+			case	"previousPage"	:
+				if ( $this->startRow > 0) {
+					$this->startRow	-=	$this->rowCount ;
+				} else {
+					$this->startRow	=	0 ;
+				}
+				break ;
+			case	"oneBackward"	:
+				if ( $this->startRow > 0) {
+					$this->startRow	-=	1 ;
+				} else {
+					$this->startRow	=	0 ;
+				}
+				break ;
+			case	"thisPage"	:
+				break ;
+			case	"oneForward"	:
+				$this->startRow	+=	1 ;
+				if ( ( $this->startRow + $this->rowCount) >= $matchingRows )
+					$this->startRow	=	$matchingRows - $this->rowCount ;
+				break ;
+			case	"nextPage"	:
+				$this->startRow	+=	$this->rowCount ;
+				if ( ( $this->startRow + $this->rowCount) >= $matchingRows)
+					$this->startRow	=	$matchingRows - $this->rowCount ;
+				break ;
+			case	"lastPage"	:
+				$this->startRow	=	$matchingRows - $this->rowCount ;
+				break ;
+		}
+		if ( $this->startRow < 0)
+			$this->startRow	=	0 ;
+		$ret	=	"" ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		if ( ! $_query->limit) {
+			$_query->addLimit( new FSqlLimit( $this->startRow, $this->rowCount)) ;
+		}
+		try {
+			$this->sqlResult      =       FDb::query( $_query, self::$db[$this->cacheName]) ;
+			if ( !$this->sqlResult) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_fileName')",
+					"sqlResult error [".$query."]") ;
+			} else {
+				//	IF no name five, take the name of 'this' class
+				if ( $_className == "") {
+					$_className	=	$this->className ;
+				}
+				$ret	=	"<Table" . $_className . ">\n" ;
+				$ret	.=	"<TableInfo>\n" ;
+				$ret	.=	"<StartRow>".$this->startRow."</StartRow>\n" ;
+				$ret	.=	"<RowCount>".$this->rowCount."</RowCount>\n" ;
+				$ret	.=	"<PageCount>".$this->pageCount."</PageCount>\n" ;
+				$ret	.=	"<TotalRows>".$matchingRows."</TotalRows>\n" ;
+				$ret	.=	"<Dataset>".$this->dataset."</Dataset>\n" ;
+				$ret	.=	"<Level>".$this->level."</Level>\n" ;
+				$ret	.=	"<MaxLevel>".$this->maxLevel."</MaxLevel>\n" ;
+				$ret	.=	"</TableInfo>\n" ;
+				while ( $row = FDb::getRow( $this->sqlResult, self::$db[$this->cacheName])) {
+					$this->_assignFromRow( $row) ;
+					$ret	.=	$this->getXMLF( $_className) ;
+					$ret	.=	"\n" ;
+				}
+				$ret	.=	"</Table" . $_className . ">\n" ;
+				$this->_status  =       0 ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_query', '$_className', '$_db')",
+						$e) ;
+		}
+$this->jsonTableFromQuery( $_query, $_className, $_db) ;
+		return $ret ;
+	}
+	/**
+	 * tableFromQuery( $_query, $_asXML, $_db)
+	 *
+	 * Return a string containing an XML formatted table with all records resulting from the given
+	 * $_query from the database alias $_db.
+	 * If $_className is specified
+	 * this name will be used as the classname instead of the class given during instantiation.
+	 * @param FSqlQuery $_query
+	 * @param string $_db
+	 * @throws FException
+	 * @return string
+	 */
+	function	jsonTableFromQuery( $_query, $_className="", $_db="def") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_query', '$_className', '$_db')") ;
+		/**
+		 *
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".read" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to read objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$this->pageCount	=	-1 ;
+		$ret	=	"" ;
+		/**
+		 *
+		 */
+//		$this->className	=	$_query->table ;
+		/**
+		 * figure out how many matching lines there are
+		 */
+		$matchingRows	=	FDb::getCount( $_query, self::$db[$this->cacheName]) ;
+		if ( ! isset( $this->step)) {
+			$this->step	=	"thisPage" ;
+			if ( isset( $_POST['step'])) {
+				$this->step	=	$_POST['step'] ;
+			}
+		}
+		/**
+		 *
+		 */
+		switch ( $this->step) {
+			case	"firstPage"	:
+				$this->startRow	=	0 ;
+				break ;
+			case	"previousPage"	:
+				if ( $this->startRow > 0) {
+					$this->startRow	-=	$this->rowCount ;
+				} else {
+					$this->startRow	=	0 ;
+				}
+				break ;
+			case	"oneBackward"	:
+				if ( $this->startRow > 0) {
+					$this->startRow	-=	1 ;
+				} else {
+					$this->startRow	=	0 ;
+				}
+				break ;
+			case	"thisPage"	:
+				break ;
+			case	"oneForward"	:
+				$this->startRow	+=	1 ;
+				if ( ( $this->startRow + $this->rowCount) >= $matchingRows )
+					$this->startRow	=	$matchingRows - $this->rowCount ;
+				break ;
+			case	"nextPage"	:
+				$this->startRow	+=	$this->rowCount ;
+				if ( ( $this->startRow + $this->rowCount) >= $matchingRows)
+					$this->startRow	=	$matchingRows - $this->rowCount ;
+				break ;
+			case	"lastPage"	:
+				$this->startRow	=	$matchingRows - $this->rowCount ;
+				break ;
+		}
+		if ( $this->startRow < 0)
+			$this->startRow	=	0 ;
+		$ret	=	"" ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		if ( ! $_query->limit) {
+			$_query->addLimit( new FSqlLimit( $this->startRow, $this->rowCount)) ;
+		}
+		try {
+			$this->sqlResult      =       FDb::query( $_query, self::$db[$this->cacheName]) ;
+			if ( !$this->sqlResult) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_fileName')",
+					"sqlResult error [".$query."]") ;
+			} else {
+				//	IF no name five, take the name of 'this' class
+				if ( $_className == "") {
+					$_className	=	$this->className ;
+				}
+				$ret	=	"{\n" ;
+				$ret	.=	"\t\"TableInfo\":{\n" ;
+				$ret	.=	"\t\t\"StartRow\":\"".$this->startRow."\",\n" ;
+				$ret	.=	"\t\t\"RowCount\":\"".$this->rowCount."\",\n" ;
+				$ret	.=	"\t\t\"PageCount\":\"".$this->pageCount."\",\n" ;
+				$ret	.=	"\t\t\"TotalRows\":\"".$matchingRows."\",\n" ;
+				$ret	.=	"\t\t\"Dataset\":\"".$this->dataset."\",\n" ;
+				$ret	.=	"\t\t\"Level\":\"".$this->level."\",\n" ;
+				$ret	.=	"\t\t\"MaxLevel\":\"".$this->maxLevel."\"\n" ;
+				$ret	.=	"\t},\n" ;
+				$ret	.=	"\t\"".$this->className."s\":[\n" ;
+				$subRet	=	"" ;
+				while ( $row = FDb::getRow( $this->sqlResult, self::$db[$this->cacheName])) {
+					if ( $subRet != "") {
+						$subRet	.=	",\n" ;
+					}
+					$this->_assignFromRow( $row) ;
+					$subRet	.=	$this->_exportJSON( $_className) ;
+				}
+				$subRet	.=	"]\n" ;
+				$ret	.=	$subRet ;
+				$ret	.=	"}\n" ;
+				$this->_status  =       0 ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_query', '$_className', '$_db')",
+						$e) ;
+		}
+error_log( $ret) ;
+		return $ret ;
+	}
+	/**
+	 * itemFromDb( ...)
+	 *
+	 */
+	function	itemFromDb( $_joinCols="", $_join="", $where="", $_order="", $_tableName="", $_className="", $_mf="C.*", $_xmlClass="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$ret	=	"" ;
+		/**
+		 *
+		 */
+		if ( $_className != "") {
+			$this->className	=	$_className ;
+		}
+		$query	=	"SELECT " . $_mf . " " . $_joinCols  . " FROM " . FDb::fTableName( $this->className) . " AS C " ;
+		$query	.=	$_join . " " ;
+		$query	.=	"WHERE " . $where . " " ;
+		$query	.=	$_order . " " ;
+		$this->sqlResult      =       FDb::query( $query, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =       mysqli_fetch_assoc( $this->sqlResult) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+				$ret	=	$this->getXMLF() ;
+			}
+		}
+		return $ret ;
+	}
+	/**
+	 * _firstFromDb( $_where, $_start)
+	 *
+	 * Get first object matching given criteria from db
+	 *
+	 * This methods fetches the first object matching the given condition
+	 * from the database db.
+	 *
+	 * @param	string	$_where			condition for the object to be met. Must *NOT* include the "WHERE "
+	 * @param	int		$_start			start position of the
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	_firstFromDb( $_where, $_start=0) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$keyCol	=	$this->keyCol ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		$this->_currRow	=	$_start ;
+		$myQuery	=	$this->getQueryObj( "Select") ;
+		$myQuery->addWhere( $_where) ;
+		$numrows	=	FDb::getCount( $myQuery, self::$db[$this->cacheName]) ;
+		try {
+			$this->sqlIterResult	=	FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+			if ( $numrows == 1) {
+				$row    =	mysqli_fetch_assoc( $this->sqlIterResult) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+				$this->_lastRow   =       0 ;
+			} else if ( $numrows > 1) {
+				$row    =       mysqli_fetch_assoc( $this->sqlIterResult) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+				$this->_lastRow   =       $numrows - 1 ;
+			} else {
+				$this->_status   =       -5 ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_where', $_start)",
+						$e) ;
+		}
+		return $this->_valid ;
+	}
+	/**
+	 * _nextFromDb()
+	 *
+	 * Get next object matching given criteria from db
+	 *
+	 * This methods fetches the first object matching the given condition
+	 * from the database db.
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	_nextFromDb() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		if ( $this->_currRow < $this->_lastRow) {
+			$this->_currRow++ ;
+			$row    =       mysqli_fetch_assoc( $this->sqlIterResult) ;
+			$this->_assignFromRow( $row) ;
+			$this->_valid	=	true ;
+		} else {
+			$this->_status	=	-3 ;
+		}
+		return $this->_valid ;
+	}
+	/**
+	 * updateInDb( $_exec)
+	 *
+	 * Update object in db
+	 *
+	 * Updates the given object in the db. The update is performed using the Id
+	 * as criterium. The Id and the Key of the object are *NOT* updated.
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	updateInDb( $_exec=true) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 * perform basic authorization for this dbt function
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".update" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to update objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		} else {
+		}
+		/**
+		 *
+		 */
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		$myQuery	=	$this->getQueryObj( "Update") ;
+		$myQuery->addWhere( $idKey . "='" . FDb::escapeString( $this->$idKey, self::$db[$this->cacheName]) . "' " ) ;
+		foreach ( $this->attrNames as $colName) {
+			if ( $colName != "Id" && $colName != $this->keyCol && $this->attrTypes[ $colName] != "uniqueidentifier") {
+				$authority	=	self::$db[$this->cacheName] . "." . $this->className . ".update." . $colName ;
+				if ( $appUser) {
+					if ( ! $appUser->isGranted( "dbt", $authority, false)) {
+						throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+									"insufficient rights to update field '".$colName."'!") ;
+					}
+					if ( ! $appUser->isValueGranted( "dbv", $this->className.".".$colName, FDb::escapeString( $this->$colName, self::$db[$this->cacheName]), false)) {
+						throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+									"value not allowed '".FDb::escapeString( $this->$colName, self::$db[$this->cacheName])."'!") ;
+					}
+				}
+				if (( $this->$colName === "NULL" || $this->$colName === null) && $this->attrNull[$colName] == "YES") {
+					$myQuery->addField( $colName) ;
+					$myQuery->addValue( "null") ;
+				} else if ( $this->$colName === "NULL") {
+					$myQuery->addField( $colName) ;
+					/**
+					 * special MS handling:
+					 * UniqueIDentifier is handled as string but MUST be send to the server w/o '' !!!
+					 */
+					if ( $this->attrTypes[ $colName] != "uniqueidentifier") {
+						$myQuery->addValue( "'" . $this->attrDefault[$colName]. "' ") ;
+					} else {
+						$myQuery->addValue( " " . $this->attrDefault[$colName]. "  ") ;
+					}
+				} else {
+					$myQuery->addField( $colName) ;
+					$myQuery->addValue( "'" . FDb::escapeString( $this->$colName, self::$db[$this->cacheName]) . "' ") ;
+				}
+			}
+		}
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$this->_valid	=	true ;
+		}
+		/**
+		 *
+		 */
+		if ( $this->traceUpdate) {
+			$myFile	=	fopen( $this->path->Archive . "XML/Up/" . "myUpd.sql", "a+") ;
+			fwrite( $myFile, $query . "\n") ;
+			fclose( $myFile) ;
+		}
+		FDbg::end() ;
+		return $this->_valid ;
+	}
+	/**
+	 * updateColInDb( $_col)
+	 *
+	 * Update object in db
+	 *
+	 * Updates a specific attribute of the given object in the db.
+	 * The update is performed using the Id
+	 * as criterium. The Id and the Key of the object are *NOT* updated.
+	 *
+	 * @param	string	$_col			name of the column to update
+	 * @param	string	$_db			database alias (def if not specified)
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	updateColInDb( $_col) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_col')") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 * perform basic authorization for this dbt function
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".update" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to update objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		$myQuery	=	$this->getQueryObj( "Update") ;
+		$myQuery->addWhere( $idKey . "='" . FDb::escapeString( $this->$idKey, self::$db[$this->cacheName]) . "' " ) ;
+		$cols	=	explode( ",", $_col) ;
+		foreach ( $cols as $colName) {
+			if ( $colName != "Id" && $colName != $this->keyCol && $this->attrTypes[ $colName] != "uniqueidentifier") {
+				if ( $this->$colName === null && $this->attrNull[$colName] == "YES") {
+					$myQuery->addField( $colName) ;
+					$myQuery->addValue( "null") ;
+				} else if ( $this->$colName === null) {
+					$myQuery->addField( $colName) ;
+					$myQuery->addValue( "'" . $this->attrDefault[$colName]. "' ") ;
+				} else {
+					$myQuery->addField( $colName) ;
+					$myQuery->addValue( "'" . FDb::escapeString( $this->$colName, self::$db[$this->cacheName]) . "' ") ;
+				}
+			}
+		}
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$this->_valid	=	true ;
+		}
+		/**
+		 *
+		 */
+		if ( $this->traceUpdate) {
+			$myFile	=	fopen( $this->path->Archive . "XML/Up/" . "myUpd.sql", "a+") ;
+			fwrite( $myFile, $query . "\n") ;
+			fclose( $myFile) ;
+		}
+		FDbg::end() ;
+		return $this->_valid ;
+	}
+	/**
+	 *fullUpdateInDb()
+	 *
+	 * Full update of object in db
+	 *
+	 * Updates the given object in the db. The update is performed using the Id
+	 * as criterium. The Id and the Key of the object are also updated.
+	 * This makes the usage of this function VERY DANGEROUS, as it may render
+	 * references to key columns INVALID. USE WITH CAUTION!
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	updateAllInDb( $_col) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		$myQuery	=	new FSqlUpdate( $this->className, $this) ;
+		$myQuery->addWhere( $idKey . "='" . FDb::escapeString( $this->$idKey, self::$db[$this->cacheName]) . "' " ) ;
+		$query	=	"UPDATE " . FDb::fTableName( $this->className) . " " ;
+		$query	.=	"SET " ;
+		$ndx	=	0 ;
+		$cols	=	explode( ",", $_col) ;
+		foreach ( $cols as $colName) {
+			if ( $this->$colName === null && $this->attrNull[$colName] == "YES") {
+				$myQuery->addField( $colName) ;
+				$myQuery->addValue( "null") ;
+			} else if ( $this->$colName === null) {
+				$myQuery->addField( $colName) ;
+				$myQuery->addValue( "'" . $this->attrDefault[$colName]. "' ") ;
+			} else {
+				$myQuery->addField( $colName) ;
+				$myQuery->addValue( "'" . FDb::escapeString( $this->$colName, self::$db[$this->cacheName]) . "' ") ;
+			}
+		}
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$this->_valid	=	true ;
+		}
+		/**
+		 *
+		 */
+		if ( $this->traceUpdate) {
+			$myFile	=	fopen( $this->path->Archive . "XML/Up/" . "myUpd.sql", "a+") ;
+			fwrite( $myFile, $query . "\n") ;
+			fclose( $myFile) ;
+		}
+		return $this->_valid ;
+	}
+	/**
+	 *fullUpdateInDb()
+	 *
+	 * Full update of object in db
+	 *
+	 * Updates the given object in the db. The update is performed using the Id
+	 * as criterium. The Id and the Key of the object are also updated.
+	 * This makes the usage of this function VERY DANGEROUS, as it may render
+	 * references to key columns INVALID. USE WITH CAUTION!
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	updateColInDbWhere( $_col, $_where) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		$myQuery	=	$this->getQueryObj( "Update") ;
+		$cols	=	explode( ",", $_col) ;
+		foreach ( $cols as $colName) {
+			if ( $this->$colName === null && $this->attrNull[$colName] == "YES") {
+				$myQuery->addField( $colName) ;
+				$myQuery->addValue( "null") ;
+			} else if ( $this->$colName === null) {
+				$myQuery->addField( $colName) ;
+				$myQuery->addValue( "'" . $this->attrDefault[$colName]. "' ") ;
+			} else {
+				$myQuery->addField( $colName) ;
+				$myQuery->addValue( "'" . FDb::escapeString( $this->$colName, self::$db[$this->cacheName]) . "' ") ;
+			}
+		}
+		$myQuery->addWhere( $_where ) ;
+		$this->sqlResult      =       FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status  =       -1 ;
+		} else {
+			$this->_valid	=	true ;
+		}
+		/**
+		 *
+		 */
+		if ( $this->traceUpdate) {
+			$myFile	=	fopen( $this->path->Archive . "XML/Up/" . "myUpd.sql", "a+") ;
+			fwrite( $myFile, $query . "\n") ;
+			fclose( $myFile) ;
+		}
+		return $this->_valid ;
+	}
+	/**
+	 * removeFromDb()
+	 *
+	 * Remove object from db
+	 *
+	 * Removed the given object from the db. The removal is performed using the Id
+	 * as criterium.
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	removeFromDb() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 * perform basic authorization for this dbt function
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".delete" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to delete objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$idKey	=	self::$idKey[$this->cacheName] ;
+		$myQuery	=	$this->getQueryObj( "Delete") ;
+		$myQuery->addWhere( $idKey . "='" . FDb::escapeString( $this->$idKey, self::$db[$this->cacheName]) . "' " ) ;
+		$this->sqlResult	=	FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status	=	-1 ;
+		} else {
+			$this->_valid	=	false ;
+		}
+		FDbg::end() ;
+		return $this->_valid ;
+	}
+	/**
+	 * removeFromDbWhere()
+	 *
+	 * Remove object from db
+	 *
+	 * Removed the given object from the db. The removal is performed using the Id
+	 * as criterium.
+	 *
+	 * @param	string	$_db			database alias
+	 * @return	bool					success of the method, false - no success, true - success
+	 */
+	function	removeFromDbWhere( $_where) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		/**
+		 * perform basic authorization for this dbt function
+		 */
+		$appUser	=	$this->__getAppUser() ;
+		if ( $appUser) {
+			$authority	=	self::$db[$this->cacheName] . "." . $this->className.".delete" ;
+			if ( ! $appUser->isGranted( "dbt", $authority)) {
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( ...)",
+							"insufficient rights to delete objects of type '".$this->className."'! Required: '".$authority."'") ;
+			}
+		}
+		/**
+		 *
+		 */
+		$myQuery	=	$this->getQueryObj( "Delete") ;
+		$myQuery->addWhere( $_where ) ;
+		$this->sqlResult	=	FDb::query( $myQuery, self::$db[$this->cacheName]) ;
+		if ( !$this->sqlResult) {
+			$this->_status	=	-1 ;
+		} else {
+			$this->_valid	=	false ;
+		}
+		FDbg::end() ;
+		return $this->_valid ;
+	}
+	/**
+	 * getFromJSON( $_json)
+	 *
+	 * Assign object attributes from POST variables
+	 *
+	 * Assigns all manifested attributes of the object from POST variables.
+	 * The POST variables need to follow the naming convention '_I'<attributeName>.
+	 * The Id ist *NOT* assigned.
+	 * @return	void
+	 */
+	function	getFromJSON( $_json) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		foreach ( $this->attrNames as $colName) {
+			if ( $colName != "Id") {
+				if ( isset( $_json->$colName)) {				// general input
+					$this->$colName	=	$_json->$colName ;
+				}
+			}
+		}
+	}
+	/**
+	 * getFromPost()
+	 *
+	 * Assign object attributes from POST variables
+	 *
+	 * Assigns all manifested attributes of the object from POST variables.
+	 * The POST variables need to follow the naming convention '_I'<attributeName>.
+	 * The Id ist *NOT* assigned.
+	 * @return	void
+	 */
+	function	getFromPost() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		if ( isset( $_POST['json'])) {
+			$this->getFromJSON( json_decode( $_POST['json'])) ;
+		} else {
+			foreach ( $this->attrNames as $colName) {
+				/**
+				 * we MAY NOT overwrite an 'Id' attribute ...
+				 */
+				if ( $colName != "Id") {
+					if ( isset( $_POST[ $colName])) {				// general input
+						$myValue	=	$_POST[ $colName] ;
+					} else if ( isset( $_POST[ $colName.$this->className])) {				// general input
+						$myValue	=	$_POST[ $colName.$this->className] ;
+					}
+					if ( isset( $myValue)) {
+						if ( $this->attrNull[$colName] == "YES") {
+							if ( $myValue == "")
+								$myValue	=	null ;
+						}
+						$this->$colName	=	$myValue ;
+						unset( $myValue) ;
+					}
+				}
+			}
+		}
+	}
+	/**
+	 * getFromPostL( $_noGet)
+	 *
+	 * Assign object attributes from POST variables
+	 *
+	 * Assigns all manifested attributes of the object from POST variables.
+	 * The POST variables need to follow the naming convention '_I'<attributeName>,
+	 * '_I<attributeName><className>', 'dI'<attributeName> or
+	 * 'dI<attributeName><className>'
+	 *
+	 * @return	void
+	 */
+	function	getFromPostL( $_noGet="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		if ( isset( $_POST['json'])) {
+			$this->getFromJSON( json_decode( $_POST['json'])) ;
+		} else {
+			foreach ( $this->attrNames as $colName) {
+				if ( $colName != "Id" && $colName != $this->keyCol && strpos( $_noGet, ",$colName,") === false) {
+					if ( isset( $_POST[ $colName])) {				// general input
+						$myValue	=	$_POST[ $colName] ;
+					} else if ( isset( $_POST[ $colName.$this->className])) {				// general input
+						$myValue	=	$_POST[ $colName.$this->className] ;
+					}
+					if ( isset( $myValue)) {
+						if ( $myValue === "") {
+							if ( $this->attrNull[$colName] === "YES")
+								$myValue	=	null ;
+							else
+								$myValue	=	$this->attrDefault[$colName] ;
+						}
+						$this->$colName	=	$myValue ;
+						unset( $myValue) ;
+					}
+				}
+			}
+		}
+	}
+	/**
+	 * dup( $_master)
+	 *
+	 * @param $master
+	 */
+	function	dup( $master) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		foreach ( $this->attrNames as $colName) {
+			$this->$colName	=	$master->$colName ;
+		}
+		reset( $this->attrNames) ;
+	}
+
+	/**
+	 * newKey( $_digits, $_nsStart, $_nsEnd, $_store)
+	 *
+	 * Get a new key for the object and stores the object as an empty object in the database.
+	 * The object is then reloaded.
+	 * @param int $_digits	number of digits for the key
+	 * @param string $_nsStart	beginning of the number range within which to fetch the new key
+	 * @param string $_nsEnd	end of the number range within which to fetch the new key
+	 * @return void
+	 */
+	function	newKey( $_digits=6, $_nsStart="000000", $_nsEnd="999999", $_store=true) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( $_digits, '$_nsStart', '$_nsEnd')") ;
+		if ( self::$idKey[$this->cacheName]	!=	"Id") {
+			try {
+				$myConfig	=	EISSCoreObject::__getAppConfig() ;
+				$class	=	$this->className ;
+				$_nsStart	=	$myConfig->$class->nsStart ;
+				$_nsEnd	=	$myConfig->$class->nsEnd ;
+				$_digits	=	strlen( $_nsStart) ;
+			} catch ( Exception $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( $_digits, '$_nsStart', '$_nsEnd', $_store)",
+							$e) ;
+			}
+			if ( strlen( $_nsStart) != $_digits) {
+				error_log( "FDbObject.php::FDbObject::newKey( $_digits, '$_nsStart', '$_nsEnd'): $this->className invalid combination!") ;
+			}
+			$myQuery	=	"SELECT IFNULL(( SELECT $this->keyCol + 1 FROM " .  $this->className . " " .
+							"WHERE  $this->keyCol > $_nsStart AND $this->keyCol <= $_nsEnd " .
+							"ORDER BY $this->keyCol DESC LIMIT 1 ), $_nsStart+1)  AS newKey" ;
+			$myRow	=	FDb::queryRow( $myQuery, self::$db[$this->cacheName]) ;
+			$keyCol	=	$this->keyCol ;
+			$this->$keyCol	=	sprintf( "%0".$_digits."s", $myRow['newKey']) ;
+			if ( $_store) {
+				$this->storeInDb() ;
+				$this->reload() ;
+			} else {
+				$this->_valid	=	true ;
+			}
+			$res	=	$this->$keyCol ;
+		} else {
+			if ( $_store) {
+				$this->storeInDb() ;
+				$this->reload() ;
+			} else {
+				$this->_valid	=	true ;
+			}
+			$res	=	"void" ;
+		}
+		FDbg::end() ;
+		return $res ;
+	}
+	/**
+	 * newKeyKO( $_digits, $_nsStart, $_nsEnd)
+	 *
+	 * Get a new key for the object and returns this key.
+	 * @param int $_digits	number of digits for the key
+	 * @param string $_nsStart	beginning of the number range within which to fetch the new key
+	 * @param string $_nsEnd	end of the number range within which to fetch the new key
+	 * @return string
+	 */
+	function	newKeyKO( $_digits=6, $_nsStart="000000", $_nsEnd="999999") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( $_digits, '$_nsStart', '$_nsEnd')") ;
+		if ( strlen( $_nsStart) != $_digits) {
+			error_log( "FDbObject.php::FDbObject::newKey( $_digits, '$_nsStart', '$_nsEnd'): $this->className invalid combination!") ;
+		}
+		$myQuery	=	"SELECT IFNULL(( SELECT $this->keyCol + 1 FROM '$this->className' " .
+						"WHERE  $this->keyCol > $_nsStart AND $this->keyCol <= $_nsEnd " .
+						"ORDER BY $this->keyCol DESC LIMIT 1 ), $_nsStart+1)  AS newKey" ;
+		$myRow	=	FDb::queryRow( $myQuery, self::$db[$this->cacheName]) ;
+		$newKey	=	sprintf( "%0".$_digits."s", $myRow['newKey']) ;
+		FDbg::end() ;
+		return $newKey ;
+	}
+	/**
+	 * defaultDates()
+	 *
+	 * Set all attributes of type date to the current date
+	 * @return void
+	 */
+	function	defaultDates() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		foreach ( $this->attrTypes as $colName => $colType) {
+			if ( $colName != "Id" && $colName != $this->keyCol) {
+				if ( $colType == "date") {
+					$this->$colName	=	$this->today() ;
+				}
+			}
+		}
+		FDbg::end() ;
+	}
+	/**
+	 * clearRem()
+	 *
+	 */
+	function	clearRem() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		$this->Remark	=	"" ;
+		FDbg::end() ;
+	}
+	/**
+	 * clear()
+	 *
+	 * Set all attributes of type date to the current date
+	 * @return void
+	 */
+	function	clear() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		foreach ( $this->attrTypes as $colName => $colType) {
+			switch ( $colType)	{
+			case	"date"	:
+			case	"smalldatetime"	:
+			case	"datetime"	:
+				$this->$colName	=	$this->today() ;
+				break ;
+			case 	"bit"	:
+			case	"smallint"	:
+			case	"int"	:
+			case	"tinyint"	:
+			case	"bigint"	:
+				$this->$colName	=	0 ;
+				break ;
+			case	"float"	:
+			case	"double"	:
+				$this->$colName	=	0.0 ;
+				break ;
+			case	"decimal"	:
+				$this->$colName	=	0.0 ;
+				break ;
+			case	"smallmoney"	:
+			case	"money"	:
+				$this->$colName	=	0.0 ;
+				break ;
+			case	"char"	:
+			case	"varchar"	:
+			case	"mediumtext"	:
+			case	"longtext"	:
+			case	"text"	:
+				$this->$colName	=	"" ;
+				break ;
+			case	"timestamp"	:
+				$this->$colName	=	date( "Y-m-d H:i:s") ;
+				break ;
+			case	"uniqueidentifier"	:
+				$this->$colName	=	"" ;
+				break ;
+			case	"blob"	:
+			case	"tinyblob"	:
+			case	"mediumblob"	:
+			case	"longblob"	:
+				$this->$colName	=	"" ;
+				break ;
+			default	:
+				error_log( "Unidentified datatype ..... " . $colType) ;
+				break ;
+			}
+		}
+		FDbg::end( 1) ;
+	}
+	/**
+	 * _getPrevNext( $_query)
+	 */
+	function	_getPrevNext( $_query) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_query>)") ;
+		$this->sqlResult      =       FDb::query( $_query, self::$db[$this->cacheName]) ;
+		if ( ! $this->sqlResult) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( <FSqlQuery>)",
+							"failure trying to receive prev/next object! Invalid result!") ;
+		} else {
+			FDbg::trace( 1, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "_getPrevNext( '<_query>')", "sql-command successfully executed ...") ;
+			$numrows        =       FDb::rowCount( self::$db[$this->cacheName]) ;
+			FDbg::trace( 1, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "_getPrevNext( '<_query>')", "numrows = $numrows") ;
+			if ( $numrows == 1) {
+				$row    =       FDb::getRow( $this->sqlResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->reload() ;
+			} else if ( $numrows == 0)  {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( <FSqlQuery>)",
+							"failure trying to receive prev/next object! rows = 0  >>> '$_query'") ;
+			} else {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( <FSqlQuery>)",
+							"failure trying to receive prev/next object! rows > 1 >>> '$_query'") ;
+			}
+		}
+//		$this->reload() ;
+		FDbg::end() ;
+	}
+	/**
+	 * getNextAsXML( $_query)
+	 */
+	function	getNextAsXML( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 101, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')") ;
+		$reply	=	new Reply( __class__, $this->className) ;
+		$keyCol	=	$this->keyCol ;
+		try {
+			$myQuery	=	$this->getQueryObj( "Select") ;
+			$myQuery->addWhere( $this->keyCol." > '" . $this->$keyCol . "' ") ;
+			$myQuery->addOrder( $this->keyCol . " ASC ") ;
+			$myQuery->addLimit( new FSqlLimit( 0, 1)) ;
+			$this->_getPrevNext( $myQuery) ;
+			$reply->replyData	=	$this->getAsXML()->replyData ;
+		} catch ( FException $e) {
+			try {
+				$myQuery	=	$this->getQueryObj( "Select") ;
+				$myQuery->clearWhere() ;
+				$myQuery->addOrder( $this->keyCol . " ASC ") ;
+				$myQuery->addLimit( new FSqlLimit( 0, 1)) ;
+				$this->_getPrevNext( $myQuery) ;
+				$reply->replyData	=	$this->getAsXML()->replyData ;
+			} catch ( Exception $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			} catch ( FException $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+						$e) ;
+		}
+		FDbg::end() ;
+		return $reply ;
+	}
+	/**
+	 * getPrevAsXML( $_query)
+	 */
+	function	getPrevAsXML( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 101, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')") ;
+		$reply	=	new Reply( __class__, $this->className) ;
+		$keyCol	=	$this->keyCol ;
+		try {
+			$myQuery	=	$this->getQueryObj( "Select") ;
+			$myQuery->addWhere( $this->keyCol." < '" . $this->$keyCol . "' ") ;
+			$myQuery->addOrder( $this->keyCol . " DESC ") ;
+			$myQuery->addLimit( new FSqlLimit( 0, 1)) ;
+			$this->_getPrevNext( $myQuery) ;
+			$reply->replyData	=	$this->getAsXML()->replyData ;
+		} catch ( FException $e) {
+			try {
+				$myQuery	=	$this->getQueryObj( "Select") ;
+				$myQuery->addOrder( $this->keyCol . " DESC ") ;
+				$myQuery->addLimit( new FSqlLimit( 0, 1)) ;
+				$this->_getPrevNext( $myQuery) ;
+				$reply->replyData	=	$this->getAsXML()->replyData ;
+			} catch ( Exception $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+ 							$e) ;
+			} catch ( FException $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+						$e) ;
+		}
+		FDbg::end() ;
+		return $reply ;
+	}
+	/**
+	 * getJSONNext( $_query)
+	 */
+	function	getJSONNext( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		try {
+			$keyCol	=	$this->keyCol ;
+			$myQuery	=	"SELECT * FROM " . FDb::fTableName( $this->className) . " "
+						.	"WHERE " . $this->keyCol . ">'" . $this->$keyCol . "' "
+						.	"ORDER BY ".$this->keyCol." ASC "
+						.	"LIMIT 1 " ;
+			$this->_getPrevNext( $myQuery) ;
+			return $this->getJSONComplete() ;
+		} catch ( Exception $e) {
+			try {
+				$keyCol	=	$this->keyCol ;
+				$myQuery	=	"SELECT * FROM " . FDb::fTableName( $this->className) . " "
+							.	"ORDER BY ".$this->keyCol." ASC "
+							.	"LIMIT 1 " ;
+				$this->_getPrevNext( $myQuery) ;
+				return $this->getJSONComplete() ;
+			} catch ( Exception $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			} catch ( FException $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+						$e) ;
+		}
+	}
+	/**
+	 * getJSONPrev( $_query)
+	 */
+	function	getJSONPrev( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		try {
+			$keyCol	=	$this->keyCol ;
+			$myQuery	=	"SELECT * FROM " . FDb::fTableName( $this->className) . " "
+						.	"WHERE " . $this->keyCol . "<'" . $this->$keyCol . "' "
+						.	"ORDER BY " . $this->keyCol . " DESC "
+						.	"LIMIT 1 " ;
+			$this->_getPrevNext( $myQuery) ;
+			return $this->getJSONComplete() ;
+		} catch ( Exception $e) {
+			try {
+				$keyCol	=	$this->keyCol ;
+				$myQuery	=	"SELECT * FROM " . FDb::fTableName( $this->className) . " "
+							.	"ORDER BY " . $this->keyCol . " DESC "
+							.	"LIMIT 1 " ;
+				$this->_getPrevNext( $myQuery) ;
+				return $this->getJSONComplete() ;
+			} catch ( Exception $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			} catch ( FException $e) {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							$e) ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+						$e) ;
+		}
+	}
+	/**
+	 * _lock( _$_lockState)
+	 *
+	 * Set the Lock state of THIS object to $_lockState and update the object in the database accordingly.
+	 * This function requires the object to have the 'LockState' attribute.
+	 * If the object does not have the 'LockState' attribute an exception is thrown
+	 *
+	 * @param $_lockState
+	 * @param $_db
+	 * @return bool	validity of this object
+	 */
+	function	_lock( $_lockState = 1) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( $_lockState)") ;
+		$this->_status	=	0 ;
+		$this->_valid	=	false ;
+		if ( isset( $this->attrTypes['LockState'])) {
+			$this->LockState	=	$_lockState ;
+			$this->updateColInDb( "LockState", self::$db[$this->cacheName]) ;
+			if ( $_lockState == 0)
+				$this->_addRem( "object unlocked!") ;
+			else
+				$this->_addRem( "object locked!") ;
+		} else {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+						"object[".$this->cacheName."] has no property 'LockState'!") ;
+		}
+		FDbg::end() ;
+		return $this->_valid ;
+	}
+	/**
+	 * _unlock( _$_lockState)
+	 *
+	 * Set the Lock state of THIS object to unloacked (lock=0) and update the object in the database accordingly.
+	 * This function requires the object to have the 'LockState' attribute.
+	 * If the object does not have the 'LockState' attribute an exception is thrown
+	 *
+	 * @param $_lockState
+	 * @param $_db
+	 * @return bool	validity of this object
+	 */
+	function	_unlock() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."_unlock()") ;
+		FDbg::end() ;
+		return $this->_lock( 0) ;
+	}
+	/**
+	 * addRem()
+	 *
+	 * This function adds the given comment to the object.
+	 * If the object does not have the 'Rem' attribute an
+	 * exception is thrown (through the used _lock method).
+	 * @param $_rem
+	 * @param $_user
+	 * @param $_db
+	 */
+	function	_addRem( $_rem, $_user="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( )") ;
+		try {
+			if ( $_user != "") {
+				$myText	=	date( "Ymd/His") . ": " . $_user . ": " . $_rem . "\n" ;
+			} else {
+				$myText	=	date( "Ymd/His") . ": " . $this->UserId . ": " . $_rem . "\n" ;
+			}
+			if ( isset( $this->attrTypes['Rem'])) {
+				$myText	.=	$this->Rem ;
+				$this->Rem	=	$myText ;
+				$this->updateColInDb( "Rem", self::$db[$this->cacheName]) ;
+			} else if ( isset( $this->attrTypes['Remark'])) {
+				$myText	.=	$this->Remark ;
+				$this->Remark	=	$myText ;
+				$this->updateColInDb( "Remark", self::$db[$this->cacheName]) ;
+			} else {
+				FDbg::abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+							"object[".$this->cacheName."] has no property 'Remark'!") ;
+			}
+		} catch( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')",
+						$e) ;
+		}
+		FDbg::end() ;
+	}
+	/**
+	 * isValid()
+	 *
+	 * @return	bool	wether the object is vali dor not
+	 */
+	function	isValid() {		return $this->_valid ;		}
+	/**
+	 * copyFrom( $_src)
+	 *
+	 * Copies all attribute values common to the $this object and the $_src object
+	 * from the $_src object to $this object.
+	 * @param object $_src
+	 */
+	function	copyFrom( $_src) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_src>)", "copying to: $this->className]") ;
+		foreach ( $this->attrNames as $ndx => $fieldName) {
+			if ( $fieldName != "Id" && substr( $fieldName, 0, 1) != "_") {
+				if ( isset( $_src->$fieldName) ) {
+					$this->$fieldName	=	$_src->$fieldName ;
+				}
+			}
+		}
+		FDbg::end() ;
+	}
+	/**
+	 * copyTo( $_dest)
+	 *
+	 * Copies all attribute values common to the $this object and the $_dest object
+	 * from the $this object to $_dest object.
+	 * @param object $_dest
+	 */
+	function	copyTo( $_dest) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_dst>)", "copying to: $_dest->className]") ;
+		foreach ( $this->attrNamers as $ndx => $fieldName) {
+			if ( $fieldName != "Id" && substr( $fieldName, 0, 1) != "_") {
+				if ( isset( $_dest->$fieldName)) {
+					$_dest->$fieldName	=	$this->$fieldName ;
+				}
+			}
+		}
+		FDbg::end() ;
+	}
+	/**
+	 * add( $_key, $_id, $_val)
+	 *
+	 * @throws FException
+	 */
+	function	add( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')") ;
+		FDbg::abort() ;
+		throw new FException( basename( __FILE__), __CLASS__, __METHOD__."(...)",
+					"object[".$this->cacheName."]->add must be defined in derived class!") ;
+	}
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $_key
+	 * @param unknown_type $_id
+	 * @param unknown_type $_val
+	 */
+	function	upd( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')") ;
+		FDbg::abort() ;
+		throw new FException( basename( __FILE__), __CLASS__, __METHOD__."(...)",
+					"object[".$this->cacheName."]->upd must be defined in derived class!") ;
+	}
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $_key
+	 * @param unknown_type $_id
+	 * @param unknown_type $_val
+	 */
+	function	del( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')") ;
+		FDbg::abort() ;
+		throw new FException( basename( __FILE__), __CLASS__, __METHOD__."(...)",
+					"object[".$this->cacheName."]->del must be defined in derived class!") ;
+	}
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $_key
+	 * @param unknown_type $_id
+	 * @param unknown_type $_val
+	 */
+	function	copy( $_key="", $_id=-1, $_val="") {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_key', $_id, '$_val')") ;
+		FDbg::abort() ;
+		throw new FException( basename( __FILE__), __CLASS__, __METHOD__."(...)",
+					"object[".$this->cacheName."]->copy must be defined in derived class!") ;
+	}
+	/**
+	 * mayNull( $_attr)
+	 *
+	 * Return information about the null-value option for the given attribute.
+	 *
+	 *	@param	string		$_attr	name of the attribute to enquire information about
+	 *	@return	mixed				info about the null-value for the given attribute
+	 *	@throws	Exception when attribute not defined for this object
+	 *
+	 *
+	 */
+	function	mayNull( $_attr) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_attr')") ;
+		$status	=	false ;
+		if ( isset( $this->attrNull[ $_attr])) {
+			$status	=	$this->attrNull[ $_attr] ;
+		} else {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."( '$_attr')",
+						"attribute not defined") ;
+		}
+		FDbg::end() ;
+		return $status ;
+	}
+	/**
+	 * define the iterator interface
+	 */
+	/**
+	 * setIterCond
+	 * set iteration condition
+	 * example: setIterCond( "ArtikelNr = '123456') ;
+	 * @param	string	$_cond	condition for the where clause
+	 */
+	function	clearIterCond() {
+		$this->iterQuery->clearWhere() ;
+	}
+	function	setIterCond( $_cond) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_cond>)") ;
+		$this->iterQuery->addWhere( $_cond) ;
+		FDbg::end( 0) ;
+	}
+	/**
+	 * setIterOrder
+	 * set iteration ordering
+	 * example: setIterOrder( "ORDER BY ArtikelNr DESC ") ;
+	 * @param	string	$_order	order statement
+	 */
+	function	clearIterOrder() {
+		$this->iterQuery->clearOrder() ;
+	}
+	function	setIterOrder( $_order) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '<_order>')") ;
+		$this->iterQuery->addOrder( $_order) ;
+		FDbg::end( 0) ;
+	}
+	/**
+	 *
+	 * Enter description here ...
+	 * @param unknown_type $_join
+	 * @param unknown_type $_joinCols
+	 */
+	function	setIterJoin( $_join, $_joinCols) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( <_join>, <_joinCols>)") ;
+		$this->iterJoin	=	$_join ;
+		$this->iterJoinCols	=	$_joinCols ;
+		FDbg::end() ;
+	}
+	function	getIterPos() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		FDbg::end() ;
+		return $this->iterPos ;
+	}
+	function	getIterCount() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		FDbg::end() ;
+		return $this->iterCount ;
+	}
+	/**
+	 * (non-PHPdoc)
+	 * @see Iterator::current()
+	 */
+	function	current() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		FDbg::end() ;
+		return $this ;
+	}
+	/**
+	 * (non-PHPdoc)
+	 * @see Iterator::key()
+	 */
+	function	key() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		FDbg::end() ;
+		$keyCol	=	$this->keyCol ;
+		return $this->$keyCol ;
+	}
+	/**
+	 * (non-PHPdoc)
+	 * @see Iterator::next()
+	 */
+	function	next() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		if ( $this->iterPos < ( $this->iterCount - 1)) {
+			try {
+				$row    =       FDb::getRow( $this->sqlIterResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} catch ( Exception $e) {
+				FDbg:abort() ;
+				throw new FException( basename( __FILE__), __CLASS__, __METHOD__."()",
+							$e) ;
+			}
+		} else {
+			$this->_valid	=	false ;
+		}
+		$this->iterPos++ ;
+		FDbg::end() ;
+	}
+	function	rewind() {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."()") ;
+		$this->iterPos	=	0 ;
+		$numRows	=	FDb::getCount( $this->iterQuery, self::$db[$this->cacheName]) ;
+		if ( $this->iterQuery->limit != null)
+			if ( $this->iterQuery->limit->count < $numRows)
+				$numRows	=	$this->iterQuery->limit->count ;
+		FDbg::trace( 1, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "rewind()", $this->iterQuery) ;
+		FDbg::trace( 1, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "rewind()", "rows to iterate := $numRows") ;
+		try {
+			$this->iterCount	=	$numRows ;
+			FDbg::trace( 1, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "rewind()", "iterCount := " . $this->iterCount) ;
+			$this->sqlIterResult      =       FDb::query( $this->iterQuery, self::$db[$this->cacheName]) ;
+			if ( $numRows > 0) {
+				$row    =       FDb::getRow( $this->sqlIterResult, self::$db[$this->cacheName]) ;
+				$this->_assignFromRow( $row) ;
+				$this->_valid   =       true ;
+			} else {
+				$this->_valid   =       false ;
+			}
+		} catch ( Exception $e) {
+			FDbg::abort() ;
+			throw new FException( basename( __FILE__), __CLASS__, __METHOD__."()",
+						$e) ;
+		}
+		FDbg::end() ;
+	}
+	/**
+	 * (non-PHPdoc)
+	 * @see Iterator::valid()
+	 */
+	function	valid() {
+		return $this->_valid ;
+	}
+	/**
+	 *
+	 */
+	function	dumpDb() {
+		foreach ( self::$db as $key => $value) {
+			FDbg::trace( 1, "FDbObject.php", "FDbObject", "dumpDb()", $key . " => " . $value) ;
+		}
+	}
+	/**
+	 *
+	 */
+	function	getQueryObj( $_type) {
+		FDbg::begin( 1, basename( __FILE__), __CLASS__, __METHOD__."( '$_type')") ;
+		FDbg::trace( 1, FDbg::mdTrcInfo1, "FDbObject.php", "FDbObject", "rewind()", "tableName := '" .$this->cacheName. "', alias := '" . self::$db[$this->cacheName] . "' ") ;
+		$obj	=	FDb::getQueryObj( $_type,$this->tableName, self::$db[$this->cacheName]) ;
+		FDbg::end() ;
+		return $obj ;
+	}
+//	function	dump() {
+//		printf( "Class: %s \n", $this->className) ;
+//		foreach ( $this->attrNames as $index => $name) {
+//			printf( "\tAttribute[$name]: " . $this->$name . " \n") ;
+//		}
+//	}
+	/**
+	 * dumpStructure()
+	 *
+	 *
+	 */
+	function	dumpStructure() {
+		FDbg::begin( 1, "FDbObject.php", "FDbObject", "dumpStructure( )") ;
+		error_log( sprintf( "Class: %s \n", $this->className)) ;
+		foreach ( $this->attrNames as $index => $name) {
+			error_log( sprintf( "\tAttribute: %s \n", $name)) ;
+		}
+	}
+	/**
+	 *
+	 */
+	function	__dump() {
+		$buffer	=	__CLASS__ . " Object dump ........: \n" ;
+		$buffer	.=	"    Database.......: " . self::$db[$this->cacheName] . "\n" ;
+		$buffer	.=	"    Driver.........: " . FDb::getDriver( self::$db[$this->cacheName]) . "\n" ;
+		$buffer	.=	"    Class name.....: " . $this->className . "\n" ;
+		$buffer	.=	"    Table name.....: " .$this->cacheName. "\n" ;
+		foreach ( $this->attrNames as $ndx => $fieldName) {
+			$buffer	.=	"        Field..: " . $fieldName . " := " . $this->$fieldName . "\n" ;
+		}
+		return $buffer ;
+	}
+	/**
+	 *
+	 */
+	function	__toString() {
+		return $this->__dump() ;
+	}
+}
+?>

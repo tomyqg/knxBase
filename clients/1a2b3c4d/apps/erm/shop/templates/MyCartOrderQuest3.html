@@ -1,0 +1,58 @@
+<form name="formOrder" method="post" action="/index.php?webPage=MyCart&action=order&step=4">
+	<table>
+<!-- 
+		<tr>
+			<td>
+				<input type="radio" name="PaymentAgent" value="Paypal""></td>
+			<td>
+				<a href="https://www.paypal.com/de/" target="_blank">
+					<img src="/Rsrc/logos/de-pp-logo-100px.png" border="0" alt="Logo 'PayPal empfohlen'">
+				</a>
+			</td>
+			<td>$trans.SHOP-TEXT-PAYPAL$</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type="radio" name="PaymentAgent" value="PaypalExpress"></td>
+			<td><img class="text_links" src="/Rsrc/logos/de-btn-expresscheckout.gif" alt="wimtecc.de"/></td>
+			<td>$trans.SHOP-TEXT-PAYPAL-EXPRESS$</td>
+			<td></td>
+		</tr>
+ -->
+		<tr>
+			<td><input type="radio" name="PaymentAgent" value="PostPay" /></td>
+			<td><img class="text_links" src="/Rsrc/logos/logo_giropay_small.gif" alt="PostPay"/></td>
+			<td></td>
+			<td>
+			</td>
+			<td rowspan="4">
+				<input name="_ISubmitOrder" type="submit" value="$trans.SHOP-BTN-PAY-NOW-GIROPAY$" class="buttonBasic" />
+			</td>
+		</tr>
+		<tr>
+			<td><input type="radio" name="PaymentAgent" value="GiroPay" checked="true"/></td>
+			<td><img class="text_links" src="/Rsrc/logos/logo_giropay_small.gif" alt="GiroPay"/></td>
+			<td>$trans.SHOP-TEXT-BANK-CODE$</td>
+			<td>
+					<input type="text" name="bankcode" size="8" MAXLENGTH="8" value="" title="SHOP-INFO-BANKCODE" />
+			</td>
+		</tr>
+<!-- 
+ 		<tr>
+			<td><input class="disabled" type="radio" name="PaymentAgent" value="Bank""></td>
+			<td>$trans.SHOP-TEXT-WIRETRANSFER$</td>
+			<td></td>
+			<td>
+				<form name="formOrder" method="post" action="/index.php?webPage=MyCart&action=order&step=31">
+					<input name="_ISubmitOrder" type="submit" value="$trans.SHOP-BTN-PAY-INVOICE$" class="buttonBasic" />
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input name="_ISubmitOrder" type="submit" value="$trans.SHOP-BTN-PAY$" class="buttonBasic" />
+			</td>
+		</tr>
+ -->
+	</table>
+</form>

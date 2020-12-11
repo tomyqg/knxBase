@@ -1,0 +1,51 @@
+<div id="0653182890">
+    <div id="0825328827" class="wapDialog" data-wap-module="ModBase" data-wap-screen="SupplierDiscount" data-wap-core-object="SupplierDiscount" data-wap-core-object-key="Id" data-wap-parent-object="Supplier" style="width: 500px; height: 300">
+        <h1 id="0098503973" class="page-title">
+            Edit Supplier Contact		</h1>
+        <div id="content">
+            <div id="maindata">
+                <fieldset id="0525046158">
+                    <legend id="0002409616">
+                        Editor: Supplier Contact					</legend>
+                    <div id="edtSupplierDiscountMain" class="wapForm" name="edtSupplierDiscountMain" data-wap-confirm-discard="true">
+                        <table id="0043415446">
+                            <tr id="0962004624">
+                                <th id="0099110003" class="flHelp">
+                                    <img id="0828131523" src="/api/loadImage.php?image=b_help.png">
+                                    </img>
+                                </th>
+                                <th id="0522465745" class="flMainData">
+                                    :								</th>
+                                <td id="0694412724" width="360" class="fEdit">
+                                    <input id="" name="" class="wapField" data-wap-attr="" data-wap-type="text" data-wap-mode="edit" maxlength="64" size="32" value="" />
+                                </td>
+                            </tr>
+                            <tr id="0059222373">
+                                <th id="0690236223" class="flHelp">
+                                    <img id="0122145318" src="/api/loadImage.php?image=b_help.png">
+                                    </img>
+                                </th>
+                                <th id="0609075085" class="flMainData">
+                                    :								</th>
+                                <td id="0501500761" width="360" class="fEdit">
+                                    <input id="" name="" class="wapField" data-wap-attr="" data-wap-type="text" data-wap-mode="edit" maxlength="64" size="32" value="" />
+                                </td>
+                            </tr>
+                            <tr id="0088384882">
+                                <th id="0152892854" class="flHelp">
+                                    <img id="0643938553" src="/api/loadImage.php?image=b_help.png">
+                                    </img>
+                                </th>
+                                <th id="0475426296" class="flMainData">
+                                    :								</th>
+                                <td id="0095687932" width="360" class="fEdit">
+                                    <input id="" name="" class="wapField" data-wap-attr="" data-wap-type="text" data-wap-mode="edit" maxlength="64" size="32" value="" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

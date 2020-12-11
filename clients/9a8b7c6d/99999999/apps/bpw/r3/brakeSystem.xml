@@ -1,0 +1,26 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Brake System</h1>
+		<div id="myContainer" class="wapTabContainer">  
+			<ul class="wapTabMenu">  
+				<li id="html" class="active" onClick="showTab( this, 'myContainer', 'myHTMLTab') ;">HTML</li>  
+				<li id="css" class="" onClick="showTab( this, 'myContainer', 'myCSSTab') ;">CSS</li>  
+				<li id="javascript" class="" onClick="showTab( this, 'myContainer', 'myJSTab') ;">Javascript</li>  
+				<li id="xxx" class="" onClick="activate( 'trailerData') ; return false ;">Javascript</li>  
+			</ul>  
+			<div class="clear"> </div>  
+			<div class="wapTabTopBorder"> </div>
+			<div id="myHTMLTab" class="wapTabContent active">
+				<h2 class="page-title">1st tab content</h2>
+			</div>
+			<div id="myCSSTab" class="wapTabContent">
+				<h2 class="page-title">2nd tab content</h2>
+			</div>
+			<div id="myJSTab" class="wapTabContent">  
+				<h2 class="page-title">3rd tab content</h2>
+			</div>
+		</div>
+	</div>
+</html>

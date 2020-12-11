@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<title>Frieda - Service</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="Main.js"></script>
+		<script src="CreateNews.js"></script>
+		<script src="GUIElements.js"></script>
+		<script src="DisplayDetailTables.js"></script>
+		<link rel="stylesheet" type="text/css" href="Main.css">
+
+	</head>
+	<body>
+		<center>
+			<h2>Ticketsystem Frieda</h2>
+			<table style="border-collapse:collapse;background-color:#DDDDDD">
+				<tr>
+					<!--colspan has to be equal number of functions available to current user minus 2 -->
+					<td width="400">
+						Frieda Müller
+					</td>
+					<td width="500">
+						Service
+					</td>
+					<td align="right" width="200">
+						Logout&nbsp;&nbsp;<img src="icons/Off-256.png" class="little-icon-button" title="abmelden"/>
+					</td>
+				</tr>
+			</table>
+			<table style="border-collapse:collapse;" id="MAIN">
+				<tr>
+					<!-- name of each td should be the kind of the tab so you could evaluate on click which body form you should use-->
+					<td class="head-icon" id="tab1" name="new-job" onclick="ChangeTabTo(this)" title="Neuen Job erstellen">
+						<img src="icons/Add-Job-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab2" name="jobs" onclick="ChangeTabTo(this)" title="Jobs ansehen">
+						<img src="icons/Clipboard-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab3" name="tickets" onclick="ChangeTabTo(this)" title="Tickets ansehen">
+						<img src="icons/Documents-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab4" name="customer-data" onclick="ChangeTabTo(this)" title="Kundendaten">
+						<img src="icons/Customer-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab5" name="statistics" onclick="ChangeTabTo(this)" title="Statistik">
+						<img src="icons/Graph-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab6" name="messages" onclick="ChangeTabTo(this)" title="Nachrichten">
+						<img src="icons/Message-256.png" class="head-icon-img"/>
+					</td>
+					<td id="head-filler" width="X">
+
+					</td>
+				</tr>
+					<!--colspan has to be equal number of functions available to current user -->
+					<td id= "frieda-body" class="MAIN" colspan="5" height="500px">
+
+					</td>
+				<tr>
+				</tr>
+			</table>
+		</center>
+	</body>
+</html>

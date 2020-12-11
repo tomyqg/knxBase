@@ -1,0 +1,7 @@
+/**
+ * trm		Trouble Report Management
+ *
+ * trm is a system for the management of trouble report and respective trouble report
+ * analysis documents.
+ *
+ */

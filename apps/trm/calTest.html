@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+/**
+ * Comment
+ */
+var unmarked	=	"lightcoral" ;
+var markStarted	=	false ;
+var startHour	=	null ;
+var endHour		=	null ;
+function mouseOver( _event, _object) {
+	_object.style.background	=	"grey" ;
+}
+function mouseOut( _event, _object) {
+	if ( ! startHour) {
+		_object.style.background	=	unmarked ;
+	}
+}
+function mouseDown( _event, _object) {
+    if ( ! startHour) {
+		startHour	=	_object ;
+		_object.style.background	=	"lightgreen" ;
+	} else if ( ! endHour) {
+		endHour	=	_object ;
+		_object.style.background	=	"magenta" ;
+	} else {
+		startHour	=	null ;
+		endHour	=	null ;
+	}
+}
+	</script>
+	</head>
+	<body>
+		<div style="z-index: 100;">
+			<div>TODO write content</div>
+			<div style="background-color: lightcoral;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;"><i>Uhrzeit</i></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">08:00 - 09:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">09:00 - 10:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">10:00 - 11:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">11:00 - 12:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">12:00 - 13:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">13:00 - 14:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">14:00 - 15:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">15:00 - 16:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">16:00 - 17:00</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;">17:00 - 18:00</div>
+			</div>
+			<div style="background-color: black;width: 2px;height: 430px; float: left;"></div>
+			<div style="background-color: lightcoral;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Montag</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;" onmousedown="mouseDown(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;" onmousedown="mouseDown(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;" onmousedown="mouseDown(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+			<div style="background-color: black;width: 1px;height: 430px; float: left;"></div>
+			<div style="background-color: lightcoral;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Dienstag</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+			<div style="background-color: black;width: 1px;height: 430px; float: left;"></div>
+			<div style="background-color: lightcoral;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Mittwoch</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+			<div style="background-color: black;width: 1px;height: 430px; float: left;"></div>
+			<div style="background-color: lightcoral;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Donnerstag</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+			<div style="background-color: black;width: 1px;height: 430px; float: left;"></div>
+			<div style="background-color: lightcoral;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Freitag</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+			<div style="background-color: black;width: 1px;height: 430px; float: left;"></div>
+			<div style="background-color: lightblue;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Samstag</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+			<div style="background-color: black;width: 1px;height: 430px; float: left;"></div>
+			<div style="background-color: lightblue;width: 100px;float: left;">
+				<div style="height: 20px;vertical-align: center;text-align: center;">Sonntag</div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;" onmouseover="mouseOver(event, this);" onmouseout="mouseOut(event, this) ;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+				<div style="background-color: black;height: 1px;"></div>
+				<div style="height: 40px;"></div>
+			</div>
+		</div>
+		<div style="position: absolute; z-index: 50; top: 30px; left: 30px;">OVERLAY</div>
+	</body>
+</html>

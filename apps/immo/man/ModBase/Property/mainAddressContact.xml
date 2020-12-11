@@ -1,0 +1,32 @@
+<!-- 
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:dojo="http://www.openwap.org/dojo"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:data>
+		<wap:dataform id="formAddressContactMain">
+			<wap:rowdisplay wapLabel="Id" wapObj="AddressContact" wapVar="Id" />
+			<wap:rowdisplay wapLabel="Address no." wapObj="AddressContact" wapVar="AddressNo" />
+			<wap:rowdisplay wapLabel="Contact no." wapObj="AddressContact" wapVar="AddressContactNr" />
+			<wap:rowinput wapLabel="First name" wapObj="AddressContact" wapVar="FirstName" wapMode="edit" />
+			<wap:rowinput wapLabel="Name" wapObj="AddressContact" wapVar="LastName" wapMode="edit" />
+			<wap:rowinput wapLabel="Phone" wapObj="AddressContact" wapVar="Phone" wapMode="edit" />
+			<wap:rowinput wapLabel="Fax" wapObj="AddressContact" wapVar="Fax" wapMode="edit" />
+			<wap:rowinput wapLabel="Cellphone" wapObj="AddressContact" wapVar="Cellphone" wapMode="edit" />
+			<wap:rowinput wapLabel="E-Mail" wapObj="AddressContact" wapVar="eMail" wapMode="edit" />
+			<wap:rowinput wapLabel="Username" wapObj="AddressContact" wapVar="UserName" wapMode="edit" />
+			<wap:rowinput wapLabel="Password" wapObj="AddressContact" wapVar="Password" wapMode="edit" />
+			<wap:rowtext wapLabel="Remark" wapObj="AddressContact" wapVar="Remark" wapMode="edit" cols="32" rows="4" />
+		</wap:dataform>
+		<form name="formAddressContactBtn">
+			<wap:btnCreate form="formAddressContactMain" id="AddressContactCreate" />
+			<wap:btnUpdate form="formAddressContactMain" id="AddressContactUpdate" />
+		</form>
+	</wap:data>
+</html>

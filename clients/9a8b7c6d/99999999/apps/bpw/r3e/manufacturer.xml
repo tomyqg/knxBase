@@ -1,0 +1,79 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Manufacturer</h1>
+		<wap:key>
+			<wap:keyform id="ManufacturerKeyData">
+				<wap:keyrow data-wap-label="Manufacturer no." data-wap-attr="ManufacturerId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Description" data-wap-attr="Description" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlManufacturerMain">
+			<wap:tabContentPane id="tabPageManufacturerSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="Manufacturer" data-wap-grid-name="gridManufacturerOV">
+					<wap:gridcol data-wap-obj="Manufacturer" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Manufacturer" data-wap-attr="ManufacturerId" data-wap-label="Manufacturer Id." />
+					<wap:gridcol data-wap-obj="Manufacturer" data-wap-attr="Description" data-wap-label="Description" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageManufacturerMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formManufacturerMain">
+										<wap:rowdisplay data-wap-label="Manufacturer Id." data-wap-attr="ManufacturerId" />
+										<wap:rowinput data-wap-label="Description" data-wap-attr="Description" />
+										<wap:rowflag data-wap-label="Valve producer" data-wap-attr="MakesValves" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Brake System producer" data-wap-attr="MakesBrakes" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Cylinder producer" data-wap-attr="MakesCylinders" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Axle producer" data-wap-attr="MakesAxles" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowdisplay data-wap-label="Checksum" data-wap-attr="Checksum" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formManufacturerMain,formManufacturerValues,formManufacturerValues1" />
+					<wap:btnUpdate data-wap-forms="formManufacturerMain,formManufacturerValues,formManufacturerValues1" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageManufacturerBrakes" data-wap-heading="Brakes">
+				<wap:grid data-wap-class="Brake" data-wap-grid-name="gridBrake">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="BrakeId" data-wap-label="Brake Id." eissLinkTo="Brake" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageManufacturerCylinders" data-wap-heading="Cylinders">
+				<wap:grid data-wap-class="Cylinder" data-wap-grid-name="gridCylinder">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="CylinderId" data-wap-label="Cylinder id" eissLinkTo="Cylinder" />
+					<wap:gridcol data-wap-attr="OrderNo" data-wap-label="Order number" />
+					<wap:gridcol data-wap-attr="Description" data-wap-label="Description" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageManufacturerValves" data-wap-heading="Valves">
+				<wap:grid data-wap-class="Valve" data-wap-grid-name="gridValve">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="ValveId" data-wap-label="Valve id" eissLinkTo="Valve" />
+					<wap:gridcol data-wap-attr="Description" data-wap-label="Description" />
+					<wap:gridcol data-wap-attr="ValveFamily_Description" data-wap-label="Valve family Description" />
+				</wap:grid>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

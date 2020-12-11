@@ -1,0 +1,5 @@
+ToDo list for pdm/svm
+
+1.  Put the configuration for the path to vault into the database mas_pdm_<customerid> as 'PathToVault';
+
+2.  FbDbObject needs to be fixed with regards to the parameters which can be _declare()d. this only happens in ftoreInDb and updateInDb so far;

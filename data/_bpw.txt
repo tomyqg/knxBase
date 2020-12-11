@@ -1,0 +1,902 @@
+<CompleteApplicationSystemData>
+  <ApplicationSystem type="class">
+    <Id type="int" title="Id"><![CDATA[1]]></Id>
+    <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+    <Description1 type="varchar" title="Description1"><![CDATA[BPW Web Applications]]></Description1>
+    <VersionMajor type="int" title="VersionMajor"><![CDATA[0]]></VersionMajor>
+    <VersionMinor type="int" title="VersionMinor"><![CDATA[0]]></VersionMinor>
+    <VersionBuild type="int" title="VersionBuild"><![CDATA[0]]></VersionBuild>
+    <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+    <!--ADDITIONAL_DATA: ApplicationSystem-->
+    <Application type="class">
+      <Id type="int" title="Id"><![CDATA[3]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <Description1 type="varchar" title="Description1"><![CDATA[Design Studie BrakeCalc R3]]></Description1>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: Application-->
+    </Application>
+    <Application type="class">
+      <Id type="int" title="Id"><![CDATA[8]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <Description1 type="varchar" title="Description1"><![CDATA[Design Studie BrakeCalc R3 Editor]]></Description1>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: Application-->
+    </Application>
+    <Application type="class">
+      <Id type="int" title="Id"><![CDATA[13]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <Description1 type="varchar" title="Description1"><![CDATA[Product Change Management]]></Description1>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: Application-->
+    </Application>
+    <Application type="class">
+      <Id type="int" title="Id"><![CDATA[14]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <Description1 type="varchar" title="Description1"><![CDATA[Design Studie BrakeCalc R3 Calculation Design Study]]></Description1>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: Application-->
+    </Application>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[6]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[dfgdfgd]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/calc/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[8]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[__appuser__]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[zzzz]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/calc/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[12]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[dfgdfgsfgsdf]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/r3/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[17]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/r3e/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[52]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/pcm/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[53]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/r3pa1/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <ClientApplication type="class">
+      <Id type="int" title="Id"><![CDATA[58]]></Id>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <UserId type="varchar" title="UserId"><![CDATA[miskhweD]]></UserId>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <PathConfig type="varchar" title="PathConfig"><![CDATA[]]></PathConfig>
+      <PathApplication type="varchar" title="PathApplication"><![CDATA[/clients/99999999/apps/bpw/r3pa1/index.php]]></PathApplication>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: ClientApplication-->
+    </ClientApplication>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[145]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[141]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[142]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwbrake_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[144]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[442]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPrefix]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[143]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[calc]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[119]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[ui]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[196]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[115]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[116]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwbrake_sys]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[118]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[117]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[150]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[showLeftMenu]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[true]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[124]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[197]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[120]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[121]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwbrake_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[123]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[122]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[edit]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[273]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[278]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[274]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[275]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwpcm_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[276]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[277]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[pcm]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[445]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[444]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql
+]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[446]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[447]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwbrake_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[448]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[449]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPrefix]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[450]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[183]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[200]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[179]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[180]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwbrake_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[182]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[443]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPrefix]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[181]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[201]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[206]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[202]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[203]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_bpwbrake_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[204]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[451]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPrefix]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[205]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3e]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[453]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[appSys]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[454]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[455]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[456]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_r3pa1_99999999_sys]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[457]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[458]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPrefix]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[459]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[appSys]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[279]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[284]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[280]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[281]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[mas_r3pa1_99999999]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[282]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[452]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbPrefix]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+    <SysConfigObj type="class">
+      <Id type="int" title="Id"><![CDATA[283]]></Id>
+      <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[bpw]]></ApplicationSystemId>
+      <ApplicationId type="varchar" title="ApplicationId"><![CDATA[r3pa1]]></ApplicationId>
+      <ClientId type="varchar" title="ClientId"><![CDATA[99999999]]></ClientId>
+      <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+      <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+      <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+      <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+      <Help type="varchar" title="Help"><![CDATA[]]></Help>
+      <Imported type="int" title="Imported"><![CDATA[0]]></Imported>
+      <!--ADDITIONAL_DATA: SysConfigObj-->
+    </SysConfigObj>
+  </ApplicationSystem>
+</CompleteApplicationSystemData>

@@ -1,0 +1,112 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+
+<br/>
+<fieldset>
+	<legend>Typ 0</legend>
+	
+	<font color="white">
+		z0 = 
+	</font>
+	<input type="text" style="width:75px" id="z_0" data-dojo-type="dijit.form.TextBox" value="0.563" onBlur="Check_z_0();overview_actualize();"/>
+	
+	<font color="white">
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pm[bar] = 
+	</font> 
+	<input type="text" style="width:75px" id="typ_0_pm" data-dojo-type="dijit.form.TextBox" value="6,5"/>
+	
+	<br/><br/>
+	
+	<div id="auswertung_typ0_table"></div>
+</fieldset>
+	
+<br/>
+	
+<p style="font-weight:bold;color:red">1 Fehler</p>
+			
+<font color="black">
+	<select id="Fehler" size="10" data-dojo-type="dijit.form.Select" name="Fehler" width="400">
+		<option value="000">Der Reifen ist zu klein f&uuml;r das gew&auml;hlte Gutachten</option>
+		</select>
+</font>
+<br/>
+
+<font color="white">
+Diese Fehlermeldungen werden nur zu Anschauungszwecken angezeigt, sie ergeben sich NICHT aus den eingegeben Werten.
+</font>
+	<br/><br/>
+
+<p style="font-weight:bold;color:yellow">3 Hinweise</p>
+	
+<font color="black">
+	<select id="Hinweise" size="10" data-dojo-type="dijit.form.Select" name="Hinweise" width="400">
+		<option value="001">keine Feststellbremse vorhanden</option>
+		<option value="002">EBS ist nach EG nur in Ausnahmen zul&auml;ssig. Wenn m&ouml;gl. nach ECE umstellen.</option>
+	</select>
+</font>
+<br/>
+
+<font color="white">
+Diese Hinweismeldungen werden nur zu Anschauungszwecken angezeigt, sie ergeben sich NICHT aus den eingegeben Werten.
+</font>
+<br/><br/>
+			
+<fieldset>
+		<legend>EBS Einstellungen</legend>
+		
+		<table border="0">
+			<tr>
+				<td></td>
+				<td><font color="white">pm [bar]</font></td>
+				<td>
+					<input style="width:75px" id="EBS_I_1_1" data-dojo-type="dijit.form.NumberSpinner" value="0.60" smallDelta="0.01" constraints="{min:0,max:4,places:2}"/>
+				</td>
+				<td><input style="width:75px" id="EBS_I_2_1" data-dojo-type="dijit.form.NumberSpinner" value="2" smallDelta="1" constraints="{min:0,max:10,places:0}"/></td>
+				<td><input type="text" style="width:75px" id="EBS_I_3_1" data-dojo-type="dijit.form.TextBox" value="3"/></td>
+				<td><input type="text" style="width:75px" id="EBS_I_4_1" data-dojo-type="dijit.form.TextBox" value="6,5"/></td>
+			</tr>
+			<tr>
+				<td><button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconUndo', showLabel: false" id="undo_1">undo</button></td>
+				<td><font color="white">z beladen</font></td>
+				<td></td>
+				<td><input style="width:75px" id="EBS_I_2_2" data-dojo-type="dijit.form.NumberSpinner" value="0.14" smallDelta="0.01" constraints="{min:0,max:1,places:2}"/></td>
+				<td></td>
+				<td><input style="width:75px" id="EBS_I_4_2" data-dojo-type="dijit.form.NumberSpinner" value="0.565" smallDelta="0.001" constraints="{min:0,max:1,places:3}"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font color="white">pZyl[bar]</font></td>
+				<td><input type="text" style="width:75px" id="EBS_I_1_3" data-dojo-type="dijit.form.TextBox" value="0,9"/></td>
+				<td><input type="text" style="width:75px" id="EBS_I_2_3" data-dojo-type="dijit.form.TextBox" value="2,2"/></td>
+				<td></td>
+				<td><input type="text" style="width:75px" id="EBS_I_4_3" data-dojo-type="dijit.form.TextBox" value="6,4"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th colspan="6" align="left"><input id="einst_leer_man" data-dojo-type="dijit.form.CheckBox" value="einst_leer_man" checked="true"><label><font color="white">Einstellung leer manuell</font></label></input></th>
+			</tr>
+			<tr>
+				<td><button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconUndo', showLabel: false" id="undo_2">undo</button></td>
+				<td><font color="white">z leer</font></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input style="width:75px" id="EBS_I_4_5" data-dojo-type="dijit.form.NumberSpinner" value="0.867" smallDelta="0.001" constraints="{min:0,max:1,places:3}"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font color="white">pZyl vorne [bar]</font></td>
+				<td><input type="text" style="width:75px" id="EBS_I_1_6" data-dojo-type="dijit.form.TextBox" value="0,9"/></td>
+				<td></td>
+				<td></td>
+				<td><input type="text" style="width:75px" id="EBS_I_4_6" data-dojo-type="dijit.form.TextBox" value="2,6"/></td>
+			</tr>
+		</table>
+</fieldset>
+	

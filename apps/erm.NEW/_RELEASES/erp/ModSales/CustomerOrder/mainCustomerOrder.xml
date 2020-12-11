@@ -1,0 +1,137 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+	<wap:module name="ModSales" />
+	<wap:screen name="CustomerOrder" />
+	<div>
+		<h1 class="page-title">Customer Orders</h1>
+		<wap:key>
+			<wap:keyform id="CustomerOrderKeyData">
+				<wap:keyrow data-wap-label="Customer order no." data-wap-attr="CustomerOrderNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Name" data-wap-attr="CustomerOrderName1" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlCustomerOrderMain">
+                <wap:tabContentPane id="tabPageCustomerOrderSurvey" data-wap-heading="Overview">
+                        <wap:grid data-wap-class="CustomerOrder" data-wap-grid-name="gridCustomerOrderOV">
+                            <wap:gridcol data-wap-obj="CustomerOrder" data-wap-attr="Id" data-wap-label="Id" />
+                            <wap:gridcol data-wap-obj="CustomerOrder" data-wap-attr="CustomerOrderNo" data-wap-label="CustomerOrderNo" />
+                            <wap:gridcol data-wap-obj="CustomerOrder" data-wap-attr="Customer" data-wap-label="Customer" />
+                            <wap:gridcol data-wap-obj="CustomerOrder" data-wap-attr="Name" data-wap-label="Contact" />
+                        </wap:grid>
+                </wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCustomerOrderMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formCustomerOrderMain">
+										<wap:rowdisplay data-wap-label="Order no." data-wap-attr="CustomerOrderNo" />
+										<wap:rowdisplay data-wap-label="Revision" data-wap-attr="RevNo" />
+										<wap:rowdate data-wap-label="Date" data-wap-attr="Date" data-wap-mode="edit" />
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Customer no." />
+                                            <td class="fEdit">
+												<wap:input data-wap-attr="CustomerNo" size="16" />
+                                                <wap:linkTo data-wap-link-to="Customer" data-wap-link-ref-field="CustomerNo" />
+												<wap:input data-wap-attr="CustomerContactNo" size="3" max="3" cellWidth="60" />
+                                            </td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Delivery customer no." />
+                                            <td class="fEdit">
+											    <wap:input data-wap-attr="DeliveryCustomerNo" size="16" />
+                                                <wap:linkTo data-wap-link-to="Customer" data-wap-link-ref-field="DeliveryCustomerNo" />
+											    <wap:input data-wap-attr="DeliveryCustomerContactNo" size="3" max="3" cellWidth="60" />
+                                            </td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Invoice customer no." />
+                                            <td class="fEdit">
+												<wap:input data-wap-attr="InvoiceCustomerNo" size="16" />
+                                                <wap:linkTo data-wap-link-to="Customer" data-wap-link-ref-field="InvoiceCustomerNo" />
+												<wap:input data-wap-attr="InvoiceCustomerContactNo" size="3" max="3" cellWidth="60" />
+                                            </td>
+										</wap:row>
+										<wap:rowdisplay data-wap-label="Customer cart no." data-wap-attr="CustomerCartNo" />
+										<wap:rowoption data-wap-label="Market" data-wap-attr="MarketId" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Market'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption data-wap-label="Status" data-wap-attr="Status" data-wap-mode="edit"
+											data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="Class='CustomerOrder' AND OptionName = 'Status'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Items</legend>
+									<wap:dataform id="formCustomerOrderItem">
+										<wap:rowinput data-wap-label="Item count" data-wap-attr="ItemCount" />
+										<wap:rowinput data-wap-label="Item count 'Drop Shipping'" data-wap-attr="ItemCountDS" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Reference</legend>
+									<wap:dataform id="formCustomerOrderReferences">
+										<wap:rowinput data-wap-label="Reference no." data-wap-attr="ReferenceNo" />
+										<wap:rowdate data-wap-label="Reference date" data-wap-attr="ReferenceDate" data-wap-mode="edit" />
+ 										<wap:rowinput data-wap-label="Customer reference no." data-wap-attr="CustomerReferenceNo" data-wap-mode="edit" />
+										<wap:rowdate data-wap-label="Customer reference date" data-wap-attr="CustomerReferenceDate" data-wap-mode="edit" />
+										<wap:rowdate data-wap-label="Latest invoicing date" data-wap-attr="LatestInvoicingDate" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Requested delivery" data-wap-attr="RequestedDelivery" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Values</legend>
+									<wap:data>
+										<wap:dataform id="formCustomerOrderValues">
+										<wap:rowinput data-wap-label="Handling flatrate" data-wap-type="float" data-wap-attr="HandlingFlat" />
+										<wap:rowinput data-wap-label="TotalPrice" data-wap-type="float" data-wap-attr="TotalPrice" />
+										<wap:rowinput data-wap-label="TotalTax" data-wap-type="float" data-wap-attr="TotalTax" />
+										</wap:dataform>
+									</wap:data>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formCustomerOrderMain" />
+					<wap:btnUpdate data-wap-forms="formCustomerOrderMain" />
+					<wap:btnDelete wap-auth-object="allowDelete" />
+				    <wap:btnMisc data-wap-label="Create PDF" data-wap-misc-function="createPDF" />
+				    <wap:btnMisc data-wap-label="Consolidate order" data-wap-misc-function="consolidate" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCustomerOrderItems" data-wap-heading="Order Items">
+				<wap:btnJS data-wap-label="Open Article Selector ..." data-wap-misc-function="assignToProfile" data-wap-forms="CustomerOrderKeyData" />
+				<wap:btnMisc data-wap-label="Renumber items" data-wap-misc-function="renumberItems" />
+				<wap:btnMisc data-wap-label="Consolidate order" data-wap-misc-function="consolidate" />
+				<wap:grid data-wap-class="CustomerOrderItem" data-wap-grid-name="gridCustomerOrderItem" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="CustomerOrderNo" data-wap-label="Customer order no." />
+					<wap:gridcol data-wap-attr="ItemNo" data-wap-label="Item no." />
+					<wap:gridcol data-wap-attr="SubItemNo" data-wap-label="Sub-Item no." />
+					<wap:gridcol data-wap-attr="ArticleNo" data-wap-label="Article no." data-wap-size="32,64" data-wap-link-to="Article" />
+                    <wap:gridcol data-wap-attr="ArticleDescription" data-wap-label="Article description" />
+					<wap:gridcol data-wap-attr="Quantity" data-wap-label="Qty." data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="QuantityDelivered" data-wap-label="Dlvrd." data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="QuantityInvoiced" data-wap-label="Invcd." data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="Price" data-wap-label="Price" data-wap-fnc="input" data-wap-size="8,16" data-wap-align="right" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCustomerOrderHelp" data-wap-heading="Help">
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

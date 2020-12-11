@@ -1,0 +1,31 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtProjectDocument" class="wapForm">
+		<h1 class="page-title">Edit Project Document</h1>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Project Document</legend>
+				<wap:dataform id="edtDocumentMain">
+					<wap:rowinput data-wap-label="Prefix" data-wap-attr="Prefix" data-wap-mode="edit" />
+					<wap:rowoption data-wap-label="DecimalClass" data-wap-attr="DecimalClass" data-wap-mode="edit"
+						data-wap-db="DocumentInfo" data-wap-key="Key" data-wap-value="Value" data-wap-cond="Category = 'DECClass'" data-wap-order="'Key'" data-wap-def="" />
+					<wap:rowoption data-wap-label="ABCClass" data-wap-attr="ABCClass" data-wap-mode="edit"
+						data-wap-db="DocumentInfo" data-wap-key="Key" data-wap-value="Value" data-wap-cond="Category = 'ABCClass'" data-wap-order="'Key'" data-wap-def="" />
+					<wap:rowinput data-wap-label="ProductId" data-wap-attr="ProductId" data-wap-mode="edit" />
+					<wap:rowinput data-wap-label="Postfix" data-wap-attr="Postfix" data-wap-mode="edit" />
+					<wap:rowinput data-wap-label="Title" data-wap-attr="Title" data-wap-mode="edit" />
+					<wap:rowoption data-wap-label="Document type" data-wap-attr="DocumentType" data-wap-mode="edit"
+						data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'DocumentType'" data-wap-order="'Key'" data-wap-def="pdf" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

@@ -1,0 +1,76 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModBase" data-wap-screen="Mitarbeiter" data-wap-core-object="Mitarbeiter" data-wap-core-object-key="Mitarbeiternummer" >
+		<h1 class="page-title">Mitarbeiter</h1>
+		<wap:key>
+			<wap:keyform id="MitarbeiterKeyData">
+				<wap:keyrow data-wap-label="Mitarbeiter no." data-wap-attr="Mitarbeiternummer" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Name" data-wap-attr="Name" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlMitarbeiter_Main" data-wap-active-tab-onload="tabPageMitarbeiterSurveyEntry">
+			<wap:tabContentPane id="tabPageMitarbeiterSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-object="Mitarbeiter" data-wap-grid-name="gridMitarbeiterOV" data-wap-tab-onselect="tabPageMitarbeiterMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="Mitarbeiter" data-wap-attr="Mandant" data-wap-label="Mandant" />
+					<wap:gridcol data-wap-obj="Mitarbeiter" data-wap-attr="Mitarbeiternummer" data-wap-label="Mitarbeiter no." data-wap-link-to="Mitarbeiter" />
+					<wap:gridcol data-wap-obj="Mitarbeiter" data-wap-attr="Vorname" data-wap-label="First Name" />
+					<wap:gridcol data-wap-obj="Mitarbeiter" data-wap-attr="Name" data-wap-label="Name" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageMitarbeiterMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formMitarbeiterMain">
+										<wap:rowdisplay data-wap-label="Mandant" data-wap-attr="Mandant" />
+										<wap:rowdisplay data-wap-label="Mitarbeiter Nummer" data-wap-attr="Mitarbeiternummer" />
+										<wap:rowinput data-wap-label="Vorname" data-wap-attr="Vorname" />
+										<wap:rowinput data-wap-label="Name" data-wap-attr="Name" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formMitarbeiterMain" />
+					<wap:btnUpdate data-wap-forms="formMitarbeiterMain" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAktivitaetenMitarbeiter" data-wap-heading="Aktivitaeten">
+				<wap:data>
+					<fieldset>
+						<legend>Zuordnung der Aktivitäten für diesen Mitarbeiters</legend>
+						<wap:grid data-wap-object="AktivitaetenMitarbeiter" data-wap-grid-name="gridAktivitaetenMitarbeiter" data-wap-adder="true" data-wap-load-on-init="false">
+							<wap:gridcol data-wap-attr="UniqueId" data-wap-label="Id" />
+							<wap:gridcol data-wap-attr="Mandant" data-wap-label="Mandant" />
+							<wap:gridcol data-wap-attr="LfdNr" data-wap-label="laufende Nr.y" data-wap-size="8,8" />
+							<wap:gridcol data-wap-attr="MitarbeiterNummer" data-wap-label="Mitarbeiter Nr." data-wap-size="8,8" data-wap-link-to="Mitarbeiter" />
+							<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+						</wap:grid>
+					</fieldset>
+<!--
+					<fieldset>
+						<legend>Aktivitäten für diesen Mitarbeiters</legend>
+						<wap:grid data-wap-object="Aktivitaeten" data-wap-grid-name="gridAktivitaeten" data-wap-adder="true" data-wap-load-on-init="false">
+							<wap:gridcol data-wap-attr="UniqueID" data-wap-label="Id" />
+							<wap:gridcol data-wap-attr="Bezeichnung" data-wap-label="Bezeichnung" />
+							<wap:gridcol data-wap-attr="Datum" data-wap-label="Anfang" data-wap-size="16,16" />
+							<wap:gridcol data-wap-attr="EnddatumZeit" data-wap-label="Ende" data-wap-size="16,16" />
+						</wap:grid>
+					</fieldset>
+-->
+				</wap:data>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

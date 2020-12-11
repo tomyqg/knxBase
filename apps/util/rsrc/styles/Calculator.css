@@ -1,0 +1,398 @@
+#header {		/* ID-selector	*/
+  float:left;
+  width:100%;
+  background:#DAE0D2 url("/rsrc/gif/bg.gif") repeat-x bottom;
+  font-size:100%;
+  line-height:normal;
+  }
+#header ul {		/* ID-selector	*/
+ font: small-caps 900 10px arial ;
+  margin:0;
+  padding:10px 10px 0;
+  list-style:none;
+  }
+#header li {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt1 {		/* ID-selector AND TYPE-selector => descendant	*/
+ font: small-caps 900 10px arial ;
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt2 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt3 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt4 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt5 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt6 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt7 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt8 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header offt9 {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  background:url("/rsrc/gif/norm_left.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 9px;
+  }
+#header a {		/* ID-selector AND TYPE-selector => descendant	*/
+  float:left;
+  display:block;
+  background:url("/rsrc/gif/norm_right.gif") no-repeat right top;
+  padding:5px 15px 4px 6px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#765;
+  }
+/* Commented Backslash Hack
+   hides rule from IE5-Mac \*/
+#header a {float:none;}
+/* End IE5-Mac hack */
+#header a:hover {
+  color:#333;
+  }
+#header #current a {
+  background-image:url("/rsrc/gif/norm_right_on.gif");
+  color:#333;
+  padding-bottom:5px;
+}
+
+table {
+}
+td {
+ border-spacing: 0 0 ;
+ font: 300 11px arial
+}
+#content #display table table {
+	margin: auto;
+	border-spacing: 1 1 ;
+}
+
+#content #keydata table th {
+	text-align: right;
+	font-weight: bold;
+//	background-color: #448844;
+	border-top: 1px solid black;
+	color: #111111;
+	font: 300 12px arial;
+	width: 150px;
+}
+
+#content #keydata table th.flTranslated {
+	text-align: right;
+	color: #111111;
+	font: 300 12px arial
+}
+
+#content #keydata table th.flTranslate {
+	text-align: right;
+	color: #222222;
+	font: 300 12px arial
+}
+
+#content #keydata table td {
+	text-align: left;
+	background-color: #381dbf;
+	color: #fff;
+	font: 300 11px arial;
+}
+
+#content #keydata table td input {
+	background-color: #dddddd;
+	font-weight: bold;
+	color: #111;
+	font: 300 12px arial
+}
+
+#content #keydata table td.space {
+	background-color: #381dbf;
+	font: 300 12px arial
+}
+
+#content #keydata table td.image {
+	background-color: #ffffff;
+	font-weight: bold;
+	color: #111;
+	font: 300 12px arial
+}
+
+#content #maindata {
+	font: 300 11px arial
+}
+
+#content #maindata table th.flTranslated {
+	text-align: right;
+	background-color: #33ee33;
+	color: #fff;
+	font: 300 10px arial
+}
+
+#content #maindata table th.flTranslate {
+	text-align: right;
+	background-color: #ee3333;
+	color: #fff;
+	font: 300 10px arial
+}
+
+#content #maindata table th.flHelp {
+	text-align: right;
+	background-color: #eeee00;
+	color: #fff;
+	font: 300 10px arial
+}
+
+#content #maindata table th.flRed {
+	text-align: right;
+	background-color: #bf1d38;
+	color: #fff;
+	font: 300 10px arial
+}
+
+#content #maindata table th.flBlue {
+	text-align: right;
+	background-color: #381dbf;
+	color: #fff;
+	font: 300 10px arial
+}
+
+#content #maindata table th.flMainData {
+	text-align: right;
+	font-weight: bold;
+//	background-color: #448844;
+	border-top: 1px solid black;
+	color: #111111;
+	font: 300 12px arial;
+	width: 150px;
+}
+
+#content #maindata table th.flRefData {
+	text-align: right;
+	background-color: #381dbf;
+	color: #fff;
+	font: 300 10px arial
+}
+
+#content #maindata table td.fDate {
+	text-align: left;
+	background-color: #eeeeee;
+	color: #000;
+	font: 300 10px arial
+}
+
+#content #maindata table td.fEdit {
+	text-align: left;
+	background-color: #38bf38;
+	color: #fff;
+	font: 300 10px arial;
+	margin-top: 0.1em;
+	margin-bottom: 0.1em;
+	margin-left: 0.2em;
+	padding: 0.1em;
+}
+
+#content #maindata table td.fDisplay {
+	text-align: left;
+	background-color: #381dbf;
+	color: #fff;
+	font: 300 9px arial
+}
+
+#content #maindata table td.fNote {
+	text-align: left;
+/*	background-color: #7f7f18;
+	color: #fff;	*/
+	font: 300 10px arial
+}
+
+#content #maindata fieldset {      
+	float: left;      
+	clear: both;      
+/*	width: 80%;      */
+	margin: 0.5em 0.5em 0.5em 0.5em;      
+	padding: 1em;      
+	border: 1px solid #BFBAB0;      
+	background-color: #F2EFE9;      
+/*	background-image: url(rsrc/image/fieldset_gradient.jpg);	*/      
+	background-repeat: repeat-x;      
+}
+#content #maindata select {
+	border-radius: 0 0 0 0;
+}
+#content #depdata table {
+	background-color: #eee;
+	border-top: 3px solid #ccc;
+	border-left: 2px solid #ccc;
+	border-right: 2px solid #aaa;
+	border-bottom: 3px solid #aaa;
+}
+
+#content #depdata table th.colLabel {
+	text-align: center;
+	background-color: #bf1d38;
+	color: #fff;
+	font: 300 9px arial
+}
+
+#content #depdata table td.colDataL {
+	text-align: left;
+	background-color: #bfbf38;
+	color: #000;
+	font: 300 9px arial
+}
+
+#content #depdata table tbody tr:hover {
+	background-color: #dddddd ;
+}
+
+#content #sectionTitle {
+font-size: 11px;
+font-weight: bold;
+border-bottom: 1px solid #ccc;
+margin: 3px 10px 2px 5px;
+padding: 0px 0px 4px 6px;
+color: #575757;
+}
+
+#content #maindata #sectionTitle {
+font-size: 11px;
+font-weight: bold;
+border-bottom: 1px solid #ccc;
+margin: 3px 10px 2px 5px;
+padding: 0px 0px 4px 6px;
+color: #575757;
+}
+
+input {
+ font: 500 12px arial ;
+ margin-top: 0px;
+ margin-left:0px;
+}
+textarea {
+ font: 900 8px arial ;
+ margin-top: 0px;
+ margin-left:0px;
+}
+select {
+ font: 900 8px arial ;
+ margin-top: 0px;
+ margin-left:0px;
+}
+.wapBtn {
+   border: 1px outset blue;
+   background-color: lightGreen;
+}
+//
+// wapTabController
+//
+body{
+    margin:0;
+}
+.clear{
+    clear: both;
+    height: 0;
+    visibility: hidden;
+    display: block;
+}
+a {
+    text-decoration: none;
+}
+.wapTabContainer{
+    position: relative;
+    width: 100%;
+	font-family: Arial,  Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height:14px;
+    margin: 3em auto;
+ //   width: 500px;
+    overflow: hidden;
+ }
+.wapTabContainer ul{
+    list-style: none;
+    list-style-position: outside;
+    width: 100%;
+}
+.wapTabContainer ul.wapTabMenu li{
+    display: block;
+    float: left;
+    position: relative;
+    font-weight: 700;
+    padding: 5px 10px 5px 10px;
+    background: #eee;
+    border: 1px solid #ddc;
+    border-bottom: none;
+    border-width: 1px;
+    color: #999;
+    cursor: default;
+    height: 14px;
+    margin-bottom: -1px;
+    margin-right: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.wapTabContainer ul.wapTabMenu li.active{
+    background: #fff;
+    color: #0088CC;
+    height: 15px;
+    border-bottom: 0;
+}
+.wapTabTopBorder {
+    border-bottom: 1px solid #d0ccc9;
+}
+.wapTabContent{
+    margin: 0 auto;
+    background: #efefef;
+    background: #fff;
+    border: 1px solid #ddc;
+    border-top-style: none;
+    text-align: left;
+    padding: 10px;
+    padding-bottom: 20px;
+    font-size: 11px;
+    display: none;
+//    height: 250px;
+}
+.wapTabContainer div.active{
+    display: block;
+}
+.wapTabContent h1{
+    line-height: 1em;
+    height: 28px;
+    font-size: 22px;
+}

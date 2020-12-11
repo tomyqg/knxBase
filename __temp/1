@@ -1,0 +1,45 @@
+<Reply><Debug>
+<DebugData>
+<GET>
+<sessionId><![CDATA[d6d3ba1f030c9276c2967e60ad4a7108]]></sessionId>
+<_obj><![CDATA[Address]]></_obj>
+<_fnc><![CDATA[upd]]></_fnc>
+<_key><![CDATA[00000002]]></_key>
+<_id><![CDATA[5]]></_id>
+<_val><![CDATA[AddressContact]]></_val>
+</GET>
+<POST>
+</POST>
+</DebugData>
+</Debug>
+<Status>
+<StatusCode>0</StatusCode>
+<StatusText><![CDATA[ok]]></StatusText>
+<StatusInfo>empty</StatusInfo>
+<TargetURL><![CDATA[]]></TargetURL>
+<InstantiatedClass>Address</InstantiatedClass>
+<ReplyingClass>AppObject</ReplyingClass>
+</Status>
+<Data>
+<TableAddressContact>
+<TableInfo>
+<StartRow>0</StartRow>
+<RowCount>20</RowCount>
+<PageCount>-1</PageCount>
+<TotalRows>1</TotalRows>
+<Dataset>AddressContact</Dataset>
+<Level>0</Level>
+<MaxLevel>0</MaxLevel>
+</TableInfo>
+<AddressContact type="class">
+  <Id type="int" title="Id"><![CDATA[5]]></Id>
+  <AddressNo type="varchar" title="AddressNo"><![CDATA[00000002]]></AddressNo>
+  <AddressContactNo type="varchar" title="AddressContactNo"><![CDATA[3]]></AddressContactNo>
+  <FirstName type="varchar" title="FirstName"><![CDATA[ddd]]></FirstName>
+  <LastName type="varchar" title="LastName"><![CDATA[ddd]]></LastName>
+  <!--ADDITIONAL_DATA: AddressContact-->
+  <!--ADDITIONAL_DATA: AddressContact-->
+</AddressContact>
+</TableAddressContact>
+</Data>
+</Reply>

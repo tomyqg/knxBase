@@ -1,0 +1,32 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModCloud" data-wap-screen="LEGSPosition" data-wap-core-object="LEGSPosition" data-wap-core-object-key="Id" data-wap-parent-object="LEGSVertrag" w="500" h="300">
+		<wap:key>
+			<wap:keyform id="LEGSPositionKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="LEGSPosition" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formLEGSPosition" class="formCreate formUpdate" w="500" h="200">
+				<table>
+					<wap:rowinput data-wap-label="LEGS" data-wap-obj="LEGSPosition" data-wap-attr="LEGS" />
+					<wap:rowinput data-wap-label="HMV Nr." data-wap-obj="LEGSPosition" data-wap-attr="HMVNr" />
+					<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="LEGSPosition" data-wap-attr="Bezeichnung1" />
+					<wap:rowinput data-wap-label="Bezeichnung 1" data-wap-obj="LEGSPosition" data-wap-attr="Bezeichnung2" />
+					<wap:rowinput data-wap-label="Bezeichnung 2" data-wap-obj="LEGSPosition" data-wap-attr="Preis" />
+					<wap:rowinput data-wap-label="Leistungskennziffer" data-wap-obj="LEGSPosition" data-wap-attr="LKZ" />
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

@@ -1,0 +1,12 @@
+Alias /Archive /private/var/www/vhosts/wimtecc.de.local/Archive
+Alias /Images /private/var/www/vhosts/wimtecc.de.local/Images
+Alias /Documents /private/var/www/vhosts/wimtecc.de.local/Documents
+Alias /Downloads /private/var/www/vhosts/wimtecc.de.local/Downloads
+Alias /Common /private/var/www/vhosts/wimtecc.de.local/mas_r1/api
+Alias /clients /private/var/www/vhosts/wimtecc.de.local/mas_r1/clients
+Alias /api /private/var/www/vhosts/wimtecc.de.local/mas_r1/api
+Alias /rsrc /private/var/www/vhosts/wimtecc.de.local/mas_r1/rsrc
+Alias /lib /private/var/www/vhosts/wimtecc.de.local/mas_r1/lib
+Alias /masDoc /private/var/www/vhosts/wimtecc.de.local/masDoc
+Alias /tryout /private/var/www/vhosts/wimtecc.de.local/mas_r1/TryOut
+Alias /home /private/var/www/vhosts/wimtecc.de.local/homeserver

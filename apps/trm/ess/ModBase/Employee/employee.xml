@@ -1,0 +1,131 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Employees</h1>
+		<wap:key>
+			<wap:keyform id="EmployeeKeyData">
+				<wap:keyrow data-wap-label="Employee no." data-wap-attr="EmployeeNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Last Name" data-wap-attr="LastName"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlEmployeeMain">
+			<wap:tabContentPane id="tabPageEmployeeSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="Employee" data-wap-grid-name="gridEmployeeOV"  >
+					<wap:gridcol data-wap-obj="Employee" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Employee" data-wap-attr="EmployeeNo" data-wap-label="User Id." />
+					<wap:gridcol data-wap-obj="Employee" data-wap-attr="Name" data-wap-label="Name" data-wap-align="left"/>
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageEmployeeMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formEmployeeMain">
+										<wap:rowinput data-wap-label="Employee no." data-wap-attr="EmployeeNo" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="First name" data-wap-attr="FirstName" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Middle name" data-wap-attr="MiddleName" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Last name" data-wap-attr="LastName" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Phone" data-wap-attr="Phone" data-wap-mode="edit" />
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Street / No" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="Street" data-wap-mode="edit" />
+												<wap:input data-wap-attr="Number" size="6" max="8" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="ZIP / City" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="ZIP" size="6" max="8" data-wap-mode="edit" />
+												<wap:input data-wap-attr="City" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:rowoption data-wap-label="Country" data-wap-attr="Country" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Country'" data-wap-order="'Key'" data-wap-def="de" />
+										<wap:rowoption data-wap-label="Language" data-wap-attr="Language" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Language'" data-wap-order="'Key'" data-wap-def="de" />
+										<wap:rowinput data-wap-label="e-Mail" data-wap-attr="eMail" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formEmployeeMain" />
+					<wap:btnUpdate data-wap-forms="formEmployeeMain" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageEmployeeAbsence" data-wap-heading="Absences">
+				<wap:data>
+					<fieldset>
+						<legend>Main</legend>
+						<wap:dataform id="formEmployeeAbsenceRequest">
+							<wap:rowinput data-wap-label="Employee no." data-wap-attr="EmployeeNo" data-wap-mode="edit" />
+							<wap:rowoption data-wap-label="Type of absence" data-wap-attr="AbsenceType" data-wap-mode="edit"
+								data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'AbsenceType'" data-wap-order="'Key'" data-wap-def="vac" />
+							<wap:rowdate data-wap-label="From date" data-wap-attr="DateFrom" />
+							<wap:rowdate data-wap-label="Until date" data-wap-attr="DateUntil" />
+							<wap:rowinput data-wap-label="Number of days" data-wap-attr="NumberOfDays" data-wap-mode="edit" />
+							<wap:rowdisplay data-wap-label="Days left (before this request)" data-wap-attr="DaysLeft" />
+						</wap:dataform>
+						<wap:btnMisc data-wap-label="see how much you have left ..." data-wap-misc-function="consolidateAbsence" />
+						<wap:btnMisc data-wap-forms="formEmployeeAbsenceRequest" data-wap-label="Go for it, you deserve it ..." data-wap-misc-function="requestAbsence" />
+					</fieldset>
+				</wap:data>
+				<wap:grid data-wap-class="EmployeeAbsence" data-wap-grid-name="gridEmployeeAbsence" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="EmployeeNo" data-wap-label="Employee no." />
+					<wap:gridcol data-wap-attr="DateFrom" data-wap-label="From" />
+					<wap:gridcol data-wap-attr="DateUntil" data-wap-label="Until"  />
+					<wap:gridcol data-wap-attr="Days" data-wap-label="Number of days" data-wap-align="right" />
+					<wap:gridcol data-wap-attr="AbsenceType" data-wap-label="Reason" data-wap-align="center" />
+					<wap:gridcol data-wap-attr="Status" data-wap-label="Status" data-wap-align="center" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageEmployeeAbsenceRequest" data-wap-heading="Absence Request">
+				<wap:data>
+					<fieldset>
+						<legend>Main</legend>
+						<wap:dataform id="formEmployeeAbsednceRequest">
+							<wap:rowinput data-wap-label="Employee no." data-wap-attr="EmployeeNo" data-wap-mode="edit" />
+							<wap:rowoption data-wap-label="Type of absence" data-wap-attr="AbsenceType" data-wap-mode="edit"
+								data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'AbsenceType'" data-wap-order="'Key'" data-wap-def="vac" />
+							<wap:rowdate data-wap-label="From date" data-wap-attr="DateFrom" />
+							<wap:rowdate data-wap-label="Until date" data-wap-attr="DateUntil" />
+							<wap:rowinput data-wap-label="Number of days" data-wap-attr="NumberOfDays" data-wap-mode="edit" />
+							<wap:rowdisplay data-wap-label="Days left (before this request)" data-wap-attr="DaysLeft" />
+						</wap:dataform>
+						<wap:btnMisc data-wap-label="see how much you have left ..." data-wap-misc-function="consolidateAbsence" />
+						<wap:btnMisc data-wap-forms="formEmployeeAbsenceRequest" data-wap-label="Go for it, you deserve it ..." data-wap-misc-function="requestAbsence" />
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageEmployeeHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlEmployeeHelpMain">
+					<wap:tabContentPane id="tabPageEmployeeHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageEmployeeHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageEmployeeHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

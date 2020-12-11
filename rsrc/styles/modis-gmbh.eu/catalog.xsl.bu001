@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DOCUMENT [
+	<!ENTITY ALPHA "@0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+	<!ENTITY LOWER "abcdefghijklmnopqrstuvwxyz">
+	<!ENTITY UPPER "ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+]>
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
+<!-- Specify a paper size -->
+<!-- Refer to $paper-width, $paper-height for the value. -->
+<xsl:param name="paper-width-default">210mm</xsl:param>
+<xsl:param name="paper-height-default">297mm</xsl:param>
+<xsl:param name="paper-width">210mm</xsl:param>
+<xsl:param name="paper-height">297mm</xsl:param>
+
+<xsl:param name="toc-make" select="true()"/>
+<xsl:param name="cover-make" select="false()"/>
+
+<xsl:key name="index-key" match="index" use="
+ translate(substring(normalize-space(concat(@key,@keyword,.)),1,1),'&LOWER;','&UPPER;') "/>
+ 
+<xsl:template match="/">
+           
+	<fo:root>
+		<fo:layout-master-set>
+			<!-- Define the cover page. -->
+			<fo:simple-page-master master-name="cover" page-height="297mm"
+					                   page-width="210mm" margin-top="20mm"
+					                   margin-bottom="20mm" margin-left="20mm"
+					                   margin-right="10mm">
+				<fo:region-body margin-top="0.25in" margin-bottom="0.25in"/>
+			</fo:simple-page-master>
+
+			<!-- Define the table-of-content (TOC) page. -->
+			<fo:simple-page-master margin="25mm 25mm 25mm 25mm" master-name="PageMaster-index">
+				<xsl:attribute name="page-height">
+					<xsl:value-of select="$paper-height-default"/>
+				</xsl:attribute>
+				<xsl:attribute name="page-width">
+					<xsl:value-of select="$paper-width-default"/>
+				</xsl:attribute>
+				<fo:region-body margin="0mm 0mm 0mm 0mm" column-count="3" column-gap="10mm"/>
+			</fo:simple-page-master>
+
+			<!-- Define a body (or default) page. -->
+			<fo:simple-page-master margin="25mm 25mm 25mm 25mm" master-name="PageMaster-TOC">
+				<xsl:attribute name="page-height">
+					<xsl:value-of select="$paper-height"/>
+				</xsl:attribute>
+				<xsl:attribute name="page-width">
+					<xsl:value-of select="$paper-width"/>
+				</xsl:attribute>
+				<fo:region-body margin="0mm 0mm 0mm 0mm"/>
+			</fo:simple-page-master>
+
+			<!-- Define a body (or default) page. -->
+			<fo:simple-page-master master-name="leftPage" page-height="297mm"
+					                   page-width="210mm" margin-top="8mm"
+					                   margin-bottom="8mm" margin-left="10mm"
+					                   margin-right="20mm">
+
+				<!-- Central part of page -->
+				<fo:region-body column-count="2" column-gap="5mm" margin-top="10mm"
+					              margin-bottom="10mm"/>
+
+				<!-- Header -->
+				<fo:region-before extent="10mm"/>
+
+				<!-- Footer -->
+				<fo:region-after extent="10mm"/>
+			</fo:simple-page-master>
+			<fo:simple-page-master master-name="rightPage" page-height="297mm"
+					                   page-width="210mm" margin-top="8mm"
+					                   margin-bottom="8mm" margin-left="20mm"
+					                   margin-right="10mm">
+
+				<!-- Central part of page -->
+				<fo:region-body column-count="2" column-gap="5mm" margin-top="10mm"
+					              margin-bottom="10mm"/>
+
+				<!-- Header -->
+				<fo:region-before extent="10mm"/>
+
+				<!-- Footer -->
+				<fo:region-after extent="10mm"/>
+			</fo:simple-page-master>
+			<fo:page-sequence-master master-name="contents">
+				<fo:repeatable-page-master-alternatives>
+					<fo:conditional-page-master-reference
+							master-reference="leftPage"
+							odd-or-even="even"/>
+					<fo:conditional-page-master-reference
+							master-reference="rightPage"
+							odd-or-even="odd"/>
+				</fo:repeatable-page-master-alternatives>
+			</fo:page-sequence-master>
+		</fo:layout-master-set>
+
+		<!-- cover page -->
+		<fo:page-sequence master-reference="cover">
+			<fo:flow flow-name="xsl-region-body">
+				<fo:block text-align="center" font-size="28.0pt">
+					<xsl:text>MODIS Preisliste</xsl:text>
+				</fo:block>
+				<fo:block text-align="center" font-size="14.0pt">
+					<xsl:text>Stand: 11.08.2011</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text></xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>MODIS GmbH</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Robert-Bosch-Str. 1</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>D-51674 Wiehl - Bomig</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Telefon: 02262 7999 00-0</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Fax: 02262 7999 00-9</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text></xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Bitte beachten Sie:</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Wir liefern Chemikalien AUSSCHLIESSLICH an Schulen,
+					Universitäten sowie gewerbliche Abnehmer.</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Bei Internetbestellungen werden Chemikalien automatisch
+					aus der Bestellung gelöscht wenn der Besteller
+					diese Voraussetzung nicht erfüllt.</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Bei Neuregisterierung über unsere Internetseite müssen 
+					Sie sich, um diese Voraussetzung zu erfüllen, entsprechend anmelden.
+					Hierzu ist die Angabe von Telefonnummer, Telefaxnummer sowie der
+					Umsatzsteuerident Nr. erforderlich. Wir behalten uns vor diese Angabe
+					nachzuprüfen und im Zweifelsfall eine Gewerbeanmeldung einzufordern.
+					</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Für Bestellung von Kaliumpermanganat sowie Essigsäureanhydrid
+					ist zusätzliche eine sogenannte Endverbleibserklärung
+					erforderlich.
+					Das hierzu erforderliche Formular finden Sie in dem Download Bereich.
+					Beide Chemikalien werden ausschliesslich an Schulen und Universitäten
+					abgegeben.</xsl:text>
+				</fo:block>
+				<fo:block text-align="left" font-size="10.0pt">
+					<xsl:text>Alle Preise in dieser Preisliste sind netto, d.h. zzgl. der
+					gesetzlichen Mwst., derzeit 19%.
+					Gewerbliche Abnehmer innerhalb der EU beliefern wir Mwst. frei wenn eine
+					nachprüfbare Umsatzsteuer Ident Nr. (UStId) vorliegt.
+					</xsl:text>
+				</fo:block>
+			</fo:flow>
+		</fo:page-sequence>
+
+		<!-- table-of-contents (TOC) page -->
+		<xsl:call-template name="toc"/>
+
+		<!-- Body page -->
+		<fo:page-sequence master-reference="contents" initial-page-number="1">
+
+			<!-- Define the contents of the header. -->
+			<fo:static-content flow-name="xsl-region-before">
+				<fo:block font-size="14.0pt" font-family="sans-serif" padding-after="4.0pt"
+					space-before="4.0pt" text-align="center"
+					border-bottom-style="solid" border-bottom-width="1.0pt">
+					<xsl:text>MODIS Preisliste</xsl:text>
+				</fo:block>
+			</fo:static-content>
+
+			<!-- Define the contents of the footer. -->
+			<fo:static-content flow-name="xsl-region-after">
+				<fo:block font-size="8.0pt" font-family="sans-serif"
+							padding-before="2mm"
+							padding-after="2.0pt"
+					        space-before="3mm" text-align="center"
+					        border-top-style="solid" border-bottom-width="1.0pt">
+					        <xsl:text>Page </xsl:text>
+					        <fo:page-number/>
+				</fo:block>
+			</fo:static-content>
+
+			<!-- The main contents of the body page, that is, the catalog entries -->
+			<fo:flow flow-name="xsl-region-body">
+				<fo:block font-size="10.0pt" font-family="sans-serif">
+					<xsl:apply-templates select="Catalog">
+					</xsl:apply-templates>
+				</fo:block>
+			</fo:flow>
+		</fo:page-sequence>
+		
+		<!-- table-of-contents (TOC) page --> 
+		<xsl:call-template name="index.create" />
+
+	</fo:root>
+</xsl:template>
+
+<xsl:template match="Chapters">
+	<xsl:apply-templates />
+</xsl:template>
+
+<!-- Format entries from angebot.xml -->
+<xsl:template match="ArtGr">
+<!--
+	<fo:block font-size="10.0pt" font-weight="bold" padding-top="6mm" keep-with-next="always"><xsl:value-of select="./ArtGrName"/></fo:block>
+-->
+	<xsl:variable name="imageURI" select="./Image"/>
+	<fo:external-graphic src="url('{$imageURI}')" padding-left="22.5mm" padding-bottom="2mm" content-height="30mm" content-width="40mm" keep-with-next="always"/>
+	<fo:block font-size="9.0pt" padding-top="2mm" keep-with-next="always">
+		<xsl:apply-templates select="./Description">
+		</xsl:apply-templates>
+	</fo:block>
+	<xsl:apply-templates  select="Prices" />
+</xsl:template>
+
+<!-- Format entries from angebot.xml -->
+<xsl:template match="Artikel">
+	<xsl:variable name="imageURI" select="./Image"/>
+	<fo:block font-size="10.0pt" font-weight="bold" padding-top="6mm" keep-with-next="always"><xsl:value-of select="./ArtGrName"/></fo:block>
+	<fo:external-graphic src="url('{$imageURI}')" padding-left="22.5mm" padding-bottom="2mm" content-height="30mm" content-width="40mm" keep-with-next="always"/>
+	<fo:block font-size="9.0pt" padding-top="2mm" keep-with-next="always">
+		<xsl:apply-templates select="./Description">
+		</xsl:apply-templates>
+	</fo:block>
+	<xsl:apply-templates  select="Prices" />
+</xsl:template>
+
+<xsl:template match="Prices">
+	<!-- Put entire entry within a single block. -->
+	<xsl:if test="Price">
+		<fo:block font-family="sans-serif" font-size="9.0pt" space-after="2.0pt">
+			<xsl:call-template name="PriceListTempl">
+				<xsl:with-param name="PriceList" select="Price"/>
+			</xsl:call-template>
+		</fo:block>
+	</xsl:if>
+</xsl:template>
+		
+<!-- Useful template for listing multiple items (such as authors). -->
+<xsl:template name="PriceListTempl">
+	<xsl:param name="PriceList"/>
+	<fo:table padding-bottom="4mm">
+		<fo:table-column column-width="20mm"/>
+		<fo:table-column column-width="42mm"/>
+		<fo:table-column column-width="13mm"/>
+		<fo:table-column column-width="10mm"/>
+		<fo:table-header>
+			<fo:table-row>
+				<fo:table-cell>
+					<fo:block font-weight="bold">Artikelnr.</fo:block>
+				</fo:table-cell>
+				<fo:table-cell>
+					<fo:block font-weight="bold">Beschreibung</fo:block>
+				</fo:table-cell>
+				<fo:table-cell>
+					<fo:block font-weight="bold" text-align="right">Menge</fo:block>
+				</fo:table-cell>
+				<fo:table-cell>
+					<fo:block font-weight="bold" text-align="right">Preis</fo:block>
+				</fo:table-cell>
+			</fo:table-row>
+		</fo:table-header>
+		<fo:table-body>
+			<xsl:for-each select="$PriceList[position()]">
+				<fo:table-row>
+					<fo:table-cell>
+						<fo:block>
+							<xsl:value-of select="ArtikelNr"/>
+						</fo:block>
+					</fo:table-cell>
+					<fo:table-cell>
+						<fo:block><xsl:value-of select="Text"/></fo:block>
+					</fo:table-cell>
+					<fo:table-cell>
+						<fo:block text-align="right"><xsl:value-of select="./Menge"/></fo:block>
+					</fo:table-cell>
+					<fo:table-cell>
+						<fo:block text-align="right"><xsl:value-of select="./Preis"/></fo:block>
+					</fo:table-cell>
+				</fo:table-row>
+			</xsl:for-each>
+		</fo:table-body>
+	</fo:table>
+</xsl:template>
+
+<xsl:template name="toc">
+	<!-- generate fo:page-sequence-->
+	<fo:page-sequence master-reference="PageMaster-TOC">
+		<!-- generate flow applied to region-body -->
+		<fo:flow flow-name="xsl-region-body" >
+			<!--generate a block of table of contents-->
+			<fo:block xsl:use-attribute-sets="div.toc">
+				<!--generate the title “Table of Contents”-->
+				<fo:block>Verzeichnis der Produktgruppen</fo:block>
+				<!-- select the elements of part, chapter, section, subsection,
+				subsubsection from the whole XML documents-->
+				<xsl:for-each select="//KatGr |
+					//SubKatGr |
+					//SubSubKatGr |
+					//SubSubSubKatGr |
+					//ArtGr">
+					<!-- apply template for each element
+					to generate each line of the contents.-->
+					<xsl:call-template name="toc.line"/>
+				</xsl:for-each>
+			</fo:block>
+		</fo:flow>
+	</fo:page-sequence>
+</xsl:template>
+
+<xsl:key name="index-key" match="index" use="substring(@key,1,1)"/>
+<xsl:key name="index-value" match="index" use="."/>
+<xsl:template match="index">
+	<xsl:variable name="key" select="concat(@key,@keyword,.)"/>
+	<xsl:variable name="initial" select="substring($key,1,1)"/>
+	<xsl:if test="$initial=''">
+		<xsl:message terminate="yes">
+			<xsl:text>Empty keyword.&#10;</xsl:text>
+		</xsl:message>
+	</xsl:if>
+	<xsl:if test="not(contains('&ALPHA;',$initial) or
+                  contains('&LOWER;',$initial))">
+		<xsl:message terminate="yes">
+			<xsl:text>Invalid keyword: </xsl:text>
+			<xsl:value-of select="."/>
+			<xsl:if test="@key!=''">
+				<xsl:text> (key="</xsl:text>
+				<xsl:value-of select="@key"/>
+				<xsl:text>")</xsl:text>
+			</xsl:if>
+			<xsl:text>&#10;</xsl:text>
+		</xsl:message>
+	</xsl:if>
+	<fo:inline id="{generate-id()}">
+		<xsl:apply-templates/>
+	</fo:inline>
+</xsl:template>
+
+<xsl:template name="index.create">
+	<fo:page-sequence master-reference="PageMaster-index">
+		<!-- Set a document name in the header region. -->
+		<fo:static-content flow-name="xsl-region-before">
+			<fo:block font-size="7pt" border-after-width="thin">
+				<xsl:value-of select="/doc/head/title"/>
+			</fo:block>
+		</fo:static-content>
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block span="all" text-align="center">
+				<fo:block line-height="15mm" background-color="#9bd49d"
+						font-size="20pt" space-after="10mm" id="indexpage">
+					Verzeichnins des Artikelnummern
+				</fo:block>
+				<fo:block>
+					&#xA0;
+				</fo:block>
+			</fo:block>
+			<fo:block>
+				<fo:block xsl:use-attribute-sets="index">
+					<xsl:call-template name="index.create.mainALPHA"/>
+				</fo:block>
+			</fo:block>
+		</fo:flow>
+	</fo:page-sequence>
+</xsl:template>
+
+<xsl:template name="index.create.mainALPHA">
+	<xsl:param name="lettersALPHA">&ALPHA;</xsl:param>
+
+	<xsl:call-template name="index.create.section">
+		<xsl:with-param name="letter" select="substring($lettersALPHA,1,1)"/>
+	</xsl:call-template>
+	<xsl:variable name="remainderALPHA" select="substring($lettersALPHA,2)"/>
+
+	<xsl:if test="$remainderALPHA">
+		<xsl:call-template name="index.create.mainALPHA">
+			<xsl:with-param name="lettersALPHA" select="$remainderALPHA"/>
+		</xsl:call-template>
+	</xsl:if>
+</xsl:template>
+
+<xsl:template name="index.create.section">
+	<!-- Receive the character to be processed. -->
+	<xsl:param name="letter"/>
+	<!-- Set the nodes who have the 'letter' value of the key to the terms variable and sort them.-->
+	<xsl:variable name="terms" select="key('index-key',$letter)"/>
+	<!-- Get the index which has the same head-one character
+	as the parameter which received. -->
+	<xsl:if test="$terms">
+		<!-- Output key characters. -->
+		<fo:block font-weight="bold" text-align="center" space-before="1em">
+		<!-- Output the received one character as is. -->
+		<xsl:value-of select="$letter"/>
+		</fo:block>
+		<!-- Make it a rule not to process the same text redundantly. -->
+		<xsl:for-each select="$terms[not(.=preceding::index)]">
+			<!-- Sort the text in key order. -->
+			<xsl:sort select="@key"/>
+			<fo:block text-align-last="justify">
+				<!-- Output the text as is. -->
+				<xsl:value-of select="."/>
+				<fo:leader leader-pattern="dots" leader-length.optimum="3em"/>
+				<!-- Get the same text. -->
+				<xsl:variable name="terms2" select="key('index-value',.)"/>
+				<xsl:if test="$terms2">
+					<fo:inline>
+					<!-- Output all of those page numbers when the same text exists
+					in two or more places. -->
+					<xsl:apply-templates select="$terms2" mode="line"/>
+					</fo:inline>
+				</xsl:if>
+			</fo:block>
+		</xsl:for-each>
+	</xsl:if>
+</xsl:template>
+
+<!-- global parameter and variable used when creating the table of contents. -->
+<xsl:param name="toc-level-default" select="3"/>
+
+<!-- The template that creates the table of contents -->
+<xsl:variable name="toc-level-max">
+	<xsl:choose>
+		<xsl:when test="not (doc/@toclevel)">
+			<xsl:value-of select="$toc-level-default"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="number(doc/@toclevel)"/>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:variable>
+
+<xsl:template name="toc.line">
+	<!-- Count the nest level of current node,
+	set the value to "level" local variable. -->
+	<xsl:variable name="level" select="count(ancestor-or-self::KatGr |
+				ancestor-or-self::SubKatGr |
+				ancestor-or-self::SubSubKatGr |
+				ancestor-or-self::SubSubSubKatGr |
+				ancestor-or-self::ArtGr )"/>
+	<!-- Test if the nest level can be a target. -->
+	<xsl:if test="$level &lt;= $toc-level-max">
+		<!-- Create fo:block for each line of toc. -->
+		<fo:block text-align-last="justify">
+			<!-- Widen the margin left in proportion to a nest level.-->
+			<xsl:attribute name="margin-left">
+				<xsl:value-of select="$level - 1"/>
+				<xsl:text>em</xsl:text>
+			</xsl:attribute>
+			<!-- space-before becomes larger in proportion
+			that the nest level becomes upper.-->
+			<xsl:attribute name="space-before">
+				<xsl:choose>
+					<xsl:when test="$level=1">4pt</xsl:when>
+					<xsl:when test="$level=2">3pt</xsl:when>
+					<xsl:when test="$level=3">3pt</xsl:when>
+					<xsl:otherwise>1pt</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<!-- font-size is processed in the same way-->
+			<xsl:attribute name="font-size">
+				<xsl:choose>
+					<xsl:when test="$level=1">1em</xsl:when>
+					<xsl:otherwise>0.9em</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<!-- font-weight is also processed in the same way -->
+			<xsl:attribute name="font-weight">
+				<xsl:value-of select="800 - $level * 100"/>
+			</xsl:attribute>
+			<!-- Below is the data of the table of contents -->
+			<xsl:value-of select="Title"/>
+			<fo:leader leader-pattern="dots"/>
+			<!-- Output fo:page-number-citation.
+			Formatter replaces it to the page number. -->
+			<fo:page-number-citation ref-id="{generate-id()}"/>
+		</fo:block>
+	</xsl:if>
+</xsl:template>
+
+<xsl:template match="KatGr | SubKatGr | SubSubKatGr | SubSubSubKatGr | ArtGr">
+	<xsl:call-template name="title.out"/>
+	<xsl:variable name="imageURI" select="./Image" />
+	<fo:external-graphic src="url('{$imageURI}')" padding-left="22.5mm" padding-bottom="2mm" content-height="30mm" content-width="40mm" keep-with-next="always" />
+	<xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="KatGr/Title | SubKatGr/Title | SubSubKatGr/Title | SubSubSubKatGr/Title | ArtGr/Title">
+</xsl:template>
+
+<xsl:template name="title.out">
+	<xsl:variable name="level" select="count(ancestor-or-self::KatGr |
+		ancestor-or-self::SubKatGr |
+		ancestor-or-self::SubSubKatGr |
+		ancestor-or-self::SubSubSubKatGr |
+		ancestor-or-self::ArtGr)" />
+	<xsl:choose>
+		<xsl:when test="$level=1">
+			<fo:block xsl:use-attribute-sets="h1" id="{generate-id()}">
+				<xsl:call-template name="title.out.sub"/>
+				<xsl:value-of select="Title"/>
+			</fo:block>
+		</xsl:when>
+		<xsl:when test="$level=2">
+			<fo:block xsl:use-attribute-sets="h2" id="{generate-id()}">
+				<xsl:call-template name="title.out.sub"/>
+				<xsl:value-of select="Title"/>
+			</fo:block>
+		</xsl:when>
+		<xsl:when test="$level=3">
+			<fo:block xsl:use-attribute-sets="h3" id="{generate-id()}">
+				<xsl:call-template name="title.out.sub"/>
+				<xsl:value-of select="Title"/>
+			</fo:block>
+		</xsl:when>
+		<xsl:when test="$level=4">
+			<fo:block xsl:use-attribute-sets="h4" id="{generate-id()}">
+				<xsl:call-template name="title.out.sub"/>
+				<xsl:value-of select="Title"/>
+			</fo:block>
+		</xsl:when>
+		<xsl:when test="$level=5">
+			<fo:block xsl:use-attribute-sets="h5" id="{generate-id()}">
+				<xsl:call-template name="title.out.sub"/>
+				<xsl:value-of select="Title"/>
+			</fo:block>
+		</xsl:when>
+		<xsl:otherwise>
+			<fo:block xsl:use-attribute-sets="h6" id="{generate-id()}">
+				<xsl:call-template name="title.out.sub"/>
+				<xsl:value-of select="Title"/>
+			</fo:block>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template name="title.out.sub">
+<!-- 
+ 	<xsl:if test="@logo">
+		<fo:inline space-end="5pt">
+			<fo:external-graphic src="{@logo}">
+				<xsl:if test="@width and @height">
+					<xsl:attribute name="content-width">
+						<xsl:value-of select="@width"/>
+						</xsl:attribute>
+					<xsl:attribute name="content-height">
+						<xsl:value-of select="@height"/>
+					</xsl:attribute>
+				</xsl:if>
+			</fo:external-graphic>
+		</fo:inline>
+	</xsl:if>
+ -->
+</xsl:template>
+
+<xsl:template match="Copyright">
+</xsl:template>
+
+<xsl:template match="Scope">
+</xsl:template>
+
+<xsl:template match="Description">
+	<fo:block font-size="9.0pt" padding-top="2mm" keep-with-next="always">
+		<xsl:apply-templates />
+	</fo:block>
+</xsl:template>
+
+<xsl:attribute-set name="h1" >
+	<xsl:attribute name="font-size">24pt</xsl:attribute>
+	<xsl:attribute name="font-family">"sans-serif"</xsl:attribute>
+	<xsl:attribute name="font-weight">bold</xsl:attribute>
+	<xsl:attribute name="space-after">14pt</xsl:attribute>
+	<xsl:attribute name="border-after-style">solid</xsl:attribute>
+	<xsl:attribute name="border-after-width">2pt</xsl:attribute>
+	<xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+
+<xsl:attribute-set name="h2" >
+	<xsl:attribute name="break-before">page</xsl:attribute>
+	<xsl:attribute name="font-size">16pt</xsl:attribute>
+	<xsl:attribute name="font-family">"sans-serif"</xsl:attribute>
+	<xsl:attribute name="font-weight">bold</xsl:attribute>
+	<xsl:attribute name="space-before">19pt</xsl:attribute>
+	<xsl:attribute name="space-after">5pt</xsl:attribute>
+	<xsl:attribute name="border-after-style">solid</xsl:attribute>
+	<xsl:attribute name="border-after-width">1pt</xsl:attribute>
+	<xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+
+<xsl:attribute-set name="h3" >
+	<xsl:attribute name="font-size">13pt</xsl:attribute>
+	<xsl:attribute name="font-family">"sans-serif"</xsl:attribute>
+	<xsl:attribute name="font-weight">bold</xsl:attribute>
+	<xsl:attribute name="space-before">14pt</xsl:attribute>
+	<xsl:attribute name="space-after">5pt</xsl:attribute>
+	<xsl:attribute name="border-after-style">solid</xsl:attribute>
+	<xsl:attribute name="border-after-width">1pt</xsl:attribute>
+	<xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+
+<xsl:attribute-set name="h4" >
+	<xsl:attribute name="font-size">12pt</xsl:attribute>
+	<xsl:attribute name="font-family">"sans-serif"</xsl:attribute>
+	<xsl:attribute name="font-weight">bold</xsl:attribute>
+	<xsl:attribute name="space-before">5pt</xsl:attribute>
+	<xsl:attribute name="space-after">5pt</xsl:attribute>
+	<xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+
+<xsl:attribute-set name="h5" >
+	<xsl:attribute name="font-size">10pt</xsl:attribute>
+	<xsl:attribute name="font-family">"sans-serif"</xsl:attribute>
+	<xsl:attribute name="font-weight">bold</xsl:attribute>
+	<xsl:attribute name="space-before">3pt</xsl:attribute>
+	<xsl:attribute name="space-after">3pt</xsl:attribute>
+	<xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+
+<xsl:attribute-set name="h6" >
+	<xsl:attribute name="font-size">9pt</xsl:attribute>
+	<xsl:attribute name="font-family">"sans-serif"</xsl:attribute>
+	<xsl:attribute name="font-weight">bold</xsl:attribute>
+	<xsl:attribute name="space-before">3pt</xsl:attribute>
+	<xsl:attribute name="space-after">3pt</xsl:attribute>
+	<xsl:attribute name="keep-with-next.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+
+<xsl:attribute-set name="p">
+	<xsl:attribute name="text-indent">1em</xsl:attribute>
+	<xsl:attribute name="space-before">0.6em</xsl:attribute>
+	<xsl:attribute name="space-after">0.6em</xsl:attribute>
+	<xsl:attribute name="text-align">justify</xsl:attribute>
+	<xsl:attribute name="keep-together.within-page">always</xsl:attribute>
+</xsl:attribute-set>
+<xsl:template match="p">
+	<fo:block xsl:use-attribute-sets="p">
+		<xsl:apply-templates/>
+	</fo:block>
+</xsl:template>
+
+<xsl:template match="b">
+	<fo:block font-weight="bold"><xsl:value-of select="."/></fo:block>
+</xsl:template>
+
+<xsl:template match="br">
+	<fo:block>
+	</fo:block>
+</xsl:template>
+
+<xsl:template match="Image">
+</xsl:template>
+
+<xsl:attribute-set name="div.toc">
+</xsl:attribute-set>
+
+<xsl:attribute-set name="index">
+</xsl:attribute-set>
+
+</xsl:stylesheet>

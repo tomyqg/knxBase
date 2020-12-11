@@ -1,0 +1,55 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModBase" data-wap-screen="Rezept" data-wap-core-object="KundeAuftrag" data-wap-core-object-key="ERPNr" w="500" h="300">
+		<div id="mainRezept" style="background-image: url('/sani/rsrc/templates/rezept_rosa_muster_16_2004.png');position:relative;height:1240px;width:874px;background-size:contain;background-repeat:no-repeat;float:left;">
+<!--
+			<h2>Rezepterfassung</h2>
+-->
+			<wap:key>
+				<wap:keyform id="KundeRezeptKeyData">
+					<wap:keyrow data-wap-label="Rezept Nr." data-wap-obj="KundeAuftrag" data-wap-attr="ERPNr" data-wap-prev="true" data-wap-next="true" />
+				</wap:keyform>
+			</wap:key>
+			<wap:data>
+				<wap:dataform id="formRezeptMain" class="formCreate formUpdate formMisc">
+					<!--	start hidden attributes				-->
+					<wap:hidden data-wap-obj="KundeAuftrag" data-wap-attr="NeueArtikelNr" x="0" y="0" size="48" />
+					<wap:hidden data-wap-obj="KundeAuftrag" data-wap-attr="NeueHMVNr" x="0" y="0" size="48" />
+					<wap:hidden data-wap-obj="KundeAuftrag" data-wap-attr="Source" x="0" y="0" size="48" />
+					<!--	end hidden attributes				-->
+					<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="KVName" x="60" y="50" size="48" />
+					<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="IKNr_LE" x="725" y="60" size="9" />
+					<wap:textarea data-wap-obj="KundeAuftrag" data-wap-attr="Kunde" x="60" y="110" cols="50" rows="5" />
+					<div style="left:0px;top:0px;position:absolute;">
+						<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="IKNr_KK" x="60" y="225" size="9" />
+					</div>
+					<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="RezeptDatum" x="390" y="275" size="10" />
+					<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="RezeptNr" x="350" y="325" size="32" />
+					<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="ArtikelSuchText" x="350" y="400" size="10" />
+					<wap:input data-wap-obj="KundeAuftrag" data-wap-attr="ArtikelDaten" x="500" y="400" size="50" />
+					<wap:btnMisc data-wap-label="+" data-wap-misc-function="addArtikel" x="450" y="400" />
+					<wap:btnMisc data-wap-label="Neues Rezept" data-wap-misc-function="rezeptNeu" x="25" y="650" />
+					<wap:btnMisc data-wap-label="Rezept abschliessen >>>" data-wap-misc-function="rezeptAbschluss" x="625" y="650" />
+				</wap:dataform>
+			</wap:data>
+			<div style="position:absolute;top:170px;left:540px">
+				<wap:grid data-wap-object="KundeAuftragPosition" data-wap-grid-name="gridKundeAuftragPosition" data-wap-editor="KundeAuftragPosition" data-wap-load-on-init="false" paginate="false">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="LKZ" data-wap-label="LKZ" />
+					<wap:gridcol data-wap-attr="HMVNr" data-wap-label="HMV Nr." />
+					<wap:gridcol data-wap-attr="Menge" data-wap-label="Menge" data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-attr="KTAnteilBrutto" data-wap-label="KT-Anteil" data-wap-functions="input" data-wap-size="8,16" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</div>
+		</div>
+	</wap:wapScreen>
+</html>

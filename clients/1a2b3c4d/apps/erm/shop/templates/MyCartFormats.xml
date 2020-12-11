@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="pageMain">
+	<!--																-->
+	<!-- CartLine													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="Cart">
+		<![CDATA[
+			<table class="tab_a">	<!-- catalog	-->
+				<tbody>
+					<tr class="zeile_i_1">
+						<th class="zelle_m_1">Pos.</th>
+						<th class="zelle_m_2">Artikel Nr.</th>
+						<th class="zelle_m_3">Beschreibung</th>
+						<th class="zelle_m_4">Quantity</th>
+						<th class="zelle_m_5">Price</th>
+						<th class="zelle_m_6">Gesamtpreis</th>
+						<th class="zelle_m_7">Mwst.</th>
+						<th class="zelle_m_8">Funktionen</th>
+					</tr>
+					$CartLineBlock$
+				</tbody>
+			</table>				<!-- catalog	-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="CartLine">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_m_1">$CartLine.ItemNo$$CartLine.SubItemNo$</td>
+				<td class="zelle_m_2">
+					<img class="art_pic" src="/Images/thumbs/$CartLine.ImageReference$" alt="$CartLine.ImageReference$" /><br/>
+					<a href="/00000000/$CartLine.ArticleNo$.html">
+						$CartLine.ArticleNo$
+					</a>
+				</td>
+				<td class="zelle_m_3">$CartLine.Fulltext$</td>
+				<td class="zelle_m_4">$CartLine.Quantity$</td>
+				<td class="zelle_m_5">$CartLine.Price$</td>
+				<td class="zelle_m_6">$CartLine.TotalPrice$</td>
+				<td class="zelle_m_7" align="center">$CartLine.TaxClass$</td>
+				<td class="zelle_m_8">
+					<form method="post" name="moveItemUp$CartLine.Id$" action="">
+						<input type="hidden" name="_ICustomerCartNo" value="$CartLine.CustomerCartNo$" />
+						<input type="hidden" name="_IId" value="$CartLine.Id$" />
+						<input type="hidden" name="itemAction" value="moveItemUp" />
+						<div class="memu-icon sprite-iup"
+							onclick="moveItemUp$CartLine.Id$.submit() ;" title="$trans.SHOP-TITLE-MOVEITEMUP$">
+						</div>
+					</form>
+					<form method="post" name="moveItemDown$CartLine.Id$" action="">
+						<input type="hidden" name="_ICustomerCartNo" value="$CartLine.CustomerCartNo$" />
+						<input type="hidden" name="_IId" value="$CartLine.Id$" />
+						<input type="hidden" name="itemAction" value="moveItemDown" />
+						<div class="memu-icon sprite-idown"
+							onclick="moveItemDown$CartLine.Id$.submit() ;" title="$trans.SHOP-TITLE-MOVEITEMDOWN$">
+						</div>
+					</form>
+					<form method="post" name="deleteChange$CartLine.Id$" action="">
+						<input type="hidden" name="_ICustomerCartNo" value="$CartLine.CustomerCartNo$" />
+						<input type="hidden" name="_IId" value="$CartLine.Id$" />
+						<input type="hidden" name="itemAction" value="deleteItem" />
+						<div class="memu-icon sprite-garbage"
+							onclick="deleteChange$CartLine.Id$.submit() ;" title="$trans.SHOP-TITLE-REMOVEITEM$">
+						</div>
+					</form>
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="CartLineNet">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_m_1"></td>
+				<td class="zelle_m_2" colspan="2">Gesamtwarenwert netto (ohne Mwst.)</td>
+				<td class="zelle_m_4"></td>
+				<td class="zelle_m_5"></td>
+				<td class="zelle_m_6">$CartTotalNet$</td>
+			</tr>
+		]]>
+	</format>
+	<format name="CartLineTax">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_m_1"></td>
+				<td class="zelle_m_2" colspan="2">Mehrwertsteuer, $CartTaxClass$ %</td>
+				<td class="zelle_m_4"></td>
+				<td class="zelle_m_5">$CartTaxValue$</td>
+				<td class="zelle_m_6"></td>
+			</tr>
+		]]>
+	</format>
+	<format name="CartLineTotalTax">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_m_1"></td>
+				<td class="zelle_m_2" colspan="2">Mehrwertsteuer gesamt</td>
+				<td class="zelle_m_4"></td>
+				<td class="zelle_m_5"></td>
+				<td class="zelle_m_6">$CartTaxTotal$</td>
+			</tr>
+		]]>
+	</format>
+	<format name="CartLineGross">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_m_1"></td>
+				<td class="zelle_m_2" colspan="2">Gesamt brutto (inkl. Mwst.)</td>
+				<td class="zelle_m_4"></td>
+				<td class="zelle_m_5"></td>
+				<td class="zelle_m_6">$CartTotalGross$</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine														-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="CartHead">
+		<![CDATA[
+			<h2 class="page-title">Einkaufswagen - Übersicht</h2>
+			<div>Die folgende Liste stellt Ihren aktuellen Warenkorb dar.</div>
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine														-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="CartHeadRFQ">
+		<![CDATA[
+			<h2 class="page-title">Einkaufswagen - Angebotsanfrage</h2>
+			<div>Die folgende Liste stellt Ihren aktuellen Warenkorb dar. Hierfür werden wir Ihnen
+			gerne ein Angebot erstellen.</div>
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine														-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="CartHeadRFQFoot">
+		<![CDATA[
+			<h2 class="page-title">Einkaufswagen - Angebotsanfrage</h2>
+			<div>Die folgende Liste stellt Ihren aktuellen Warenkorb dar. Hierfür werden wir Ihnen
+			gerne ein Angebot erstellen.</div>
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine														-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="PayGiroPay">
+		<![CDATA[
+			<tr>
+				<td><input type="radio" name="PaymentAgent" value="GiroPay" checked="1"/></td>
+				<td><img class="text_links" src="/Rsrc/logos/logo_giropay_small.gif" alt="wimtecc.de"/></td>
+				<td>$trans.SHOP-TEXT-BANK-CODE$</td>
+				<td><input type="text" name="bankcode" size="8" MAXLENGTH="8" value="" title="SHOP-INFO-BANKCODE" /></td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- CartLine														-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="PayInvoice">
+		<![CDATA[
+			<td><input class="disabled" type="radio" name="PaymentAgent" value="Bank""></td>
+			<td>$trans.SHOP-TEXT-WIRETRANSFER$</td>
+			<td></td>
+			<td></td>
+		]]>
+	</format>
+</resource>

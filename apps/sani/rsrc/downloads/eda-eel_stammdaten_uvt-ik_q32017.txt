@@ -1,0 +1,120 @@
+BBNR;IK;Nachfolge IK;Gültig ab;Gültig bis;Name1;Name2;Strasse;Land;PLZ;Ort-BG;Vorwahl;Tel-Nr;Fax-Nr
+29036720;120390887;;01.01.2015;;BG der Bauwirtschaft;BV Nord;Hildesheimer Straße 309;D;30519;Hannover;0511;9870;9872440
+87661183;120991009;;01.01.2015;;BG der Bauwirtschaft;BV Süd;Am Knie 6;D;81241;München;089;889701;8897600
+42884688;120590925;;01.01.2015;;BG der Bauwirtschaft;BV Mitte;Viktoriastr. 21;D;42115;Wuppertal;0202;3980;3981404
+37916971;120290671;;01.01.2012;;BG ETEM;BV Hamburg, PLZ-Gebiet 20-22;Nagelsweg 33 - 35;D;20097;Hamburg;040;2274480;22744899
+37916971;120390466;;01.01.2010;;BG ETEM;BV Braunschweig, PLZ-Gebiet 26-31, 37, 38, 49;Lessingplatz 13;D;38100;Braunschweig;0531;47170;47171721
+34364294;120590184;;01.01.2012;;BG ETEM;BV Düsseldorf, PLZ-Gebiet 40, 41, 45-47;Auf'm Hennekamp 74;D;40225;Düsseldorf;0211;93350;9335199
+37916971;120590446;;09.09.2011;;BG ETEM;Hauptverwaltung;Gustav-Heinemann-Ufer 130;D;50968;Köln;0221;37780;37781199
+37916971;120590479;;09.09.2011;;BG ETEM;BV Köln, PLZ-Gebiet 32, 33, 48, 50-57, 58600-59;Gustav-Heinemann-Ufer 120;D;50968;Köln;0221;37780;37781711
+37916971;120590685;;01.01.2012;;BG ETEM;BV Wuppertal, PLZ-Gebiet 42, 44, 58-58599;Hofkamp 84;D;42103;Wuppertal;0202;245830;2458330
+48626018;120690697;;01.01.2012;;BG ETEM;BV Wiesbaden, PLZ-Gebiet 34, 35, 54, 55, 60, 61, 65-67;Rheinstr. 6-8;D;65185;Wiesbaden;0611;131254;131158
+37916971;120890483;;01.01.2010;;BG ETEM;BV Stuttgart, PLZ-Gebiet 68-72, 74-77, 79;Schloßstr. 29 - 31;D;70174;Stuttgart;0711;22970;22971771
+37916971;120990495;;01.01.2010;;BG ETEM;BV Nürnberg, PLZ-Gebiet 36, 63, 64, 90-97;Frauentorgraben 29;D;90443;Nürnberg;0911;24990;24991751
+37916971;120990747;;15.08.2011;;BG ETEM;BV Augsburg, PLZ-Gebiet 73, 78, 80-89;Oblatterwallstraße 18;D;86153;Augsburg;0821;31590;31591761
+37916971;121190455;;13.09.2011;;BG ETEM;BV Berlin, PLZ-Gebiet 10, 12-19, 23-25, 39;Corrensplatz 2;D;14195;Berlin;030;839020;839021731
+37916971;121490027;;01.01.2012;;BG ETEM;BV Leipzig, PLZ-Gebiet 04, 06;Gustav-Adolf-Str. 6;D;04105;Leipzig;0341;982240;9822412
+37916971;121490072;;01.01.2010;;BG ETEM;BV Dresden, PLZ-Gebiet 01-03, 07-09, 98, 99;Stübelallee 49 c;D;01309;Dresden;0351;31480;31481741
+15186676;120291466;;23.09.2011;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Hamburg;Schäferkampsallee 24;D;20357;Hamburg;040;41250;4125525
+15186676;120292332;;07.09.2011;;BG für Gesundheitsdienst und Wohlfahrtspflege;Hauptverwaltung;Pappelallee 35-37;D;22089;Hamburg;040;202070;202072495
+15186676;120392355;;13.10.2011;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Delmenhorst;Fischstr. 31;D;27749;Delmenhorst;04221;9130;913525
+15186676;120592437;;01.04.2009;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Köln;Bonner Str. 337;D;50968;Köln;0221;37720;3772525
+15186676;120592459;;01.04.2009;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Bochum;Universitätsstr. 78;D;44789;Bochum;0234;30780;040 202071299
+15186676;120792202;;01.04.2009;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Mainz;Göttelmannstr. 3;D;55130;Mainz;06131;8080;8083998
+15186676;120892316;;19.07.2010;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Karlsruhe;Philip-Reis-Str. 3;D;76137;Karlsruhe;0721;97200;9720525
+15186676;120992282;;01.04.2009;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV München;Helmholtzstr. 2;D;80636;München;089;350960;35096525
+15186676;120992293;;01.04.2009;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Würzburg;Röntgenring 2;D;97070;Würzburg;0931;35750;3575525
+15186676;121191478;;30.09.2011;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Berlin;Spichernstr. 2;D;10777;Berlin;030;896850;89685525
+15186676;121490083;;03.08.2010;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Dresden;Gret-Palucca-Str. 1 a;D;01069;Dresden;0351;86470;8647525
+15186676;121590051;;01.04.2009;;BG für Gesundheitsdienst und Wohlfahrtspflege;BV Magdeburg;Keplerstr. 12 c - 12 d;D;39104;Magdeburg;0391;60905;6090625
+52742028;120292365;;30.11.2012;;BG Holz und Metall;BV Hamburg-Bremen;Rothenbaumchaussee 145;D;20149;Hamburg;0800;99900803;040 4411222440
+29059513;120392377;;30.11.2012;;BG Holz und Metall;BV Hannover-Bielefeld;Seligmannallee 4;D;30173;Hannover;0800;99900803;"0511 811819170"
+52742028;120590253;;30.11.2012;;BG Holz und Metall;BV Dortmund;Semerteichstr. 98;D;44263;Dortmund;0800;99900803;0231 4196111
+52742028;120590275;;30.11.2012;;BG Holz und Metall;BV Köln-Düsseldorf;Hugo-Eckener-Str. 20;D;50829;Köln;0800;99900800;0221 6784111 
+52742028;120790391;;30.11.2012;;BG Holz und Metall;BV Mainz;Isaac-Fulda-Allee 18;D;55124;Mainz;0800;99900803;06131 80225000
+52742028;120890633;;30.11.2012;;BG Holz und Metall;BV Stuttgart;Vollmoellerstr. 11;D;70563;Stuttgart;0800;99900803;0711 1334-24800
+52742028;120990359;;30.11.2012;;BG Holz und Metall;BV Nürnberg;Weinmarkt 9-11;D;90403;Nürnberg;0800;99900803;0911 234719000
+87741942;120990623;;30.11.2012;;BG Holz und Metall;BV München;Am Knie 8;D;81241;München;0800;99900803;089 1791811700
+52742028;121192333;;30.11.2012;;BG Holz und Metall;BV Berlin;Innsbrucker Str. 26-27;D;10825;Berlin;0800;99900803;030 7569713450
+52742028;121590028;;30.11.2012;;BG Holz und Metall;BV Dessau;Raguhner Str. 49 b;D;06842;Dessau;0800;99900803;0340 252525093
+52742028;121690085;;30.11.2012;;BG Holz und Metall;BV Erfurt;Lucas-Cranach-Platz 2;D;99097;Erfurt;0800;99900803;036165 75512900
+52742028;120790335;;13.09.2011;;BG Holz und Metall;Hauptverwaltung  ;Isaac-Fulda-Allee 18;D;55124;Mainz;0800;99900801;06131 80210900
+63800761;120390810;;01.01.2011;;BG Nahrungsmittel und Gastgewerbe;BV Hannover;Tiergartenstr. 109-111;D;30559;Hannover;0511;235600;235605327
+63800761;120590801;;01.01.2011;;BG Nahrungsmittel und Gastgewerbe;BV Dortmund;Hansbergstr. 28;D;44141;Dortmund;0231;176340;176345563
+52738475;120790847;;01.01.2011;;BG Nahrungsmittel und Gastgewerbe;BV Mainz;Lortzingstr. 2;D;55127;Mainz;06131;7851;785340
+63800761;120890780;;20.03.2012;;BG Nahrungsmittel und Gastgewerbe;Hauptverwaltung;Dynamostr 7-11;D;68165;Mannheim;0621;44560;0800 1977553 19000
+63800761;120890837;;13.09.2011;;BG Nahrungsmittel und Gastgewerbe;BV Mannheim;Dynamostr 7-11;D;68165;Mannheim;0621;44560;44562125
+63800761;120990792;;01.01.2011;;BG Nahrungsmittel und Gastgewerbe;BV München;Streiflacher Str. 5 a;D;82110;Germering;089;894660;894665858
+63800761;121190821;;01.01.2011;;BG Nahrungsmittel und Gastgewerbe;BV Berlin;Fregestr. 44;D;12161;Berlin;030;851050;851055111
+63800761;121690052;;01.01.2011;;BG Nahrungsmittel und Gastgewerbe;BV Erfurt;Lucas-Cranach-Platz 2;D;99097;Erfurt;0361;4391340;43914906
+29029801;120390104;;21.12.2011;;BG RCI;BD Langenhagen: HB, HH, MV, NI, SH;Theodor-Heuss-Str. 160;D;30853;Langenhagen;06221;510864500;510838098
+31608112;120590026;;21.12.2011;;BG RCI;BD Bochum: Reg.-Bez. Arnsberg, Detmold, Münster sowie die Stadt Essen in NRW;Waldring 97;D;44789;Bochum;06221;510864100;510832599
+31608112;120590538;;21.12.2011;;BG RCI;BD Köln: Reg.-Bez. Köln und Düsseldorf (ohne die Stadt Essen) in NRW;Gladbacher Str. 14;D;50672;Köln;06221;510864400;510836091
+18484827;120790643;;21.12.2011;;BG RCI;BD Mainz: HE, RP, SL;Lortzingstr. 2;D;55127;Mainz;06221;510864600;510848699
+61635458;120890542;;21.12.2011;;BG RCI;BD Heidelberg: BW;Kurfürsten-Anlage 62;D;69115;Heidelberg;06221;510864300;510835999
+31608112;120990565;;21.12.2011;;BG RCI;BD Nürnberg: BY;Südwestpark 2 und 4;D;90449;Nürnberg;06221;510864700;510834499
+31608112;121690029;;21.12.2011;;BG RCI;BD Gera: BE, BB, SN, ST, TH;Amthorstr. 12;D;07545;Gera;06221;510864200;510833099
+15141364;120291295;;07.09.2011;;BG Verkehr;Hauptverwaltung;Ottenser Hauptstr. 54 ;D;22765;Hamburg;040;39800;39801666
+15141364;120291319;;07.09.2011;;BG Verkehr;BV Hamburg;Ottenser Hauptstr. 54;D;22765;Hamburg;040;39800;39802699
+99011352;120291364;;07.09.2011;;BG Verkehr;Bereich See / BV Hamburg;Ottenser Hauptstr. 54;D;22765;Hamburg;040;361370;36137770
+15141364;120391321;;03.03.2010;;BG Verkehr;BV Hannover;Walderseestr. 5-6;D;30163;Hannover;0511;39956;3995700
+15141364;120591334;;05.01.2011;;BG Verkehr;BV Wuppertal;Aue 96;D;42103;Wuppertal;0202;38950;3895400
+15141364;120691346;;09.12.2010;;BG Verkehr;BV Wiesbaden;Wiesbadener Str. 70;D;65197;Wiesbaden;0611;94130;9413106
+15141364;120991350;;09.12.2010;;BG Verkehr;BV München;Deisenhofener Str. 74;D;81539;München;089;623020;62302100
+15141364;121191309;;09.12.2010;;BG Verkehr;BV Berlin;Axel-Springer-Str. 52;D;10969;Berlin;030;259970;25997297
+15141364;121490061;;09.12.2010;;BG Verkehr;BV Dresden;Hofmühlenstr. 4;D;01187;Dresden;0351;423650;4236581
+66337061;120892305;;30.11.2005;;BG Verkehr;Sparte Post, Postbank, Telekom;Europaplatz 2;D;72072;Tübingen;07071;9330;9334399
+63886548;120491151;;01.01.2013;;BGHW;RD Nord ;Falkenstr. 7;D;28195;Bremen;0421;301700;301702299
+32064004;120591130;;04.01.2008;;BGHW;Direktion Bonn;Niebuhrstr. 5;D;53113;Bonn;0228;54069;54065199
+63886548;120591141;;01.01.2013;;BGHW;RD West;Langwartweg 103-105;D;53129;Bonn;0228;54060;54061199
+63886548;120891053;;12.11.2013;;BGHW;Hauptverwaltung;M 5, 7;D;68161;Mannheim;0621;1830;183300
+63886548;120891100;;01.01.2013;;BGHW;RD Südwest;N 4, 18;D;68161;Mannheim;0621;1830;1833201
+63886548;120991112;;01.01.2013;;BGHW;RD Südost;Arnulfstr. 283;D;80639;München;089;1787860;1787869599
+63886548;121191172;;01.01.2013;;BGHW;RD Ost ;Bundesallee 57/58;D;10715;Berlin;030;853010;853014609
+15250094;120291182;;07.09.2011;;Verwaltungs-BG;Hauptverwaltung;Deelbögenkamp 4;D;22297;Hamburg;040;51460;51462940
+15250094;120291193;;29.01.2010;;Verwaltungs-BG;BV Hamburg, BV II;Sachsenstr. 18;D;20097;Hamburg;040;236560;2369439
+15250094;120592380;;29.01.2010;;Verwaltungs-BG;BV Bielefeld, BV III;Nikolaus-Dürkopp-Str. 8;D;33602;Bielefeld;0521;58010;61284
+15250094;120592426;;21.01.2010;;Verwaltungs-BG;BV Duisburg;Wintgensstr. 27;D;47058;Duisburg;0203;34870;2809005
+15250094;120592448;;29.01.2010;;Verwaltungs-BG;BV Bergisch Gladbach, BV V;Kölner Str. 20;D;51429;Bergisch Gladbach;02204;4070;1639
+15250094;120791212;;29.01.2010;;Verwaltungs-BG;BV Mainz, BV VI;Isaac-Fulda-Allee 3;D;55124;Mainz;06131;3890;371044
+15250094;120891224;;29.01.2010;;Verwaltungs-BG;BV Ludwigsburg, BV VII;Martin-Luther-Str. 79;D;71636;Ludwigsburg;07141;9190;902319
+75932959;120990122;;29.01.2010;;Verwaltungs-BG;BV Würzburg;Riemenschneiderstr. 2;D;97072;Würzburg;0931;79430;7943800
+15250094;120991236;;29.01.2010;;Verwaltungs-BG;BV München, BV VIII;Barthstr. 20 ;D;80339;München;089;500950;5024877
+15250094;121191241;;29.01.2010;;Verwaltungs-BG;BV Berlin;Markgrafenstr. 18;D;10969;Berlin;030;770030;7741319
+15250094;121490016;;29.01.2010;;Verwaltungs-BG;BV Dresden, BV XII;Wiener Platz 6;D;01069;Dresden;0351;81450;8145109
+15250094;121690030;;29.01.2010;;Verwaltungs-BG;BV Erfurt, BV XI;Koenbergkstr. 1;D;99084;Erfurt;0361;22360;2253466
+20345417;120491754;;07.09.2011;;Unfallkasse;Freie Hansestadt Bremen;Konsul-Smidt-Str. 76 a ;D;28217;Bremen;0421;350120;3501214
+44861264;120692198;;12.12.2006;;Unfallkasse;Hessen;Leonardo-da-Vinci-Allee 20;D;60486;Frankfurt;069;29972440;29972588
+53149588;120791791;;30.11.2005;;Unfallkasse;Rheinland-Pfalz;Orensteinstr. 10;D;56626;Andernach;02632;9600;960100
+55423519;121091843;;12.12.2006;;Unfallkasse;Saarland;Beethovenstr. 41;D;66125;Saarbrücken;06897;97330;973337
+90276713;121191913;;12.11.2010;;Unfallkasse;Berlin;Culemeyerstr. 2;D;12277;Berlin;030;76240;76241109
+02379637;121290003;;30.11.2005;;Unfallkasse;Brandenburg;Müllroser Chaussee 75;D;15236;Frankfurt;0335;52160;5216222
+01681222;121390015;;17.10.2007;;Unfallkasse;Mecklenburg-Vorpommern;Wismarsche Str. 199;D;19053;Schwerin;0385;51810;5181111
+01064065;121490118;;05.03.2010;;Unfallkasse;Sachsen;Rosa-Luxemburg-Str. 17 a;D;01662;Meißen;03521;7240;724333
+03701377;121590039;;23.08.2010;;Unfallkasse;Sachsen-Anhalt;Käsperstr. 31;D;39261;Zerbst;03923;7510;751333
+07235792;121690063;;30.11.2005;;Unfallkasse;Thüringen -Landesbereich-;Humboldtstr. 111;D;99867;Gotha;03621;7770;777111
+07235792;121690074;;30.11.2005;;Unfallkasse;Thüringen -Kommunaler Bereich-;Humboldtstr. 111;D;99867;Gotha;03621;7770;777111
+67334480;120891725;;24.04.2009;;Unfallkasse Baden-Württemberg;Sitz Karlsruhe;Waldhornplatz 1;D;76131;Karlsruhe;0721;60981;60985200
+67334480;120891838;;24.04.2009;;Unfallkasse Baden-Württemberg;Hauptsitz Stuttgart;Augsburger Str. 700;D;70329;Stuttgart;0711;93210;9321500
+28143238;120392037;;30.09.2008;;Unfallversicherung Bund und Bahn;Bereich Bund;Weserstr. 47;D;26382;Wilhelmshaven;04421;4074007;4074070
+16716004;120191819;;05.03.2010;;Unfallkasse Nord;Standort Kiel -Kommunaler Bereich-;Seekoppelweg 5 a;D;24113;Kiel;0431;64070;6407250
+16716004;120192386;;12.05.2009;;Unfallkasse Nord;Standort Kiel -Landesbereich-;Seekoppelweg 5 a;D;24113;Kiel;0431;64070;6407250
+16716004;120291934;;05.03.2010;;Unfallkasse Nord;Standort Hamburg;Spohrstr. 2;D;22083;Hamburg;040;271530;271531000
+34239086;120591802;;06.01.2010;;Unfallkasse NRW;RD Rheinland -Kommunaler Bereich- ;Heyestr. 99;D;40625;Düsseldorf;0211;28080;2808119
+34239086;120591824;;30.11.2012;;Unfallkasse NRW;RD Westfalen-Lippe;Salzmannstr. 156;D;48159;Münster;0251;21020;218569
+34239086;120591982;;06.01.2010;;Unfallkasse NRW;RD Rheinland -Landesbereich-;St.-Franziskus-Str. 146 ;D;40470;Düsseldorf;0211;90240;9024180
+34239086;120592357;;06.01.2010;;Unfallkasse NRW;RD Rheinland -Feuerwehrbereich-;Heyestr. 99;D;40625;Düsseldorf;0211;28080;2808119
+18626026;120391968;;12.12.2006;;Landesunfallkasse;Niedersachsen;Am Mittelfelde 169;D;30519;Hannover;0511;87070;8707188
+88270171;120991942;;12.12.2006;;Bayerische Landesunfallkasse;Sitz München;Ungererstr. 71;D;80805;München;089;360930;36093135
+87661207;120991737;;12.12.2006;;KUVB;Kommunale Unfallversicherung Bayern;Ungererstr. 71;D;80805;München;089;360930;36093135
+21204943;120391742;;12.12.2006;;Braunschweigischer GUVV;;Berliner Platz 1 c;D;38102;Braunschweig;0531;273740;2737430
+29086457;120391764;;12.12.2006;;GUVV Hannover;;Am Mittelfelde 169;D;30519;Hannover;0511;87070;8707188
+26125562;120391786;;12.12.2006;;GUVV Oldenburg;;Gartenstr. 9;D;26122;Oldenburg;0441;779090;7790950
+49005902;120692041;;02.01.2012;;Unfallversicherung Bund und Bahn;Bereich Bahn;Salvador-Allende-Str. 9;D;60487;Frankfurt;069;478630;47862902
+29214533;120392333;;21.12.2009;;Feuerwehr-Unfallkasse;Niedersachsen;Bertastr. 5;D;30159;Hannover;0511;9895431;9895433
+02379637;121290025;;30.11.2005;;Feuerwehr-Unfallkasse;Brandenburg;Müllroser Chaussee 75;D;15236;Frankfurt;0335;52160;5216222
+98705576;121590040;;02.08.2007;;Feuerwehr-Unfallkasse Mitte;LGSt Sachsen-Anhalt;Carl-Miller-Str. 7;D;39112;Magdeburg;0391;544590;5445922
+09322747;121690096;;03.09.2010;;Feuerwehr-Unfallkasse Mitte;LGSt Thüringen;Magdeburger Allee 4;D;99086;Erfurt;0361;5518200;5518221
+18645029;120292321;;20.02.2007;;Hanseatische Feuerwehr Unfallkasse Nord;LGSt Hamburg;Mönckebergstraße 5;D;20095;Hamburg;040;253280-66;253280-73
+01627953;121390059;;31.01.2007;;Hanseatische Feuerwehr-Unfallkasse Nord;LGSt Mecklenburg-Vorpommern;Bertha-von Suttner-Str. 5;D;19061;Schwerin;0385;3031700;3031706
+13385729;120192397;;17.08.2012;;Hanseatische Feuerwehr Unfallkasse Nord;LGSt Schleswig-Holstein ;Hopfenstr. 2 d;D;24114;Kiel;0385;3031700;0431 6031395

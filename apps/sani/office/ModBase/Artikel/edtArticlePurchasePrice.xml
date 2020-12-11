@@ -1,0 +1,33 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtArticlePurchasePrice" class="wapForm">
+		<h2 class="page-title">Article Purchase Price</h2>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Article Purchase Price</legend>
+				<wap:dataform id="edtArticlePurchasePriceMain">
+					<wap:rowdisplay data-wap-label="Id" data-wap-attr="Id" />
+					<wap:rowdisplay data-wap-label="Supplier no." data-wap-attr="SupplierNo" />
+					<wap:rowdisplay data-wap-label="Supplier article no." data-wap-attr="SupplierArticleNo" />
+					<wap:rowinput data-wap-label="Quantity" data-wap-attr="Quantity" />
+					<wap:rowinput data-wap-label="Quantity per PU" data-wap-attr="QuantityPerPU" />
+					<wap:rowinput data-wap-label="Supplier Sales Price" data-wap-attr="SupplierSalesPrice" />
+					<wap:rowinput data-wap-label="Price" data-wap-attr="Price" />
+					<wap:rowinput data-wap-label="Own Discount" data-wap-attr="OwnDiscount" />
+					<wap:rowinput data-wap-label="Own Sales Price" data-wap-attr="OwnSalesPrice" />
+					<wap:rowinput data-wap-label="Margin" data-wap-attr="Margin" />
+					<wap:rowdate data-wap-label="Valid from" data-wap-attr="ValidFrom" />
+					<wap:rowdate data-wap-label="Valid until" data-wap-attr="ValidUntil" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

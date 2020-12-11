@@ -1,0 +1,25 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+<br/>
+<fieldset>
+	<legend>Aggregat</legend>
+	<input type="radio" dojoType="dijit.form.RadioButton" name="aggregat_radio" id="aggregat_radio1" value="Luftfederung" checked="true" onclick="CheckAggregatType();overview_actualize();">Luftfederung&#160;&#160;</input>
+	<input type="radio" dojoType="dijit.form.RadioButton" name="aggregat_radio" id="aggregat_radio2" value="VA-Aggregat" onclick="CheckAggregatType();overview_actualize();">VA-Aggregat&#160;&#160;</input>
+	<input type="radio" dojoType="dijit.form.RadioButton" name="aggregat_radio" id="aggregat_radio3" value="Einzelachsen" onclick="CheckAggregatType();overview_actualize();">Einzelachsen&#160;&#160; </input>
+	<input type="radio" dojoType="dijit.form.RadioButton" name="aggregat_radio" id="aggregat_radio4" value="VB-Aggregat" onclick="CheckAggregatType();overview_actualize();">VB-Aggregat&#160;&#160; </input>
+	<input type="radio" dojoType="dijit.form.RadioButton" name="aggregat_radio" id="aggregat_radio5" value="W-Aggregat" onclick="CheckAggregatType();overview_actualize();">W-Aggregat&#160;&#160; </input>
+	<input type="radio" dojoType="dijit.form.RadioButton" name="aggregat_radio" id="aggregat_radio6" value="Hydraulikfederung" onclick="CheckAggregatType();overview_actualize();">Hydraulikfederung </input>
+</fieldset>
+<br/>
+<input id="Luftfederparameter" data-dojo-type="dijit.form.CheckBox" value="Luftfederparameter" checked="false"><label>Luftfederparameter anzeigen</label></input>
+<br/><br/>
+<fieldset>
+	<legend>Liftachsen</legend>
+	<div id="aggregat_Achsen"></div>
+	<!--
+	<input id="1_Achse" dojoType="dijit.form.CheckBox" value="1_Achse" checked="false"/><label>1. Achse&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</label>
+	<input id="2_Achse" dojoType="dijit.form.CheckBox" value="2_Achse" checked="false"/><label>2. Achse&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</label>
+	<input id="3_Achse" dojoType="dijit.form.CheckBox" value="3_Achse" checked="false"/><label>3. Achse&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</label>
+	-->
+	<br/><br/>Achsabstand&#160;&#160;&#160;&#160;&#160;&#160;
+	<input type="text" id="achsabstand" value="1310" dojoType="dijit.form.TextBox"/>
+</fieldset>

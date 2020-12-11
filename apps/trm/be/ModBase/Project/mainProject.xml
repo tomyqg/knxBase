@@ -1,0 +1,80 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Project</h1>
+		<wap:key>
+			<wap:keyform id="ProjectKeyData">
+				<wap:keyrow data-wap-label="Project no." data-wap-attr="ProjectNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Description" data-wap-attr="Description" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlProjectMain">
+	                <wap:tabContentPane id="tabPageProjectSurvey" data-wap-heading="Overview">
+	                        <wap:grid data-wap-class="Project" data-wap-grid-name="gridProjectOV" wapFormName="formProjectOV" wapTableName="TableProjectOV" >
+	                                <wap:gridcol data-wap-obj="Project" data-wap-attr="Id" data-wap-label="Id" />
+	                                <wap:gridcol data-wap-obj="Project" data-wap-attr="ProjectNo" data-wap-label="ProjectNo" />
+	                                <wap:gridcol data-wap-obj="Project" data-wap-attr="Description" data-wap-label="Description" />
+	                        </wap:grid>
+	                </wap:tabContentPane>
+			<wap:tabContentPane id="tabPageProjectMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formProjectMain">
+                                        <wap:rowinput data-wap-label="Description" data-wap-attr="Description" data-wap-mode="edit" />
+                                        <wap:row>
+                                            <wap:cellhelp></wap:cellhelp>
+                                            <wap:cellinput data-wap-attr="ABCClass" data-wap-mode="edit" />
+                                            <wap:cellinput data-wap-attr="ProductId" data-wap-mode="edit" />
+                                        </wap:row>
+										<wap:rowinput data-wap-label="FCP Code" data-wap-attr="FCPCode" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Modi</legend>
+									<wap:dataform id="formProjectModi">
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Access</legend>
+									<wap:data>
+										<wap:dataform id="formProjectAccess">
+										</wap:dataform>
+									</wap:data>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formProjectMain" />
+					<wap:btnUpdate data-wap-forms="formProjectMain,formProjectModi,formProjectAccess" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageProjectDocuments" data-wap-heading="Documents">
+				<wap:grid data-wap-class="ProjectDocument" data-wap-grid-name="gridProjectDocument" adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+                    <wap:gridcol data-wap-attr="DocumentNo" data-wap-label="Document no." data-wap-link-to="Document"/>
+					<wap:gridcol data-wap-attr="Prefix" data-wap-label="Prefix" />
+                    <wap:gridcol data-wap-attr="DecimalClass" data-wap-label="Decimal Class" />
+                    <wap:gridcol data-wap-attr="ABCClass" data-wap-label="ABC Class" />
+                    <wap:gridcol data-wap-attr="ProductId" data-wap-label="Product Id" />
+                    <wap:gridcol data-wap-attr="Postfix" data-wap-label="Postfix" />
+                    <wap:gridcol data-wap-attr="Title" data-wap-label="Title" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

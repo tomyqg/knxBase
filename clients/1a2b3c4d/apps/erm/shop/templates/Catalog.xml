@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="catalog">
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="Catalog">
+		<![CDATA[
+			<h2 class="page-title">$RootProductGroup.ProductGroupName.toHTML$</h2>
+			$RootProductGroup.Fulltext$
+			<table class="tab_a">	<!-- catalog	-->
+				<tbody>
+					$ProductGroupList$
+					$ArticleGroupList$
+				</tbody>
+			</table>				<!-- catalog	-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ProductGroup">
+		<![CDATA[
+			<tr>
+				<td class="zelle_a_11" colspan="2">
+					<a href="/Images/$ProductGroup.ImageReference$" target="new">
+						<img class="art_pic" src="/Images/thumbs/$ProductGroup.ImageReference$" alt="$ProductGroup.ProductGroupName$" />
+					</a>
+				</td>
+				<td class="zelle_a_12">
+					<h3><a href="$ProductGroup.ProductGroupNameStripped$">$ProductGroup.ProductGroupName.toHTML$</a></h3>
+					<div class="zelle_a_12_text">
+						<b>$ProductGroup.Fulltext$</b><br>
+						$SubGrList$
+					</div>
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ArticleGroup">
+		<![CDATA[
+			<tr>
+				<td class="zelle_a_11">
+					<a href="/Images/$ArticleGroup.ImageReference$" target="new">
+						<img class="art_pic" src="/Images/thumbs/$ArticleGroup.ImageReference$" alt="$ArticleGroup.ArticleGroupName$" />
+					</a>
+				</td>
+				<td class="zelle_a_12">
+					<h3>$ArticleGroup.ArticleGroupName.toHTML$</h3>
+					<div class="zelle_a_12_text">
+						$ArticleGroup.Fulltext$<br>
+					</div>
+					$ArticleGroupSalesPricesTable$
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="SubProductGroup">
+		<![CDATA[
+			<a href="$SubProductGroup.ProductGroupNameStripped$">$SubProductGroup.ProductGroupName.toHTML$</a><br/>
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="SubArticleGroup">
+		<![CDATA[
+			$SubArticleGroup.ArticleGroupName.toHTML$<br/>
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="article">
+		<![CDATA[
+			$blockArtSalesPrices$
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ArticleGroupSalesPricesTable">
+		<![CDATA[
+			<table class="tab_i">	<!-- artSalesPriceTable				-->
+				<tbody>
+					<tr class="zeile_i_1">
+						<th class="zelle_i_1">Artikel Nr.</th>
+						<th class="zelle_i_2">Bezeichnung/Variante</th>
+						<th class="zelle_i_3">&euro; inkl. Mwst.<br/>&euro; exkl. Mwst.</th>
+						<th class="zelle_i_4">bis zu</th>
+						<th class="zelle_i_5">Anzahl</th>
+					</tr>
+					$ArticleGroupSalesPricesList$
+				</tbody>
+			</table>				<!-- artSalesPriceTable				-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ArtSalesPricesTable">
+		<![CDATA[
+			<table class="tab_i">	<!-- artSalesPriceTable				-->
+				<tbody>
+					<tr class="zeile_i_1">
+						<th class="zelle_i_1">Artikel Nr.</th>
+						<th class="zelle_i_2">Bezeichnung/Variante</th>
+						<th class="zelle_i_3"><b>&euro; inkl. Mwst.</b><br/>&euro; exkl. Mwst.</th>
+						<th class="zelle_i_4">bis zu</th>
+						<th class="zelle_i_5">Anzahl</th>
+					</tr>
+					$ArtSalesPricesList$
+				</tbody>
+			</table>				<!-- artSalesPriceTable				-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtSalesPriceLine												-->
+	<!-- describes the layout for the description of a single article	-->
+	<!-- needs: LinkedArticleNo, Article, SalesPrice					-->
+	<!--																-->
+	<format name="ArtSalesPriceLine">
+		<![CDATA[
+			<tr class="zeile_i_n">
+				<td class="zelle_i_1">$LinkedArticleNo$</td>
+				<td class="zelle_i_2">$Article.ArticleDescription1$,<br/>$Article.ArticleDescription2$</td>
+				<td class="zelle_i_3"><b>$SalesPrice.SalesPriceTaxIn$ / $SalesPrice.QuantityPerPU$</b><br/>
+										$SalesPrice.Price$ / $SalesPrice.QuantityPerPU$</td>
+				<td class="zelle_i_4">$SalesPrice.Discount$</td>
+				<td class="zelle_i_5">
+					<form class="eingabe1" method="post" id="Form$Article.ERPNo$_$SalesPrice.QuantityPerPU$"
+						action="merkzettel.php" onsubmit="addToCustomerCart( 'Form$Article.ERPNo$_$SalesPrice.QuantityPerPU$') ; return false ;">
+						<fieldset style="border: 0px">
+							<input type="hidden" name="_IArticleNo" value="$Article.ArticleNo$">
+							<input type="hidden" name="_IArticleDescription1" value="$Article.ArticleDescription1$">
+							<input type="hidden" name="_IF1" value="$SalesPrice.Discount$">
+							<input type="hidden" name="_IPrice" value="$SalesPrice.Price$">
+							<input type="hidden" name="_IQuantityPerPU" value="$SalesPrice.QuantityPerPU$">
+							<input class="eingabe2" maxlength="3" size="3" name="_IQuantity" value="$SalesPrice.Quantity$">
+							<input class="eingabe3" type="button" name="submit" value="MERKEN"
+									onclick="addToCustomerCart( 'Form$Article.ERPNo$_$SalesPrice.QuantityPerPU$') ; ">
+						</fieldset>
+					</form>
+				</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- artComp														-->
+	<!-- format of a single ArticleComponent as a table-line			-->
+	<!--																-->
+	<format name="artComp">
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ArticleGroupDetail">
+		<![CDATA[
+			<h1>$ArticleGroup.ArticleGroupName.toHTML$</h1>
+			<table class="tab_a">	<!-- articleDetail	-->
+				<tbody>
+<!-- ------------------------------	-->
+						<tr>
+						<td class="zelle_a_11t" rowspan="2">
+							<a href="/Images/$ArticleGroup.ImageReference$">
+								<img class="art_pic" src="/Images/internet/$ArticleGroup.ImageReference$" alt="Bild $ArticleGroup.ArticleGroupNo$" />
+							</a>
+							<br/>
+						</td>
+						<td class="zelle_a_12n" width="80%">
+							<div id="cont_descr" style="display: block; padding: 3px;">
+								<div class="zelle_a_12_text">
+									<div>
+										$ProductGroup.Fulltext$
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+<!-- ------------------------------	-->
+				</tbody>
+			</table>				<!-- articleDetail	-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleDetail													-->
+	<!-- describes the layout for the description of a single article	-->
+	<!--																-->
+	<format name="ArticleDetail">
+		<![CDATA[
+			<h1>$Article.ArticleDescription1$</h1>
+			<table class="tab_a">	<!-- articleDetail	-->
+				<tbody>
+<!-- ------------------------------	-->
+						<tr>
+						<td class="zelle_a_11t" rowspan="2">
+							<a href="/Images/$Article.ImageReference$">
+								<img class="art_pic" src="/Images/internet/$Article.ImageReference$" alt="Bild $Article.ERPNo$" />
+							</a>
+							<br/>
+						</td>
+						<td class="zelle_a_12n" width="80%">
+							<div id="product_subnav">
+								<div id="subnav_descr" class="product_subnav_active" onclick="activate_descr();">
+									Beschreibung
+								</div>
+								<div id="subnav_attrs" class="product_subnav_inactive" onclick="activate_attrs();">
+									Techn. Daten / Eigenschaften
+								</div>
+								<div id="subnav_docs" class="product_subnav_inactive" onclick="activate_docs();">
+									Dokumente
+								</div>
+								<div id="subnav_misc" class="product_subnav_inactive" onclick="activate_misc();">
+									Sonstiges
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="zelle_a_12" width="80%">
+							<div id="cont_descr" style="display: block; padding: 3px;">
+								<div class="zelle_a_12_text">
+									<div>
+										$ArticleText.Fulltext$
+									</div>
+								</div>
+							</div>
+							<div id="cont_attrs" style="display:none;">
+								$ArtAttrTable$
+							</div>
+							<div id="cont_docs" style="display:none;">
+								$blockDocuments$
+							</div>
+							<div id="cont_misc" style="display:none;">
+								$ArtAttrTableMisc$
+							</div>
+							$ArtSalesPricesTable$
+						</td>
+					</tr>
+<!-- ------------------------------	-->
+				</tbody>
+			</table>				<!-- articleDetail	-->
+		]]>
+	</format>
+	<!--																-->
+	<!-- artAttrTable													-->
+	<!-- article number w/o link to single page							-->
+	<!--																-->
+	<format name="ArtAttrTable">
+		<![CDATA[
+			<h2>Technische Details und/oder Eigenschaften:</h2>
+			<table id="tech_data" cellpadding="0" cellspacing="0">
+				$ArtAttrList$
+			</table>
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleAttributeLineEven											-->
+	<!-- article number w/o link to single page							-->
+	<!--																-->
+	<format name="ArtAttrLineEven">
+		<![CDATA[
+			<tr class="even_row">
+				<td>$Attribute.Attr$</td>
+				<td>$Attribute.AttrValue$</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- articleAttributeLineOdd										-->
+	<!-- article number w/o link to single page							-->
+	<!--																-->
+	<format name="ArtAttrLineOdd">
+		<![CDATA[
+			<tr class="odd_row">
+				<td>$Attribute.Attr$</td>
+				<td>$Attribute.AttrValue$</td>
+			</tr>
+		]]>
+	</format>
+	<!--																-->
+	<!-- artAttrTable													-->
+	<!-- article number w/o link to single page							-->
+	<!--																-->
+	<format name="ArtAttrTableMisc">
+		<![CDATA[
+			<h2>Sonstige Eigenschaften:</h2>
+			<table id="tech_data" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>Gewicht (Masse):</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Breite:</td>
+					<td>$Article.PCDimB$</td>
+				</tr>
+				<tr>
+					<td>Hoehe:</td>
+					<td>$Article.PCDimH$</td>
+				</tr>
+				<tr>
+					<td>Laenge:</td>
+					<td>$Article.PCDimL$</td>
+				</tr>
+			</table>
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtNoWLink														-->
+	<!-- article number linking to the single page						-->
+	<!-- needs: ProductGroup, Article											-->
+	<format name="ArticleNoWLink">
+		<![CDATA[
+			<a class="detail" href="/$ProductGroup.ProductGroupNo$/$Article.ArticleNo$.html">
+				$Article.ArticleNo$
+			</a>
+		]]>
+	</format>
+	<!--																-->
+	<!-- ArtNoWOLink													-->
+	<!-- article number w/o link to single page							-->
+	<!-- needs: Article													-->
+	<!--																-->
+	<format name="ArticleNoWOLink">
+		<![CDATA[
+			$Article.ArticleNo$
+		]]>
+	</format>
+</resource>

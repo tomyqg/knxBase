@@ -1,0 +1,25 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtClientApplication" class="wapForm">
+		<h1 class="page-title">Edit Client Application</h1>
+		<fieldset>
+			<legend>Main</legend>
+			<wap:dataform id="edtClientApplicationMain">
+				<wap:rowdisplay data-wap-label="Client Id." data-wap-attr="ClientId" />
+				<wap:rowinput data-wap-label="Applicationsystem Id." data-wap-attr="ApplicationSystemId" data-wap-mode="edit" />
+				<wap:rowinput data-wap-label="Application Id" data-wap-attr="ApplicationId" data-wap-mode="edit" />
+				<wap:rowinput data-wap-label="User Id." data-wap-attr="UserId" data-wap-mode="edit" />
+				<wap:rowinput data-wap-label="PathConfig" data-wap-attr="PathConfig" data-wap-mode="edit"/>
+				<wap:rowinput data-wap-label="PathApplication" data-wap-attr="PathApplication" data-wap-mode="edit" />
+			</wap:dataform>
+		</fieldset>
+	</div>
+</html>

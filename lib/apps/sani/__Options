@@ -1,0 +1,66 @@
+Optionen...........:
+
+Klasse.............:	Kunde
+
+Kategorie..........:	Pflegegrad
+Werte
+
+0		Kein Pflegegrad
+1		Pflegrad 1
+2		Pflegrad 2
+3		Pflegrad 3
+4		Pflegrad 4
+5		Pflegrad 5
+
+Kategorie..........:	Adress-Typ
+Werte
+
+0		Gemeldete Adresse des Kunden
+1		Rechnungsadresse
+2		Lieferadresse
+
+Kategorie..........:	Adress-Art
+werte
+
+0		Privat Adresse
+1		Wohnheim Adresse
+2		Angehöriger
+3		Pflegedienst
+4		Krankenhaus
+5		Vormund
+6
+
+---------------------------------------------------------------------------------------------
+
+Klasse.............:	Auftrag und Auftragsposition
+
+Kategorie..........:	AuftragArt
+Werte
+
+1		PrivatAuftrag
+2		Rezept
+3		Kostenträger
+
+Kategorie..........:	Leistungskennzahl, LKZ
+Werte
+
+00		Neulieferung
+01		Reparatur
+02
+
+Kategorie..........:	Leistungs-Bereich
+Werte
+
+01		Orthopädie
+02		Inkontinenzversorgung
+03		Stomaversorgung
+04		Prothetik
+
+Kategorie..........:
+
+---------------------------------------------------------------------------------------------
+
+Klasse.............:	Auftrag
+
+Kategorie..........:	AuftragArt
+Werte

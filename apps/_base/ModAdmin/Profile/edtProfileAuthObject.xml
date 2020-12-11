@@ -1,0 +1,26 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtProfileAuthObject" class="wapForm">
+		<h1 class="page-title">Edit Authorization Object</h1>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Authorization Object</legend>
+				<wap:dataform id="edtProfileAuthObjectMain">
+					<wap:rowdisplay data-wap-label="Profile id" data-wap-attr="ProfileId" />
+					<wap:rowoption data-wap-label="Authorization object id" data-wap-attr="AuthObjectId" data-wap-mode="edit"
+						data-wap-db="AuthObject" data-wap-key="AuthObjectId" data-wap-value="AuthObjectId" data-wap-cond="1 = 1" data-wap-order="AuthObjectId" data-wap-def="" />
+					<wap:rowflag data-wap-label="Active" data-wap-attr="Active" data-wap-mode="edit"
+						data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

@@ -1,0 +1,41 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+<br/>
+
+<fieldset>
+	<legend>Fahrzeugdaten</legend>
+	
+	<center>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		beladen
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		<button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconTabIndent', showLabel: false" id="button_right">to empty</button>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		leer 
+		<br/>
+		Gesamtgewicht[kg]:
+		<input type="text" style="width:6em" id="gsmtgewicht_voll_start" data-dojo-type="dijit.form.TextBox"/>
+		&#160;&#160;&#160;bis&#160;&#160;&#160;
+		<input type="text" style="width:6em" id="gsmtgewicht_voll_end" data-dojo-type="dijit.form.TextBox"/>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		<input type="text" style="width:6em" id="gsmtgewicht_leer_start" data-dojo-type="dijit.form.TextBox"/>
+		&#160;&#160;&#160;bis&#160;&#160;&#160;
+		<input type="text" style="width:6em" id="gsmtgewicht_leer_end" data-dojo-type="dijit.form.TextBox"/>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160
+		
+		<div id="fahrzeugdaten_Achsen">
+		</div>
+		
+		<br/>
+		Schwerpunkth&ouml;he[mm]:
+		<input type="text" style="width:6em" id="schwrpkt_beladen" data-dojo-type="dijit.form.TextBox" value="1800" onblur="CheckTrailerData();overview_actualize();"/> 
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		<input type="text" style="width:6em" id="schwrpkt_leer" data-dojo-type="dijit.form.TextBox" value="1100" onblur="CheckTrailerData();overview_actualize();"/>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		<br/><br/>
+		Radstand[mm]:
+		<input type="text" style="width:6em" id="rdstnd_von" data-dojo-type="dijit.form.TextBox" value="5500" onblur="CheckTrailerData();overview_actualize();"/>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+		<input type="text" style="width:6em" id="rdstnd_bis" data-dojo-type="dijit.form.TextBox" value="6000" onblur="CheckTrailerData();overview_actualize();"/>
+		&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+	</center>
+</fieldset>

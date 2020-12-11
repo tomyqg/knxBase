@@ -1,0 +1,13 @@
+<form name="$self.wapFormName$Bot" id="$self.wapFormName$Bot" style="margin-top:0px;margin-bottom:0px;">
+	<table style="border:0; width:100%">
+		<thead>
+			<tr>
+				<td align="left">
+					<div class="memu-icon sprite-add" onclick="wapGrids['$self.wapGridName$'].addItem() ;">
+					</div>
+				</td>
+		</tr>
+		</thead>
+	</table>
+</form>
+</html>

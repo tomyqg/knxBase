@@ -1,0 +1,65 @@
+cmd="$0"
+echo $cmd
+cmd="$1"
+srv="$2"
+sub="$3"
+case "$sub" in
+    httpdocs)
+		dir1="/srv/www/vhosts/<SITENAME>/httpdocs/"
+		dir2="<RSYNC_USER>@$srv::httpdocs"
+        ;;
+    Downloads)
+		dir1="/srv/www/vhosts/<SITENAME>/Downloads/"
+		dir2="<RSYNC_USER>@$srv::Downloads"
+        ;;
+    Bilder)
+		dir1="/srv/www/vhosts/<SITENAME>/Bilder/"
+		dir2="<RSYNC_USER>@$srv::Bilder"
+        ;;
+    Documents)
+		dir1="/srv/www/vhosts/<SITENAME>/Documents/"
+		dir2="<RSYNC_USER>@$srv::Documents"
+        ;;
+    Archiv)
+		dir1="/srv/www/vhosts/<SITENAME>/Archiv/"
+		dir2="<RSYNC_USER>@$srv::Archiv"
+        ;;
+    XMLup)
+		dir1="/srv/www/vhosts/<SITENAME>/Archiv/XML/up"
+		dir2="<RSYNC_USER>@$srv::XMLup"
+        ;;
+    XMLdown)
+		dir1="/srv/www/vhosts/<SITENAME>/Archiv/XML/down"
+		dir2="<RSYNC_USER>@$srv::XMLdown"
+        ;;
+    phpconfig)
+		dir1="/srv/www/vhosts/<SITENAME>/phpconfig/"
+		dir2="<RSYNC_USER>@$srv::phpconfig"
+        ;;
+    phpinc)
+		dir1="/srv/www/vhosts/<SITENAME>/phpinc/"
+		dir2="<RSYNC_USER>@$srv::phpinc"
+        ;;
+    help)
+		cmd="help"
+		;;
+	*)
+		echo "Gewuenschte Struktur [" $1 "] existiert nicht !!"
+		exit
+		;;
+esac
+case "$cmd" in
+	put)
+		echo "Will upload " $dir1 " into " $dir2
+		rsync -r -l -vv --password-file /etc/rsync_pwd --exclude-from="rsync.exclude" $dir1/* $dir2
+		;;
+	putFromBE)
+		echo "Will upload " $dir1 " into " $dir2
+		rsync -r -l -vv --password-file /etc/rsync_be_pwd --exclude-from="rsync.exclude" $dir1/* $dir2
+		;;
+	get)
+		echo "Will download " $dir2 " to " $dir1
+		rsync -r -l -vv --password-file /etc/rsync_pwd $dir2 $dir1
+		;;
+esac
+	

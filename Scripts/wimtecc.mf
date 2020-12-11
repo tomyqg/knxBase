@@ -1,0 +1,131 @@
+#
+# makefile for usage with openEISS R3
+#  Revision history
+#  
+# Date			Rev.	Who		what
+# --------------------------------------------
+# 2013-05-13	PA1		khw		added to rev. control
+# 2013-05-17	PA2		khw		added rev. history
+#
+
+# REFSRV	the server where the released version can be found
+
+REFSRV			:=	192.168.6.196
+REFSRVLOCAL		:=	192.168.6.196
+REFSRVGLOBAL	:=	wimtecc.de
+
+# SHOPSRV   the server where the life-shop is located
+
+SHOPSRV :=  x.x.x.x
+
+toProduction:
+
+selfUpdate:
+
+selfUpdateLocal:
+
+incRev:
+	php ./inc.php ../ERP/rc.txt
+	
+release:
+	php ./inc.php ../ERP/rc.txt
+	rsync -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" /srv/www/vhosts/wimtecc.de/erp_r4/* wwwrun@$(REFSRVGLOBAL)::r4
+
+releaseLocal:
+	php ./inc.php ../ERP/rc.txt
+	rsync -r -l -vv --password-file /etc/rsync_developer_pwd --exclude-from="rsync.exclude" /srv/www/vhosts/wimtecc.de/erp_r4/* erpdeveloper@$(REFSRVLOCAL)::r4
+
+# syncDocuments:        upload files, download files
+
+syncDocuments:
+        rsync -q -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" /srv/www/vhosts/wimtecc.de/Documents/* wwwrun@$(REFSRVGLOBAL)::shopdemo/Documents
+        rsync -q -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" wwwrun@$(REFSRVGLOBAL)::Documents/* /srv/www/vhosts/wimtecc.de/Documents
+
+# syncDownloads:        upload files, download files
+
+syncDownloads:
+        rsync -q -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" /srv/www/vhosts/wimtecc.de/Downloads/* wwwrun@$(REFSRVGLOBAL)::modis/Downloads
+        rsync -q -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" wwwrun@$(REFSRVGLOBAL)::Downloads/* /srv/www/vhosts/wimtecc.de/Downloads
+
+# syncDocuments:        upload files
+
+syncImages:
+        rsync -r -l -vv --password-file /etc/rsync_global_pwd --exclude-from="rsync.exclude" /srv/www/vhosts/wimtecc.de/Images/* wwwrun@wimtecc.de::shopdemo/Images
+
+# updateDbPrices:		uploads VKPreisCache, ArtikelBestand;
+#						should be run daily or as needed
+
+TABLES_PRICES :=	VKPreisCache ArtikelBestand
+updateDbPrices:	_createDbPrices
+	rsync 
+_createDbPrices:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo $(TABLES_PRICES) --hex-blob >/srv/www/vhosts/wimtecc.de/Archiv/XML/up/$(fullSiteName)_prices.sql
+
+# updateDbArticles:		uploads all article related stuff;
+#						should be run weekly or as needed
+
+TABLES_ARTICLES :=	VKPreisCache ArtikelBestand
+updateDbArticles:	_createDbArticles
+	rsync	
+_createDbArticles:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo $(TABLES_ARTICLES) --hex-blob >/srv/www/vhosts/wimtecc.de/Archiv/XML/up/$(fullSiteName)_prices.sql
+
+# updateDbStructure:	uploads all structural data, i.e. Product- and Article groups;
+#						should be run weekly or as needed
+
+TABLES_STRUCTURE :=	WebPage ProdGr ProdGrComp ArtGr ArtGrComp
+updateDbStructure:	_createDbStructure
+	rsync	
+_createDbStructure:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo $(TABLES_ARTICLES) --hex-blob >/srv/www/vhosts/wimtecc.de/Archiv/XML/up/$(fullSiteName)_prices.sql
+
+uploadDbStructure:
+
+#
+
+dummy:
+
+Bilder:
+	cd /srv/www/vhosts/$(fullSiteName)/Bilder; make
+
+TABLES :=	Artikel \
+			ArtKomp \
+			ArtTexte \
+			Texte \
+			Trans \
+			User \
+			VKPreis \
+			VKPreisCache
+
+TABLES_VS :=	VKPreisCache
+
+DbVerySmall:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo $(TABLES_VS) --hex-blob | gzip >../$(fullSiteName)_very_small.sql.gz
+
+DbSmall:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo $(TABLES) --hex-blob | gzip >../$(fullSiteName)_small.sql.gz
+
+DbFull:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo --hex-blob | gzip >../$(fullSiteName)_full.sql.gz
+	
+put_db_very_small:
+	echo "making 'put_db_very_small'"
+#	./syncAll putFromBE $(fullSiteName) db_very_small
+
+put_db_small:
+	echo "making 'put_db_small'"
+#	./syncAll putFromBE $(fullSiteName) db_small
+
+put_db_full:
+	echo "making 'put_db_full'"
+#	./syncAll putFromBE $(fullSiteName) db_full
+
+DEVTAB :=	Trans \
+			User
+
+DbDev:
+	/usr/local/mysql/bin/mysqldump -u erpdemo -perpdemo erpdemo $(DEVTAB) --hex-blob >/srv/www/vhosts/$(fullSiteName)/subdomains/shop/Archiv/$(fullSiteName)_dev.sql
+
+selfupdate:
+
+

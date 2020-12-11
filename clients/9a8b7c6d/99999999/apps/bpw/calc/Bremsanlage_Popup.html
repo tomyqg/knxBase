@@ -1,0 +1,96 @@
+
+<form id="Bremsanlage_PopUp" action="#" method="post">
+
+	<table>
+		<tr>
+			<td width=325>
+				<fieldset>
+					<legend><font color="white">Ventilart</legend>
+					<font color="white">
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_1" value="Anhaengerbremsventil">Anh&auml;ngerbremsventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_2" value="ALB-Regler"  disabled="disabled">ALB-Regler</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_3" value="ALB-Anhangerbremsventil"  disabled="disabled">ALB-Anhangerbremsventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_4" value="Apassungsventil"  disabled="disabled">Apassungsventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_5" value="Knickventil"  disabled="disabled">Knickventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_6" value="Druckbegrenzungsventil"  disabled="disabled">Druckbegrenzungsventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_7" value="Relaisventil"  disabled="disabled">Relaisventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_8" value="Reduzierventil"  disabled="disabled">Reduzierventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_9" value="EBS-Relaisventil"  disabled="disabled">EBS-Relaisventil</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_10" value="EBS-Modulator"  disabled="disabled">EBS-Modulator</input><br/>
+						<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_ventil" id="kind_of_ventil_11" value="keins" checked="true">keins</input><br/>
+					</font>
+				</fieldset>
+			</td>
+			<td width=325>
+				<fieldset>
+					<br/>
+					<legend><font color="white">Ventildetails</font></legend>
+					<font color="white">Hersteller</font>
+					<select id="popup_hersteller" data-dojo-type="dijit.form.Select" style="width:250px" onchange="popup_dialog_check_producer();">
+						<option value="BPW">BPW</option>
+						<option value="Wabco">Wabco</option>
+						<option value="Haldex">Haldex</option>
+						<option value="Knorr">Knorr</option>
+					</select>
+					<br/>
+					<br/>
+					<font color="white">Nummer</font>
+					<table>
+						<tr id="popup_number_BPW_row"  style="visibility:visible;">
+							<td>
+								<select id="popup_number_BPW" style="width:250px;">
+								</select>
+							</td>
+						</tr>
+						<tr id="popup_number_Knorr_row"  style="visibility:collapse;">
+							<td>
+								<select id="popup_number_Knorr" style="width:250px;">
+									<option value="RE2220;21;23-26">RE2220;21;23-26</option>
+									<option value="RE1105;10;15;25;29">RE1105;10;15;25;29</option>
+									<option value="RE1100;02-04;06-08">RE1100;02-04;06-08</option>
+									<option value="RE1132">RE1132</option>
+									<option value="RE1121;23;24;26">RE1121;23;24;26</option>
+									<option value="RE2220-21;2223-26">RE2220-21;2223-26</option>
+									<option value="BR9200(ABS)">BR9200(ABS)</option>
+									<option value="BR9231/32(ABS)">BR9231/32 (ABS)</option>
+								</select>
+							</td>
+						</tr>
+						<tr id="popup_number_Wabco_row"  style="visibility:collapse;">
+							<td>
+								<select id="popup_number_Wabco" style="width:250;">
+									<option value="9730110..0">9730110..0</option>
+									<option value="4721950..0(ABS)">4721950..0(ABS)</option>
+									<option value="9730010.00">9730010.00</option>
+									<option value="9730012.00">9730012.00</option>
+								</select>
+							</td>
+						</tr>
+						<tr id="popup_number_Haldex_row"  style="visibility:collapse;">
+							<td>
+								<select id="popup_number_Haldex" style="width:250;">
+									<option value="355023">355023</option>
+									<option value="364...;393...(ABS)">364...;393...(ABS)</option>
+									<option value="355018...">355018...</option>
+									<option value="393015001(MGX-ABV)">393015001(MGX-ABV)</option>
+									<option value="304..;364..(MODAL)">304..;364..(MODAL)</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<br/><br/><br/><br/>
+				</fieldset>
+			</td>
+		</tr>
+		
+	</table>
+	
+	<button type="button" data-dojo-type="dijit.form.Button" id="Kennlinien zeigen">Ventilkennlinie</button>
+	<br/><br/>
+	
+	<center>
+		<button type="button" data-dojo-type="dijit.form.Button" id="popup_submit" onclick="popup_dialog_send_data();">Ok</button>
+		<button type="button" data-dojo-type="dijit.form.Button" id="popup_abort" onclick="$('#popupdiv').dialog('close');">Abbrechen</button>
+	</center>
+
+</form>

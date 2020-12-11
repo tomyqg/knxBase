@@ -1,0 +1,160 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">SysUsers</h1>
+		<wap:key>
+			<wap:keyform id="SysUserKeyData">
+				<wap:keyrow data-wap-label="User id." data-wap-attr="UserId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Name 1" data-wap-attr="Name1"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlSysUserMain">
+			<wap:tabContentPane id="tabPageSysUserSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="SysUser" data-wap-grid-name="gridSysUserOV"  >
+					<wap:gridcol data-wap-obj="SysUser" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="SysUser" data-wap-attr="UserId" data-wap-label="User Id." />
+					<wap:gridcol data-wap-obj="SysUser" data-wap-attr="LastName" data-wap-label="LastName" data-wap-align="right"/>
+					<wap:gridcol data-wap-obj="SysUser" data-wap-attr="FirstName" data-wap-label="FirstName" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageSysUserMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formSysUserMain">
+										<wap:rowdisplay data-wap-label="User id." data-wap-attr="UserId" />
+										<wap:row>
+											<wap:cellhelp rowspan="2" />
+											<wap:celllabel rowspan="2" data-wap-label="Name" />
+											<wap:cellinput data-wap-attr="OrgName1" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput data-wap-attr="OrgName2" data-wap-mode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="Street / No" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="Street" data-wap-mode="edit" />
+												<wap:input data-wap-attr="Number" size="6" max="8" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel data-wap-label="ZIP / City" />
+											<td class="fEdit">
+												<wap:input data-wap-attr="ZIP" size="6" max="8" data-wap-mode="edit" />
+												<wap:input data-wap-attr="City" data-wap-mode="edit" />
+											</td>
+										</wap:row>
+										<wap:rowoption data-wap-label="Country" data-wap-attr="Country" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Country'" data-wap-order="'Key'" data-wap-def="de" />
+										<wap:rowoption data-wap-label="Language" data-wap-attr="Language" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Language'" data-wap-order="'Key'" data-wap-def="de" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Contac Information</legend>
+									<wap:dataform id="formSysUserContactData">
+										<wap:rowinput data-wap-label="Phone" data-wap-attr="Phone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="FAX" data-wap-attr="FAX" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Cellphone" data-wap-attr="Cellphone" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="URL" data-wap-attr="URL" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="eMail" data-wap-attr="eMail" data-wap-mode="edit" />
+									</wap:dataform>
+									</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Access</legend>
+									<wap:dataform id="formSysUserMisc">
+										<wap:rowinput data-wap-label="Registration" data-wap-attr="Registration" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="ValidFrom" data-wap-attr="ValidTo" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="DateReg" data-wap-attr="DateReg" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="DateLastAcc" data-wap-attr="DateLastAcc" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Miscellaneous Information</legend>
+									<wap:dataform id="formSysUserRem">
+										<wap:rowinput data-wap-label="Type" data-wap-attr="Type" data-wap-mode="edit" />
+										<wap:rowoption data-wap-label="Confirmed" data-wap-attr="Confirmed" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="'Key'" data-wap-def="false" />
+										<wap:rowinput data-wap-label="Level" data-wap-attr="Level" data-wap-mode="edit" />
+										<wap:rowtext data-wap-label="Remark(s)" data-wap-attr="Rem" cols="64" rows="8" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formSysUserMain,formSysUserContactData,formSysUserMisc,formSysUserRem" />
+					<wap:btnUpdate data-wap-forms="formSysUserMain,formSysUserContactData,formSysUserMisc,formSysUserRem" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageSysUserApplications" data-wap-heading="Applications">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Applications (Table: SysUserApplication)</legend>
+									<wap:grid data-wap-class="SysUserApplication" data-wap-grid-name="gridSysUserApplications" data-wap-adder="true">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="ApplicationSystemId" data-wap-label="Application System Id." data-wap-link-to="applicationSystem" />
+										<wap:gridcol data-wap-attr="ApplicationId" data-wap-label="Application Id." />
+										<wap:gridcol data-wap-attr="UserId" data-wap-label="UserId" />
+										<wap:gridcol data-wap-attr="PathConfig" data-wap-label="PathConfig" />
+										<wap:gridcol data-wap-attr="PathApplication" data-wap-label="PathApplication (Redirect)" />
+										<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<fieldset>
+									<legend>Configuration (Table: SysConfigObj)</legend>
+									<wap:grid data-wap-class="SysConfigObj" data-wap-grid-name="gridSysConfigObj" data-wap-adder="true">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="SysUserId" data-wap-label="SysUserId" />
+										<wap:gridcol data-wap-attr="ApplicationSystemId" data-wap-label="Application System Id." />
+										<wap:gridcol data-wap-attr="ApplicationId" data-wap-label="Application Id." />
+										<wap:gridcol data-wap-attr="Class" data-wap-label="Class" />
+										<wap:gridcol data-wap-attr="Block" data-wap-label="Block" />
+										<wap:gridcol data-wap-attr="Parameter" data-wap-label="Parameter" />
+										<wap:gridcol data-wap-attr="Value" data-wap-label="Value" />
+										<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageSysUserHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlSysUserHelpMain">
+					<wap:tabContentPane id="tabPageSysUserHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageSysUserHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageSysUserHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

@@ -1,0 +1,134 @@
+	<div class="block block-cart">
+		<div class="block-title">
+			<strong>
+				<span>$trans.SHOP-HEADER-REGISTEREDUSER$</span>
+			</strong>
+		</div>
+			<form method="post" action="">
+				<fieldset>
+					<table>
+						<tr>
+							<td>$trans.SHOP-LBL-USERID$:</td>
+							<td><input name="CustId" class="inputBasic" /></td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-PASSWORD$:</td>
+							<td><input type="password" name="CustPwd" class="inputBasic"/></td>
+						</tr>
+					</table>
+					<input type="submit" class="buttonBasic" name="Login" value="$trans.SHOP-BTN-LOGIN$" />
+				</fieldset>
+			</form>
+	</div>
+	<div class="block block-cart">
+		<div class="block-title">
+			<strong>
+				<span>$trans.SHOP-HEADER-NEWUSER$</span>
+			</strong>
+		</div>
+			<form method="post" action="">
+				<fieldset>
+					<table>
+						<tr>
+							<td>Anrede:</td>
+							<td></td>
+							<td>
+								<select name="_IAnrede">
+									$options.Salutation.Frau$
+								</select>
+							</td>
+							<td colspan="3">$trans.SHOP-HELP-ADDRESS$</td>
+						</tr>
+						<tr>
+							<td>Titel:</td>
+							<td></td>
+							<td>
+								<select name="_ITitle">
+									$options.Title.de$
+								</select>
+							</td>
+							<td colspan="3">$trans.SHOP-HELP-TITLE$</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-COMPANY$:</td>
+							<td></td>
+							<td><input class="$err._IFirmaName1$" name="_IFirmaName1" class="inputBasic" value="$post._IFirmaName1$" />
+							</td>
+							<td>$trans.SHOP-HELP-COMPANY$</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-LASTNAME$:</td>
+							<td>*</td>
+							<td><input class="$err._IName$" name="_IName" class="inputBasic" value="$post._IName$" />
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-FIRSTNAME$:</td>
+							<td></td>
+							<td><input class="$err._IVorname$" name="_IVorname" class="inputBasic" value="$post._IVorname$" /></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-STREETNO$:</td>
+							<td>*</td>
+							<td>
+								<input class="$err._IStrasse$" name="_IStrasse" class="inputBasic" value="$post._IStrasse$" />
+								<input class="$err._IHausnummer$" name="_IHausnummer" class="inputBasic" value="$post._IHausnummer$" size="5" />
+							</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-ZIPCITY$:</td>
+							<td>*</td>
+							<td>
+								<input class="$err._IPLZ$" name="_IPLZ" size="8" class="inputBasic" value="$post._IPLZ$" />
+								<input class="$err._IOrt$" name="_IOrt" class="inputFalse" value="$post._IOrt$" />
+							</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-COUNTRY$:</td>
+							<td></td>
+							<td>
+								<select name="Country">
+									$options.Country.de$
+								</select>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-PHONE$:</td>
+							<td></td>
+							<td><input name="Phone" class="inputBasic" value="" /></td>
+							<td colspan="3">$trans.SHOP-HELP-PHONE$</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-FAX$:</td>
+							<td></td>
+							<td><input name="Fax" class="inputBasic" value="" /></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-CELLPHONE$:</td>
+							<td></td>
+							<td><input name="Callphone" class="inputBasic" value="" /></td>
+							<td colspan="3">$trans.SHOP-HELP-CELLPHONE$</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-EMAIL$:</td>
+							<td>*</td>
+							<td><input name="_IeMail" class="$err._IeMail$ inputBasic" value="$post._IeMail$" /></td>
+							<td rowspan="2" colspan="3">$trans.SHOP-HELP-EMAIL$</td>
+						</tr>
+						<tr>
+							<td>$trans.SHOP-LBL-EMAILCONF$:</td>
+							<td>*</td>
+							<td><input name="_IeMailVerify" class="$err._IeMail$ inputBasic" value="$post._IeMailVerify$" /></td>
+						</tr>
+					</table>
+					<input type="submit" class="buttonBasic" value="$trans.SHOP-BTN-REGISTERNOW$" name="custNew"/>
+				</fieldset>
+			</form>
+</div>

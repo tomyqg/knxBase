@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../lib/jquery-1.11.0.min.js"></script>
+    <script>
+        (function($) {
+            var greenShade = "#33ff55" ;
+            var redShade = "#ff2211" ;
+            $.fn.greenbg = function() {
+                this.css( "background-color", greenShade) ;
+                return this ;
+            } ;
+            $.fn.redfg = function() {
+                this.css( "color", redShade) ;
+            } ;
+        }(jQuery)) ;
+        $(function() {
+//            $("div").css( "background-color", "#0e0") ;
+            $("#div1").greenbg() ;
+            $("#div2").redfg() ;
+            $("div").greenbg().redfg() ;
+        }) ;
+    </script>
+</head>
+<body>
+    jQuery Test Page
+<div id="div1">Div 1</div>
+<div id="div2">Div 2</div>
+<div id="div3">Div 3</div>
+<div id="div4">Div 4</div>
+<div id="div5">Div 5</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="divBodyCenter">
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<div id="bodyCenter">
+		<object class="Catalog" template="Catalog.xml" />
+	</div>
+</resource>

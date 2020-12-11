@@ -1,0 +1,190 @@
+<?php
+/**
+ * apps/erm/index.php
+ * ==================
+ *
+ * fetch the global configuration
+ */
+$debugBoot	=	true ;
+require_once( $_SERVER["DOCUMENT_ROOT"]."/mas/Config/config.inc.php") ;
+FDbg::setAppToTrace( "") ;
+FDbg::setApp( "index.php") ;
+$lineEnd	=	"\n" ;
+if ( isset( $_GET['screen'])) {
+	require_once( $_GET['screen']) ;
+	die() ;
+} else if ( isset( $_GET['code'])) {
+	require_once( $_GET['code']) ;
+	die() ;
+} else if ( isset( $_GET['js'])) {
+	require_once( $_GET['js']) ;
+	die() ;
+}
+
+/**
+ * read the additional "mas" configuration parameters from the database
+ */
+$mySysConfig	=	EISSCoreObject::__getSysConfig() ;
+$mySysConfig->addFromSysDb( "mas") ;
+
+/**
+ * We rely on getting all data through POST variables for the login process. Therefor, copy the value from
+ * $_GET to $_POST which have been transmitted.
+ */
+if ( ! isset( $_POST['selEnv']))
+	if ( isset( $_GET['selEnv']))
+		$_POST['selEnv']	=	$_GET['selEnv'] ;
+if ( ! isset( $_POST['selLang']))
+	if ( isset( $_GET['selLang']))
+		$_POST['selLang']	=	$_GET['selLang'] ;
+/**
+ * double check if the ClientApplication is defined. If not, we need to present the login screen.
+ */
+if ( $mySysSession->Validity == SysSession::VALIDFRM) {
+	$mySysUser	=	$mySysSession->SysUser ;
+	$scriptPath	=	$_SERVER["DOCUMENT_ROOT"] . "/"
+		.	"clients"
+		.	$mySysSession->ClientId . "/apps/"
+		.	$mySysSession->ApplicationSystemId . "/"
+		.	$mySysSession->ApplicationId . "/scripts/"
+	;
+	$appUser	=	EISSCoreObject::__getAppUser() ;
+	?>
+	<html dir="ltr">
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="/rsrc/js/jQuery/jquery-ui-1.12.1.custom/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="/rsrc/styles/semanticUI/semantic.min.css">
+	<link rel="stylesheet" href="/mas/app.css">
+	<script src="/rsrc/js/jQuery/jquery-3.2.1.min.js"></script>
+	<script src="/rsrc/js/jQuery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="/rsrc/js/jQuery/jquery.ui.autocomplete.html.js"></script>
+	<script src="/rsrc/js/semanticUI/semantic.min.js"></script>
+<!--
+	<script type="text/javascript" src="/api/debug.js" ></script>
+	<script type="text/javascript" src="/api/loadScript.php?script=wapCommon.js" ></script>
+	<script type="text/javascript" src="/api/loadScript.php?script=wapDataSource.js" ></script>
+	<script type="text/javascript" src="/api/loadScript.php?script=wapScreen.js" ></script>
+	<script type="text/javascript" src="/api/loadScript.php?script=wapSelect.js" ></script>
+	<script type="text/javascript" src="/api/loadScript.php?script=wapBusy.js" ></script>
+	<script type="text/javascript" src="/api/loadScript.php?script=wapPopup.js" ></script>
+-->
+	<script type="text/javascript" src="/api/debug.js" ></script>
+	<script type="text/javascript" src="/api/wapCommon.js" ></script>
+	<script type="text/javascript" src="/api/wapDataSource.js" ></script>
+	<script type="text/javascript" src="/api/wapScreen.js" ></script>
+	<script type="text/javascript" src="/api/wapSelect.js" ></script>
+	<script type="text/javascript" src="/api/wapBusy.js" ></script>
+	<script type="text/javascript" src="/api/wapPopup.js" ></script>
+	<script>
+        sessionId		=	"<?php echo $mySysSession->SessionId ; ?>" ;
+		function	scrLogin( _form) {
+			this.package	=	"ModLogin" ;
+			this.module		=	"Login" ;
+			this.coreObject	=	"ClientApplication" ;
+			this.keyForm	=	"ClientApplicationKeyData" ;
+			this.keyField	=	getFormField( 'ClientApplicationKeyData', 'ClientApplicationKey') ;
+			this.dataSource	=	new wapDataSource( this, {
+									object: "ClientApplication",
+									form:	"ClientApplicationKeyData",
+									fncGet:	"getAppData"
+								}) ;		// dataSource for display
+			this.onDataSourceLoaded	=	function( _scr, _xmlObj) {
+									clientApplication	=	_xmlObj.getElementsByTagName( "ClientApplication")[0] ;
+									pathApplication	=	clientApplication.getElementsByTagName( "PathApplication")[0].childNodes[0].nodeValue ;
+									console.log( pathApplication) ;
+									document.ClientApplicationKeyData.action	=	pathApplication + "?sessionId=" + sessionId ;		// this.dataSource.objects.ClientApplication[0].PathApplication ;
+									document.ClientApplicationKeyData.submit() ;
+								} ;
+			myKey	=	new Array() ;
+			myKey[0]	=	getFormField( _form, 'ClientId').value ;
+			myKey[1]	=	getFormField( _form, 'UserId').value ;
+			myKey[2]	=	getFormField( _form, 'ApplicationSystemId').value ;
+			myKey[3]	=	getFormField( _form, 'ApplicationId').value ;
+			this.dataSource.key	=	myKey ;
+			this.dataSource.dispatch( false, "getAppData", _form) ;
+		}
+	</script>
+	<!--																														-->
+	<!--																														-->
+	<!--																														-->
+	<div id="toolBar">&nbsp;&nbsp;
+		<button class="openbtn" onclick="openNav()">☰ Menu</button>
+		<button class="openbtn" onclick="openNav()">&#8630; Reload</button>
+	</div>
+	<div style="height: 5px;">
+	</div>
+	<!--																-->
+	<!--																-->
+	<!--																-->f
+	<div id="centerContainer">
+		<div id="centerLeft" class="centerLeft">
+			<button class="closebtn" onclick="closeNav()">×</button>
+			<div id="Navigator">
+			</div>
+		</div>
+		<form id="ClientApplicationKeyData" name="ClientApplicationKeyData" class="wapForm" method="post">
+			<input id="ClientApplicationKey" name="ClientApplicationKey" class="wapField" type="hidden" size="128" maxlength="123" />
+			<input id="ApplicationSystemId" name="ApplicationSystemId" class="wapField" type="hidden" data-wap-attr="ApplicationSystemId" >
+			<input id="ApplicationId" name="ApplicationId" class="wapField" type="hidden" data-wap-attr="ApplicationId" >
+		</form>
+		<div id="center" class="ui enter aligned basic segments">
+				<?php
+					$lastClientId	=	"" ;
+					$lastApplicationSystemId	=	"" ;
+					$client	=	new Client() ;
+					$clientApplication	=	new ClientApplication() ;
+					$clientApplication->setIterCond( "UserId = 'miskhwe' ") ;
+					$clientApplication->setIterOrder( [ "ClientId", "ApplicationSystemId", "ApplicationId"]) ;
+					reset( $clientApplication) ;
+					foreach ( $clientApplication as $key => $app) {
+						if ( $app->ClientId != $lastClientId) {
+							$client->setKey( $app->ClientId) ;
+							if ( $lastApplicationSystemId != "") {
+								echo "</div><!--ApplicationSystem-->" ;
+								$lastApplicationSystemId	=	"" ;
+							}
+							if ( $lastClientId != "") {
+								echo "</div><!--Client-->" ;
+							}
+							echo "<div class=\"ui horizontal divider\">" . $client->ClientId . "::" . $client->Name1 . "</div>" ;
+							echo "<div class=\"ui segment client\">" ; // Client ... : " . $app->ClientId . "=> " . $client->Name1 . "<br>" ;
+							$lastClientId	=	$app->ClientId ;
+						}
+						if ( $app->ApplicationSystemId != $lastApplicationSystemId) {
+							if ( $lastApplicationSystemId != "") {
+								echo "</div><!--ApplicationSystem-->" ;
+							}
+							echo "<div class=\"ui horizontal divider\">" . $app->ApplicationSystemId . "</div>" ;
+							echo "<div class=\"ui grid container applicationsystem\">" ;
+							$lastApplicationSystemId	=	$app->ApplicationSystemId ;
+						}
+						echo "<div class=\"four wide column\" onclick='scrLogin( \"" . $app->Id . "\")'><button class=\"ui fluid large teal appbtn\">" . $app->ApplicationId . "</button></div>" ;
+						?>
+						<form id="<?php echo $app->Id ; ?>" name="<?php echo $app->Id ; ?>" class="wapForm" method="post">
+							<input id="ClientId" name="ClientId" class="wapField" type="hidden" size="128" maxlength="123" value="<?php echo $app->ClientId ; ?>">
+							<input id="UserId" name="UserId" class="wapField" type="hidden" data-wap-attr="ApplicationSystemId" value="<?php echo $app->UserId ; ?>">
+							<input id="ClientApplicationKey" name="ClientApplicationKey" class="wapField" type="hidden" size="128" maxlength="123" value="<?php echo "..." ; ?>">
+							<input id="ApplicationSystemId" name="ApplicationSystemId" class="wapField" type="hidden" data-wap-attr="ApplicationSystemId" value="<?php echo $app->ApplicationSystemId ; ?>">
+							<input id="ApplicationId" name="ApplicationId" class="wapField" type="hidden" data-wap-attr="ApplicationId" value="<?php echo $app->ApplicationId ; ?>">
+						</form>
+						<?php
+					}
+				echo "</div>" ;		// close tag level ApplicationSystemId
+				echo "</div>" ;		// close tag level ClientId
+				?>
+		</div>
+	</div>
+	<div id="footer">
+			<p>&copy; 2007-<?php echo EISSCoreObject::today() ; ?> for Platform<br/>
+				&copy; 2010-<?php echo EISSCoreObject::today() ; ?> for ERP Core<br/>
+				&copy; 2016-<?php echo EISSCoreObject::today() ; ?> for Application</p>
+			Karl-Heinz Welter<br />
+	</div>
+	</body>
+	</html>
+	<?php
+} else {
+	require_once( "loginNew.html") ;
+	die() ;
+}
+?>

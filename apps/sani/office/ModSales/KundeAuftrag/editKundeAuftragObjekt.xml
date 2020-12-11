@@ -1,0 +1,38 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="KundeAuftragObjekt" data-wap-core-object="KundeAuftragObjekt" data-wap-core-object-key="Id" data-wap-parent-object="KundeAuftrag" w="800" h="300">>
+		<wap:key>
+			<wap:keyform id="KundeAuftragObjektKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="KundeAuftragObjekt" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formKundeAuftragObjektKT" class="formCreate formUpdate">
+				<table>
+					<tr>
+						<td><wap:celllabel data-wap-label="ERP Nr." /></td>
+						<td><wap:cellinput data-wap-obj="KundeAuftragObjekt" data-wap-attr="ERPNr" /></td>
+					</tr>
+					<tr>
+						<td><wap:celllabel data-wap-label="Auftrag Nr." /></td>
+						<td><wap:cellinput data-wap-obj="KundeAuftragObjekt" data-wap-attr="AuftragNr" /></td>
+					</tr>
+				</table>
+			</wap:dataform>
+		</wap:data>
+		<wap:data>
+			<wap:btnUpdate />
+			<wap:btnCancel />
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

@@ -1,0 +1,166 @@
+<html>
+<head>
+<title>==&gt; MAS Login &lt;==</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" media="screen" href="/mas/styles/v1.css" title="Version 1" />
+<script>
+</script>
+<script type="text/javascript">
+//
+//
+//
+function	init() {
+	dOpen( 999) ;
+	dBegin( 1, "index.html", "main", "init") ;
+	dEnd( 1, "index.html", "main", "init") ;
+}
+//
+//
+//
+function	onKeyClientId() {
+	dBegin( 2, "index.html", "main", "onClientChanged") ;
+//	scrLogin() ;
+	dEnd( 2, "index.html", "main", "onClientChanged") ;
+}
+//
+//
+//
+function	onKeyPassword( _event) {
+	dBegin( 1, "index.html", "main", "onKeyPassword()") ;
+	if ( _event.keyCode == 13) {
+		scrLogin() ;
+	}
+	dEnd( 1, "index.html", "main", "onKeyPassword()") ;
+}
+//
+//
+//
+function	scrLogin() {
+	dBegin( 1, "index.html", "scrLogin", "main()") ;
+	wapScreen.call( this, "Client") ;
+	this.package	=	"ModLogin" ;
+	this.module	=	"Login" ;
+	this.coreObject	=	"ClientApplication" ;
+	this.keyForm	=	"ClientApplicationKeyData" ;
+	this.keyField	=	getFormField( 'ClientApplicationKeyData', 'ClientApplicationKey') ;
+	this.dataSource	=	new wapDataSource( this, {
+									object: "ClientApplication",
+									form:	"ClientApplicationKeyData",
+									fncGet:	"getAppData"
+								}) ;		// dataSource for display
+	this.onDataSourceLoaded	=	function( _scr, _response) {
+		dTrace( 2, "index.html", "main", "init", "Path := " + this.dataSource.objects.ClientApplication[0].PathApplication) ;
+		myForm	=	getForm( "ClientApplicationKeyData") ;
+		myForm.action	=	this.dataSource.objects.ClientApplication[0].PathApplication ;
+		myForm.submit() ;
+								} ;
+	myKey	=	new Array() ;
+	myKey[0]	=	getFormField( 'ClientApplicationKeyData', 'ClientId').value ;
+	myKey[1]	=	getFormField( 'ClientApplicationKeyData', 'ApplicationSystemId').value ;
+	myKey[2]	=	getFormField( 'ClientApplicationKeyData', 'ApplicationId').value ;
+	myKey[3]	=	getFormField( 'ClientApplicationKeyData', 'UserId').value ;
+	this.dataSource.key	=	myKey ;
+	this.dataSource.dispatch( false, "getAsXML", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "main()") ;
+}
+</script>
+<script type="text/javascript" src="/api/debug.js" ></script>
+<script type="text/javascript" src="/api/common.js" ></script>
+<script type="text/javascript" src="/api/dispatcher.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/wapDataSourceXML.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/wapScreenXML.js" ></script>	<!-- nothing to translate -->
+</head>
+<body style="background-image:url(/rsrc/img/login_bg.jpg)" onLoad="init() ;">
+	<table width="100%" height="100%">
+		<tbody>
+			<tr>
+				<td width="33%"></td>
+				<td width="33%" style="vertical-align: middle; align: center;">
+					<form method="post" name="ClientApplicationKeyData" id="ClientApplicationKeyData">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="50%" style="color: white;" align="right">Language:&nbsp;</td>
+								<td width="50%" style="color: white;">
+									<select name="selLang" id="selLang">
+										<option value="-">Benutzer</option>
+										<option value="de">Deutsch</option>
+										<option value="en">English</option>
+										<option value="es">Espanol</option>
+										<option value="fr">Francais</option>
+										<option value="nl">Dutch</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td style="color: white;" align="right">Environment:&nbsp;</td>
+								<td align="left">
+									<select name="selEnv" id="selEnv">
+										<option value="office-sinspert">Sinspert</option>
+										<option value="office-bomig">Bomig</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td style="color: white;" align="right">Client Id.:&nbsp;</td>
+					        	<td>
+					        		<input wapType="text" wapMode="edit" wapAttr="a"
+					        				name="ClientId" id="ClientId" type="text"
+					        				class="inputtext_04" placeholder="ClientId"
+					        				size="18" maxlength="12" rows="3" onKeypress="onKeyClientId();" 
+<?php
+	if (isset( $_POST['ClientId']))
+		echo "value=\"" . $_POST['ClientId'] . "\"" ;
+?>
+									/>
+					        	</td>
+					        </tr>
+							<tr>
+								<td style="color: white;" align="right">Application System Id.:&nbsp;</td>
+					        	<td>
+					        		<input wapType="text" wapMode="edit" wapAttr="a"
+					        			name="ApplicationSystemId"  id="ApplicationSystemId" type="text"
+					        			class="inputtext_04" size="18" maxlength="12"
+<?php
+	if (isset( $_POST['ApplicationSystemId']))
+		echo "value=\"" . $_POST['ApplicationSystemId'] . "\"" ;
+?>
+					        			/>
+					        	</td>
+					        </tr>
+							<tr>
+								<td style="color: white;" align="right">Application Id.:&nbsp;</td>
+					        	<td>
+					        		<input wapType="text" wapMode="edit" wapAttr="a"
+					        			name="ApplicationId"  id="ApplicationId" type="text"
+					        			class="inputtext_04" size="18" maxlength="12"
+<?php
+	if (isset( $_POST['ApplicationId']))
+		echo "value=\"" . $_POST['ApplicationId'] . "\"" ;
+?>
+					        			/>
+					        	</td>
+					        </tr>
+							<tr>
+								<td style="color: white;" align="right">User Id.:&nbsp;</td>
+					        	<td><input onblur=";" name="UserId" id="UserId" type="text" class="inputtext_04" size="18" maxlength="12"></td>
+					        </tr>
+							<tr>
+								<td style="color: white;" align="right">Password:&nbsp;</td>
+					        	<td><input onblur=";" name="Password" id="Password" type="password" class="inputtext_04" size="18" maxlength="12"
+					        		onKeypress="onKeyPassword( event);" /></td>
+					        </tr>
+							<tr>
+								<td style="color: white;" align="right">Add.-Info:&nbsp;</td>
+					        	<td><input onblur=";" name="AddInfo" id="AddInfo" type="text" class="inputtext_04" size="18" maxlength="12"
+					        		onKeypress="onKeyPassword( event);"
+					        		/></td>
+					        </tr>
+						</table>
+					</form>
+				</td>
+				<td width="33%"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

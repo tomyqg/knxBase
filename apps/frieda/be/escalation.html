@@ -1,0 +1,134 @@
+﻿<h3>Eskalationsdaten</h3>
+
+<table>
+	<tr>
+		<td style="vertical-align:top;padding:10px;width:450px">
+			<h4>Eskalationsschemas</h4>
+			<table class="simple-table" width="100%">
+			<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+			<!--ZeilenID = MitarbeiterID aus Datenbank-->
+			<tr id="escalationscheme-21414125">
+				<td>
+					<span size="20px" style="font-weight:bold">Standard</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 1:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414125-1" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Erinnerung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 2:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414125-2" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Warnung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 3:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414125-3" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Meldung</span><br/>
+				</td>
+			</tr>
+			<tr id="escalationscheme-21414126">
+				<td>
+					<span size="20px" style="font-weight:bold">für Hegenscheidt</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 1:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414126-1" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Erinnerung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 2:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414126-2" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Warnung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 3:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414126-3" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Meldung</span><br/>
+				</td>
+			</tr>
+			<tr id="escalationscheme-21414127">
+				<td>
+					<span size="20px" style="font-weight:bold">Schnell</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 1:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414127-1" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Erinnerung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 2:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414127-2" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Warnung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 3:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414127-3" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Meldung</span><br/>
+				</td>
+			</tr>
+			<tr id="escalationscheme-21414128">
+				<td>
+					<span size="20px" style="font-weight:bold">mit Cheffe</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 1:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414128-1" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Erinnerung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 2:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414128-2" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Warnung</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stufe 3:&nbsp;&nbsp;&nbsp;<span id="escalationscheme-21414128-3" onclick="ClickSingleSelectEntry(this, 'escalations-options')" iseditable="false" style="cursor:pointer;">Meldung</span><br/>
+				</td>
+			</tr>
+			</table>
+			
+			<datalist id="escalations-options">
+				<!--value will be sent back to the server-->
+				<!--fill datalist with escalation steps from database, option-id should be escalation step id from database-->
+				<option label="Erinnerung" value="Erinnerung" option-id="23523523">
+				<option label="Warnung" value="Warnung" option-id="23523524">
+				<option label="Meldung" value="Meldung" option-id="23523525">
+			</datalist>
+			
+			<center>
+				<br/>
+				<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eskalationsschema Nr. <span id="escalationscheme-nr-start">1</span> bis <span id="escalationscheme-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+			</center>
+			<br/>
+			<fieldset>
+				<legend>neues Eskalationsschema anlegen</legend>
+				Name: <input id="new-escalationscheme-name" size="25" placeholder="Name des Eskalationsschemas"/><br/>
+				Stufe 1: 
+				<select id="new-escalationscheme-step1">
+					<!-- names from database-->
+					<option value="Erinnerung">Erinnerung</option>
+					<option value="Warnung">Warnung</option>
+					<option value="Meldung">Meldung</option>
+				</select><br/>
+				Stufe 2: 
+				<select id="new-escalationscheme-step2">
+					<!-- names from database-->
+					<option value="Erinnerung">Erinnerung</option>
+					<option value="Warnung">Warnung</option>
+					<option value="Meldung">Meldung</option>
+				</select><br/>
+				Stufe 3: 
+				<select id="new-escalationscheme-step3">
+					<!-- names from database-->
+					<option value="Erinnerung">Erinnerung</option>
+					<option value="Warnung">Warnung</option>
+					<option value="Meldung">Meldung</option>
+				</select><br/>
+				<input type="button" value="Eskalationsschema erstellen"/>
+			</fieldset>
+		
+		</td>
+		<td style="vertical-align:top;padding:10px;width:450px">
+			<h4>Eskalationsstufen</h4>
+			<table class="simple-zebra-table" width="100%">
+				<tr id="escalation-123413523"><th>Name</th><th>Rollen</th><th>Zeitdauer</th></tr>
+				<tr id="escalation-123413524"><td id="escalation-123413524-name" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Erinnerung</td><td id="escalation-123413524-role" onclick="ClickEditableCollectionEntry(this, 'escalation-role')" iseditable="false" style="cursor:pointer;">Fallbearbeiter</td><td id="escalation-123413524-timeframe" onclick="ClickTimeRangeEntry(this)" iseditable="false" style="cursor:pointer;">1 Wochen</td></tr>
+				<tr id="escalation-123413525"><td id="escalation-123413525-name" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Warnung</td><td id="escalation-123413525-role" onclick="ClickEditableCollectionEntry(this, 'escalation-role')" iseditable="false" style="cursor:pointer;">Fallbearbeiter<br/>Supervisor</td><td id="escalation-123413525-timeframe" onclick="ClickTimeRangeEntry(this)" iseditable="false" style="cursor:pointer;">2 Wochen</td></tr>
+				<tr id="escalation-123413526"><td id="escalation-123413526-name" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;">Meldung</td><td id="escalation-123413526-role" onclick="ClickEditableCollectionEntry(this, 'escalation-role')" iseditable="false" style="cursor:pointer;">Fallbearbeiter<br/>Supervisor</td><td id="escalation-123413526-timeframe" onclick="ClickTimeRangeEntry(this)" iseditable="false" style="cursor:pointer;">3 Wochen</td></tr>
+			</table>
+			
+			<datalist id="escalation-role">
+				<!--value will be sent back to the server-->
+				<!--fill datalist with escalation roles from database, option-id should be escalation role id from database-->
+				<option label="" value="" option-id=""><!--empy option is really important for editable collection !!!!-->
+				<option label="Fallbearbeiter" value="Fallbearbeiter" option-id="23523523">
+				<option label="Supervisor" value="Supervisor" option-id="23523524">
+				<option label="Kunde" value="Kunde" option-id="23523525">
+			</datalist>
+			
+			
+			<center>
+				<br/>
+				<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eskalationsstufe Nr. <span id="escalationscheme-nr-start">1</span> bis <span id="escalationscheme-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+			</center>
+				
+			<br/>
+			<fieldset>
+				<legend>neue Eskalationsstufe anlegen</legend>
+				Name: <input id="new-escalationstep-name" size="25" placeholder="Name der Eskalationsstufe"/><br/>
+				erste Rolle: 
+				<select id="new-escalationstep-role">
+					<!-- names from database-->
+					<option value="Fallbearbeiter">Fallbearbeiter</option>
+					<option value="Supervisor">Supervisor</option>
+					<option value="Kunde">Kunde</option>
+				</select><br/>
+				Zeitdauer: 
+				<input id="new-escalationstep-time_number" type="number" value="1" style="width:3em;" max="24" min="1"></input>
+
+				<select id="new-escalationstep-time_select">
+					<option value="Stunden">Stunden</option>
+					<option value="Tage">Tage</option>
+					<option value="Wochen">Wochen</option>
+					<option value="Monate">Monate</option>
+					<option value="Jahre">Jahre</option>
+				</select><br/>
+				<input type="button" value="Eskalationsstufe erstellen"/>
+			</fieldset>
+		</td>
+	</tr>
+</table>

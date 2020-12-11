@@ -1,0 +1,20 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h2 class="page-title">Select a Customer</h2>
+		<fieldset>
+			<legend>Filter: Customer</legend>
+			<wap:dataform id="formCustomerSelectFilter">
+				<wap:rowinput data-wap-label="Customer no." data-wap-attr="CustomerNo" />
+				<wap:rowinput data-wap-label="Name" data-wap-attr="Name" />
+			</wap:dataform>
+		</fieldset>
+		<wap:grid data-wap-class="Customer" data-wap-grid-name="gridCustomerSelectOV">
+			<wap:gridcol data-wap-obj="Customer" data-wap-attr="Id" data-wap-label="Id" />
+			<wap:gridcol data-wap-obj="Customer" data-wap-attr="CustomerNo" data-wap-label="CustomerNo" />
+			<wap:gridcol data-wap-obj="Customer" data-wap-attr="CustomerName" data-wap-label="Name" />
+			<wap:gridcol data-wap-obj="Customer" data-wap-attr="Name" data-wap-label="Contact" />
+		</wap:grid>
+	</div>
+</html>

@@ -1,0 +1,38 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtCustomerContact" class="wapForm">
+		<h1 class="page-title">Edit Customer Contact</h1>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Customer Contact</legend>
+				<wap:dataform id="edtCustomerContactMain">
+					<wap:rowdisplay data-wap-label="Customer no." data-wap-attr="CustomerNo" />
+					<wap:rowdisplay data-wap-label="Contact no" data-wap-attr="CustomerContactNo" />
+					<wap:rowoption data-wap-label="Salutation" data-wap-attr="Salutation" data-wap-mode="edit"
+						data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Salutation'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowoption data-wap-label="Title" data-wap-attr="Title" data-wap-mode="edit"
+						data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Title'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowinput data-wap-label="First name" data-wap-attr="FirstName" />
+					<wap:rowinput data-wap-label="Last name" data-wap-attr="LastName" />
+					<wap:rowinput data-wap-label="Phone" data-wap-attr="Phone" />
+					<wap:rowinput data-wap-label="Fax" data-wap-attr="Fax" />
+					<wap:rowinput data-wap-label="E-Mail" data-wap-attr="eMail" />
+					<wap:rowoption data-wap-label="Function" data-wap-attr="Function" data-wap-mode="edit"
+						data-wap-db="Option" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'CCFunction'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowinput data-wap-label="Username" data-wap-attr="Username" />
+					<wap:rowinput data-wap-label="Password" data-wap-attr="Password" />
+					<wap:rowtext data-wap-label="Remark(s)" data-wap-attr="Remark" cols="64" rows="8" data-wap-mode="edit" />
+					<wap:rowtext data-wap-label="Mailing" data-wap-attr="Mailing" cols="64" rows="8" data-wap-mode="edit" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

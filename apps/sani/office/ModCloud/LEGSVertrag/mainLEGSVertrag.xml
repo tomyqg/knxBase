@@ -1,0 +1,74 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModBase" data-wap-screen="LEGSVertrag" data-wap-core-object="LEGSVertrag" data-wap-core-object-key="LEGS" >
+		<h1 class="page-title">LEGSVertrag</h1>
+		<wap:key>
+			<wap:keyform id="LEGSVertragKeyData">
+				<wap:keyrow data-wap-label="LEGS" data-wap-obj="LEGSVertrag" data-wap-attr="LEGS" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Beschreibung" data-wap-obj="LEGSVertrag" data-wap-attr="Beschreibung" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlLEGSVertragMain" data-wap-active-tab-onload="tabPageLEGSVertragSurveyEntry">
+			<wap:tabContentPane id="tabPageLEGSVertragSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-object="LEGSVertrag" data-wap-grid-name="gridLEGSVertragOV" data-wap-tab-onselect="tabPageLEGSVertragMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="LEGSVertrag" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="LEGSVertrag" data-wap-attr="LEGS" data-wap-label="LEGS" />
+					<wap:gridcol data-wap-obj="LEGSVertrag" data-wap-attr="Beschreibung" data-wap-label="Name" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageLEGSVertragMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formLEGSVertragMain" class="formCreate formUpdate">
+										<wap:rowinput data-wap-label="LEGS" data-wap-obj="LEGSVertrag" data-wap-attr="LEGS" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Beschreibung" data-wap-obj="LEGSVertrag" data-wap-attr="Beschreibung" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate />
+					<wap:btnUpdate />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageLEGSPosition" data-wap-heading="Vertragspositionen">
+				<wap:grid data-wap-object="LEGSPosition" data-wap-grid-name="gridLEGSPosition" data-wap-editor="LEGSPosition" data-wap-load-on-init="false">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" sort="gridLEGSPosition" />
+					<wap:gridcol data-wap-attr="HMVNr" data-wap-label="Abrechnungsnr." />
+					<wap:gridcol data-wap-attr="Bezeichnung1" data-wap-label="Bezeichnung" />
+					<wap:gridcol data-wap-attr="Preis" data-wap-label="Preis" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageVertragLE" data-wap-heading="Leistungserbringer">
+				<wap:grid data-wap-object="VertragLE" data-wap-grid-name="gridVertragLE" data-wap-form-name="formVertragLE" wapTableName="TableVertragLE" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" sort="gridLEGSPosition" />
+					<wap:gridcol data-wap-attr="LEIKNr" data-wap-label="Leistungserbringer IK#" data-wap-link-to="Leistungserbringer" />
+					<wap:gridcol data-wap-attr="Name1" data-wap-label="Leistungserbringer" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabKostentraeger" data-wap-heading="Kostentraeger">
+				<wap:grid data-wap-object="Kostentraeger" data-wap-grid-name="gridKostentraeger" data-wap-form-name="formKostentraeger" wapTableName="TableKostentraeger" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" sort="gridLEGSPosition" />
+					<wap:gridcol data-wap-attr="HMVNr" data-wap-label="Abrechnungsnr." />
+					<wap:gridcol data-wap-attr="Bezeichnung1" data-wap-label="Bezeichnung" />
+					<wap:gridcol data-wap-attr="Preis" data-wap-label="Preis" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

@@ -1,0 +1,124 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Cylinders</h1>
+		<wap:key>
+			<wap:keyform id="CylinderKeyData">
+				<wap:keyrow data-wap-label="Cylinder no." data-wap-attr="CylinderId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Description" data-wap-attr="Description" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlCylinderMain">
+			<wap:tabContentPane id="tabPageCylinderSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="Cylinder" data-wap-grid-name="gridCylinderOV">
+					<wap:gridcol data-wap-obj="Cylinder" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Cylinder" data-wap-attr="CylinderId" data-wap-label="Cylinder Id." />
+					<wap:gridcol data-wap-obj="Cylinder" data-wap-attr="Description" data-wap-label="Description" />
+					<wap:gridcol data-wap-obj="Cylinder" data-wap-attr="LastUpdate" data-wap-label="Last Update" data-wap-sort-by="gridCylinderOV" />
+					<wap:gridcol data-wap-obj="Cylinder" data-wap-attr="M_Description" data-wap-label="Manufacturer" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCylinderMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formCylinderMain">
+										<wap:rowoption data-wap-label="Manufacturer" data-wap-attr="ManufacturerId" data-wap-mode="edit" data-wap-link-to="manufacturer"
+											data-wap-db="Manufacturer" data-wap-key="ManufacturerId" data-wap-value="Description" data-wap-cond="" data-wap-order="ManufacturerId" data-wap-def="#.00000001" />
+										<wap:rowinput data-wap-label="Authorization" data-wap-attr="Authorization" />
+										<wap:rowinput data-wap-label="zp_id" data-wap-attr="zp_id" />
+										<wap:rowinput data-wap-label="Order no" data-wap-attr="OrderNo" />
+										<wap:rowinput data-wap-label="Description" data-wap-attr="Description" />
+										<wap:rowinput data-wap-label="Brake type" data-wap-attr="BrakeType" />
+										<wap:rowinput data-wap-label="max. stroke" data-wap-attr="StrokeMax" />
+										<wap:rowinput data-wap-label="Type" data-wap-attr="typ" />
+										<wap:rowinput data-wap-label="fs_typ" data-wap-attr="fs_typ" />
+										<wap:rowinput data-wap-label="fs_tfzw" data-wap-attr="fs_tfzw" />
+										<wap:rowflag data-wap-label="Assessment correction" data-wap-attr="AssessmentCorrection" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowinput data-wap-label="Sequence" data-wap-attr="Sequence" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Successor" data-wap-attr="Successor" />
+										<wap:rowinput data-wap-label="UserId" data-wap-attr="UserId" />
+										<wap:rowinput data-wap-label="Local" data-wap-attr="Local" />
+										<wap:rowinput data-wap-label="ReservoirType" data-wap-attr="ReservoirType" />
+										<wap:rowflag data-wap-label="Current" data-wap-attr="Current" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Assessment_ece" data-wap-attr="Assessment_ece" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowinput data-wap-label="LastUpdate" data-wap-attr="LastUpdate" />
+										<wap:rowinput data-wap-label="LastUpdateTicks" data-wap-attr="LastUpdateTicks" />
+										<wap:rowdisplay data-wap-label="Checksum" data-wap-attr="Checksum" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Characteristics</legend>
+									<wap:dataform id="formCylinderCharacteristics">
+										<wap:rowflag data-wap-label="Short stroke cylinder" data-wap-attr="ShortStrokeCylinder" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Membrane cylinder" data-wap-attr="MembraneCylinder" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Reset spring" data-wap-attr="ResetSpring" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Parking brake" data-wap-attr="ParkingBrake" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Performance values</legend>
+									<wap:dataform id="formCylinderPerformanceValues">
+										<wap:rowinput data-wap-label="thaw" data-wap-attr="thaw" />
+										<wap:rowinput data-wap-label="tha0" data-wap-attr="tha0" />
+										<wap:rowinput data-wap-label="spw" data-wap-attr="spw" wapType="double" />
+										<wap:rowinput data-wap-label="sp0" data-wap-attr="sp0" wapType="double" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Pressure values</legend>
+									<wap:dataform id="formCylinderPressureValues">
+										<wap:rowinput data-wap-label="OpeningPressure" data-wap-attr="OpeningPressure" />
+										<wap:rowinput data-wap-label="Pressure min." data-wap-attr="PressureMin" />
+										<wap:rowinput data-wap-label="Pressure max." data-wap-attr="PressureMax" />
+										<wap:rowinput data-wap-label="max. stroke" data-wap-attr="StrokeMax" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formCylinderMain,formCylinderCharacteristics,formCylinderPerformanceValues,formCylinderPressureValues" />
+					<wap:btnUpdate data-wap-forms="formCylinderMain,formCylinderCharacteristics,formCylinderPerformanceValues,formCylinderPressureValues" />
+					<wap:btnMisc data-wap-label="Show Insert Statement" wapMiscFnc="getInsertStatement" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCylinderHelpContent"  data-wap-heading="Help">
+				<div id="tabCntrlcylinderHelpMain" class="wapTabContainer">
+					<ul class="wapTabMenu" wapTabCntrlId="tabCntrlcylinderHelpMain">
+						<li id="tabPageCylinderHelpDE" class="" wapContentId="tabPageCylinderHelpDEContent" onClick="showTab( 'tabPageCylinderHelpDE') ;">Deutsch</li>
+						<li id="tabPageCylinderHelpEN" class="" wapContentId="tabPageCylinderHelpENContent" onClick="showTab( 'tabPageCylinderHelpEN') ;">English</li>
+						<li id="tabPageCylinderHelpFR" class="" wapContentId="tabPageCylinderHelpFRContent" onClick="showTab( 'tabPageCylinderHelpFR') ;">Francais</li>
+					</ul>
+					<div class="clear"> </div>
+					<div class="wapTabTopBorder"> </div>
+					<div id="tabPageCylinderHelpDEContent" class="wapTabContent">
+					Deutsch Hilfe.</div>
+					<div id="tabPageCylinderHelpENContent" class="wapTabContent">
+					English help.</div>
+					<div id="tabPageCylinderHelpFRContent" class="wapTabContent">
+					Aide francais.</div>
+				</div>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

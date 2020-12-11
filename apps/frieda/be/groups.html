@@ -1,0 +1,64 @@
+﻿<h3>Gruppen</h3>
+<br/>
+	<table class="standard-table">
+		<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+		<!--ZeilenID = MitarbeiterID aus Datenbank-->
+		<tr> <th width="200">Gruppenname</th> <th>Anzahl an Mitgliedern</th></tr>
+		<tr id="group-21414125" onclick="ClickGroupEntry(this)"><td>Techniker</td><td>20</td></tr>
+		<tr id="group-21414126" onclick="ClickGroupEntry(this)"><td>Azubis</td><td>3</td></tr>
+		<tr id="group-21414127" onclick="ClickGroupEntry(this)"><td>Idioten</td><td>0 (wir sind halt<br/>ne super firma :P)</td></tr>
+		<tr id="group-21414128" onclick="ClickGroupEntry(this)"><td>Apple</td><td>2</td></tr>
+		<tr id="group-21414129" onclick="ClickGroupEntry(this)"><td>Software</td><td>4</td></tr>
+		<tr id="group-21414130" onclick="ClickGroupEntry(this)"><td>Ritter der Kokusnuss</td><td>2</td></tr>
+		<tr id="group-21414131" onclick="ClickGroupEntry(this)"><td>The Avengers</td><td>7</td></tr>
+		<tr id="group-21414132" onclick="ClickGroupEntry(this)"><td>Horst</td><td>1</td></tr>
+		<tr id="group-21414133" onclick="ClickGroupEntry(this)"><td>Vertrieb</td><td>3</td></tr>
+		<tr id="group-21414134" onclick="ClickGroupEntry(this)"><td>Server Guru</td><td>1</td></tr>
+	</table>
+	
+	<center>
+		<br/>
+		<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gruppennr. <span id="group-nr-start">1</span> bis <span id="group-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+	</center>
+	
+	<div>
+		<fieldset style="display:inline-block">
+			<legend>neue Gruppe anlegen</legend>
+			<input type="button" value="neue Gruppe" onclick="CreateNewGroup()"/>
+		</fieldset>
+	</div>
+	
+	<div id="group-detail" style="display:none">
+	<br/>
+	<span id="group-detail-label" style="font-weight:bold"></span><br/>
+	<table class="detail-table">
+		<tr>
+			<td>
+				<p>Gruppenname</p>
+				<span id="group-detail-name" onclick="ClickEditableTextEntry(this)" iseditable="false" style="cursor:pointer;"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>Mitglieder</p>
+				<!--aktualisiere Bei Änderungen der Gruppenmitglieder auch die Anzahl der Mitglieder on oberer Tabelle-->
+				<span id="group-detail-members" onclick="ClickEditableCollectionEntry(this, 'employees')" iseditable="false" style="cursor:pointer;">Rosalina Super<br/>Mario Super<br/>Iron Man</span>
+				
+				<datalist id="employees">
+					<!--value will be sent back to the server-->
+					<!--fill datalist with employees from database, option-id should be employee id from database-->
+					<!--don't fill with employees who are already in the group-->
+					<option label="" value="" option-id=""><!--empy option is really important!!!!-->
+					<option label="Frieda Müller" value="Frieda Müller" option-id="23523523">
+					<option label="Friedbert Meier" value="Friedbert Meier" option-id="23523524">
+					<option label="MASTER of the Universe" value="MASTER of the Universe" option-id="23523525">
+					<option label="Arthur Dent" value="Arthur Dent" option-id="23523526">
+					<option label="Ford Prefect" value="Ford Prefect" option-id="23523527">
+					<option label="Zaphod Beblebrox" value="Zaphod Beblebrox" option-id="23523528">
+					<option label="Trisha McMillan" value="Trisha McMillan" option-id="23523529">
+				</datalist>
+			</td>
+		</tr>
+	</table>
+
+	</div>

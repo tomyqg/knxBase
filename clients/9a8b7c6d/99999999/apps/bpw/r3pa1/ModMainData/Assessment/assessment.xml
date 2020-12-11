@@ -1,0 +1,150 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModMainData" data-wap-screen="Assessment" data-wap-core-object="Assessment" data-wap-core-object-key="AssessmentId" >
+		<h1 class="page-title">Assessments</h1>
+		<wap:key>
+			<wap:keyform id="AssessmentKeyData">
+				<wap:keyrow data-wap-label="Assessment no." data-wap-attr="AssessmentId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Description" data-wap-attr="Description" />
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlAssessmentMain" data-wap-active-tab-onload="tabPageAssessmentSurveyEntry">
+			<wap:tabContentPane id="tabPageAssessmentSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-object="Assessment" data-wap-grid-name="gridAssessmentOV" data-wap-tab-onselect="tabPageAssessmentMainDataEntry" data-wap-load-on-init="true">
+					<wap:gridcol data-wap-obj="Assessment" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Assessment" data-wap-attr="AssessmentId" data-wap-label="Assessment Id." data-wap-sort="gridAssessmentOV" />
+					<wap:gridcol data-wap-obj="Assessment" data-wap-attr="ProtocolNo" data-wap-label="Protocol no." data-wap-sort="gridAssessmentOV" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAssessmentMainData" data-wap-heading="Main">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formAssessmentMain">
+										<wap:rowdisplay data-wap-label="Assessment Id." data-wap-attr="AssessmentId" />
+										<wap:rowinput data-wap-label="Protocol no." data-wap-attr="ProtocolNo" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Index" data-wap-attr="AssessmentIndex" />
+										<wap:rowinput data-wap-label="Brake id." data-wap-attr="BrakeId" />
+										<wap:rowinput data-wap-label="Tyre id." data-wap-attr="TyreId" />
+										<wap:rowinput data-wap-label="Axle type" data-wap-attr="AxleType" />
+										<wap:rowinput data-wap-label="Type" data-wap-attr="Type" />
+										<wap:rowinput data-wap-label="Usage" data-wap-attr="Usage" />
+										<wap:rowinput data-wap-label="Successor" data-wap-attr="Successor" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Organization</legend>
+									<wap:dataform id="formAssessmentOrganization">
+										<wap:rowflag data-wap-label="Local" data-wap-attr="Local" data-wap-mode="edit"
+											data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Current" data-wap-attr="Current" data-wap-mode="edit"
+											data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowdate data-wap-label="Last change" data-wap-attr="LastChange" />
+										<wap:rowinput data-wap-label="Sorting order" data-wap-attr="Sorting" />
+										<wap:rowinput data-wap-label="Rights" data-wap-attr="Rights" />
+										<wap:rowdisplay data-wap-label="Last change (ticks)" data-wap-attr="LastChangeTicks" />
+										<wap:rowdisplay data-wap-label="Checksum" data-wap-attr="Checksum" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Braking Parameters</legend>
+									<wap:dataform id="formAssessmentParameters">
+										<wap:rowinput data-wap-label="Brake factor" data-wap-attr="BrakeFactor" />
+										<wap:rowinput data-wap-label="Parking brake factor" data-wap-attr="ParkingBrakeFactor" />
+										<wap:rowinput data-wap-label="Tyre min." data-wap-attr="MinTyre" />
+										<wap:rowinput data-wap-label="Tyre max." data-wap-attr="MaxTyre" />
+										<wap:rowinput data-wap-label="Allowed axle load" data-wap-attr="AllowedAxleLoad" />
+										<wap:rowinput data-wap-label="Cam torque" data-wap-attr="CamTorque" />
+										<wap:rowinput data-wap-label="Operating force" data-wap-attr="OperatingForce" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Test Parameters</legend>
+									<wap:dataform id="formAssessmentTestParameters">
+										<wap:rowinput data-wap-label="Test axle load" data-wap-attr="TestAxleLoad" />
+										<wap:rowinput data-wap-label="Test RStat" data-wap-attr="TestRStat" />
+										<wap:rowinput data-wap-label="Test Rdyn" data-wap-attr="TestRDyn" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>StVZO</legend>
+									<wap:dataform id="formAssessmentStVZO">
+										<wap:rowinput data-wap-label="Brake pad StVZO" data-wap-attr="BrakeLiningSTVZO" />
+										<wap:rowdate data-wap-label="Test date StVZO" data-wap-attr="TestDateSTVZO" />
+										<wap:rowinput data-wap-label="Test date StVZO (ticks)" data-wap-attr="TestDateSTVZOTicks" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formAssessmentMain,formAssessmentOrganization,formAssessmentParameters,formAssessmentTestParameters,formAssessmentStVZO" />
+					<wap:btnUpdate data-wap-forms="formAssessmentMain,formAssessmentOrganization,formAssessmentParameters,formAssessmentTestParameters,formAssessmentStVZO" />
+					<wap:btnMisc data-wap-label="Show Insert Statement" data-wap-misc-function="getInsertStatement" />
+					<wap:btnMisc data-wap-label="Show Update Statement" data-wap-misc-function="getUpdateStatement" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAssessmentBrakeData" data-wap-heading="Brakes">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Brake Pads</legend>
+									<wap:grid data-wap-object="BrakePad" data-wap-grid-name="gridBrakePad" adder="true" data-wap-editor="edtBrakePad" data-wap-load-on-init="false">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol colspan="2" data-wap-attr="BrakePadId" data-wap-label="Brake pad id." />
+										<wap:gridcol data-wap-attr="Description" data-wap-label="Description" />
+										<wap:gridcol data-wap-attr="AssessmentDate" data-wap-label="Assessment date" />
+										<wap:gridcol data-wap-attr="DateOfIssue" data-wap-label="Issue date" />
+										<wap:gridcol data-wap-attr="eg" data-wap-label="eg" />
+										<wap:gridcol data-wap-attr="ece" data-wap-label="ece" />
+
+									</wap:grid>
+								</fieldset>
+<!--
+								<fieldset>
+									<legend>Brake Pad Values</legend>
+									<wap:grid data-wap-object="BrakePadValue" data-wap-grid-name="gridBrakePadValue" adder="true" data-wap-editor="edtBrakePadValue" data-wap-load-on-init="false">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="BrakePadId" data-wap-label="BrakePad Id." data-wap-link-to="BrakePad" />
+										<wap:gridcol data-wap-attr="ActuationForce" data-wap-label="Actuation force" data-wap-fnc="input" wapSize="32,64" />
+										<wap:gridcol data-wap-attr="BrakingForce" data-wap-label="Braking force" data-wap-fnc="input" wapSize="32,64" />
+										<wap:gridcol data-wap-attr="LeverLength" data-wap-label="Lever length" />
+										<wap:gridcol data-wap-attr="CylinderPressure" data-wap-label="Cylinder pressure" />
+									</wap:grid>
+								</fieldset>
+-->
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAssessmentHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlAssessmentHelpMain">
+					<wap:tabContentPane id="tabPageAssessmentHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageAssessmentHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageAssessmentHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

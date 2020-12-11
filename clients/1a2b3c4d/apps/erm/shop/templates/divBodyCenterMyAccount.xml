@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource name="divBodyCenter">
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<div id="bodyCenter">
+		<if var="customerValid" eq="0">
+			<if var="show" eq="NewPassword">
+				<dynamic file="NewPassword.html" />
+			</if>
+			<if var="show" eq="MyAccount">
+				<dynamic file="LoginOrRegister.html" />
+			</if>
+		</if>
+		<if var="customerValid" eq="1">
+			<if var="show" eq="MyAccount">
+				<h2 class="page-title"><trans>SHOP-HEADER-MYACCOUNT-MYADDRESS</trans></h2>
+				<h3 class="section-title"><trans>SHOP-HEADER-MYACCOUNT-MYADDRESS</trans></h3>
+				<object class="MyAccount" template="CustomerInfo.xml" />
+				<h3 class="section-title"><trans>SHOP-HEADER-SELECTFUNCTION</trans></h3>
+				<dynamic file="MyAccountSelMode.html" />
+			</if>
+			<if var="show" eq="MyPassword">
+				<h2 class="page-title"><trans>SHOP-HEADER-MYACCOUNT-MYPASSWORD</trans></h2>
+				<h3 class="section-title"><trans>SHOP-HEADER-MYACCOUNT-MYPASSWORD</trans></h3>
+				<object class="MyAccount" template="CustomerInfo.xml" />
+			</if>
+			<if var="show" eq="MyOrders">
+				<h2 class="page-title"><trans>SHOP-HEADER-MYACCOUNT-MYORDERS</trans></h2>
+				<object class="MyAccount" template="CustomerInfo.xml" />
+			</if>
+			<if var="show" eq="MyCarts">
+				<h2 class="page-title"><trans>SHOP-HEADER-MYACCOUNT-MYCARTS</trans></h2>
+				<object class="MyAccount" template="CustomerInfo.xml" />
+			</if>
+		</if>
+	</div>
+</resource>

@@ -1,0 +1,355 @@
+<html dir="ltr">
+<meta charset="utf-8" />
+<head>
+	<link rel="stylesheet" type="text/css" href="/rsrc/semanticUI/semantic.min.css">
+	<style>
+		.section.inactive	{
+			display: none;
+		}
+		.section.active	{
+			display: block;
+		}
+
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/rsrc/semanticUI/semantic.min.js"></script>
+	<script>
+		var	dataCustomer	=	{
+			customer:			{	'CustomerNo':"-"
+								,	'CustomerName1':'-'
+								,	'ZIP':'-'
+								,	'City':'-'
+								,	'Street':'-'
+ 								,	'Number':'-'
+								},
+			customerContacts:	[	{
+			    						'Id':'-'
+									,	'FirstName':'-'
+									,	'LastName':'-'
+									}
+								]
+		} ;
+
+		$(document).ready(function() {
+			new Vue( {
+				el: '#sectCustomer',
+				data:	dataCustomer,
+                methods:	{
+                    moveUp() {
+                        alert( "moving ...") ;
+                    }
+                }
+			}) ;
+		}) ;
+
+        function toggleNav() {
+            $('.ui.left.labeled.icon.sidebar')
+                .sidebar('setting', 'transition', 'overlay').sidebar('toggle')
+            ;
+        }
+
+        function toggleRightBar() {
+            $('.ui.right.labeled.icon.sidebar')
+                .sidebar('setting', 'transition', 'overlay').sidebar('toggle')
+            ;
+        }
+
+        function	showSection( _section) {
+             $('.section').addClass( 'inactive') ;
+            $('#sect'+_section).removeClass( 'inactive') ;
+            toggleNav() ;
+        }
+
+        function	showTab( _tab) {
+            $('.item').removeClass( 'active') ;
+            $('#tab'+_tab).addClass( 'active') ;
+			$('.tab').removeClass( 'active') ;
+			$('#data'+_tab).addClass( 'active') ;
+        }
+
+        function	openSelector() {
+            $('.ui.modal')
+                .modal('show')
+            ;
+        }
+
+        function	getPrev( e, _step=0) {
+			var postData	=	'' ;
+			$('#headCustomer input').each(function( index ) {
+                console.log( index + ": " + $( this).val()) ;
+                if ( typeof( $( this).attr("name")) != 'undefined') {
+	                postData	+=	$( this).attr("name") + '=' + $( this).val() + '&' ;
+                }
+            }) ;
+            if ( _step == 0) {
+                var form = $(this);
+                var url = "vt2getPrev.php";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: postData,
+                    success: function (_reply) {
+                        dataCustomer.customer = JSON.parse(_reply);
+                        setTimeout( getNext, 500, null, 1) ;
+                    },
+                    error: function (data) {
+                        alert("vt2getData: an error occurred ...");
+                    }
+                });
+            } else if ( _step == 1) {
+                var form	=	$(this);
+                var url		=	"vt2getData2.php";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: postData,
+                    success: function (_reply) {
+                        dataCustomer.customerContacts = JSON.parse( _reply);
+                    },
+                    error: function (data) {
+                        alert("vt2getData2: an error occurred ...");
+                    }
+                });
+            }
+        } ;
+
+        function	getNext( e, _step=0) {
+//			console.assert( noDebug, "Hello, world ...") ;
+//            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var postData	=	'' ;
+            $('#headCustomer input').each(function( index ) {
+                console.log( index + ": " + $( this).val()) ;
+                if ( typeof( $( this).attr("name")) != 'undefined') {
+                    postData	+=	$( this).attr("name") + '=' + $( this).val() + '&' ;
+                }
+            }) ;
+            if ( _step == 0) {
+                var form = $(this);
+                var url = "vt2getNext.php";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: postData,
+                    success: function (_reply) {
+                        dataCustomer.customer = JSON.parse(_reply);
+                        setTimeout( getNext, 500, null, 1) ;
+                    },
+                    error: function (data) {
+                        alert("vt2getData: an error occurred ...");
+                    }
+                });
+            } else if ( _step == 1) {
+                var form	=	$(this);
+                var url		=	"vt2getData2.php";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: postData,
+                    success: function (_reply) {
+                        dataCustomer.customerContacts = JSON.parse( _reply);
+                    },
+                    error: function (data) {
+                        alert("vt2getData2: an error occurred ...");
+                    }
+                });
+            }
+        } ;
+
+	</script>
+</head>
+<body>
+	<div class="ui left demo vertical sidebar labeled icon menu">
+		<div class="ui secondary vertical menu">
+			<div class="header">Stammdaten</div>
+			<a class="active item" onclick="showSection( 'Customer') ;">Kunden</a>
+			<a class="item" onclick="showSection( 'Customer') ;">Lieferanten</a>
+			<a class="item" onclick="showSection( 'Article') ">Artikel</a>
+			<div class="header">Einkauf</div>
+			<a class="item" onclick="showSection( 'SuppOrders') ;">Aufträge</a>
+			<a class="item" onclick="showSection( 'SuppDeliveries') ;">Lieferungen</a>
+			<a class="item" onclick="showSection( 'SuppInvoices') ">Rechnungen</a>
+			<div class="header">Verkauf</div>
+			<a class="item" onclick="showSection( 'CustQuotations') ;">Angebote</a>
+			<a class="item" onclick="showSection( 'CustOrders') ;">Aufträge</a>
+			<a class="item" onclick="showSection( 'CustDeliveries') ">Lieferscheine</a>
+			<a class="item" onclick="showSection( 'CustInvoices') ">Rechnungen</a>
+			<a class="item" onclick="showSection( 'CustReturns') ">Rücknahmen</a>
+			<a class="item" onclick="showSection( 'CustCreditnotes') ">Gutschriften</a>
+		</div>
+	</div>
+	<div class="ui right demo vertical sidebar labeled icon menu">
+		<div>Hier stehen meine persönlichen Daten.</div>
+	</div>
+	<div id="toolBar">
+		<button class="ui button" onmouseover="toggleNav() ;">☰</button>&nbsp;
+		<button class="ui button">&#8630; Reload</button>
+		<button class="ui button" onclick="toggleRightBar() ;">About me</button>&nbsp;
+	</div>
+	<div class="ui horizontal divider"></div>
+	<div id="dataSection">
+		<div id="sectCustomer" class="container section">
+			<div class="ui modal">
+				<i class="close icon"></i>
+				<div class="ui icon header">
+					<i class="data icon"></i>
+					Kunde Kontakt Daten
+				</div>
+				<div class="content">
+					<form class="ui form">
+						<label>Name</label>
+						<div class="two fields">
+							<div class="field">
+								<input type="text" name="first-name" placeholder="Name 1" v-model.text="customer.CustomerName1">
+							</div>
+							<div class="field">
+								<input type="text" name="last-name" placeholder="Name 2" v-model.text="customer.CustomerName2">
+							</div>
+						</div>
+						<button class="ui primary button">Speichern</button>
+						<button class="ui button">Änderungen verwerfen</button>
+					</form>
+				</div>
+			</div>
+			<div id="headCustomer">
+				<div class="ui labeled input">
+					<div class="ui label">Customer No.:</div>&nbsp;
+					<button class="ui primary button" onCLick="getPrev() ;">&lt;</button>&nbsp;
+					<div class="ui icon input">
+						<input type="ui text" name="CustomerNo" v-model.text="customer.CustomerNo" />
+						<i class="search icon"></i>
+					</div>
+					&nbsp;&nbsp;
+					<button class="ui primary button" onCLick="getNext() ;">&gt;</button>&nbsp;
+					{{ customer.CustomerName1 }}<br/>&nbsp;{{ customer.CustomerName2 }}
+				</div>
+			</div>
+			<div class="ui horizontal divider">Daten zu diesem Kunden</div>
+			<div class="ui top attached tabular menu">
+				<div id="tabCustomerMain" class="item active" onclick="showTab( 'CustomerMain') ;">Main</div>
+				<div id="tabCustomerBanking" class="item" onclick="showTab( 'CustomerBanking') ;">Banking</div>
+				<div id="tabCustomerOrdering" class="item" onclick="showTab( 'CustomerOrdering') ;">Ordering</div>
+				<div id="tabCustomerContacts" class="item" onclick="showTab( 'CustomerContacts') ;">Contacts</div>
+			</div>
+			<div id="dataCustomerMain" class="ui bottom attached tab active segment">
+				<form class="ui form">
+					<div class="two fields">
+						<div class="field">
+							<label>Name</label>
+							<div class="two fields">
+								<div class="field">
+									<input type="text" name="first-name" placeholder="Name 1" v-model.text="customer.CustomerName1">
+								</div>
+								<div class="field">
+									<input type="text" name="last-name" placeholder="Name 2" v-model.text="customer.CustomerName2">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="fields">
+						<div class="six wide field">
+							<label>Strasse</label>
+							<input type="text" name="first-name" placeholder="Name 1" v-model.text="customer.ZIP">
+						</div>
+						<div class="two wide field">
+							<label>Hausnr.</label>
+							<input type="text" name="last-name" placeholder="Name 2" v-model.text="customer.City">
+						</div>
+							<div class="two wide field">
+								<label>PLZ</label>
+								<input type="text" name="first-name" placeholder="Name 1" v-model.text="customer.Street">
+							</div>
+							<div class="six wide field">
+								<label>Ort</label>
+								<input type="text" name="last-name" placeholder="Name 2" v-model.text="customer.No">
+							</div>
+					</div>
+					<button class="ui primary button">Speichern</button>
+					<button class="ui button">Änderungen verwerfen</button>
+				</form>
+			</div>
+			<div id="dataCustomerBanking" class="ui bottom attached tab segment">
+				<form class="ui form">
+					<button class="ui primary button">Speichern</button>
+					<button class="ui button">Änderungen verwerfen</button>
+				</form>
+			</div>
+			<div id="dataCustomerOrdering" class="ui bottom attached tab segment">
+				<form class="ui form">
+					<button class="ui primary button">Speichern</button>
+					<button class="ui button">Änderungen verwerfen</button>
+				</form>
+			</div>
+			<div id="dataCustomerContacts" class="ui bottom attached tab segment">
+				<table class="ui striped table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>FirstName</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="customerContact in customerContacts">
+							<td>{{ customerContact.Id }}</td>
+							<td>{{ customerContact.FirstName }}</td>
+							<td>{{ customerContact.LastName }}</td>
+						</tr>
+					</tbody>
+				</table>
+				<button class="ui primary button" onCLick="openSelector() ;">Kontakt hinzufügen</button>
+			</div>
+		</div>
+		<div id="sectArticle" class="section inactive">
+			<div id="headArticle">
+				<div class="ui labeled input">
+					<div class="ui label">Article No.:</div>
+					<input type="ui button" value="&lt;" onCLick="getPrev() ;" />
+					<input type="ui text" name="ArticleNo" v-model.text="article.ArticleNo" />
+					<input type="ui button" value="&gt;" onCLick="getNext() ;" />
+				</div>
+			</div>
+			<div class="ui horizontal divider">Daten zu diesem Artikel</div>
+			<div class="ui top attached tabular menu">
+				<div id="tabArticleMain" class="item active" onclick="showTab( 'ArticleMain') ;">Stammdaten</div>
+				<div id="tabArticleDescription" class="item" onclick="showTab( 'ArticleDescription') ;">Beschreibungen</div>
+				<div id="tabArticlePurchase" class="item" onclick="showTab( 'ArticlePurchase') ;">Einkauf</div>
+				<div id="tabArticleSale" class="item" onclick="showTab( 'ArticleSale') ;">Verkauf</div>
+				<div id="tabArticleStock" class="item" onclick="showTab( 'ArticleStock') ;">Lager</div>
+			</div>
+			<div id="dataArticleMain" class="ui bottom attached tab active segment">
+				<div class="ui labeled input">
+					<div class="ui label">Name 1</div>
+					<input type="text" v-model.text="article.ArticleName1" />
+				</div><br/>
+				<div class="ui labeled input">
+					<div class="ui label">Name 1</div>
+					<input type="text" v-model.text="article.ArticleName2" />
+				</div><br/>
+				<div class="ui labeled input">
+					<div class="ui label">PLZ/Stadt</div>
+					<input type="text" v-model.text="article.ZIP" />
+					<input type="text" v-model.text="article.City" />
+				</div><br/>
+				<div class="ui labeled input">
+					<div class="ui label">Strasse/Nr.</div>
+					<input type="text" v-model.text="article.Street" />
+					<input type="text" v-model.text="article.No" />
+				</div><br/>
+				<button class="ui primary button">
+					Save
+				</button>
+				<button class="ui button">
+					Discard
+				</button>
+			</div>
+			<div id="dataArticlePurchasing" class="ui bottom attached tab segment">
+			</div>
+			<div id="dataArticleSelling" class="ui bottom attached tab segment">
+			</div>
+			<div id="dataArticleStock" class="ui bottom attached tab segment">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

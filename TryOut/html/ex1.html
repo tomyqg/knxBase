@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<title>Beispiel für Event-Handling gemäß dem W3C DOM</title>
+<script type="text/javascript">
+
+window.addEventListener("load", start, false);
+
+function start () {
+   var pElement = document.getElementById("interaktiv");
+   pElement.addEventListener("click", klickverarbeitung, false);
+}
+
+function klickverarbeitung () {
+   document.getElementById("interaktiv").innerHTML +=
+      " Huhu, das ist von Javascript eingefügter Text.";
+}
+
+</script>
+</head>
+<body>
+
+<p id="interaktiv">
+   Dies ist ein einfacher Textabsatz, aber mithilfe von JavaScript können wir ihn
+   interaktiv gestalten. Klicken Sie diesen Absatz doch einfach mal mit der Maus an!
+</p>
+
+</body>
+</html>

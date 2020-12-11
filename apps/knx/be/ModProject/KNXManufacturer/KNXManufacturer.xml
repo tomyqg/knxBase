@@ -1,0 +1,130 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:wapScreen data-wap-module="ModProject" data-wap-screen="KNXManufacturer" data-wap-core-object="KNXManufacturer" data-wap-core-object-key="Id" >
+		<h1 class="page-title">KNXManufacturers</h1>
+		<wap:key>
+			<wap:keyform id="KNXManufacturerKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Name" data-wap-attr="Name"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlKNXManufacturerMain" data-wap-active-tab-onload="tabPageKNXManufacturerSurveyEntry">
+			<wap:tabContentPane id="tabPageKNXManufacturerSurvey" data-wap-heading="Overview">
+				<wap:tree data-wap-object="KNXManufacturer" data-wap-tree-name="treeKNXManufacturer" data-wap-tab-onselect="tabPageKNXManufacturerSurveyEntry" data-wap-load-on-init="true" data-wap-editor="edtKNXManufacturer" >
+					<wap:treerow data-wap-tree-level="0" data-wap-tree-expandattr="Name" style="display: none;" data-wap-dataset="Manufacturer" data-wap-object-key="Id">
+						<wap:treecol data-wap-attr="Id" data-wap-label="Name" />
+						<wap:treecol data-wap-attr="RefId" data-wap-label="RefId" />
+						<wap:treecol data-wap-attr="Name" data-wap-label="Name" />
+					</wap:treerow>
+					<wap:treerow data-wap-tree-level="1" data-wap-tree-expandattr="Name" style="display: none;" data-wap-dataset="MiddleGroup" data-wap-object-key="Id">
+						<wap:treecol data-wap-attr="Name" data-wap-label="Name" colspan="1" />
+						<wap:treecol data-wap-attr="Address" data-wap-label="Address" colspan="2" />
+					</wap:treerow>
+					<wap:treerow data-wap-tree-level="2" data-wap-tree-expandattr="Name" data-wap-dataset="GroupObject" data-wap-object-key="Id">
+						<wap:treecol data-wap-attr="Name" data-wap-label="Name" colspan="1" />
+						<wap:treecol data-wap-attr="Address" data-wap-label="Address" colspan="1" />
+						<wap:treecol data-wap-attr="KNXManufacturerDec" data-wap-label="Decimal" colspan="3" data-wap-edit-as="input" />
+					</wap:treerow>
+				</wap:tree>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKNXManufacturerMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td>
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formKNXManufacturerMain">
+										<wap:rowinput data-wap-label="Name" data-wap-attr="Name" />
+										<wap:rowinput data-wap-label="TopGroup" data-wap-attr="TopGroup" />
+										<wap:rowinput data-wap-label="MiddleGroup" data-wap-attr="MiddleGroup" />
+										<wap:rowinput data-wap-label="Object" data-wap-attr="Object" />
+										<wap:rowinput data-wap-label="Address" data-wap-attr="Address" />
+										<wap:rowinput data-wap-label="InsertGroup" data-wap-attr="InsertGroup" />
+										<wap:rowflag id="4712" data-wap-label="Central" data-wap-attr="Central" data-wap-mode="edit"
+											data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Unfiltered" data-wap-attr="Unfiltered" data-wap-mode="edit"
+											data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption data-wap-label="DPTId" data-wap-attr="DPTId" data-wap-mode="edit"
+											data-wap-db="v_FullDPT" data-wap-key="Id" data-wap-value="Value" data-wap-cond="1 = 1" data-wap-order="Id" data-wap-def="" />
+									</wap:dataform>
+									<wap:btnCreate data-wap-forms="formKNXManufacturerMain" />
+									<wap:btnUpdate data-wap-forms="formKNXManufacturerMain" />
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKNXManufacturerBlock" data-wap-heading="Group Addresses in same Block">
+				<wap:data>
+					<fieldset>
+						<legend>Group Addresses (Table: KNXManufacturer)</legend>
+						<wap:grid data-wap-object="KNXManufacturerBlock" data-wap-grid-name="gridKNXManufacturerBlock" data-wap-load-on-init="false">
+							<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+							<wap:gridcol data-wap-attr="Name" data-wap-label="Name" />
+							<wap:gridcol data-wap-attr="Detail" data-wap-label="Detail" />
+							<wap:gridcol data-wap-attr="Address" data-wap-label="Address" />
+							<wap:gridcol data-wap-attr="DPTId" data-wap-label="DPTId" data-wap-edit-as="select" data-wap-sel-object="v_FullDPT" data-wap-sel-key="Id" data-wap-sel-value="Value" />
+							<wap:gridcol data-wap-attr="InsertGroup" data-wap-label="InsertGroup" data-wap-edit-as="input" />
+						</wap:grid>
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+<!--
+			<wap:tabContentPane id="tabPageKNXManufacturerTree" data-wap-heading="Group Addresses (tree-view)">
+				<wap:data>
+					<fieldset>
+						<legend>Group Addresses (Table: KNXManufacturer)</legend>
+						<wap:tree data-wap-object="KNXManufacturer" data-wap-tree-name="treeKNXManufacturer" data-wap-adder="true" data-wap-editor="edtKNXManufacturer" data-wap-load-on-init="false">
+							<wap:treecol data-wap-attr="Id" data-wap-label="Id" />
+							<wap:treecol data-wap-attr="Name" data-wap-label="Name" />
+							<wap:treecol data-wap-attr="Address" data-wap-label="Address" />
+							<wap:treecol data-wap-attr="Central" data-wap-label="Central" />
+							<wap:treecol data-wap-attr="Unfiltered" data-wap-label="Unfiltered" />
+							<wap:treecol data-wap-attr="Unfiltered" data-wap-label="Unfiltered" />
+							<wap:treecol data-wap-functions="edit,delete" data-wap-label="Functions" />
+						</wap:tree>
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+-->
+			<wap:tabContentPane id="tabPageImport" data-wap-heading="Export- and Import">
+				<wap:data>
+					<fieldset>
+						<legend>Data Import and Export</legend>
+						<wap:btnMisc data-wap-label="Export XML Complete" data-wap-misc-function="exportXMLComplete" data-wap-forms="formBatchMain"
+								title="Will export the complete tree of data for this Application System" />
+						<wap:btnMisc data-wap-label="Export XML" data-wap-misc-function="exportXML" data-wap-forms="formBatchMain"
+								title="Will export data of this Application System only" />
+					</fieldset>
+					<fieldset>
+						<legend>Data Import and Export</legend>
+						<wap:rowupload data-wap-label="Import File to upload" data-wap-attr="XMLData" data-wap-upload-function="importXML" />
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKNXManufacturerHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlKNXManufacturerHelpMain">
+					<wap:tabContentPane id="tabPageKNXManufacturerHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageKNXManufacturerHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageKNXManufacturerHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

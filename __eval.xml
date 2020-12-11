@@ -1,0 +1,107 @@
+<Reply>
+<Request>
+<RequestObj>Kunde</RequestObj>
+<RequestFnc>getXMLComplete</RequestFnc>
+<RequestKey>100501</RequestKey>
+<RequestId></RequestId>
+<RequestVal></RequestVal>
+</Request>
+<DebugData>
+<GET>
+<_obj><![CDATA[Kunde]]></_obj>
+<_fnc><![CDATA[getXMLComplete]]></_fnc>
+<_key><![CDATA[100501]]></_key>
+<_id><![CDATA[]]></_id>
+<_val><![CDATA[]]></_val>
+</GET>
+<POST>
+</POST>
+</DebugData>
+<Data>
+<Kunde>
+<Id type="int" title="Id"><![CDATA[64]]></Id>
+<KundeNr type="varchar" title="KundeNr"><![CDATA[100501]]></KundeNr>
+<AdrType type="varchar" title="AdrType"><![CDATA[]]></AdrType>
+<AdrNo type="varchar" title="AdrNo"><![CDATA[]]></AdrNo>
+<FirmaName1 type="varchar" title="FirmaName1"><![CDATA[HTW Dresden]]></FirmaName1>
+<FirmaName2 type="varchar" title="FirmaName2"><![CDATA[dsfsfsdfsd]]></FirmaName2>
+<FirmaName3 type="varchar" title="FirmaName3"><![CDATA[]]></FirmaName3>
+<PLZ type="varchar" title="PLZ"><![CDATA[01069]]></PLZ>
+<Ort type="varchar" title="Ort"><![CDATA[Dresden]]></Ort>
+<Strasse type="varchar" title="Strasse"><![CDATA[Friedrich-List-Platz]]></Strasse>
+<Hausnummer type="varchar" title="Hausnummer"><![CDATA[1]]></Hausnummer>
+<Land type="varchar" title="Land"><![CDATA[de]]></Land>
+<Sprache type="varchar" title="Sprache"><![CDATA[de_DE]]></Sprache>
+<Telefon type="varchar" title="Telefon"><![CDATA[0351 462 2483]]></Telefon>
+<FAX type="varchar" title="FAX"><![CDATA[0351 462 2168]]></FAX>
+<Mobil type="varchar" title="Mobil"><![CDATA[]]></Mobil>
+<URL type="varchar" title="URL"><![CDATA[]]></URL>
+<eMail type="varchar" title="eMail"><![CDATA[]]></eMail>
+<UStId type="varchar" title="UStId"><![CDATA[]]></UStId>
+<MandNr type="varchar" title="MandNr"><![CDATA[]]></MandNr>
+<BenutzerName type="varchar" title="BenutzerName"><![CDATA[]]></BenutzerName>
+<Passwort type="varchar" title="Passwort"><![CDATA[]]></Passwort>
+<ModusBestInternet type="int" title="ModusBestInternet"><![CDATA[0]]></ModusBestInternet>
+<ModusBestConf type="int" title="ModusBestConf"><![CDATA[0]]></ModusBestConf>
+<ModusLief type="int" title="ModusLief"><![CDATA[1]]></ModusLief>
+<ModusRech type="int" title="ModusRech"><![CDATA[1]]></ModusRech>
+<ModusSkonto type="int" title="ModusSkonto"><![CDATA[210]]></ModusSkonto>
+<ModusPay type="int" title="ModusPay"><![CDATA[1]]></ModusPay>
+<Rights type="int" title="Rights"><![CDATA[10]]></Rights>
+<Rabatt type="double" title="Rabatt"><![CDATA[0]]></Rabatt>
+<ActivationKey type="varchar" title="ActivationKey"><![CDATA[AUTHORIZED]]></ActivationKey>
+<Currency type="varchar" title="Currency"><![CDATA[EUR]]></Currency>
+<Tax type="int" title="Tax"><![CDATA[0]]></Tax>
+<TypeCust type="int" title="TypeCust"><![CDATA[0]]></TypeCust>
+<OrgType type="varchar" title="OrgType"><![CDATA[Sonstige]]></OrgType>
+<Rem1 type="text" title="Rem1"><![CDATA[20120622/143536: miskhwe: Customer updated
+]]></Rem1>
+</Kunde>
+<TableKundeKontakt><StartRow>0</StartRow>
+<RowCount>20</RowCount>
+<PageCount>-1</PageCount>
+<TotalRows>1</TotalRows>
+<KundeKontakt>
+<Id type="int" title="Id"><![CDATA[61]]></Id>
+<KundeNr type="varchar" title="KundeNr"><![CDATA[100501]]></KundeNr>
+<KundeKontaktNr type="varchar" title="KundeKontaktNr"><![CDATA[000]]></KundeKontaktNr>
+<Funktion type="varchar" title="Funktion"><![CDATA[ALLG]]></Funktion>
+<AdrZusatz type="varchar" title="AdrZusatz"><![CDATA[]]></AdrZusatz>
+<Anrede type="varchar" title="Anrede"><![CDATA[Herr]]></Anrede>
+<Titel type="varchar" title="Titel"><![CDATA[Dr.]]></Titel>
+<Vorname type="varchar" title="Vorname"><![CDATA[Robert]]></Vorname>
+<Name type="varchar" title="Name"><![CDATA[jhkjh]]></Name>
+<Telefon type="varchar" title="Telefon"><![CDATA[0351 462 2483]]></Telefon>
+<FAX type="varchar" title="FAX"><![CDATA[2342343]]></FAX>
+<Mobil type="varchar" title="Mobil"><![CDATA[12312312]]></Mobil>
+<eMail type="varchar" title="eMail"><![CDATA[88888888]]></eMail>
+<BenutzerName type="varchar" title="BenutzerName"><![CDATA[]]></BenutzerName>
+<Passwort type="varchar" title="Passwort"><![CDATA[]]></Passwort>
+<ActivationKey type="varchar" title="ActivationKey"><![CDATA[AUTHORIZED]]></ActivationKey>
+<Bem1 type="varchar" title="Bem1"><![CDATA[Leiter des Physikalischen Praktikums]]></Bem1>
+<Mailing type="text" title="Mailing"><![CDATA[]]></Mailing>
+</KundeKontakt>
+</TableKundeKontakt>
+<TableKundeLiefLiefKunde><StartRow>0</StartRow>
+<RowCount>20</RowCount>
+<PageCount>-1</PageCount>
+<TotalRows>0</TotalRows>
+</TableKundeLiefLiefKunde>
+<TableKundeRechRechKunde><StartRow>0</StartRow>
+<RowCount>20</RowCount>
+<PageCount>-1</PageCount>
+<TotalRows>0</TotalRows>
+</TableKundeRechRechKunde>
+<TableKundeAddAddKunde><StartRow>0</StartRow>
+<RowCount>20</RowCount>
+<PageCount>-1</PageCount>
+<TotalRows>0</TotalRows>
+</TableKundeAddAddKunde>
+</Data>
+<Status>
+<StatusCode>0</StatusCode>
+<StatusText>ok</StatusText>
+<StatusInfo>ok</StatusInfo>
+</Status>
+</Reply>
+

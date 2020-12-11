@@ -1,0 +1,514 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.15.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Erstellungszeit: 25. Mai 2016 um 14:45
+-- Server-Version: 5.6.21
+-- PHP-Version: 5.5.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Datenbank: `mas_sys_example`
+--
+CREATE DATABASE IF NOT EXISTS `mas_sys_example` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `mas_sys_example`;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `Application`
+--
+
+DROP TABLE IF EXISTS `Application`;
+CREATE TABLE IF NOT EXISTS `Application` (
+  `Id` int(11) NOT NULL,
+  `ApplicationSystemId` varchar(32) NOT NULL,
+  `ApplicationId` varchar(32) NOT NULL,
+  `Description1` varchar(128) NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `Application`
+--
+
+INSERT INTO `Application` (`Id`, `ApplicationSystemId`, `ApplicationId`, `Description1`, `Imported`) VALUES
+(1, 'mas', 'mgmt', 'Administration', 0);
+-- --------------------------------------------------------
+
+--
+-- Stellvertreter-Struktur des Views `ApplicationPerClient`
+--
+DROP VIEW IF EXISTS `ApplicationPerClient`;
+CREATE TABLE IF NOT EXISTS `ApplicationPerClient` (
+`ClientId` varchar(32)
+,`ApplicationSystemId` varchar(32)
+,`ApplicationId` varchar(32)
+,`Description1` varchar(128)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `ApplicationSystem`
+--
+
+DROP TABLE IF EXISTS `ApplicationSystem`;
+CREATE TABLE IF NOT EXISTS `ApplicationSystem` (
+  `Id` int(11) NOT NULL,
+  `ApplicationSystemId` varchar(32) NOT NULL,
+  `Description1` varchar(128) NOT NULL,
+  `VersionMajor` int(4) NOT NULL,
+  `VersionMinor` int(4) NOT NULL,
+  `VersionBuild` int(6) NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `ApplicationSystem`
+--
+
+INSERT INTO `ApplicationSystem` (`Id`, `ApplicationSystemId`, `Description1`, `VersionMajor`, `VersionMinor`, `VersionBuild`, `Imported`) VALUES
+(1, 'mas', 'MAS Administration', 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Stellvertreter-Struktur des Views `ApplicationSystemPerClient`
+--
+DROP VIEW IF EXISTS `ApplicationSystemPerClient`;
+CREATE TABLE IF NOT EXISTS `ApplicationSystemPerClient` (
+`ClientId` varchar(32)
+,`ApplicationSystemId` varchar(32)
+,`ApplicationId` varchar(32)
+,`Description1` varchar(128)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `ApplicationVersion`
+--
+
+DROP TABLE IF EXISTS `ApplicationVersion`;
+CREATE TABLE IF NOT EXISTS `ApplicationVersion` (
+  `Id` int(11) NOT NULL,
+  `ApplicationId` varchar(32) NOT NULL,
+  `VersionMajor` int(4) NOT NULL,
+  `VersionMinor` int(4) NOT NULL,
+  `VersionBuild` int(6) NOT NULL,
+  `Default` int(1) NOT NULL,
+  `Path` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `Client`
+--
+
+DROP TABLE IF EXISTS `Client`;
+CREATE TABLE IF NOT EXISTS `Client` (
+  `Id` int(8) NOT NULL,
+  `ClientId` varchar(32) NOT NULL,
+  `Name1` varchar(40) NOT NULL,
+  `Name2` varchar(40) NOT NULL,
+  `ZIP` varchar(16) NOT NULL,
+  `City` varchar(32) NOT NULL,
+  `Street` varchar(32) NOT NULL,
+  `Number` varchar(6) NOT NULL,
+  `Country` varchar(32) NOT NULL,
+  `Language` varchar(10) NOT NULL,
+  `Phone` varchar(32) NOT NULL,
+  `FAX` varchar(32) NOT NULL,
+  `Cellphone` varchar(32) NOT NULL,
+  `URL` varchar(128) NOT NULL,
+  `eMail` varchar(64) NOT NULL,
+  `TaxId` varchar(32) NOT NULL,
+  `OrgType` varchar(48) NOT NULL,
+  `Rem` text NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0',
+  `Server` varchar(255) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `Client`
+--
+
+INSERT INTO `Client` (`Id`, `ClientId`, `Name1`, `Name2`, `ZIP`, `City`, `Street`, `Number`, `Country`, `Language`, `Phone`, `FAX`, `Cellphone`, `URL`, `eMail`, `TaxId`, `OrgType`, `Rem`, `Imported`, `Server`) VALUES
+(1, '1a2b3c4d', 'Goofy & Co', '', 'ZIP', 'HOME_CITY', 'ONW_WAY', '', 'de', 'de_DE', '', '', '', '', '', '', '', '', 0, ',mas,');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `ClientApplication`
+--
+
+DROP TABLE IF EXISTS `ClientApplication`;
+CREATE TABLE IF NOT EXISTS `ClientApplication` (
+  `Id` int(10) NOT NULL,
+  `ClientId` varchar(32) NOT NULL,
+  `UserId` varchar(32) NOT NULL,
+  `ApplicationSystemId` varchar(32) NOT NULL,
+  `ApplicationId` varchar(32) NOT NULL,
+  `PathConfig` varchar(128) NOT NULL,
+  `PathApplication` varchar(128) NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `ClientApplication`
+--
+
+INSERT INTO `ClientApplication` (`Id`, `ClientId`, `UserId`, `ApplicationSystemId`, `ApplicationId`, `PathConfig`, `PathApplication`, `Imported`) VALUES
+(20, '1a2b3c4d', 'maxmus', 'mas', 'mgmt', '', '/mas/mgmt/index.php', 0),
+(64, '1a2b3c4d', '__appuser__', 'mas', 'mgmt', '', '/mas/mgmt/index.php', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `ClientContact`
+--
+
+DROP TABLE IF EXISTS `ClientContact`;
+CREATE TABLE IF NOT EXISTS `ClientContact` (
+  `Id` int(8) NOT NULL,
+  `ClientId` varchar(32) NOT NULL,
+  `ClientContactNo` varchar(8) NOT NULL,
+  `AdrZusatz` varchar(32) NOT NULL,
+  `Anrede` varchar(8) NOT NULL,
+  `Titel` varchar(16) NOT NULL,
+  `Vorname` varchar(32) NOT NULL,
+  `Name` varchar(32) NOT NULL,
+  `Telefon` varchar(32) NOT NULL,
+  `FAX` varchar(32) NOT NULL,
+  `Mobil` varchar(32) NOT NULL,
+  `eMail` varchar(64) NOT NULL,
+  `BenutzerName` varchar(16) NOT NULL,
+  `Passwort` varchar(128) NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `ClientContact`
+--
+
+INSERT INTO `ClientContact` (`Id`, `ClientId`, `ClientContactNo`, `AdrZusatz`, `Anrede`, `Titel`, `Vorname`, `Name`, `Telefon`, `FAX`, `Mobil`, `eMail`, `BenutzerName`, `Passwort`, `Imported`) VALUES
+(1, '00000000', '001', '', 'Herr', '', 'Max', 'Mustermann', '', '', '', '', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `SysConfigObj`
+--
+
+DROP TABLE IF EXISTS `SysConfigObj`;
+CREATE TABLE IF NOT EXISTS `SysConfigObj` (
+  `Id` int(11) NOT NULL,
+  `ApplicationSystemId` varchar(32) NOT NULL,
+  `ApplicationId` varchar(32) NOT NULL,
+  `ClientId` varchar(32) NOT NULL,
+  `Class` varchar(32) NOT NULL DEFAULT '',
+  `Block` varchar(32) NOT NULL DEFAULT '',
+  `Parameter` varchar(64) NOT NULL,
+  `Value` varchar(128) NOT NULL,
+  `Help` varchar(64) NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=572 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `SysConfigObj`
+--
+
+INSERT INTO `SysConfigObj` (`Id`, `ApplicationSystemId`, `ApplicationId`, `ClientId`, `Class`, `Block`, `Parameter`, `Value`, `Help`, `Imported`) VALUES
+(159, 'mas', 'mgmt', '', 'UI', 'ui', 'dbAlias', 'ui', '', 0),
+(228, 'mas', 'mgmt', '', 'UI', 'ui', 'dbDriver', 'mysql', '', 0),
+(156, 'mas', 'mgmt', '', 'UI', 'ui', 'dbHost', 'localhost', '', 0),
+(157, 'mas', 'mgmt', '', 'UI', 'ui', 'dbName', 'mas_mgmt_sys', '', 0),
+(160, 'mas', 'mgmt', '', 'UI', 'ui', 'dbPassword', 'UserPub', '', 0),
+(305, 'mas', 'mgmt', '', 'UI', 'ui', 'dbPrefix', '', '', 0),
+(158, 'mas', 'mgmt', '', 'UI', 'ui', 'dbUser', 'PubUser', '', 0),
+(161, 'mas', 'mgmt', '', 'UI', 'ui', 'showLeftMenu', 'true', '', 0),
+(222, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbAlias', 'def', '', 0),
+(227, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbDriver', 'mysql', '', 0),
+(223, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbHost', 'localhost', '\r\n', 0),
+(224, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbName', 'mas_mgmt_sys', '', 0),
+(225, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbPassword', 'UserPub', '', 0),
+(304, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbPrefix', '', '', 0),
+(226, 'mas', 'mgmt', '1a2b3c4d', 'def', 'def', 'dbUser', 'PubUser', '', 0),
+(511, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbAlias', 'appSys', '', 0),
+(512, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbDriver', 'mysql', '', 0),
+(513, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbHost', 'localhost', '\r\n', 0),
+(514, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbName', 'mas_mgmt_sys', '', 0),
+(515, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbPassword', 'UserPub', '', 0),
+(516, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbPrefix', '', '', 0),
+(517, 'mas', 'mgmt', '1a2b3c4d', 'def', 'appSys', 'dbUser', 'PubUser', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `SysSession`
+--
+
+DROP TABLE IF EXISTS `SysSession`;
+CREATE TABLE IF NOT EXISTS `SysSession` (
+  `Id` int(8) NOT NULL,
+  `SessionId` char(128) NOT NULL,
+  `IPAddress` varchar(64) NOT NULL,
+  `ClientId` varchar(32) NOT NULL,
+  `ApplicationSystemId` varchar(32) NOT NULL,
+  `ApplicationId` varchar(32) NOT NULL,
+  `SysUserId` varchar(32) NOT NULL,
+  `AppUserId` varchar(32) NOT NULL,
+  `Datum` date NOT NULL,
+  `LastAccess` int(11) NOT NULL,
+  `Status` int(3) NOT NULL,
+  `Validity` int(2) NOT NULL DEFAULT '0',
+  `Checksum` varchar(128) NOT NULL,
+  `SearchTerm` varchar(512) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10894 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `SysSession`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `SysTrans`
+--
+
+DROP TABLE IF EXISTS `SysTrans`;
+CREATE TABLE IF NOT EXISTS `SysTrans` (
+  `Id` int(8) NOT NULL,
+  `Name` varchar(32) NOT NULL,
+  `RefNo` varchar(128) NOT NULL,
+  `Language` varchar(10) NOT NULL,
+  `Fulltext` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Fulltext2` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `UseCount` int(11) NOT NULL,
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `SysTrans`
+--
+
+INSERT INTO `SysTrans` (`Id`, `Name`, `RefNo`, `Language`, `Fulltext`, `Fulltext2`, `UseCount`, `Imported`) VALUES
+(1, 'trans', '769b57e086f0cf7c1c88eebd52fafc29', 'en', 'Do you really wanto add', 'Do you really wanto add', 500, 0),
+(8, 'trans', '9f7d0ee82b6a6ca7ddeae841f3253059', 'en', 'valid', 'valid', 2, 0),
+(9, 'trans', '9acb44549b41563697bb490144ec6258', 'en', 'status', 'status', 2, 0),
+(10, 'trans', '599dcce2998a6b40b1e38e8c6006cb0a', 'en', 'type', 'type', 2, 0),
+(11, 'trans', '5fc732311905cb27e82d67f4f6511f7f', 'en', 'date', 'date', 2, 0),
+(12, 'trans', '45000f8ab1c731efd4d8207bb079f378', 'en', 'StatusInfo', 'StatusInfo', 2, 0),
+(13, 'trans', 'b2145aac704ce76dbe1ac7adac535b23', 'en', 'var', 'var', 0, 0),
+(14, 'trans', 'e358efa489f58062f10dd7316b65649e', 'en', 't', 't', 2, 0),
+(15, 'trans', '52eb567b8698b4e2d8f4dc4559627db6', 'en', 'ApplicationSystem no.', 'ApplicationSystem no.', 0, 0),
+(16, 'trans', '48fe428f0f969cfd9acc2c614d48c79b', 'en', 'ClientApplication no.', 'ClientApplication no.', 0, 0),
+(17, 'trans', '89cc52b1cfe0ecc4eb49a19f615b9a70', 'en', 'Role id.', 'Role id.', 0, 0),
+(18, 'trans', '9004d136b074f2629f1300d417c2d73e', 'en', 'Profile id.', 'Profile id.', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `SysUser`
+--
+
+DROP TABLE IF EXISTS `SysUser`;
+CREATE TABLE IF NOT EXISTS `SysUser` (
+  `Id` int(8) NOT NULL,
+  `ClientId` varchar(32) NOT NULL,
+  `UserId` varchar(16) NOT NULL DEFAULT '',
+  `ApplicationSystemId` varchar(32) NOT NULL DEFAULT 'erpdemo',
+  `ApplicationId` varchar(32) NOT NULL,
+  `OrgName1` varchar(32) NOT NULL DEFAULT '',
+  `OrgName2` varchar(32) NOT NULL DEFAULT '',
+  `LastName` varchar(16) DEFAULT NULL,
+  `FirstName` varchar(16) DEFAULT NULL,
+  `MailId` varchar(64) NOT NULL DEFAULT '',
+  `Password` varchar(34) NOT NULL DEFAULT '',
+  `MD5Password` varchar(64) NOT NULL DEFAULT '',
+  `Street` varchar(32) DEFAULT NULL,
+  `Number` varchar(32) DEFAULT NULL,
+  `City` varchar(32) DEFAULT NULL,
+  `ZIP` varchar(8) DEFAULT NULL,
+  `Province` varchar(32) DEFAULT NULL,
+  `Country` varchar(32) DEFAULT NULL,
+  `Telephone` varchar(24) DEFAULT NULL,
+  `Cellphone` varchar(24) DEFAULT NULL,
+  `FAX` varchar(24) DEFAULT NULL,
+  `Registration` date NOT NULL DEFAULT '0000-00-00',
+  `Type` smallint(1) NOT NULL DEFAULT '0',
+  `Lang` varchar(8) NOT NULL DEFAULT '',
+  `Confirmed` smallint(6) NOT NULL DEFAULT '0',
+  `Level` int(3) NOT NULL DEFAULT '0',
+  `ValidFrom` date NOT NULL,
+  `ValidTo` date NOT NULL,
+  `DateReg` date NOT NULL,
+  `DateLastAcc` date NOT NULL,
+  `Packages` varchar(256) NOT NULL DEFAULT '*',
+  `Modules` varchar(256) NOT NULL DEFAULT '*',
+  `Imported` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Uniquely Identifies Users in the ETE/BETE Systems';
+
+--
+-- Daten für Tabelle `SysUser`
+--
+
+INSERT INTO `SysUser` (`Id`, `ClientId`, `UserId`, `ApplicationSystemId`, `ApplicationId`, `OrgName1`, `OrgName2`, `LastName`, `FirstName`, `MailId`, `Password`, `MD5Password`, `Street`, `Number`, `City`, `ZIP`, `Province`, `Country`, `Telephone`, `Cellphone`, `FAX`, `Registration`, `Type`, `Lang`, `Confirmed`, `Level`, `ValidFrom`, `ValidTo`, `DateReg`, `DateLastAcc`, `Packages`, `Modules`, `Imported`) VALUES
+(1, '', 'maxmus', 'erm', 'erp', '', '', 'Mustermann', 'Max', 'm.mustermann@goofyundco.de', 'UNSICHER', '', 'ONE_WAY', '88', 'HOME_CITY', 'MY_ZIP', '1', 'de', '', '', '', '2000-02-01', 0, 'en', 1, 1, '2010-01-01', '2016-12-31', '0000-00-00', '2000-02-01', '', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur des Views `ApplicationPerClient`
+--
+DROP TABLE IF EXISTS `ApplicationPerClient`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`erpdemo`@`localhost` SQL SECURITY DEFINER VIEW `ApplicationPerClient` AS select `CA`.`ClientId` AS `ClientId`,`CA`.`ApplicationSystemId` AS `ApplicationSystemId`,`CA`.`ApplicationId` AS `ApplicationId`,`A`.`Description1` AS `Description1` from (`clientapplication` `CA` join `application` `A` on(((`A`.`ApplicationId` = `CA`.`ApplicationId`) and (`A`.`ApplicationSystemId` = `CA`.`ApplicationSystemId`)))) group by `CA`.`ClientId`,`CA`.`ApplicationSystemId`,`CA`.`ApplicationId`;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur des Views `ApplicationSystemPerClient`
+--
+DROP TABLE IF EXISTS `ApplicationSystemPerClient`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`erpdemo`@`localhost` SQL SECURITY DEFINER VIEW `ApplicationSystemPerClient` AS select `CA`.`ClientId` AS `ClientId`,`CA`.`ApplicationSystemId` AS `ApplicationSystemId`,`CA`.`ApplicationId` AS `ApplicationId`,`A`.`Description1` AS `Description1` from (`clientapplication` `CA` join `applicationsystem` `A` on((`A`.`ApplicationSystemId` = `CA`.`ApplicationSystemId`))) group by `CA`.`ClientId`,`CA`.`ApplicationSystemId`;
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `Application`
+--
+ALTER TABLE `Application`
+  ADD UNIQUE KEY `Id` (`Id`);
+
+--
+-- Indizes für die Tabelle `ApplicationSystem`
+--
+ALTER TABLE `ApplicationSystem`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indizes für die Tabelle `ApplicationVersion`
+--
+ALTER TABLE `ApplicationVersion`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indizes für die Tabelle `Client`
+--
+ALTER TABLE `Client`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `MandNr` (`ClientId`);
+
+--
+-- Indizes für die Tabelle `ClientApplication`
+--
+ALTER TABLE `ClientApplication`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indizes für die Tabelle `ClientContact`
+--
+ALTER TABLE `ClientContact`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `MandNr` (`ClientId`),
+  ADD UNIQUE KEY `MandKontaktNr` (`ClientContactNo`);
+
+--
+-- Indizes für die Tabelle `SysConfigObj`
+--
+ALTER TABLE `SysConfigObj`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indizes für die Tabelle `SysSession`
+--
+ALTER TABLE `SysSession`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indizes für die Tabelle `SysTrans`
+--
+ALTER TABLE `SysTrans`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `RefNo_Lang` (`RefNo`,`Language`);
+
+--
+-- Indizes für die Tabelle `SysUser`
+--
+ALTER TABLE `SysUser`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `UserId` (`UserId`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `Application`
+--
+ALTER TABLE `Application`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT für Tabelle `ApplicationSystem`
+--
+ALTER TABLE `ApplicationSystem`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT für Tabelle `ApplicationVersion`
+--
+ALTER TABLE `ApplicationVersion`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `Client`
+--
+ALTER TABLE `Client`
+  MODIFY `Id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT für Tabelle `ClientApplication`
+--
+ALTER TABLE `ClientApplication`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
+--
+-- AUTO_INCREMENT für Tabelle `ClientContact`
+--
+ALTER TABLE `ClientContact`
+  MODIFY `Id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT für Tabelle `SysConfigObj`
+--
+ALTER TABLE `SysConfigObj`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=572;
+--
+-- AUTO_INCREMENT für Tabelle `SysSession`
+--
+ALTER TABLE `SysSession`
+  MODIFY `Id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10894;
+--
+-- AUTO_INCREMENT für Tabelle `SysTrans`
+--
+ALTER TABLE `SysTrans`
+  MODIFY `Id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT für Tabelle `SysUser`
+--
+ALTER TABLE `SysUser`
+  MODIFY `Id` int(8) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

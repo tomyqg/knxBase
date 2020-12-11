@@ -1,0 +1,109 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Document</h1>
+		<wap:key>
+			<wap:keyform id="DocumentKeyData">
+				<wap:keyrow data-wap-label="Document no." data-wap-attr="DocumentNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Name" data-wap-attr="Title" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlDocumentMain">
+            <wap:tabContentPane id="tabPageDocumentSurvey" data-wap-heading="Main Data">
+                <wap:grid data-wap-class="Document" data-wap-grid-name="gridDocumentOV" wapFormName="formDocumentOV" wapTableName="TableDocumentOV" >
+                        <wap:gridcol data-wap-obj="Document" data-wap-attr="Id" data-wap-label="Id" />
+                        <wap:gridcol data-wap-obj="Document" data-wap-attr="DocumentNo" data-wap-label="DocumentNo" />
+                        <wap:gridcol data-wap-obj="Document" data-wap-attr="ABCClass" data-wap-label="ABCClass" />
+                        <wap:gridcol data-wap-obj="Document" data-wap-attr="DecimalClass" data-wap-label="DecimalClass" />
+                        <wap:gridcol data-wap-obj="Document" data-wap-attr="Title" data-wap-label="Title" />
+                </wap:grid>
+            </wap:tabContentPane>
+			<wap:tabContentPane id="tabPageDocumentMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formDocumentMain">
+										<wap:rowinput data-wap-label="Prefix" data-wap-attr="Prefix" data-wap-mode="edit" />
+                                        <wap:rowoption data-wap-label="DecimalClass" data-wap-attr="DecimalClass" data-wap-mode="edit"
+            								data-wap-db="DocumentInfo" data-wap-key="Key" data-wap-value="Value" data-wap-cond="Category = 'DECClass'" data-wap-order="'Key'" data-wap-def="" />
+                                        <wap:rowoption data-wap-label="ABCClass" data-wap-attr="ABCClass" data-wap-mode="edit"
+            								data-wap-db="DocumentInfo" data-wap-key="Key" data-wap-value="Value" data-wap-cond="Category = 'ABCClass'" data-wap-order="'Key'" data-wap-def="" />
+										<wap:rowinput data-wap-label="ProductId" data-wap-attr="ProductId" data-wap-mode="edit" />
+                                        <wap:rowinput data-wap-label="Postfix" data-wap-attr="Postfix" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Title" data-wap-attr="Title" data-wap-mode="edit" />
+                                        <wap:rowoption data-wap-label="Document type" data-wap-attr="DocumentType" data-wap-mode="edit"
+            								data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'DocumentType'" data-wap-order="'Key'" data-wap-def="pdf" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Modi</legend>
+									<wap:data>
+										<wap:dataform id="formDocumentModi">
+										</wap:dataform>
+									</wap:data>
+								</fieldset>
+								<fieldset>
+									<legend>Access</legend>
+									<wap:data>
+										<wap:dataform id="formDocumentGet">
+										</wap:dataform>
+									</wap:data>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formDocumentMain,formDocumentModi,formDocumentZugriff" />
+					<wap:btnUpdate data-wap-forms="formDocumentMain,formDocumentModi,formDocumentZugriff" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageDocumentHistory" data-wap-heading="History">
+				<fieldset>
+					<legend>Create Revision</legend>
+					<wap:data>
+						<wap:dataform id="formCreate">
+							<wap:btnMisc data-wap-label="Create Revision" data-wap-misc-function="createRevision" />
+							<wap:btnMisc data-wap-label="Create Revision" data-wap-misc-function="createRelease" />
+						</wap:dataform>
+						<wap:dataform id="formCreateRevision">
+							<wap:rowoption data-wap-label="Status" data-wap-attr="Status" data-wap-mode="edit"
+								data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'DocumentStatus'" data-wap-order="Value" data-wap-def="" />
+							<wap:rowupload data-wap-label="Document" data-wap-attr="Document" data-wap-upload-function="createRevision" />
+						</wap:dataform>
+						<wap:dataform id="formCreateRelease">
+							<wap:rowupload data-wap-label="Document" data-wap-attr="Document" data-wap-upload-function="createRelease" />
+						</wap:dataform>
+					</wap:data>
+				</fieldset>
+				<wap:grid data-wap-class="DocumentRevision" data-wap-grid-name="gridDocumentRevision" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="DocumentNo" data-wap-label="Document no." />
+					<wap:gridcol data-wap-attr="Revision" data-wap-label="Revision" />
+					<wap:gridcol data-wap-attr="DateStored" data-wap-label="Stored"  />
+					<wap:gridcol data-wap-attr="Status" data-wap-label="Status" />
+					<wap:gridcol data-wap-attr="DocumentNo" data-wap-label="Download link" data-wap-can-open="true" />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+            <wap:tabContentPane id="tabPageDocumentDependancies" data-wap-heading="Dependencies">
+				<wap:grid data-wap-class="DocumentDependant" data-wap-grid-name="gridDocumentDependant" data-wap-adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="DocumentNo" data-wap-label="Document no." />
+					<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+        </wap:tabContainer>
+	</div>
+</html>

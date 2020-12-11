@@ -1,0 +1,60 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Product Group</h1>
+		<wap:key>
+			<wap:keyform id="WebPageKeyData">
+				<wap:keyrow data-wap-label="WebPage no." data-wap-attr="WebPageNo" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Name" data-wap-attr="Name" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlWebPageMain">
+			<wap:tabContentPane id="tabPageWebPageSurvey" data-wap-heading="Overview">
+                <wap:grid data-wap-class="WebPage" data-wap-grid-name="gridWebPageOV">
+                    <wap:gridcol data-wap-obj="WebPage" data-wap-attr="Id" data-wap-label="Id" />
+                    <wap:gridcol data-wap-obj="WebPage" data-wap-attr="WebPageNo" data-wap-label="WebPageNo" />
+                    <wap:gridcol data-wap-obj="WebPage" data-wap-attr="Name" data-wap-label="Name" />
+                </wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageWebPageMainData" data-wap-heading="Main Data">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formWebPageMain">
+										<wap:rowinput data-wap-label="Name" data-wap-attr="Name" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Markt" data-wap-attr="Markt" data-wap-mode="edit" />
+										<wap:rowinput data-wap-label="Name, stripped" data-wap-attr="NameStripped" data-wap-mode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formWebPageMain" />
+					<wap:btnUpdate data-wap-forms="formWebPageMain,formWebPageModi,formWebPageZugriff" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageWebPageFullText" data-wap-heading="Full Text">
+				<wap:data>
+    				<fieldset>
+    					<legend>Text</legend>
+    					<wap:dataform id="formWebPageText">
+        		            <textarea class="ckeditor wapField" name="Fulltext" data-wap-attr="Fulltext" data-wap-type="rtf" data-wap-mode="edit"></textarea>
+    					</wap:dataform>
+    				</fieldset>
+					<wap:btnUpdate data-wap-forms="formWebPageText" />
+				</wap:data>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

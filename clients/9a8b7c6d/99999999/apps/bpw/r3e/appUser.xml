@@ -1,0 +1,132 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">AppUsers</h1>
+		<wap:key>
+			<wap:keyform id="AppUserKeyData">
+				<wap:keyrow data-wap-label="User id" data-wap-attr="UserId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Name" data-wap-attr="LastName" />
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlAppUserMain">
+			<wap:tabContentPane id="tabPageAppUserSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="AppUser" data-wap-grid-name="gridAppUserOV" >
+					<wap:gridcol data-wap-obj="AppUser" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="AppUser" data-wap-attr="UserId" data-wap-label="User Id." data-wap-sort="gridAppUserOV" />
+					<wap:gridcol data-wap-obj="AppUser" data-wap-attr="Name" data-wap-label="Name" data-wap-sort="gridAppUserOV" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAppUserMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formAppUserMain">
+										<wap:rowdisplay data-wap-label="User Id." data-wap-attr="UserId" />
+										<wap:rowinput data-wap-label="First Name" data-wap-attr="FirstName" />
+										<wap:rowinput data-wap-label="Last Name" data-wap-attr="LastName" />
+										<wap:rowinput data-wap-label="Authority" data-wap-attr="Authority" />
+										<wap:rowinput data-wap-label="Password" data-wap-attr="Password" />
+										<wap:rowinput data-wap-label="Identification" data-wap-attr="Identification" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Braking Parameters</legend>
+									<wap:dataform id="formAppUserParameters">
+										<wap:rowinput data-wap-label="Brake factor" data-wap-attr="BrakeFactor" />
+										<wap:rowinput data-wap-label="Parking brake factor" data-wap-attr="ParkingBrakeFactor" />
+										<wap:rowinput data-wap-label="Tyre min." data-wap-attr="MinTyre" />
+										<wap:rowinput data-wap-label="Tyre max." data-wap-attr="MaxTyre" />
+										<wap:rowinput data-wap-label="Allowed axle load" data-wap-attr="AllowedAxleLoad" />
+										<wap:rowinput data-wap-label="Cam torque" data-wap-attr="CamTorque" />
+										<wap:rowinput data-wap-label="Operating force" data-wap-attr="OperatingForce" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Test Parameters</legend>
+									<wap:dataform id="formAppUserTestParameters">
+										<wap:rowdate data-wap-label="Test date" data-wap-attr="TestDateSTVZO" />
+										<wap:rowinput data-wap-label="Test axle load" data-wap-attr="TestAxleLoad" />
+										<wap:rowinput data-wap-label="Test RStat" data-wap-attr="TestRStat" />
+										<wap:rowinput data-wap-label="Test Rdyn" data-wap-attr="TestRDyn" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>StVZO</legend>
+									<wap:dataform id="formAppUserStVZO">
+										<wap:rowinput data-wap-label="Brake pad StVZO" data-wap-attr="BrakeLiningSTVZO" />
+										<wap:rowdate data-wap-label="Test date StVZO" data-wap-attr="TestDateSTVZO" />
+										<wap:rowinput data-wap-label="Test date StVZO (ticks)" data-wap-attr="TestDateSTVZOTicks" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formAppUserMain,formAppUserOrganization,formAppUserParameters,formAppUserTestParameters,formAppUserStVZO" />
+					<wap:btnUpdate data-wap-forms="formAppUserMain,formAppUserOrganization,formAppUserParameters,formAppUserTestParameters,formAppUserStVZO" />
+					<wap:btnMisc data-wap-label="Show Insert Statement" data-wap-misc-function="getInsertStatement" />
+					<wap:btnMisc data-wap-label="Show Update Statement" data-wap-misc-function="getUpdateStatement" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAppUserBrakeData" data-wap-heading="Brakes">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Brake Pads</legend>
+									<wap:grid data-wap-class="BrakePad" data-wap-grid-name="gridBrakePad">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol colspan="2" data-wap-attr="BrakePadId" data-wap-label="Brake pad id." />
+										<wap:gridcol data-wap-attr="Description" data-wap-label="Description" />
+										<wap:gridcol data-wap-attr="AppUserDate" data-wap-label="AppUser date" />
+										<wap:gridcol data-wap-attr="DateOfIssue" data-wap-label="Issue date" />
+										<wap:gridcol data-wap-attr="eg" data-wap-label="eg" />
+										<wap:gridcol data-wap-attr="ece" data-wap-label="ece" />
+
+									</wap:grid>
+								</fieldset>
+								<fieldset>
+									<legend>Brake Pad Values</legend>
+									<wap:grid data-wap-class="BrakePadValue" data-wap-grid-name="gridBrakePadValue">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="BrakePadId" data-wap-label="BrakePad Id." data-wap-link-to="BrakePad" />
+										<wap:gridcol data-wap-attr="ActuationForce" data-wap-label="Actuation force" data-wap-fnc="input" wapSize="32,64" />
+										<wap:gridcol data-wap-attr="BrakingForce" data-wap-label="Braking force" data-wap-fnc="input" wapSize="32,64" />
+										<wap:gridcol data-wap-attr="LeverLength" data-wap-label="Lever length" />
+										<wap:gridcol data-wap-attr="CylinderPressure" data-wap-label="Cylinder pressure" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageAppUserHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlAppUserHelpMain">
+					<wap:tabContentPane id="tabPageAppUserHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageAppUserHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageAppUserHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

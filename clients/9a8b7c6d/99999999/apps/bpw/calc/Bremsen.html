@@ -1,0 +1,189 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+
+<br/>
+
+<input type="radio" data-dojo-type="dijit.form.RadioButton" name="brake_all_or" id="brake_all_or_1" value="Vorauswahl">Vorauswahl</input> 
+
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+
+<input id="Alle_Achsen_gleich" data-dojo-type="dijit.form.CheckBox" value="Alle_Achsen_gleich" checked="false"><label>Alle Achsen gleich</label></input>
+
+<br/>
+
+<input type="radio" data-dojo-type="dijit.form.RadioButton" name="brake_all_or" id="brake_all_or_2" value="alle Gutachten" checked="true">alle Gutachten</input> 
+
+<fieldset>
+	<legend>Bremsen: 1,2,3</legend>
+	
+	<p><font color="black">
+		<select id="company_select" size="3" data-dojo-type="dijit.form.Select" name="company_select" width="150">
+			<option value="BPW">BPW</option>
+		</select>
+	</font></p>
+	
+	<br/><br/>
+	
+	<table border="0">
+		<tr>
+			<td width="260" valign="top">
+				<table border="0">
+					<tr>
+						<td></td>
+						<td><font color="white">Bremse:</font></td>
+					</tr>
+					<tr>
+						<td><input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_brake" id="kind_of_brake_1" value="SN-Bremse" checked="true" onclick="CheckBrakes();BrakeCheckRadio_DisableSelect();overview_actualize();"><font color="white">SN-Bremse</font></input></td>
+						<td>
+							<select id="SN_brake_select" size="10" data-dojo-type="dijit.form.Select" name="brake_select" width="110" onchange="CheckBrakes();overview_actualize();">
+								<option value="SN 3012">SN 3012</option>
+								<option value="SN 3015">SN 3015</option>
+								<option value="SN 3020">SN 3020</option>
+								<option value="SN 3616">SN 3616</option>
+								<option value="SN 3620">SN 3620</option>
+								<option value="SN 4008">SN 4008</option>
+								<option value="SN 4212">SN 4212</option>
+								<option value="SN 4216">SN 4216</option>
+								<option value="SN 4218">SN 4218</option>
+								<option value="SN 4218 ALT">SN 4218 ALT</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_brake" id="kind_of_brake_2" value="SB-Bremse" onclick="CheckBrakes();BrakeCheckRadio_DisableSelect();overview_actualize();"><font color="white">SB-Bremse</font></input>
+						</td>
+						<td>
+							<select id="SB_brake_select" size="10" data-dojo-type="dijit.form.Select" name="brake_select" width="110" onchange="CheckBrakes();overview_actualize();" data-dojo-props="disabled:true">
+								<option value="SB 1509">SB 1509</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_brake" id="kind_of_brake_3" value="N-Bremse" onclick="CheckBrakes();BrakeCheckRadio_DisableSelect();overview_actualize();"><font color="white">N-Bremse</font></input>
+						</td>
+						<td>
+							<select id="N_brake_select" size="10" data-dojo-type="dijit.form.Select" name="brake_select" width="110" onchange="CheckBrakes();overview_actualize();" data-dojo-props="disabled:true">
+								<option value="N 1509">N 1509</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_brake" id="kind_of_brake_4" value="FL-Bremse" onclick="CheckBrakes();BrakeCheckRadio_DisableSelect();overview_actualize();"><font color="white">FL-Bremse</font></input>
+						</td>
+						<td>
+							<select id="FL_brake_select" size="10" data-dojo-type="dijit.form.Select" name="brake_select" width="110" onchange="CheckBrakes();overview_actualize();" data-dojo-props="disabled:true">
+								<option value="FL 1509">FL 1509</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="radio" data-dojo-type="dijit.form.RadioButton" name="kind_of_brake" id="kind_of_brake_5" value="S-Bremse" onclick="CheckBrakes();BrakeCheckRadio_DisableSelect();overview_actualize();"><font color="white">S-Bremse</font></input>
+						</td>
+						<td>
+							<select id="S_brake_select" size="10" data-dojo-type="dijit.form.Select" name="brake_select" width="110" onchange="CheckBrakes();overview_actualize();" data-dojo-props="disabled:true">
+								<option value="S 1509">S 1509</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td width="700" align="center" valign="top">
+					<table border="0" bgcolor=#A0A0A0 bordercolor=#000000>
+						<tr style="background-color:#A0A0A0">
+							<td>Protokollnr</td>
+							<td>Achstyp</td>
+							<td>Pstat&#160;[kg]</td>
+							<td>Ppr&uuml;f&#160;[kg]</td>
+							<td>Re&#160;[m]</td>
+							<td>Pr&uuml;ftyp</td>
+							<td>Km/h</td>
+							<td>letzte Pr&uuml;fung</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td>TDB 0752</td>
+							<td>H 102</td>
+							<td>9000</td>
+							<td>10200</td>
+							<td>0,529</td>
+							<td>ECE</td>
+							<td>105</td>
+							<td>27.02.06</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td>TDB 0372</td>
+							<td>Z 110-1</td>
+							<td>9000</td>
+							<td>11000</td>
+							<td>0,546</td>
+							<td>EG</td>
+							<td>105</td>
+							<td>14.08.07</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td>TDB 0135</td>
+							<td>Z 90</td>
+							<td>9000</td>
+							<td>9450</td>
+							<td>0,525</td>
+							<td>EG</td>
+							<td>105</td>
+							<td>13.08.07</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td>TDB 0014</td>
+							<td>S 110-1</td>
+							<td>9000</td>
+							<td>11000</td>
+							<td>0,535</td>
+							<td>EG</td>
+							<td>105</td>
+							<td>12.01.07</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td>TDB 0007</td>
+							<td>S 90</td>
+							<td>9000</td>
+							<td>10200</td>
+							<td>0,535</td>
+							<td>EG</td>
+							<td>105</td>
+							<td>11.01.07</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td>TDB 0004</td>
+							<td>B 100</td>
+							<td>10000</td>
+							<td>10000</td>
+							<td>0,527</td>
+							<td>EG</td>
+							<td>105</td>
+							<td>11.01.07</td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td> <br> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr style="background-color:#FFFFFF">
+							<td> <br> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+					</table>
+			</td>
+		</tr>
+	</table>
+</fieldset>

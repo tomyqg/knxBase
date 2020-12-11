@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents">
+<Timestamp>2012-02-13T14:52:59.255Z</Timestamp>
+<Ack>Success</Ack>
+<Version>759</Version>
+<Build>E759_CORE_BUNDLED_14406145_R1</Build>
+<PaginationResult>
+<TotalNumberOfPages>1</TotalNumberOfPages>
+<TotalNumberOfEntries>6</TotalNumberOfEntries>
+</PaginationResult>
+<HasMoreOrders>false</HasMoreOrders>
+<OrderArray>
+<Order>
+<OrderID>320834952890-842652519011</OrderID>
+<OrderStatus>Completed</OrderStatus>
+<AdjustmentAmount currencyID="EUR">0.0</AdjustmentAmount>
+<AmountPaid currencyID="EUR">19.45</AmountPaid>
+<AmountSaved currencyID="EUR">11.9</AmountSaved>
+<CheckoutStatus>
+<eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus>
+<LastModifiedTime>2012-02-13T13:07:03.000Z</LastModifiedTime>
+<PaymentMethod>PayPal</PaymentMethod>
+<Status>Complete</Status>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+</CheckoutStatus>
+<ShippingDetails>
+<SalesTax>
+<SalesTaxPercent>19.0</SalesTaxPercent>
+<SalesTaxState>
+</SalesTaxState>
+<ShippingIncludedInTax>false</ShippingIncludedInTax>
+<SalesTaxAmount currencyID="EUR">0.0</SalesTaxAmount>
+</SalesTax>
+<ShippingServiceOptions>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+<ShippingServicePriority>1</ShippingServicePriority>
+<ExpeditedService>false</ExpeditedService>
+<ShippingTimeMin>1</ShippingTimeMin>
+<ShippingTimeMax>2</ShippingTimeMax>
+</ShippingServiceOptions>
+<SellingManagerSalesRecordNumber>134</SellingManagerSalesRecordNumber>
+<GetItFast>false</GetItFast>
+</ShippingDetails>
+<CreatedTime>2012-02-12T06:45:22.000Z</CreatedTime>
+<PaymentMethods>MoneyXferAccepted</PaymentMethods>
+<PaymentMethods>MoneyXferAcceptedInCheckout</PaymentMethods>
+<PaymentMethods>PayPal</PaymentMethods>
+<ShippingAddress>
+<Name>Andreas Angele</Name>
+<Street1>Hohenzollernstraße 12</Street1>
+<Street2>
+</Street2>
+<CityName>Blaustein</CityName>
+<StateOrProvince>
+</StateOrProvince>
+<Country>DE</Country>
+<CountryName>Deutschland</CountryName>
+<Phone>Invalid Request</Phone>
+<PostalCode>89134</PostalCode>
+<AddressID>433973734019</AddressID>
+<AddressOwner>eBay</AddressOwner>
+<ExternalAddressID>
+</ExternalAddressID>
+</ShippingAddress>
+<ShippingServiceSelected>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+</ShippingServiceSelected>
+<Subtotal currencyID="EUR">13.5</Subtotal>
+<Total currencyID="EUR">19.45</Total>
+<TransactionArray>
+<Transaction>
+<Buyer>
+<Email>andy.angele@kabelbw.de</Email>
+</Buyer>
+<ShippingDetails>
+<SellingManagerSalesRecordNumber>134</SellingManagerSalesRecordNumber>
+</ShippingDetails>
+<CreatedDate>2012-02-12T06:45:22.000Z</CreatedDate>
+<Item>
+<ItemID>320834952890</ItemID>
+<Site>Germany</Site>
+<Title>Steilbrustflasche, Apothekerflasche, 250 mL, weithals, braun</Title>
+<SKU>301.0250</SKU>
+<ConditionID>1000</ConditionID>
+<ConditionDisplayName>Neu</ConditionDisplayName>
+</Item>
+<QuantityPurchased>3</QuantityPurchased>
+<Status>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+</Status>
+<TransactionID>842652519011</TransactionID>
+<TransactionPrice currencyID="EUR">4.5</TransactionPrice>
+<Platform>eBay</Platform>
+<Variation/>
+<OrderLineItemID>320834952890-842652519011</OrderLineItemID>
+</Transaction>
+</TransactionArray>
+<BuyerUserID>andyfix</BuyerUserID>
+<PaidTime>2012-02-12T06:46:12.000Z</PaidTime>
+<ShippedTime>2012-02-13T13:07:03.000Z</ShippedTime>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+<EIASToken>nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEk4WoAZCGqAydj6x9nY+seQ==</EIASToken>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+<PaymentHoldDetails/>
+</Order>
+<Order>
+<OrderID>320834971938-843497171011</OrderID>
+<OrderStatus>Completed</OrderStatus>
+<AdjustmentAmount currencyID="EUR">0.0</AdjustmentAmount>
+<AmountPaid currencyID="EUR">14.35</AmountPaid>
+<AmountSaved currencyID="EUR">0.0</AmountSaved>
+<CheckoutStatus>
+<eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus>
+<LastModifiedTime>2012-02-13T13:06:52.000Z</LastModifiedTime>
+<PaymentMethod>PayPal</PaymentMethod>
+<Status>Complete</Status>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+</CheckoutStatus>
+<ShippingDetails>
+<SalesTax>
+<SalesTaxPercent>19.0</SalesTaxPercent>
+<SalesTaxState>
+</SalesTaxState>
+<ShippingIncludedInTax>false</ShippingIncludedInTax>
+<SalesTaxAmount currencyID="EUR">0.0</SalesTaxAmount>
+</SalesTax>
+<ShippingServiceOptions>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+<ShippingServicePriority>1</ShippingServicePriority>
+<ExpeditedService>false</ExpeditedService>
+<ShippingTimeMin>1</ShippingTimeMin>
+<ShippingTimeMax>2</ShippingTimeMax>
+</ShippingServiceOptions>
+<SellingManagerSalesRecordNumber>136</SellingManagerSalesRecordNumber>
+<GetItFast>false</GetItFast>
+</ShippingDetails>
+<CreatedTime>2012-02-13T11:04:26.000Z</CreatedTime>
+<PaymentMethods>MoneyXferAccepted</PaymentMethods>
+<PaymentMethods>MoneyXferAcceptedInCheckout</PaymentMethods>
+<PaymentMethods>PayPal</PaymentMethods>
+<ShippingAddress>
+<Name>Heike Wolf</Name>
+<Street1>Jägerstraße 96</Street1>
+<Street2>
+</Street2>
+<CityName>Düsseldorf</CityName>
+<StateOrProvince>
+</StateOrProvince>
+<Country>DE</Country>
+<CountryName>Deutschland</CountryName>
+<Phone>Invalid Request</Phone>
+<PostalCode>40231</PostalCode>
+<AddressID>431661942018</AddressID>
+<AddressOwner>eBay</AddressOwner>
+<ExternalAddressID>
+</ExternalAddressID>
+</ShippingAddress>
+<ShippingServiceSelected>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+</ShippingServiceSelected>
+<Subtotal currencyID="EUR">8.4</Subtotal>
+<Total currencyID="EUR">14.35</Total>
+<TransactionArray>
+<Transaction>
+<Buyer>
+<Email>heike.wolf06@gmx.de</Email>
+</Buyer>
+<ShippingDetails>
+<SellingManagerSalesRecordNumber>136</SellingManagerSalesRecordNumber>
+</ShippingDetails>
+<CreatedDate>2012-02-13T11:04:26.000Z</CreatedDate>
+<Item>
+<ItemID>320834971938</ItemID>
+<Site>Germany</Site>
+<Title>Steilbrustflasche, Apothekerflasche, 1000 mL, weithals, klar</Title>
+<SKU>301.1000</SKU>
+<ConditionID>1000</ConditionID>
+<ConditionDisplayName>Neu</ConditionDisplayName>
+</Item>
+<QuantityPurchased>1</QuantityPurchased>
+<Status>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+</Status>
+<TransactionID>843497171011</TransactionID>
+<TransactionPrice currencyID="EUR">8.4</TransactionPrice>
+<Platform>eBay</Platform>
+<Variation/>
+<OrderLineItemID>320834971938-843497171011</OrderLineItemID>
+</Transaction>
+</TransactionArray>
+<BuyerUserID>heike7581</BuyerUserID>
+<PaidTime>2012-02-13T11:11:09.000Z</PaidTime>
+<ShippedTime>2012-02-13T13:06:52.000Z</ShippedTime>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+<BuyerCheckoutMessage>bitte mit Stopfen:NS 60/46 aus Glas</BuyerCheckoutMessage>
+<EIASToken>nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFmYOlDJaAqQSdj6x9nY+seQ==</EIASToken>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+<PaymentHoldDetails/>
+</Order>
+<Order>
+<OrderID>320835025621-840278959011</OrderID>
+<OrderStatus>Completed</OrderStatus>
+<AdjustmentAmount currencyID="EUR">0.0</AdjustmentAmount>
+<AmountPaid currencyID="EUR">7.0</AmountPaid>
+<AmountSaved currencyID="EUR">0.0</AmountSaved>
+<CheckoutStatus>
+<eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus>
+<LastModifiedTime>2012-02-08T07:57:14.000Z</LastModifiedTime>
+<PaymentMethod>PayPal</PaymentMethod>
+<Status>Complete</Status>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+</CheckoutStatus>
+<ShippingDetails>
+<SalesTax>
+<SalesTaxPercent>19.0</SalesTaxPercent>
+<SalesTaxState>
+</SalesTaxState>
+<ShippingIncludedInTax>false</ShippingIncludedInTax>
+<SalesTaxAmount currencyID="EUR">0.0</SalesTaxAmount>
+</SalesTax>
+<ShippingServiceOptions>
+<ShippingService>DE_DeutschePostBrief</ShippingService>
+<ShippingServiceCost currencyID="EUR">2.5</ShippingServiceCost>
+<ShippingServicePriority>1</ShippingServicePriority>
+<ExpeditedService>false</ExpeditedService>
+<ShippingTimeMin>1</ShippingTimeMin>
+<ShippingTimeMax>2</ShippingTimeMax>
+</ShippingServiceOptions>
+<SellingManagerSalesRecordNumber>132</SellingManagerSalesRecordNumber>
+<GetItFast>false</GetItFast>
+</ShippingDetails>
+<CreatedTime>2012-02-07T18:52:11.000Z</CreatedTime>
+<PaymentMethods>MoneyXferAccepted</PaymentMethods>
+<PaymentMethods>MoneyXferAcceptedInCheckout</PaymentMethods>
+<PaymentMethods>PayPal</PaymentMethods>
+<ShippingAddress>
+<Name>André   Christmann</Name>
+<Street1>Windecker Weg 8</Street1>
+<Street2>
+</Street2>
+<CityName>Bruchköbel</CityName>
+<StateOrProvince>
+</StateOrProvince>
+<Country>DE</Country>
+<CountryName>Deutschland</CountryName>
+<Phone>Invalid Request</Phone>
+<PostalCode>63486</PostalCode>
+<AddressID>387270081010</AddressID>
+<AddressOwner>eBay</AddressOwner>
+<ExternalAddressID>
+</ExternalAddressID>
+</ShippingAddress>
+<ShippingServiceSelected>
+<ShippingService>DE_DeutschePostBrief</ShippingService>
+<ShippingServiceCost currencyID="EUR">2.5</ShippingServiceCost>
+</ShippingServiceSelected>
+<Subtotal currencyID="EUR">4.5</Subtotal>
+<Total currencyID="EUR">7.0</Total>
+<TransactionArray>
+<Transaction>
+<Buyer>
+<Email>spike-world@web.de</Email>
+</Buyer>
+<ShippingDetails>
+<SellingManagerSalesRecordNumber>132</SellingManagerSalesRecordNumber>
+</ShippingDetails>
+<CreatedDate>2012-02-07T18:52:11.000Z</CreatedDate>
+<Item>
+<ItemID>320835025621</ItemID>
+<Site>Germany</Site>
+<Title>Gummistopfen 47 / 55 / 40</Title>
+<ConditionID>1000</ConditionID>
+<ConditionDisplayName>Neu</ConditionDisplayName>
+</Item>
+<QuantityPurchased>1</QuantityPurchased>
+<Status>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+</Status>
+<TransactionID>840278959011</TransactionID>
+<TransactionPrice currencyID="EUR">4.5</TransactionPrice>
+<Platform>eBay</Platform>
+<Variation/>
+<OrderLineItemID>320835025621-840278959011</OrderLineItemID>
+</Transaction>
+</TransactionArray>
+<BuyerUserID>spike876</BuyerUserID>
+<PaidTime>2012-02-07T18:58:23.000Z</PaidTime>
+<ShippedTime>2012-02-08T07:57:13.000Z</ShippedTime>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+<BuyerCheckoutMessage>Es wäre klasse wenn ich den Stopfen bis Samstag erhalten würde.&#xd;
+Vielen Dank im voraus...</BuyerCheckoutMessage>
+<EIASToken>nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJl4KgCpSCoQydj6x9nY+seQ==</EIASToken>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+<PaymentHoldDetails/>
+</Order>
+<Order>
+<OrderID>320835112431-837206230011</OrderID>
+<OrderStatus>Completed</OrderStatus>
+<AdjustmentAmount currencyID="EUR">0.0</AdjustmentAmount>
+<AmountPaid currencyID="EUR">125.95</AmountPaid>
+<AmountSaved currencyID="EUR">65.45</AmountSaved>
+<CheckoutStatus>
+<eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus>
+<LastModifiedTime>2012-02-02T10:20:46.000Z</LastModifiedTime>
+<PaymentMethod>PayPal</PaymentMethod>
+<Status>Complete</Status>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+</CheckoutStatus>
+<ShippingDetails>
+<SalesTax>
+<SalesTaxPercent>19.0</SalesTaxPercent>
+<SalesTaxState>
+</SalesTaxState>
+<ShippingIncludedInTax>false</ShippingIncludedInTax>
+<SalesTaxAmount currencyID="EUR">0.0</SalesTaxAmount>
+</SalesTax>
+<ShippingServiceOptions>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+<ShippingServicePriority>1</ShippingServicePriority>
+<ExpeditedService>false</ExpeditedService>
+<ShippingTimeMin>1</ShippingTimeMin>
+<ShippingTimeMax>2</ShippingTimeMax>
+</ShippingServiceOptions>
+<SellingManagerSalesRecordNumber>130</SellingManagerSalesRecordNumber>
+<GetItFast>false</GetItFast>
+</ShippingDetails>
+<CreatedTime>2012-02-02T09:37:44.000Z</CreatedTime>
+<PaymentMethods>MoneyXferAccepted</PaymentMethods>
+<PaymentMethods>MoneyXferAcceptedInCheckout</PaymentMethods>
+<PaymentMethods>PayPal</PaymentMethods>
+<ShippingAddress>
+<Name>Peter Guinand</Name>
+<Street1>Deichstrasse 8a</Street1>
+<Street2>
+</Street2>
+<CityName>Wilhelmshaven</CityName>
+<StateOrProvince>
+</StateOrProvince>
+<Country>DE</Country>
+<CountryName>Deutschland</CountryName>
+<Phone>Invalid Request</Phone>
+<PostalCode>26382</PostalCode>
+<AddressID>1671078135</AddressID>
+<AddressOwner>eBay</AddressOwner>
+<ExternalAddressID>
+</ExternalAddressID>
+</ShippingAddress>
+<ShippingServiceSelected>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+</ShippingServiceSelected>
+<Subtotal currencyID="EUR">120.0</Subtotal>
+<Total currencyID="EUR">125.95</Total>
+<TransactionArray>
+<Transaction>
+<Buyer>
+<Email>meike07@pg-dental.de</Email>
+</Buyer>
+<ShippingDetails>
+<SellingManagerSalesRecordNumber>130</SellingManagerSalesRecordNumber>
+</ShippingDetails>
+<CreatedDate>2012-02-02T09:37:44.000Z</CreatedDate>
+<Item>
+<ItemID>320835112431</ItemID>
+<Site>Germany</Site>
+<Title>Bunsenbrenner Juchheim Propangas, DVGW</Title>
+<ConditionID>1000</ConditionID>
+<ConditionDisplayName>Neu</ConditionDisplayName>
+</Item>
+<QuantityPurchased>12</QuantityPurchased>
+<Status>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+</Status>
+<TransactionID>837206230011</TransactionID>
+<TransactionPrice currencyID="EUR">10.0</TransactionPrice>
+<Platform>eBay</Platform>
+<Variation/>
+<OrderLineItemID>320835112431-837206230011</OrderLineItemID>
+</Transaction>
+</TransactionArray>
+<BuyerUserID>laflossa</BuyerUserID>
+<PaidTime>2012-02-02T09:39:07.000Z</PaidTime>
+<ShippedTime>2012-02-02T10:20:46.000Z</ShippedTime>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+<EIASToken>nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wGlYSlDJaAogidj6x9nY+seQ==</EIASToken>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+<PaymentHoldDetails/>
+</Order>
+<Order>
+<OrderID>320840194839-840680681011</OrderID>
+<OrderStatus>Completed</OrderStatus>
+<AdjustmentAmount currencyID="EUR">0.0</AdjustmentAmount>
+<AmountPaid currencyID="EUR">24.95</AmountPaid>
+<AmountSaved currencyID="EUR">0.0</AmountSaved>
+<CheckoutStatus>
+<eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus>
+<LastModifiedTime>2012-02-09T08:37:50.000Z</LastModifiedTime>
+<PaymentMethod>MoneyXferAcceptedInCheckout</PaymentMethod>
+<Status>Complete</Status>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+</CheckoutStatus>
+<ShippingDetails>
+<SalesTax>
+<SalesTaxPercent>19.0</SalesTaxPercent>
+<SalesTaxState>
+</SalesTaxState>
+<ShippingIncludedInTax>false</ShippingIncludedInTax>
+<SalesTaxAmount currencyID="EUR">0.0</SalesTaxAmount>
+</SalesTax>
+<ShippingServiceOptions>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+<ShippingServicePriority>1</ShippingServicePriority>
+<ExpeditedService>false</ExpeditedService>
+<ShippingTimeMin>1</ShippingTimeMin>
+<ShippingTimeMax>2</ShippingTimeMax>
+</ShippingServiceOptions>
+<SellingManagerSalesRecordNumber>133</SellingManagerSalesRecordNumber>
+<GetItFast>false</GetItFast>
+</ShippingDetails>
+<CreatedTime>2012-02-08T14:20:05.000Z</CreatedTime>
+<PaymentMethods>MoneyXferAccepted</PaymentMethods>
+<PaymentMethods>MoneyXferAcceptedInCheckout</PaymentMethods>
+<PaymentMethods>PayPal</PaymentMethods>
+<PaymentMethods>PaymentSeeDescription</PaymentMethods>
+<ShippingAddress>
+<Name>Andreas Szekely</Name>
+<Street1>Louis-Goos Str.9</Street1>
+<Street2>
+</Street2>
+<CityName>Sinsheim-Reihen</CityName>
+<StateOrProvince>
+</StateOrProvince>
+<Country>DE</Country>
+<CountryName>Deutschland</CountryName>
+<Phone>Invalid Request</Phone>
+<PostalCode>74889</PostalCode>
+<AddressID>1114784285</AddressID>
+<AddressOwner>eBay</AddressOwner>
+<ExternalAddressID>
+</ExternalAddressID>
+</ShippingAddress>
+<ShippingServiceSelected>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+</ShippingServiceSelected>
+<Subtotal currencyID="EUR">19.0</Subtotal>
+<Total currencyID="EUR">24.95</Total>
+<TransactionArray>
+<Transaction>
+<Buyer>
+<Email>andrasszekely@web.de</Email>
+</Buyer>
+<ShippingDetails>
+<SellingManagerSalesRecordNumber>133</SellingManagerSalesRecordNumber>
+</ShippingDetails>
+<CreatedDate>2012-02-08T14:20:05.000Z</CreatedDate>
+<Item>
+<ApplicationData>8210211.B.0000</ApplicationData>
+<ItemID>320840194839</ItemID>
+<Site>Germany</Site>
+<Title>Spiritusbrenner Glas, separater Einfüllstutzen mit Schliffstopfen</Title>
+<ConditionID>1000</ConditionID>
+<ConditionDisplayName>Neu</ConditionDisplayName>
+</Item>
+<QuantityPurchased>1</QuantityPurchased>
+<Status>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+</Status>
+<TransactionID>840680681011</TransactionID>
+<TransactionPrice currencyID="EUR">19.0</TransactionPrice>
+<Platform>eBay</Platform>
+<Variation/>
+<OrderLineItemID>320840194839-840680681011</OrderLineItemID>
+</Transaction>
+</TransactionArray>
+<BuyerUserID>camaro_3</BuyerUserID>
+<PaidTime>2012-02-09T08:37:42.000Z</PaidTime>
+<ShippedTime>2012-02-09T08:37:50.000Z</ShippedTime>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+<EIASToken>nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJloSlDpSLpgidj6x9nY+seQ==</EIASToken>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+<PaymentHoldDetails/>
+</Order>
+<Order>
+<OrderID>320841486165-0</OrderID>
+<OrderStatus>Completed</OrderStatus>
+<AdjustmentAmount currencyID="EUR">0.0</AdjustmentAmount>
+<AmountPaid currencyID="EUR">15.94</AmountPaid>
+<AmountSaved currencyID="EUR">0.0</AmountSaved>
+<CheckoutStatus>
+<eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus>
+<LastModifiedTime>2012-02-13T13:06:57.000Z</LastModifiedTime>
+<PaymentMethod>PayPal</PaymentMethod>
+<Status>Complete</Status>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+</CheckoutStatus>
+<ShippingDetails>
+<SalesTax>
+<SalesTaxPercent>0.0</SalesTaxPercent>
+<SalesTaxState>
+</SalesTaxState>
+<ShippingIncludedInTax>false</ShippingIncludedInTax>
+<SalesTaxAmount currencyID="EUR">0.0</SalesTaxAmount>
+</SalesTax>
+<ShippingServiceOptions>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+<ShippingServicePriority>1</ShippingServicePriority>
+<ExpeditedService>false</ExpeditedService>
+<ShippingTimeMin>1</ShippingTimeMin>
+<ShippingTimeMax>2</ShippingTimeMax>
+</ShippingServiceOptions>
+<SellingManagerSalesRecordNumber>135</SellingManagerSalesRecordNumber>
+<GetItFast>false</GetItFast>
+</ShippingDetails>
+<CreatedTime>2012-02-12T14:28:15.000Z</CreatedTime>
+<PaymentMethods>MoneyXferAccepted</PaymentMethods>
+<PaymentMethods>MoneyXferAcceptedInCheckout</PaymentMethods>
+<PaymentMethods>PayPal</PaymentMethods>
+<ShippingAddress>
+<Name>Patrick Witthaus</Name>
+<Street1>Bismarckstr 3</Street1>
+<Street2>
+</Street2>
+<CityName>Sehnde</CityName>
+<StateOrProvince>
+</StateOrProvince>
+<Country>DE</Country>
+<CountryName>Deutschland</CountryName>
+<Phone>Invalid Request</Phone>
+<PostalCode>31319</PostalCode>
+<AddressID>325579134017</AddressID>
+<AddressOwner>eBay</AddressOwner>
+<ExternalAddressID>
+</ExternalAddressID>
+</ShippingAddress>
+<ShippingServiceSelected>
+<ShippingService>DE_DPDClassic</ShippingService>
+<ShippingServiceCost currencyID="EUR">5.95</ShippingServiceCost>
+</ShippingServiceSelected>
+<Subtotal currencyID="EUR">9.99</Subtotal>
+<Total currencyID="EUR">15.94</Total>
+<TransactionArray>
+<Transaction>
+<Buyer>
+<Email>pwitthaus@web.de</Email>
+</Buyer>
+<ShippingDetails>
+<SellingManagerSalesRecordNumber>135</SellingManagerSalesRecordNumber>
+</ShippingDetails>
+<CreatedDate>2012-02-12T14:28:15.000Z</CreatedDate>
+<Item>
+<ItemID>320841486165</ItemID>
+<Site>Germany</Site>
+<Title>Bürette, Duran, gerader NS-Hahn, 25 mL, Teilung 0,1 mL</Title>
+<ConditionID>1000</ConditionID>
+<ConditionDisplayName>Neu</ConditionDisplayName>
+</Item>
+<QuantityPurchased>1</QuantityPurchased>
+<Status>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+</Status>
+<TransactionID>0</TransactionID>
+<TransactionPrice currencyID="EUR">9.99</TransactionPrice>
+<Platform>eBay</Platform>
+<Variation/>
+<OrderLineItemID>320841486165-0</OrderLineItemID>
+</Transaction>
+</TransactionArray>
+<BuyerUserID>jitter2000</BuyerUserID>
+<PaidTime>2012-02-12T18:26:24.000Z</PaidTime>
+<ShippedTime>2012-02-13T13:06:57.000Z</ShippedTime>
+<IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled>
+<EIASToken>nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wJkYujCJeKoAudj6x9nY+seQ==</EIASToken>
+<PaymentHoldStatus>None</PaymentHoldStatus>
+<PaymentHoldDetails/>
+</Order>
+</OrderArray>
+<OrdersPerPage>100</OrdersPerPage>
+<PageNumber>1</PageNumber>
+<ReturnedOrderCountActual>6</ReturnedOrderCountActual>
+</GetOrdersResponse>

@@ -1,0 +1,28 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModCloud" data-wap-screen="KostentraegerGruppeKostentraeger" data-wap-core-object="KostentraegerGruppeKostentraeger" data-wap-core-object-key="Id" data-wap-parent-object="KostentraegerGruppe" w="500" h="300">
+		<wap:key>
+			<wap:keyform id="KostentraegerGruppeKostentraegerKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="KostentraegerGruppeKostentraeger" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formKostentraegerGruppeKostentraeger" class="formCreate formUpdate" w="500" h="200">
+				<table>
+					<wap:rowinput data-wap-label="Position Nr." data-wap-obj="KostentraegerGruppeKostentraeger" data-wap-attr="PosNr" />
+					<wap:rowinput data-wap-label="Kostenträger IK Nr." data-wap-obj="KostentraegerGruppeKostentraeger" data-wap-attr="IKNr" />
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

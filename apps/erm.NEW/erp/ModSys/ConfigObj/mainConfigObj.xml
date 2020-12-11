@@ -1,0 +1,64 @@
+<!-- 
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:dojo="http://www.openwap.org/dojo"
+	xmlns:wap="http://www.openwap.org/wap">
+<dojo:lbc style="width: 100%; height: 100%;">
+	<dojo:lcp data-dojo-props="region:'top', splitter:true" style="height: 150px;">
+		<wap:key>
+			<wap:keyform id="ConfigObjKeyData">
+				<wap:keyrow wapLabel="Config object id" wapVar="Id" prev="true" next="true" select="true" />
+			</wap:keyform>
+		</wap:key>
+	</dojo:lcp>
+	<dojo:lcp data-dojo-props="region:'center'">
+		<dojo:ltc id="tcConfigObjMain">
+			<dojo:lcp title="Overview">
+				<wap:grid class="ConfigObj" wapGridName="gridConfigObjOV" wapFormName="formConfigObjOV" wapTableName="TableConfigObjOV" >
+					<wap:gridcol wapObj="ConfigObj" wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapObj="ConfigObj" wapVar="Class" wapLabel="Class" />
+					<wap:gridcol wapObj="ConfigObj" wapVar="Block" wapLabel="Block" />
+ 					<wap:gridcol wapObj="ConfigObj" wapVar="Parameter" wapLabel="Parameter" />
+ 				</wap:grid>
+			</dojo:lcp>
+			<dojo:lcp title="General" id="tcConfigObjMain_cpGeneral">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formConfigObjMain">
+										<wap:rowinput wapLabel="Class" wapVar="Class" wapMode="edit" />
+										<wap:rowinput wapLabel="Block" wapVar="Block" wapMode="edit" />
+										<wap:rowinput wapLabel="Parameter" wapVar="Parameter" wapMode="edit" />
+										<wap:rowinput wapLabel="Value" wapVar="Value" wapMode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate form="formConfigObjMain" />
+					<wap:btnUpdate forms="formConfigObjMain,formConfigObjModi,formConfigObjZugriff" />
+				</wap:data>
+			</dojo:lcp>
+			<dojo:lcp title="Help">
+				<dojo:ltc>
+					<dojo:lcp title="English">
+					This is the english help page.
+					</dojo:lcp>
+					<dojo:lcp title="German">
+						This is the german help page.
+					</dojo:lcp>
+				</dojo:ltc>
+			</dojo:lcp>
+		</dojo:ltc>
+	</dojo:lcp>
+</dojo:lbc>
+</html>

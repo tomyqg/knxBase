@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlinterface>
+	<authentifikation>
+		<md5key>bec26f4a5bef41402f39699b991bca01</md5key>
+		<softwareID>OCA-1</softwareID>
+	</authentifikation>
+	<kostenvoranschlaege>
+		<kostenvoranschlag>
+			<intKvID>900032</intKvID>
+			<versorgungsdaten>
+				<kostentraegerID>999</kostentraegerID>
+				<kostentraegerIK>109999999</kostentraegerIK>
+				<versorgungsart>1</versorgungsart>
+				<verordnungsarzt>4712</verordnungsarzt>
+				<bstnummer>100300000</bstnummer>
+				<verordnungsdatum>2017-11-27</verordnungsdatum>
+				<opdatum>0000-00-00</opdatum>
+				<unfalldatum>
+				</unfalldatum>
+				<unfallkz>
+				</unfallkz>
+				<bvg>
+				</bvg>
+				<versichertendaten>
+					<kvnummer>VERSNR4712</kvnummer>
+					<kvanrede>Herr</kvanrede>
+					<kvname>Mit 300000/-</kvname>
+					<kvvorname>KHW, 101575519/1x/-</kvvorname>
+					<kvstrasse>Im Löhbusch 13b</kvstrasse>
+					<kvplz>51580</kvplz>
+					<kvort>Reichshof</kvort>
+					<kvgeburtsdatum>1999-11-01</kvgeburtsdatum>
+					<kvtelefon>
+					</kvtelefon>
+					<kvtelefax>
+					</kvtelefax>
+					<kvmobil>
+					</kvmobil>
+					<kvemail>
+					</kvemail>
+				</versichertendaten>
+			</versorgungsdaten>
+			<positionen>
+				<position>
+					<intPosID>1</intPosID>
+					<hmvz>0803020001</hmvz>
+					<versorgungsbeginn>0000-00-00</versorgungsbeginn>
+					<versorgungsende>0000-00-00</versorgungsende>
+					<hmkz>00</hmkz>
+					<produktbesonderheit>
+					</produktbesonderheit>
+					<beratungsdatum>0000-00-00</beratungsdatum>
+					<preis>49</preis>
+					<mwstkz>2</mwstkz>
+					<beschreibung>Bettungseinlagen, elastisch, ggf. druckumverteilend Vertragspartner nach § 127 SGB V</beschreibung>
+					<menge>200.000</menge>
+					<rabatt>1</rabatt>
+					<vertragsnummer>1596047</vertragsnummer>
+					<versicherungsart>1</versicherungsart>
+					<posZuzID>1</posZuzID>
+					<posEigID>1</posEigID>
+					<merkmale/>
+					<zusatzanschriften/>
+					<codes>
+						<errorcodes/>
+						<statuscodes/>
+						<warningcodes/>
+					</codes>
+				</position>
+			</positionen>
+			<zusatzanschriften>
+				<zusatzanschrift>
+					<typ>2</typ>
+					<name>Mit 300000/-</name>
+					<vorname>KHW, 101575519/1x/-</vorname>
+					<strasse>Im Löhbusch 13b</strasse>
+					<plz>51580</plz>
+					<ort>Reichshof</ort>
+					<anrede>Herr</anrede>
+				</zusatzanschrift>
+			</zusatzanschriften>
+			<eigenanteile>
+				<eigenanteil>
+					<eigID>1</eigID>
+					<intEigID>1</intEigID>
+					<betrag>0.00</betrag>
+				</eigenanteil>
+			</eigenanteile>
+			<zuzahlungen>
+				<zuzahlung>
+					<zuzID>1</zuzID>
+					<intZuzID>1</intZuzID>
+					<betrag>10.000</betrag>
+					<zuzkz>3</zuzkz>
+				</zuzahlung>
+			</zuzahlungen>
+			<anhaenge>
+				<anhang>
+					<name>999941_400001_2Seiten.pdf</name>
+					<datei>md5 content</datei>
+					<typ>pdf</typ>
+					<art>1</art>
+				</anhang>
+			</anhaenge>
+		</kostenvoranschlag>
+	</kostenvoranschlaege>
+</xmlinterface>

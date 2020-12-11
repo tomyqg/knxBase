@@ -1,0 +1,94 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="KundeAuftragPosition" data-wap-core-object="KundeAuftragPosition" data-wap-core-object-key="Id" data-wap-parent-object="KundeAuftrag" w="800" h="300">
+		<wap:key>
+			<wap:keyform id="KundeAuftragPositionKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="KundeAuftragPosition" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formKundeAuftragPositionHead" class="formCreate formUpdate" w="700" h="50">
+				<wap:hidden data-wap-obj="KundeAuftragPosition" data-wap-attr="ERPNr" x="0" y="0" />
+				<wap:label data-wap-label="Auftrag Nr." x="20" y="57" />
+					<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="AuftragNr" size="12" max="12" x="100" y="55" />
+					<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="PosNr" size="2" max="2" x="200" y="55" />
+					<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="UPosNr" size="2" max="2" x="250" y="55" />
+			</wap:dataform>
+		</wap:data>
+		<wap:tabContainer id="tabCntrlKundeAuftragPositionMain" data-wap-active-tab-onload="tabPageKundeAuftragPositionKTEntry">
+			<wap:tabContentPane id="tabPageKundeAuftragPositionArtikel" data-wap-heading="Artikel">
+				<wap:data>
+					<wap:dataform id="formKundeAuftragPositionArtikel" class="formCreate formUpdate" w="700" h="300">
+						<table>
+							<wap:label data-wap-label="Artikel Nr." x="20" y="57" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="ArtikelNr" x="100" y="55" />
+							<wap:label data-wap-label="HMV Nr." x="20" y="82" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="HMVNr" size="10" max="10" x="100" y="80" />
+							<wap:label data-wap-label="PZN" x="20" y="107" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="PZN" size="12" max="12" x="100" y="105" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="PZNText" size="64" max="128" x="200" y="105" />
+							<wap:label data-wap-label="Bez. 1" x="20" y="132" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="Bez1" size="64" max="128" x="100" y="130" />
+							<wap:label data-wap-label="Bez. 2" x="20" y="157" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="Bez2" size="64" max="128" x="100" y="155" />
+							<wap:label data-wap-label="Bez. 3" x="20" y="182" />
+								<wap:input data-wap-obj="KundeAuftragPosition" data-wap-attr="Bez3" size="64" max="128" x="100" y="180" />
+						</table>
+					</wap:dataform>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragPositionKT" data-wap-heading="VK/UVP +/- Kalkulation">
+				<wap:data>
+					<wap:dataform id="formKundeAuftragPositionKT" class="formCreate formUpdate">
+						<table>
+							<wap:rowinput data-wap-label="Zuzahlung" data-wap-obj="KundeAuftragPosition" data-wap-attr="Zuzahlung" />
+							<wap:rowinput data-wap-label="Eigenanteil" data-wap-obj="KundeAuftragPosition" data-wap-attr="Eigenanteil" />
+							<wap:rowinput data-wap-label="Qualitätszulage" data-wap-obj="KundeAuftragPosition" data-wap-attr="Zulage" />
+						</table>
+					</wap:dataform>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragPositionUVPVK" data-wap-heading="VK/UVP +/- Kalkulation">
+				<wap:data>
+					<wap:dataform id="formKundeAuftragPositionUVPVK" class="formCreate formUpdate">
+						<table>
+							<wap:rowinput data-wap-label="Zuzahlung" data-wap-obj="KundeAuftragPosition" data-wap-attr="Zuzahlung" />
+							<wap:rowinput data-wap-label="Eigenanteil" data-wap-obj="KundeAuftragPosition" data-wap-attr="Eigenanteil" />
+							<wap:rowinput data-wap-label="Qualitätszulage" data-wap-obj="KundeAuftragPosition" data-wap-attr="Zulage" />
+						</table>
+					</wap:dataform>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageKundeAuftragPositionEK" data-wap-heading="EK +/- Kalkulation">
+				<wap:data>
+					<wap:dataform id="formKundeAuftragPositionEK" class="formCreate formUpdate">
+						<table>
+							<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="KundeAuftragPosition" data-wap-attr="Bez1" />
+							<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="KundeAuftragPosition" data-wap-attr="Bez2" />
+							<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="KundeAuftragPosition" data-wap-attr="Bez3" />
+							<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="KundeAuftragPosition" data-wap-attr="Menge" />
+							<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="KundeAuftragPosition" data-wap-attr="AbgabePreisBrutto" />
+							<wap:rowinput data-wap-label="Bezeichnung" data-wap-obj="KundeAuftragPosition" data-wap-attr="KTAnteilBrutto" />
+						</table>
+					</wap:dataform>
+				</wap:data>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+<!--
+		<wap:data>
+			<wap:btnUpdate />
+			<wap:btnCancel />
+		</wap:data>
+-->
+	</wap:wapDialog>
+</div>
+</html>

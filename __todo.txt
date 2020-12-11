@@ -1,0 +1,15 @@
+/**
+ * Project:	openEISS
+ *
+ * ToDo Liste
+ *
+ * Date			User	Remark
+ * --------------------------------------------------------------------
+ * 2013-07-11	khw		create q tree-view widget in JavaScript; this
+ *						ist mostly for ProductGroupe view;
+ *
+ * 2013-06-19	khw		VKPreis need to be adjusted to markets.
+ *						introduce market module concept;
+ 						2013-07-11: mostly done;
+ *
+ */

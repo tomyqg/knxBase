@@ -1,0 +1,27 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtAttribute" class="wapForm">
+		<h2 class="page-title">Attribute</h2>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Attribute</legend>
+				<wap:dataform id="edtAttributeMain">
+					<wap:rowdisplay data-wap-label="Id" data-wap-attr="Id" />
+					<wap:rowdisplay data-wap-label="Data Table" data-wap-attr="DataTable" />
+					<wap:rowdisplay data-wap-label="Article no." data-wap-attr="RefNo" />
+					<wap:rowinput data-wap-label="Item no" data-wap-attr="ItemNo" />
+					<wap:rowinput data-wap-label="Attribute" data-wap-attr="Attr" />
+					<wap:rowinput data-wap-label="Attribute Value" data-wap-attr="AttrValue" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

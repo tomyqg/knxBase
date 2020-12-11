@@ -1,0 +1,18 @@
+#!/usr/bin/php
+
+<?php
+require_once( "../../core/FDbg.php") ;
+require_once( "fpdf.php") ;
+require_once( "FmkBase.php") ;
+require_once( "FmkCharFmt.php") ;
+require_once( "FmkParFmt.php") ;
+require_once( "FmkFlow.php") ;
+require_once( "FmkPage.php") ;
+require_once( "FmkFrame.php") ;
+require_once( "FmkBox.php") ;
+require_once( "FmkTableFmt.php") ;
+FDbg::setLevel( 99) ;
+FDbg::enable() ;
+$myDoc	=	new FmkBase( "test.frm") ;	// process the template
+$myDoc->_debug() ;
+?>

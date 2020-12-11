@@ -1,0 +1,41 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:dojo="http://www.openwap.org/dojo"
+	xmlns:wap="http://www.openwap.org/wap">
+<dojo:lbc style="width: 100%; height: 100%;">
+	<wap:data>
+		<table>
+			<tr>
+				<td valign="top">
+					<fieldset>
+						<legend>Editor: Address Contact</legend>
+						<wap:dataform id="formAddressContactEdit">
+							<wap:rowdisplay wapLabel="Address no." wapVar="AddressNo" />
+							<wap:rowinput wapLabel="Contact no" wapVar="AddressContactNo" />
+							<wap:rowoption wapLabel="Salutation" wapVar="Salutation" wapMode="edit"
+								db="Option" key="Key" value="Value" cond="OptionName = 'Salutation'" order="ORDER BY Value" def="" />
+							<wap:rowoption wapLabel="Title" wapVar="Title" wapMode="edit"
+								db="Option" key="Key" value="Value" cond="OptionName = 'Title'" order="ORDER BY Value" def="" />
+							<wap:rowinput wapLabel="First name" wapVar="FirstName" />
+							<wap:rowinput wapLabel="Last name" wapVar="LastName" />
+							<wap:rowinput wapLabel="Phone" wapVar="Phone" />
+							<wap:rowinput wapLabel="Fax" wapVar="Fax" />
+							<wap:rowinput wapLabel="E-Mail" wapVar="eMail" />
+							<wap:rowoption wapLabel="Function" wapVar="Function" wapMode="edit"
+								db="Option" key="Key" value="Value" cond="OptionName = 'CCFunction'" order="ORDER BY Value" def="" />
+							<wap:rowinput wapLabel="Username" wapVar="Username" />
+							<wap:rowinput wapLabel="Password" wapVar="Password" />
+							<wap:rowtext wapLabel="Remark(s)" wapVar="Remark" cols="64" rows="8" wapMode="edit" />
+							<wap:rowtext wapLabel="Mailing" wapVar="Mailing" cols="64" rows="8" wapMode="edit" />
+							</wap:dataform>
+					</fieldset>
+				</td>
+			</tr>
+		</table>
+		<wap:btnCreateDep form="formAddressContactEdit" />
+		<wap:btnUpdateDep form="formAddressContactEdit" />
+		<wap:btnCancelDep form="formAddressContactEdit" />
+	</wap:data>
+</dojo:lbc>
+</html>
+

@@ -1,0 +1,21 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtCustomerOrderItem" class="wapForm">
+		<h1 class="page-title">Edit Customer Order Item</h1>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Customer Invoice Item</legend>
+				<wap:dataform id="edtCustomerOrderItemMain">
+					<wap:rowdisplay data-wap-label="Customer Invoice no." data-wap-attr="CustomerInvoiceNo" />
+					<wap:rowdisplay data-wap-label="Order Item no." data-wap-attr="ItemNo" />
+					<wap:rowdisplay data-wap-label="Article no." data-wap-attr="ArticleNo" />
+					<wap:rowinput data-wap-label="Description" data-wap-attr="ArticleDescription" />
+					<wap:rowinput data-wap-label="Bill of delivery no." data-wap-attr="CustomerDeliveryNo" />
+					<wap:rowinput data-wap-label="Quantity" data-wap-attr="Quantity" />
+					<wap:rowinput data-wap-label="Quantity Invoiced" data-wap-attr="QuantityInvoiced" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

@@ -1,0 +1,19 @@
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h2 class="page-title">Select a Calculation</h2>
+		<fieldset>
+			<legend>Selection Criteria</legend>
+			<wap:dataform id="formArticleSelectFilter">
+				<wap:rowinput data-wap-label="Article no." data-wap-attr="ArticleNo" />
+			</wap:dataform>
+		</fieldset>
+		<wap:grid data-wap-class="Article" data-wap-grid-name="gridArticleSelectOV">
+			<wap:gridcol data-wap-obj="Article" data-wap-attr="Id" data-wap-label="Id" />
+			<wap:gridcol data-wap-obj="Article" data-wap-attr="ArticleNo" data-wap-label="ArticleNo" />
+			<wap:gridcol data-wap-obj="Article" data-wap-attr="ArticleNo" data-wap-label="ArticleNo" />
+			<wap:gridcol data-wap-obj="Article" data-wap-attr="ArticleDescription" data-wap-label="Description" />
+		</wap:grid>
+	</div>
+</html>

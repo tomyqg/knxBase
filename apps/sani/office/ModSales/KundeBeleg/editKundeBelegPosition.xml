@@ -1,0 +1,31 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+-->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+<div>
+	<wap:wapDialog data-wap-module="ModBase" data-wap-screen="KundeBelegPosition" data-wap-core-object="KundeBelegPosition" data-wap-core-object-key="Id" data-wap-parent-object="KundeBeleg" w="800" h="300">
+		<wap:key>
+			<wap:keyform id="KundeBelegPositionKeyData">
+				<wap:keyrow data-wap-label="Id" data-wap-obj="KundeBelegPosition" data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" />
+			</wap:keyform>
+		</wap:key>
+		<wap:data>
+			<wap:dataform id="formKundeBelegPosition" class="formCreate formUpdate">
+				<table>
+					<wap:rowinput data-wap-label="ERP Nr." data-wap-obj="KundeBelegPosition" data-wap-attr="ERPNr" />
+					<wap:rowinput data-wap-label="Beleg Nr." data-wap-obj="KundeBelegPosition" data-wap-attr="BelegNr" />
+					<wap:rowinput data-wap-label="Zuzahlung" data-wap-obj="KundeBelegPosition" data-wap-attr="Zuzahlung" />
+					<wap:rowinput data-wap-label="Eigenanteil" data-wap-obj="KundeBelegPosition" data-wap-attr="Eigenanteil" />
+					<wap:rowinput data-wap-label="Zulage" data-wap-obj="KundeBelegPosition" data-wap-attr="Zulage" />
+				</table>
+			</wap:dataform>
+		</wap:data>
+	</wap:wapDialog>
+</div>
+</html>

@@ -1,0 +1,101 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font>
+<br/>
+
+<table border="0">
+	<tr>
+		<td>
+			<fieldset>
+				<legend><font color="white">Fahrzeugbeschreibung</font></legend>
+				<font color="white">Hersteller:</font><br/>
+				
+				<select id="ausdruck_hersteller" size="3" data-dojo-type="dijit.form.Select" style="width:200px">
+					<option value="BPW">BPW</option>
+				</select>
+				
+				<button type="button" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconDelete', showLabel: false" id="ausdruck_delete">undo</button>
+				<br/>
+			
+				<font color="white">Fahrzeug:</font>
+				<br/>
+				<input type="text" style="width:250px" id="ausdruck_Fahrzeug" data-dojo-type="dijit.form.TextBox"/>
+				<br/><br/><br/>
+				
+				<font color="white">Bemerkung:</font>
+				<br/>
+				<textarea id="ausdruck_bemerkung"data-dojo-type="dijit.form.SimpleTextarea" style="width:250px;" rows="5"></textarea>
+				<br/>
+				
+				<font color="white">Achstyp:</font>
+				<br/>
+				<input type="text" style="width:250px" id="ausdruck_Achstyp" data-dojo-type="dijit.form.TextBox"/>
+			</fieldset>
+			<fieldset>
+				<legend><font color="white">Ausdruck</font></legend>
+				<font color="white">
+					<input id="mit_ventil_data" data-dojo-type="dijit.form.CheckBox" value="mit_ventil_data" checked="false"><label>mit Ventildatenblatt<br/></label></input>
+					<input id="zusatzber" data-dojo-type="dijit.form.CheckBox" value="zusatzber" checked="false"><label>Zusatzberechnung<br/></label></input>
+					<input id="mit_feststellbr_ber" data-dojo-type="dijit.form.CheckBox" value="mit_feststellbr_ber" checked="false"><label>mit Feststellbremsberechnung<br/></label></input>
+					<input id="Bremskraftvert" data-dojo-type="dijit.form.CheckBox" value="Bremskraftvert" checked="false"><label>mit Bremskraftverteilungsdiagrammen<br/></label></input>
+					<input id="mit_refwert_ber" data-dojo-type="dijit.form.CheckBox" value="mit_refwert_ber" checked="false"><label>mit Referenzwertberechung<br/></label></input>
+					<input id="ungültig_stem" data-dojo-type="dijit.form.CheckBox" value="ungültig_stem" checked="false"><label>ung&uuml;ltig stempeln<br/></label></input>
+					<input id="EBS-data" data-dojo-type="dijit.form.CheckBox" value="EBS-data" checked="false"><label>EBS-Datenblatt<br/></label></input>
+				</font>
+			</fieldset>
+			
+			<button type="button" data-dojo-type="dijit.form.Button" id="ausdruck_speichern">Speichern</button>
+		</td>
+		<td width="250">
+		</td>
+		<td valign="top">
+			<fieldset>
+				<legend><font color="white">Ersteller</font></legend>
+				<input type="text" style="width:250px" id="ausdruck_ersteller" data-dojo-type="dijit.form.TextBox" value="Homer Simpson"/>
+			</fieldset>
+			
+			<fieldset>
+				<legend><font color="white">Berechnungsnummer</font></legend>
+				<input type="text" style="width:250px" id="ausdruck_berechnungsnummer" data-dojo-type="dijit.form.TextBox" value="WS12 3001.00"/>
+			</fieldset>
+			
+			<fieldset>
+				<legend><font color="white">Sprache</font></legend>
+				
+				<select id="ausdruck_sprache" size="3" data-dojo-type="dijit.form.Select" style="width:250px">
+					<option value="deustch">deutsch</option>
+					<option value="englisch">englisch</option>
+					<option value="schwedisch">schwedisch</option>
+					<option value="norwegisch">norwegisch</option>
+					<option value="finnisch">finnisch</option>
+					<option value="polnisch">polnisch</option>
+					<option value="italienisch">italienisch</option>
+					<option value="chinesisch">chinesisch</option>
+					<option value="na'vi">na'vi</option>
+				</select>
+			</fieldset>
+			
+			<fieldset>
+				<legend><font color="white">Berechnungsverwaltung</font></legend>
+				<font color="white" style="bold">Zur Pr&uuml;fung</font><br/><br/>
+				<font color="white">Status:</font>
+				
+				<fieldset>
+					<legend><font color="white">Unterschrift Ersteller</font></legend>
+					<font color="white">Name:</font><br>
+					<input type="text" style="width:220px" id="ausdruck_name_ersteller" data-dojo-type="dijit.form.TextBox"/>
+					<br/>
+					<button type="button" data-dojo-type="dijit.form.Button" id="ausdruck_ersteller_ausdatei">Aus Datei</button>
+				</fieldset>
+				<fieldset>
+					<legend><font color="white">Unterschrift Genehmigt</font></legend>
+					<font color="white">Name:</font><br>
+					<input type="text" style="width:220px" id="ausdruck_name_genehmigt" data-dojo-type="dijit.form.TextBox"/>
+					<br/>
+					<button type="button" data-dojo-type="dijit.form.Button" id="ausdruck_genehmigt_ausdatei">Aus Datei</button>
+				</fieldset>
+			</fieldset>
+			
+			<button type="button" data-dojo-type="dijit.form.Button" id="ausdruck_drucken">Drucken</button>
+		</td>
+	</tr>
+</table>
+			

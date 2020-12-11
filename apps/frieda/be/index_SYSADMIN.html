@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<title>Frieda - System Admin</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="Main.js"></script>
+		<script src="CreateNews.js"></script>
+		<script src="GUIElements.js"></script>
+		<script src="DisplayDetailTables.js"></script>
+		<link rel="stylesheet" type="text/css" href="Main.css">
+
+	</head>
+	<body>
+		<center>
+			<h2>Ticketsystem Frieda</h2>
+			<table style="border-collapse:collapse;background-color:#DDDDDD">
+				</tr>
+					<!--colspan has to be equal number of functions available to current user minus 2 -->
+					<td width="400">
+						MASTER
+					</td>
+					<td width="500">
+						System Admin
+					</td>
+					<td align="right" width="200">
+						Logout&nbsp;&nbsp;<img src="icons/Off-256.png" class="little-icon-button" title="abmelden"/>
+					</td>
+				<tr>
+			</table>
+			<table style="border-collapse:collapse;" id="MAIN">
+				<tr>
+					<!-- name of each td should be the kind of the tab so you could evaluate on click which body form you should use-->
+					<td class="head-icon" id="tab1" name="employees" onclick="ChangeTabTo(this)" title="Mitarbeiterdaten bearbeiten">
+						<img src="icons/Employee-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab2" name="groups" onclick="ChangeTabTo(this)" title="Gruppen">
+						<img src="icons/Group-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab3" name="reaction-teams" onclick="ChangeTabTo(this)" title="Reaktionsteams">
+						<img src="icons/Reaction-Team-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab4" name="customer-data" onclick="ChangeTabTo(this)" title="Kundendaten">
+						<img src="icons/Customer-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab5" name="escalation" onclick="ChangeTabTo(this)" title="Eskalation">
+						<img src="icons/Escalation-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab6" name="einsatz" onclick="ChangeTabTo(this)" title="Einsatzarten">
+						<img src="icons/Van-256.png" class="head-icon-img"/>
+					</td>
+					<td class="head-icon" id="tab7" name="messages" onclick="ChangeTabTo(this)" title="Nachrichten">
+						<img src="icons/Message-256.png" class="head-icon-img"/>
+					</td>
+					<td id="head-filler" width="X">
+					</td>
+				</tr>
+					<!--colspan has to be equal number of functions available to current user -->
+					<td id= "frieda-body" class="MAIN" colspan="5" height="500px">
+
+					</td>
+				<tr>
+				</tr>
+			</table>
+		</center>
+	</body>
+</html>

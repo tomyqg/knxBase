@@ -1,0 +1,66 @@
+<!-- 
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:dojo="http://www.openwap.org/dojo"
+	xmlns:wap="http://www.openwap.org/wap">
+	<dojo:ltc>
+		<dojo:lcp title="Sales">
+			<dojo:ltc>
+				<dojo:lcp title="Orders booked by year">
+					<wap:btnmisc wapScrFnc="getOrdersBookedY" wapLabel="Refresh"/>
+					<wap:dtvst eissClass="StatsCuOrdr" eissFnc="OrdersBookedY">
+					</wap:dtvst>
+				</dojo:lcp>
+				<dojo:lcp title="Orders booked by quarter">
+					<div>
+						<wap:btnmisc wapScrFnc="getOrdersBookedQ" wapLabel="Refresh"/>
+						<wap:dtvst eissClass="StatsCuOrdr" eissFnc="OrdersBookedQ">
+						</wap:dtvst>
+					</div>
+					<div>
+						<wap:btnmisc wapScrFnc="getOrdersBookedQGraph" wapLabel="Refresh Graph"/>
+						<div id="graphOBQ">
+						</div>
+					</div>
+				</dojo:lcp>
+				<dojo:lcp title="Orders booked by month">
+					<div>
+						<wap:btnmisc wapScrFnc="getOrdersBookedM" wapLabel="Refresh"/>
+						<wap:dtvst eissClass="StatsCuOrdr" eissFnc="OrdersBookedM">
+						</wap:dtvst>
+					</div>
+					<div>
+						<wap:btnmisc wapScrFnc="getOrdersBookedMGraph" wapLabel="Refresh Graph"/>
+						<div id="graphOBM">
+						</div>
+					</div>
+				</dojo:lcp>
+			</dojo:ltc>
+		</dojo:lcp>
+		<dojo:lcp title="Articles">
+			<dojo:ltc>
+				<dojo:lcp title="Articles ordered per Month">
+					<wap:btnmisc wapScrFnc="getArticlesSoldM" wapLabel="Refresh"/>
+					<wap:dtvst eissClass="StatsCuOrdr" eissFnc="ArticlesSoldM">
+					</wap:dtvst>
+				</dojo:lcp>
+			</dojo:ltc>
+		</dojo:lcp>
+		<dojo:lcp title="Help">
+			<dojo:ltc>
+				<dojo:lcp title="English">
+				This is the english help page.
+				</dojo:lcp>
+				<dojo:lcp title="German">
+					This is the german help page.
+				</dojo:lcp>
+			</dojo:ltc>
+		</dojo:lcp>
+	</dojo:ltc>
+</html>

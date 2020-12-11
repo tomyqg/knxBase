@@ -1,0 +1,88 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">ClientApplications</h1>
+		<wap:key>
+			<wap:keyform id="ClientApplicationKeyData">
+				<wap:keyrow data-wap-label="ClientApplication no." data-wap-attr="Id" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Description1" data-wap-attr="Description1"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlClientApplicationMain">
+			<wap:tabContentPane id="tabPageClientApplicationSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="ClientApplication" data-wap-grid-name="gridClientApplicationOV"  >
+					<wap:gridcol data-wap-obj="ClientApplication" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="ClientApplication" data-wap-attr="ClientId" data-wap-label="ClientId" />
+					<wap:gridcol data-wap-obj="ClientApplication" data-wap-attr="ApplicationSystemId" data-wap-label="ApplicationSystemId" />
+					<wap:gridcol data-wap-obj="ClientApplication" data-wap-attr="ApplicationId" data-wap-label="ApplicationId" />
+					<wap:gridcol data-wap-obj="ClientApplication" data-wap-attr="PathConfig" data-wap-label="PathConfig" />
+					<wap:gridcol data-wap-obj="ClientApplication" data-wap-attr="PathApplication" data-wap-label="PathApplication" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageClientApplicationMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formClientApplicationMain">
+										<wap:rowinput data-wap-label="ClientId" data-wap-attr="ClientId" />
+										<wap:rowinput data-wap-label="ApplicationSystemId" data-wap-attr="ApplicationSystemId" />
+										<wap:rowinput data-wap-label="ApplicationId" data-wap-attr="ApplicationId" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Version Information</legend>
+									<wap:dataform id="formClientApplicationVersion">
+										<wap:rowinput data-wap-label="VersionMajor" data-wap-attr="VersionMajor" />
+										<wap:rowinput data-wap-label="VersionMinor" data-wap-attr="VersionMinor" />
+										<wap:rowinput data-wap-label="VersionBuild" data-wap-attr="VersionBuild" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formClientApplicationMain,formClientApplicationVersion" />
+					<wap:btnUpdate data-wap-forms="formClientApplicationMain,formClientApplicationVersion" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageApplications" data-wap-heading="Applications">
+				<wap:data>
+					<fieldset>
+						<legend>Applications</legend>
+						<wap:grid data-wap-class="Application" data-wap-grid-name="gridApplications" data-wap-adder="true">
+							<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+							<wap:gridcol data-wap-attr="ApplicationId" data-wap-label="Application Id." />
+							<wap:gridcol data-wap-attr="Description1" data-wap-label="Description 1" />
+							<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+						</wap:grid>
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageClientApplicationHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlClientApplicationHelpMain">
+					<wap:tabContentPane id="tabPageClientApplicationHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageClientApplicationHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageClientApplicationHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

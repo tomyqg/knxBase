@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlinterface>
+	<kostenvoranschlaege>
+		<kostenvoranschlag>
+			<versorgungsdaten>
+				<kostentraegerID>999</kostentraegerID>
+				<kostentraegerIK>109999999</kostentraegerIK>
+				<kostentraegerdaten>
+					<name>Schulung Kostenträger</name>
+					<strasse>Musterstraße 12</strasse>
+					<plz>67105</plz>
+					<ort>Musterhausen</ort>
+					<telefon>+49 123 45678</telefon>
+					<telefax>+49 123 456789</telefax>
+					<email>info@medicomp.de</email>
+				</kostentraegerdaten>
+				<leistungserbringerIK>4628</leistungserbringerIK>
+				<leistungserbringerdaten>
+					<name>Optica GmbH</name>
+					<strasse>Kolpingstr. 58</strasse>
+					<plz>57462</plz>
+					<ort>Olpe</ort>
+					<telefon>02761-942780</telefon>
+					<telefax>
+					</telefax>
+					<email>w.muscheid@optica.de</email>
+					<sachbearbeiter>
+						<anrede>Herr</anrede>
+						<titel>
+						</titel>
+						<name>Hesse</name>
+						<vorname>Niki</vorname>
+						<telefon>02761 94278-18</telefon>
+						<telefax>
+						</telefax>
+						<email>n.hesse@optica.de</email>
+					</sachbearbeiter>
+				</leistungserbringerdaten>
+				<versorgungsart>1</versorgungsart>
+				<verordnungsarzt>4712</verordnungsarzt>
+				<bstnummer>100300000</bstnummer>
+				<verordnungsnummer>
+				</verordnungsnummer>
+				<verordnungsdatum>2017-11-27</verordnungsdatum>
+				<opdatum>0000-00-00</opdatum>
+				<unfalldatum>
+				</unfalldatum>
+				<unfallkz>
+				</unfallkz>
+				<bvg>
+				</bvg>
+				<diagnosen>
+				</diagnosen>
+				<versichertendaten>
+					<kvnummer>VERSNR4712</kvnummer>
+					<kvanrede>Herr</kvanrede>
+					<kvtitel>
+					</kvtitel>
+					<kvvorname>KHW, 101575519/1x/-</kvvorname>
+					<kvname>Mit 300000/-</kvname>
+					<kvstrasse>Im Löhbusch 13b</kvstrasse>
+					<kvplz>51580</kvplz>
+					<kvort>Reichshof</kvort>
+					<kvgeburtsdatum>1999-11-01</kvgeburtsdatum>
+					<kvstatus>
+					</kvstatus>
+					<kvgueltigkeit>
+					</kvgueltigkeit>
+					<kvtelefon>
+					</kvtelefon>
+					<kvtelefax>
+					</kvtelefax>
+					<kvmobil>
+					</kvmobil>
+					<kvemail>
+					</kvemail>
+					<kvbemerkung>
+					</kvbemerkung>
+				</versichertendaten>
+			</versorgungsdaten>
+			<kvID>45708</kvID>
+			<kvRefID>0</kvRefID>
+			<intKvID>900032</intKvID>
+			<status>3</status>
+			<genehmigungsnummer>
+			</genehmigungsnummer>
+			<genehmigungsdatum>
+			</genehmigungsdatum>
+			<auftragsart>
+			</auftragsart>
+			<auftragkennzeichen>
+			</auftragkennzeichen>
+			<prioritaet>
+			</prioritaet>
+			<betragnetto>0.00000</betragnetto>
+			<betragmwst>0.00000</betragmwst>
+			<betragbrutto>0.00000</betragbrutto>
+			<bemerkungen>
+			</bemerkungen>
+			<anmerkungen>
+			</anmerkungen>
+			<kverzeugt>2017-11-27 12:59:30</kverzeugt>
+			<kvbearbeitet>2017-11-27 12:59:30</kvbearbeitet>
+			<positionen>
+				<position>
+					<posID>78447</posID>
+					<intPosID>1</intPosID>
+					<anfragenmr>
+					</anfragenmr>
+					<posstatus>3</posstatus>
+					<registernummer>
+					</registernummer>
+					<seriennummer>
+					</seriennummer>
+					<baujahr>
+					</baujahr>
+					<hersteller>Vertragspartner nach § 127 SGB V</hersteller>
+					<produktbezeichnung>Bettungseinlagen, elastisch, ggf. druckumverteilend</produktbezeichnung>
+					<hmvz>0803020001</hmvz>
+					<pzn>
+					</pzn>
+					<verbrauch>0</verbrauch>
+					<hmkz>00</hmkz>
+					<produktbesonderheit>
+					</produktbesonderheit>
+					<beschreibung>Bettungseinlagen, elastisch, ggf. druckumverteilend Vertragspartner nach § 127 SGB V</beschreibung>
+					<versorgungsbeginn>0000-00-00</versorgungsbeginn>
+					<versorgungsende>0000-00-00</versorgungsende>
+					<vorversorgungsdatum>
+					</vorversorgungsdatum>
+					<menge>200.000</menge>
+					<preis>49.00000</preis>
+					<einheit>STUECK</einheit>
+					<mwst>3.40000</mwst>
+					<mwstkz>2</mwstkz>
+					<posEigID>1</posEigID>
+					<posZuzID>1</posZuzID>
+					<rabatt>1</rabatt>
+					<vertragsnummer>1596047</vertragsnummer>
+					<versicherungsart>1</versicherungsart>
+					<merkmale>
+					</merkmale>
+					<zusatzanschriften>
+					</zusatzanschriften>
+					<bemerkung>
+					</bemerkung>
+					<poserzeugt>2017-11-27 12:59:30</poserzeugt>
+					<posbearbeitet>2017-11-27 12:59:30</posbearbeitet>
+					<codes>
+					</codes>
+				</position>
+			</positionen>
+			<zusatzanschriften>
+				<zusatzanschrift>
+					<typ>2</typ>
+					<anrede>Herr</anrede>
+					<name>Mit 300000/-</name>
+					<vorname>KHW, 101575519/1x/-</vorname>
+					<strasse>Im Löhbusch 13b</strasse>
+					<plz>51580</plz>
+					<ort>Reichshof</ort>
+					<postfach>
+					</postfach>
+					<bundesland>Nordrhein-Westfalen</bundesland>
+					<land>
+					</land>
+					<telefon>
+					</telefon>
+					<telefax>
+					</telefax>
+					<mobil>
+					</mobil>
+					<email>
+					</email>
+					<bemerkung>
+					</bemerkung>
+				</zusatzanschrift>
+			</zusatzanschriften>
+			<eigenanteile>
+				<eigenanteil>
+					<eigID>44241</eigID>
+					<intEigID>1</intEigID>
+					<betrag>0.00000</betrag>
+				</eigenanteil>
+			</eigenanteile>
+			<zuzahlungen>
+				<zuzahlung>
+					<zuzID>50967</zuzID>
+					<intZuzID>1</intZuzID>
+					<betrag>10.00000</betrag>
+					<zuzkz>3</zuzkz>
+				</zuzahlung>
+			</zuzahlungen>
+			<codes>
+				<errorcodes>
+					<errorcode>
+						<code>E10010</code>
+						<text>Bei der Prüfung der angegebenen Krankenversichertennummer ist ein Fehler aufgetreten. Bitte kontrollieren Sie Ihre Eingabe und zusätzlich ggf. das Geburtsdatum oder setzen Sie sich mit dem Kostenträger in Verbindung.</text>
+					</errorcode>
+					<errorcode>
+						<code>E1037</code>
+						<text>Vertragsarztnummer ungültig.</text>
+					</errorcode>
+					<errorcode>
+						<code>E11003</code>
+						<text>Die Prüfung der elektronischen Anfrage ergab Beanstandungen. Bitte prüfen Sie Ihre Angaben oder setzen Sie sich mit dem Kostenträger  in Verbindung.</text>
+					</errorcode>
+				</errorcodes>
+			</codes>
+		</kostenvoranschlag>
+	</kostenvoranschlaege>
+	<codes>
+		<statuscodes>
+			<statuscode>
+				<code>S1000</code>
+				<text>Benutzerkennung gültig.</text>
+			</statuscode>
+			<statuscode>
+				<code>S1001</code>
+				<text>Softwarekennung gültig.</text>
+			</statuscode>
+		</statuscodes>
+	</codes>
+</xmlinterface>

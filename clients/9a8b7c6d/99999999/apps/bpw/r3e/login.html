@@ -1,0 +1,221 @@
+<html>
+<head>
+<title>==&gt; MAS Login &lt;==</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" media="screen" href="/styles/v1.css" title="Version 1" />
+<script type="text/javascript" src="/api/debug.js" ></script>
+<script>
+dojoConfig	=	{parseOnLoad: true} ;
+sessionId	=	"login" ;
+</script>
+<script type="text/javascript" src="/dojo/dojo-release-1.9.1/dojo/dojo.js"></script>
+<script>
+	// Load the editor resource
+	require([
+		"dojo/parser",
+		"dojo/domReady",
+		"dojo/io/iframe",
+		"dijit/Dialog",
+		"dijit/form/Button"
+	]) ;
+    </script>
+<script type="text/javascript">
+//
+//
+//
+function	init() {
+	dBegin( 1, "index.html", "main", "init") ;
+	myClientSelect	=	new wapSelectXML( this, "mySelect", {
+											selectNode:	getFormField( "ClientApplicationKeyData", "ClientId")
+										,	object:		"Client"
+										,	key:		"ClientId"
+										,	value:		"Name1"
+										,	onDataSourceLoaded:	function( _parent, _data) {
+												dBegin( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+												this.show() ;
+												dEnd( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+											}
+								}) ;
+	myApplicationSystemSelect	=	new wapSelectXML( this, "mySelect", {
+											selectNode:	getFormField( "ClientApplicationKeyData", "ApplicationSystemId")
+										,	object:		"ApplicationSystem"
+										,	key:		"ApplicationSystemId"
+										,	value:		"Description1"
+										,	onDataSourceLoaded:	function( _parent, _data) {
+												dBegin( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+												this.show() ;
+												myApplicationSelect.dataSource.val	=	"APerClient" ;
+												myApplicationSelect.dataSource.dispatch( false, "getList", "ClientApplicationKeyData") ;
+												dEnd( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+											}
+								}) ;
+	myApplicationSelect	=	new wapSelectXML( this, "mySelect", {
+											selectNode:	getFormField( "ClientApplicationKeyData", "ApplicationId")
+										,	object:		"Application"
+										,	key:		"ApplicationId"
+										,	value:		"Description1"
+										,	onDataSourceLoaded:	function( _parent, _data) {
+												dBegin( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+												this.show() ;
+												dEnd( 102, "login{wapSelectXML.js}", "wapSelectXML", "onDataSourceLoaded( <_parent>, <_data>)") ;
+											}
+									}) ;
+	myClientSelect.refresh() ;
+//	myApplicationSystemSelect.refresh() ;
+//	myApplicationSelect.refresh() ;
+//	dOpen( 999) ;
+	dEnd( 1, "index.html", "main", "init") ;
+}
+//
+//
+//
+function	onKeyClientId() {
+	dBegin( 2, "index.html", "main", "onClientChanged") ;
+//	scrLogin() ;
+	dEnd( 2, "index.html", "main", "onClientChanged") ;
+}
+//
+//
+//
+function	onKeyPassword( _event) {
+	dBegin( 1, "index.html", "main", "onKeyPassword()") ;
+	if ( _event.keyCode == 13) {
+		scrLogin() ;
+	}
+	dEnd( 1, "index.html", "main", "onKeyPassword()") ;
+}
+//
+//
+//
+function	scrLogin() {
+	dBegin( 1, "index.html", "scrLogin", "main()") ;
+	wapScreen.call( this, "Client") ;
+	this.package	=	"ModLogin" ;
+	this.module	=	"Login" ;
+	this.coreObject	=	"ClientApplication" ;
+	this.keyForm	=	"ClientApplicationKeyData" ;
+	this.keyField	=	getFormField( 'ClientApplicationKeyData', 'ClientApplicationKey') ;
+	this.dataSource	=	new wapDataSource( this, {
+									object: "ClientApplication",
+									form:	"ClientApplicationKeyData",
+									fncGet:	"getAppData"
+								}) ;		// dataSource for display
+	this.onDataSourceLoaded	=	function( _scr, _xmlObj) {
+		myForm	=	getForm( "ClientApplicationKeyData") ;
+		clientApplication	=	_xmlObj.getElementsByTagName( "ClientApplication")[0] ;
+		pathApplication	=	clientApplication.getElementsByTagName( "PathApplication")[0].childNodes[0].nodeValue ;
+		myForm.action	=	pathApplication ;		// this.dataSource.objects.ClientApplication[0].PathApplication ;
+		myForm.submit() ;
+	} ;
+	myKey	=	new Array() ;
+	myKey[0]	=	getFormField( 'ClientApplicationKeyData', 'ClientId').value ;
+	myKey[1]	=	getFormField( 'ClientApplicationKeyData', 'UserId').value ;
+	myKey[2]	=	getFormField( 'ClientApplicationKeyData', 'ApplicationSystemId').value ;
+	myKey[3]	=	getFormField( 'ClientApplicationKeyData', 'ApplicationId').value ;
+	this.dataSource.key	=	myKey ;
+	this.dataSource.dispatch( false, "getAppData", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "main()") ;
+}
+function	clientIdSelected( _select) {
+	dBegin( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+	myApplicationSystemSelect.dataSource.val	=	"ASPerClient" ;
+	myApplicationSystemSelect.dataSource.dispatch( false, "getList", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+}
+function	applicationSystemIdSelected( _select) {
+	dBegin( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+	myApplicationSelect.dataSource.val	=	"APerClient" ;
+	myApplicationSelect.dataSource.dispatch( false, "getList", "ClientApplicationKeyData") ;
+	dEnd( 1, "index.html", "scrLogin", "clientIdSelected()") ;
+}
+</script>
+<script type="text/javascript" src="/api/common.js" ></script>
+<script type="text/javascript" src="/api/dispatcher.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/wapDataSourceXML.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/wapScreenXML.js" ></script>	<!-- nothing to translate -->
+<script type="text/javascript" src="/api/wapSelectXML.js" ></script>	<!-- nothing to translate -->
+</head>
+<body style="background-image:url(/rsrc/img/login_bg.jpg)" onLoad="init() ;">
+	<table width="100%" height="100%">
+		<tbody>
+			<tr>
+				<td width="33%"></td>
+				<td width="33%" style="vertical-align: middle; align: center;">
+					<form method="post" name="ClientApplicationKeyData" id="ClientApplicationKeyData">
+						<table border="0" cellspacing="0" cellpadding="0" >
+							<tr>
+								<td width="50%" style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Language:&nbsp;</td>
+								<td width="50%" style="color: black;">
+									<select name="selLang" id="selLang">
+										<option value="-">Benutzer</option>
+										<option value="de">Deutsch</option>
+										<option value="en">English</option>
+										<option value="es">Espanol</option>
+										<option value="fr">Francais</option>
+										<option value="nl">Dutch</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Environment:&nbsp;</td>
+								<td align="left">
+									<select name="selEnv" id="selEnv">
+										<option value="office-sinspert">Sinspert</option>
+										<option value="office-bomig">Bomig</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Client Id.:&nbsp;</td>
+					        	<td>
+					        		<input name="ClientApplicationKey" id="ClientApplicationKey" type="hidden" size="128" maxlength="123" />
+					        		<select id="ClientId" name="ClientId" wapType="option" wapAttr="ClientId" wapMode="edit" onchange="clientIdSelected( this) ;">
+					        		</select>
+					        	</td>
+					        </tr>
+<!--
+ 							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Client Id.:&nbsp;</td>
+					        	<td>
+					        		<input wapType="text" wapMode="edit" wapAttr="a" name="ClientId" id="ClientId" type="text" class="inputtext_04" placeholder="ClientId" size="18" maxlength="12" onKeypress="onKeyClientId() ;" />
+					        	</td>
+					        </tr>
+ -->
+							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Application System Id.:&nbsp;</td>
+					        	<td>
+					        		<select id="ApplicationSystemId" name="ApplicationSystemId" wapType="option" wapAttr="ApplicationSystemId" wapMode="edit" onchange="applicationSystemIdSelected( this) ;">
+					        		</select>
+					        	</td>
+					        </tr>
+							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Application Id.:&nbsp;</td>
+					        	<td>
+					        		<select id="ApplicationId" name="ApplicationId" wapAttr="ApplicationId" >
+					        		</select>
+					        	</td>
+					        </tr>
+							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">User Id.:&nbsp;</td>
+					        	<td><input onblur=";" name="UserId" id="UserId" type="text" class="inputtext_04" size="18" placeholder="UserId" maxlength="12"></td>
+					        </tr>
+							<tr>
+								<td style="color: black; background: rgba(255, 255, 255, 0.4);" align="right">Password:&nbsp;</td>
+					        	<td><input onblur=";" name="Password" id="Password" type="password" class="inputtext_04" size="18" maxlength="12"
+					        		onKeypress="onKeyPassword( event);" /></td>
+					        </tr>
+							<tr>
+								<td style="color: white;" align="right">Add.-Info:&nbsp;</td>
+					        	<td><input onblur=";" name="AddInfo" id="AddInfo" type="text" class="inputtext_04" size="18" maxlength="12"
+					        		onKeypress="onKeyPassword( event);"
+					        		/></td>
+					        </tr>
+						</table>
+					</form>
+				</td>
+				<td width="33%"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

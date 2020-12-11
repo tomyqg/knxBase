@@ -1,0 +1,7 @@
+*
+*
+*
+
+pmp	=	project management platform
+pmb	=	project management backend
+pmf	=	project management frontend

@@ -1,0 +1,173 @@
+<CompleteApplicationSystemData ApplicationSystemId="util">
+<?xml version="1.0"?>
+<ApplicationSystem type="class">
+  <Id type="int" title="Id"><![CDATA[4]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <Description1 type="varchar" title="Description1"><![CDATA[General Utility Functions]]></Description1>
+  <VersionMajor type="int" title="VersionMajor"><![CDATA[0]]></VersionMajor>
+  <VersionMinor type="int" title="VersionMinor"><![CDATA[0]]></VersionMinor>
+  <VersionBuild type="int" title="VersionBuild"><![CDATA[0]]></VersionBuild>
+  <!--ADDITIONAL_DATA: ApplicationSystem-->
+</ApplicationSystem>
+<Application type="class">
+  <Id type="int" title="Id"><![CDATA[7]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <Description1 type="varchar" title="Description1"><![CDATA[Erstellen eines Tilgungsplans]]></Description1>
+  <!--ADDITIONAL_DATA: Application-->
+</Application>
+<ClientApplication type="class">
+  <Id type="int" title="Id"><![CDATA[13]]></Id>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <UserId type="varchar" title="UserId"><![CDATA[miskhwe]]></UserId>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <PathConfig type="varchar" title="PathConfig"><![CDATA[]]></PathConfig>
+  <PathApplication type="varchar" title="PathApplication"><![CDATA[/util/tilg/index.php]]></PathApplication>
+  <!--ADDITIONAL_DATA: ClientApplication-->
+</ClientApplication>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[184]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[185]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[mas_utilities_1a2b3c4d]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[186]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[187]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[188]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[def]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[189]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbHost]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[localhost]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[190]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbUser]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[erpdemo]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[191]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbAlias]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[ui]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[192]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbPassword]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[demoerp]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[193]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbName]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[mas_utilities_sys]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[198]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[1a2b3c4d]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[def]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[def]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+<SysConfigObj type="class">
+  <Id type="int" title="Id"><![CDATA[199]]></Id>
+  <ApplicationSystemId type="varchar" title="ApplicationSystemId"><![CDATA[util]]></ApplicationSystemId>
+  <ApplicationId type="varchar" title="ApplicationId"><![CDATA[tilg]]></ApplicationId>
+  <ClientId type="varchar" title="ClientId"><![CDATA[]]></ClientId>
+  <Class type="varchar" title="Class"><![CDATA[UI]]></Class>
+  <Block type="varchar" title="Block"><![CDATA[ui]]></Block>
+  <Parameter type="varchar" title="Parameter"><![CDATA[dbDriver]]></Parameter>
+  <Value type="varchar" title="Value"><![CDATA[mysql]]></Value>
+  <Help type="varchar" title="Help"><![CDATA[]]></Help>
+  <!--ADDITIONAL_DATA: SysConfigObj-->
+</SysConfigObj>
+</CompleteApplicationSystemData>

@@ -1,0 +1,46 @@
+<script>
+function enable( element) {
+        if ( document.formOrder.HdlgFrage[1].checked) {
+                document.formOrder._ISubmitOrder.disabled    =       false ;
+        } else {
+                document.formOrder._ISubmitOrder.disabled    =       true ;
+        }
+}
+</script>
+<form name="formOrder" method="post" action="/index.php?webPage=MyCart&action=order&step=2">
+	<table>
+		<tr>
+<!-- Gesamtkosten akzeptieren		-->
+			<td colspan="5">$trans.SHOP-TEXT-ORDER-ACCEPTHDLG$</td>
+			<td>
+				<input type="radio" name="HdlgFrage" value="Nein" checked onClick="enable( '_ISubmitOrder') ; ">$trans.No$</input>
+				<input type="radio" name="HdlgFrage" value="Ja" onClick="enable( '_ISubmitOrder') ; ">$trans.Yes$</input>
+			</td>
+		</tr>
+		<tr>
+<!-- Gutschein Code					-->
+			<td>$trans.SHOP-TEXT-ORDER-PROMOTIONCODE$</td>
+			<td colspan="4">
+				<input type="text" name="_ICouponCode" value="" title="SHOP-INFO-PROMOTION-CODE"/>
+			</td>
+		</tr>
+		<tr>
+<!-- Eigene Referenznummer			-->
+		<td>$trans.SHOP-TEXT-OWN-REFERENCE-NO$</td>
+			<td colspan="4">
+				<input type="text" name="_IKdRefNr" value="webShop" title="SHOP-INFO-OWN-REFERENCE-NO" />
+			</td>
+		</tr>
+		<tr>
+<!-- Anmerkungen					-->
+		<td>$trans.SHOP-TEXT-REMARK$</td>
+			<td colspan="4"><textarea name="_ICustText" cols="30" rows="4"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="3"></td>
+			<td>
+				<input name="_ISubmitOrder" type="submit" value="$trans.SHOP-BTN-ACCPT-HDLG$" disabled="1" class="buttonBasic" />
+			</td>
+		</tr>
+	</table>
+</form>

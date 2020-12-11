@@ -1,0 +1,189 @@
+﻿<h3>Requests</h3>
+	<p align="right">
+		<input type="radio" name="got-sent-requests" value="got" checked>empfangene Requests
+		<input type="radio" name="got-sent-requests" value="sent">gesendete Requests
+	</p>
+	Requests an dich:<br/>
+	<table class="standard-table">
+		<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+		<!--ZeilenID = RequestID aus Datenbank-->
+		<tr> <th class="create-date-column">Requestdatum</th><th>Requestuhrzeit</th><th class="company-column">Firma</th> <th width="250px">Titel</th><th>bisheriger Bearbeiter</th></tr>
+		<tr id="request21414125" onclick="ClickTicketEntry(this)"> <td class="create-date-column">17/2/2015</td> <td>15:15</td> <td class="company-column">BPW</td> <td width="250px">EGBrake zeigt Fehlermeldung</td><td>Wario</td></tr>
+		<tr id="request21414126" onclick="ClickTicketEntry(this)"> <td class="create-date-column">17/2/2015</td> <td>13:45</td> <td class="company-column">Hegenscheidt</td> <td width="250px">Drucker XY ist kaputt</td><td>Mario</td></tr>
+		<tr id="request21414127" onclick="ClickTicketEntry(this)"> <td class="create-date-column">15/2/2015</td> <td>14:34</td> <td class="company-column">Steinmüller</td> <td width="250px">Server XY stürzt ab</td> <td>Rosalina</td></tr>
+		<tr id="request21414128" onclick="ClickTicketEntry(this)"> <td class="create-date-column">15/2/2015</td> <td>05:23</td> <td class="company-column">BPW</td> <td width="250px">Drucker XY ist kaputt</td><td>Toad</td></tr>
+		<tr id="request21414129" onclick="ClickTicketEntry(this)"> <td class="create-date-column">14/2/2015</td> <td>09:45</td> <td class="company-column">Steinmüller</td> <td width="250px">EGBrake zeigt Fehlermeldung</td><td>Dummy</td></tr>
+		<tr id="request21414130" onclick="ClickTicketEntry(this)"> <td class="create-date-column">14/2/2015</td> <td>13:00</td> <td class="company-column">Hegenscheidt</td> <td width="250px">Server XY stürzt ab</td> <td>Dummy</td></tr>
+		<tr id="request21414131" onclick="ClickTicketEntry(this)"> <td class="create-date-column">14/2/2015</td> <td>17:45</td> <td class="company-column">BPW</td> <td width="250px">Drucker XY ist kaputt</td> <td>Dummy</td></tr>
+		<tr id="request21414132" onclick="ClickTicketEntry(this)"> <td class="create-date-column">12/2/2015</td> <td>09:03</td> <td class="company-column">Hegenscheidt</td> <td width="250px">EGBrake zeigt Fehlermeldung</td><td>Dummy</td></tr>
+		<tr id="request21414133" onclick="ClickTicketEntry(this)"> <td class="create-date-column">11/2/2015</td> <td>10:43</td> <td class="company-column">BPW</td> <td width="250px">Drucker XY ist kaputt</td> <td>Dummy</td></tr>
+		<tr id="request21414134" onclick="ClickTicketEntry(this)"> <td class="create-date-column">11/2/2015</td> <td>11:45</td> <td class="company-column">Steinmüller</td> <td width="250px">Server XY stürzt ab</td><td>Dummy</td></tr>
+	</table>
+	
+	<center>
+		<br/>
+		<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requestnr. <span id="ticket-nr-start">1</span> bis <span id="ticket-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+	</center>
+	
+	<div id="ticket-detail" style="display:none">
+		<br/>
+		<table>
+			<tr>
+				<td style="vertical-align:top;padding:10px;">
+					<span style="font-weight:bold">ausgewählter Request:</span>
+					<table class="detail-table">
+						<tr>
+							<td colspan="2">
+								<p>Titel</p>
+								<!--TODO: Zeilenumbrüche in <br/> umwandeln!-->
+								<span id="ticket-detail-description"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Firma</p>
+								<span id="ticket-detail-company"></span>
+							</td>
+							<td>
+								<p>Erstelldatum</p>
+								<span id="ticket-detail-date"></span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Beschreibung</p>
+								<!--TODO: Zeilenumbrüche in <br/> umwandeln!-->
+								<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Adresse</p>
+								<span>Waldweg 42</span>
+							</td>
+							<td>
+								<p>Ansprechpartner</p>
+								<span>Meier Müller Schulze</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>bisheriger Bearbeiter</p>
+								<span>Mario</span>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<fieldset>
+						<legend>Request beantworten</legend>
+						<input type="button" value="annehmen"/><input type="button" value="ablehnen"/>
+					</fieldset>
+				</td>
+				<td style="vertical-align:top;padding:10px;">
+					<span style="font-weight:bold">Activities von diesem Ticket:</span>
+					<table class="detail-table">
+						<tr>
+							<td>
+								<p>Ticketnr.</p>
+								<span>1</span>
+							</td>
+							<td>
+								<p>Bearbeiter</p>
+								<span>Friedbert Müller</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Titel</p>
+								<span>Teamviewer Session zur Analyse</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Beschreibung</p>
+								<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Startzeit</p>
+								<span>27.2.2015 13 Uhr</span>
+							</td>
+							<td>
+								<p>Endzeit</p>
+								<span>27.2.2015 15 Uhr</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Einsatzart</p>
+								<span>TeamViewer Session</span>
+							</td>
+							<td>
+								<p>Aktionen</p>
+								<span><input type="button" value="Service Bericht erstellen"></span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Angehängte Dokumente</p>
+								<span><a href="test.txt"><img src="icons/Document-Download-256.png" width="15px"/> BlaBla.txt</a></span>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<table class="detail-table">
+						<tr>
+							<td>
+								<p>Ticketnr.</p>
+								<span>2</span>
+							</td>
+							<td>
+								<p>Bearbeiter</p>
+								<span>Friedbert Müller</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Titel</p>
+								<span>Kunde ist echt doof...</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Beschreibung</p>
+								<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Startzeit</p>
+								<span>27.2.2015 15 Uhr</span>
+							</td>
+							<td>
+								<p>Endzeit</p>
+								<span>27.2.2015 17 Uhr</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Einsatzart</p>
+								<span>Telefonsupport</span>
+							</td>
+							<td>
+								<p>Aktionen</p>
+								<span><input type="button" value="Service Bericht erstellen"></span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p>Angehängte Dokumente</p>
+								<span><a href="banana.png"><img src="icons/Document-Download-256.png" width="15px"/> banana.png</a></span>
+							</td>
+						</tr>
+					</table>
+					<br/>
+				</td>
+			</tr>
+		</table>
+	</div>

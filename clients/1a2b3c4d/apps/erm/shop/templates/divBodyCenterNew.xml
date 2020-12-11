@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="divBodyCenter">
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<!--																-->
+	<div id="bodyCenter">
+		<h2 class="page-title">$RootProductGroup.ProductGroupName.toHTML$</h2>
+		$RootProductGroup.Fulltext$
+		<table class="tab_a">	<!-- catalog	-->
+			<tbody>
+				<!-- create list of product groups		 -->
+				 foreach ProductGroup where
+				$ProductGroupList$
+				<!-- cretae list if article groups		 -->
+				$ArticleGroupList$
+			</tbody>
+		</table>				<!-- catalog	-->
+	</div>
+</resource>

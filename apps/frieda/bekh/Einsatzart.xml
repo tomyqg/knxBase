@@ -1,0 +1,101 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Einsatzarts</h1>
+		<wap:key>
+			<wap:keyform id="EinsatzartKeyData">
+				<wap:keyrow wapLabel="Einsatzart no." wapVar="EinsatzartId" prev="true" next="true" select="true" />
+				<wap:keydisplay wapLabel="Description" wapVar="Description" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<div id="tabCntrlEinsatzartMain" class="wapTabContainer">
+			<ul class="wapTabMenu" wapTabCntrlId="tabCntrlEinsatzartMain">
+				<li id="tabPageEinsatzartSurvey" class="active" wapContentId="tabPageEinsatzartSurveyContent" onClick="showTab( 'tabPageEinsatzartSurvey') ;">Overview</li>
+				<li id="tabPageEinsatzartMainData" class="" wapContentId="tabPageEinsatzartMainDataContent" onClick="showTab( 'tabPageEinsatzartMainData') ;">Main Data</li>
+				<li id="tabPageEinsatzartAssessments" class="" wapContentId="tabPageEinsatzartAssessmentsContent" onClick="showTab( 'tabPageEinsatzartAssessments') ;">Assessments</li>
+				<li id="tabPageEinsatzartHelp" class="" wapContentId="tabPageEinsatzartHelpContent" onClick="showTab( 'tabPageEinsatzartHelp') ;">Help</li>
+			</ul>
+			<div class="clear"> </div>
+			<div id="tabPageEinsatzartSurveyContent" class="wapTabContent">
+				<wap:grid wapClass="Einsatzart" wapGridName="gridEinsatzartOV" wapFormName="formEinsatzartOV" wapTableName="TableEinsatzartOV" >
+					<wap:gridcol wapObj="Einsatzart" wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapObj="Einsatzart" wapVar="EinsatzartId" wapLabel="Einsatzart Id." />
+					<wap:gridcol wapObj="Einsatzart" wapVar="Description" wapLabel="Description" />
+					<wap:gridcol wapObj="Einsatzart" wapVar="RDyn" wapLabel="&#x00D8;-dynamic" />
+					<wap:gridcol wapObj="Einsatzart" wapVar="RStat" wapLabel="&#x00D8;-static" />
+				</wap:grid>
+			</div>
+			<div id="tabPageEinsatzartMainDataContent" class="wapTabContent">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formEinsatzartMain">
+										<wap:rowinput wapLabel="Description" wapVar="Description" />
+										<wap:rowdisplay wapLabel="Manufacturer Id." wapVar="ManufacturerId" />
+										<wap:rowoption wapLabel="Manufacturer" wapVar="ManufacturerId" wapMode="edit"
+											db="t_hersteller" key="h_id" value="h_bezeichnung" cond="" order="h_id" def="#.00000001" />
+										<wap:rowdisplay wapLabel="Einsatzart type" wapVar="EinsatzartTypeId" />
+										<wap:rowoption wapLabel="Einsatzart type" wapVar="EinsatzartTypeId" wapMode="edit"
+											db="t_bremstyp" key="bt_id" value="bt_bezeichnung" cond="" order="bt_id" def="EUR" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Logistic Data</legend>
+									<wap:dataform id="formEinsatzartLogistics">
+										<wap:rowdisplay wapLabel="LastUpdate" wapVar="LastUpdate" />
+										<wap:rowinput wapLabel="Authority" wapVar="Authority" />
+										<wap:rowinput wapLabel="Location" wapVar="Location" />
+										<wap:rowinput wapLabel="UserId" wapVar="UserId" />
+										<wap:rowinput wapLabel="Local" wapVar="Local" />
+										<wap:rowinput wapLabel="Current" wapVar="Current" />
+										<wap:rowdisplay wapLabel="LastUpdateTicks" wapVar="LastUpdateTicks" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate forms="formEinsatzartMain,formEinsatzartValues,formEinsatzartValues1" />
+					<wap:btnUpdate forms="formEinsatzartMain,formEinsatzartValues,formEinsatzartValues1" />
+				</wap:data>
+			</div>
+			<div id="tabPageEinsatzartAssessmentsContent" class="wapTabContent">
+				<wap:grid wapClass="Assessment" wapGridName="gridEinsatzartAssessments" wapFormName="formEinsatzartAssessment" wapTableName="TableEinsatzartAssessment" adder="true">
+					<wap:gridcol wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapVar="AssessmentId" wapLabel="Assessment Id." wapLinkTo="Assessment" />
+					<wap:gridcol wapVar="ProtocolNo" wapLabel="Protocol no." />
+					<wap:gridcol wapFunctions="edit,delete" wapLabel="Functions" />
+				</wap:grid>
+			</div>
+			<div id="tabPageEinsatzartHelpContent" class="wapTabContent">
+				<div id="tabCntrlEinsatzartHelpMain" class="wapTabContainer">
+					<ul class="wapTabMenu" wapTabCntrlId="tabCntrlEinsatzartHelpMain">
+						<li id="tabPageEinsatzartHelpDE" class="" wapContentId="tabPageEinsatzartHelpDEContent" onClick="showTab( 'tabPageEinsatzartHelpDE') ;">Deutsch</li>
+						<li id="tabPageEinsatzartHelpEN" class="" wapContentId="tabPageEinsatzartHelpENContent" onClick="showTab( 'tabPageEinsatzartHelpEN') ;">English</li>
+						<li id="tabPageEinsatzartHelpFR" class="" wapContentId="tabPageEinsatzartHelpFRContent" onClick="showTab( 'tabPageEinsatzartHelpFR') ;">Francais</li>
+					</ul>
+					<div class="clear"> </div>
+					<div class="wapTabTopBorder"> </div>
+					<div id="tabPageEinsatzartHelpDEContent" class="wapTabContent">
+					Deutsch Hilfe.</div>
+					<div id="tabPageEinsatzartHelpENContent" class="wapTabContent">
+					English help.</div>
+					<div id="tabPageEinsatzartHelpFRContent" class="wapTabContent">
+					Aide francais.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

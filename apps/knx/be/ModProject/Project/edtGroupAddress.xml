@@ -1,0 +1,33 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtGroupAddress" class="wapForm">
+		<h1 class="page-title">Edit GroupAddress</h1>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: GroupAddress</legend>
+				<wap:dataform id="edtGroupAddressMain">
+					<wap:rowdisplay data-wap-label="Id" data-wap-attr="Id" />
+					<wap:rowinput data-wap-label="Name" data-wap-attr="Name" />
+					<wap:rowinput data-wap-label="TopGroup" data-wap-attr="TopGroup" />
+					<wap:rowinput data-wap-label="MiddleGroup" data-wap-attr="MiddleGroup" />
+					<wap:rowinput data-wap-label="Object" data-wap-attr="Object" />
+					<wap:rowinput data-wap-label="Address" data-wap-attr="Address" />
+					<wap:rowflag data-wap-label="Central" data-wap-attr="Central" data-wap-mode="edit"
+						data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowflag data-wap-label="Unfiltered" data-wap-attr="Unfiltered" data-wap-mode="edit"
+						data-wap-db="AppOption" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+					<wap:rowoption data-wap-label="DPTId" data-wap-attr="DPTId" data-wap-mode="edit"
+						data-wap-db="DataPointType" data-wap-key="DPTId" data-wap-value="Description" data-wap-cond="1 = 1" data-wap-order="DPTId" data-wap-def="" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

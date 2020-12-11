@@ -1,0 +1,26 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div id="edtValveParameter" class="wapForm">
+		<h1 class="page-title">Edit Valve Parameter</h1>
+		<wap:data>
+			<fieldset>
+				<legend>Editor: Valve Parameter</legend>
+				<wap:dataform id="edtValveParameterMain">
+					<wap:rowdisplay data-wap-label="Valve id" data-wap-attr="ValveId" />
+					<wap:rowinput data-wap-type="float" data-wap-label="To X" data-wap-attr="ToX" />
+					<wap:rowinput data-wap-type="float" data-wap-label="a" data-wap-attr="a" />
+					<wap:rowinput data-wap-type="float" data-wap-label="b" data-wap-attr="b" />
+					<wap:rowinput data-wap-type="float" data-wap-label="c" data-wap-attr="c" />
+				</wap:dataform>
+			</fieldset>
+		</wap:data>
+	</div>
+</html>

@@ -1,0 +1,211 @@
+<!-- 
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:dojo="http://www.openwap.org/dojo"
+	xmlns:wap="http://www.openwap.org/wap">
+<dojo:lbc style="width: 100%; height: 100%;">
+	<dojo:lcp data-dojo-props="region:'top', splitter:true" style="height: 150px;">
+		<wap:key>
+			<wap:keyform id="CustomerKeyData">
+				<wap:keyrow wapLabel="Customer no." wapVar="CustomerNo" prev="true" next="true" select="true" />
+				<wap:keydisplay wapLabel="Name" wapVar="CustomerName1" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+	</dojo:lcp>
+	<dojo:lcp data-dojo-props="region:'center'">
+		<dojo:ltc id="tcCustomerMain">
+			<dojo:lcp title="Overview">
+				<wap:grid class="Customer" wapGridName="gridCustomerOV" wapFormName="formCustomerOV" wapTableName="TableCustomerOV" >
+					<wap:gridcol wapObj="Customer" wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapObj="Customer" wapVar="CustomerNo" wapLabel="CustomerNo" />
+					<wap:gridcol wapObj="Customer" wapVar="Name" wapLabel="Name" />
+				</wap:grid>
+			</dojo:lcp>
+			<dojo:lcp title="General" id="tcCustomerMain_cpGeneral">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formCustomerMain">
+										<wap:row>
+											<wap:cellhelp rowspan="3" />
+											<wap:celllabel rowspan="3" wapLabel="Company name" />
+											<wap:cellinput wapVar="CustomerName1" wapMode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput wapVar="CustomerName2" wapMode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellinput wapVar="CustomerName3" wapMode="edit" />
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel wapLabel="Street / No" />
+											<td class="fEdit">
+												<wap:input wapVar="Street" wapMode="edit" />
+												<wap:input wapVar="Number" size="6" max="8" wapMode="edit" />
+											</td>
+										</wap:row>
+										<wap:row>
+											<wap:cellhelp />
+											<wap:celllabel wapLabel="ZIP / City" />
+											<td class="fEdit">
+												<wap:input wapVar="ZIP" size="6" max="8" wapMode="edit" />
+												<wap:input wapVar="City" wapMode="edit" />
+											</td>
+										</wap:row>
+										<wap:rowoption wapLabel="Country" wapVar="Country"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Country'" order="ORDER BY Value" def="de" />
+										<wap:rowinput wapLabel="Phone" wapVar="Phone" wapMode="edit" />
+										<wap:rowinput wapLabel="Fax" wapVar="Fax" wapMode="edit" />
+										<wap:rowinput wapLabel="Cellphone" wapVar="Cellphone" wapMode="edit" />
+										<wap:rowinput wapLabel="E-Mail" wapVar="eMail" wapMode="edit" />
+										<wap:rowinput wapLabel="URL" wapVar="URL" wapMode="edit" />
+										<wap:rowflag wapLabel="Tax" wapVar="Tax" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Flag'" order="ORDER BY Value" def="" />
+										<wap:rowoption wapLabel="Language" wapVar="Language" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Language'" order="ORDER BY Value" def="de_DE" />
+										<wap:rowoption wapLabel="Currency" wapVar="Currency" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Currency'" order="ORDER BY Value" def="EUR" />
+										<wap:rowoption wapLabel="Organization" wapVar="Organization" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Organization'" order="ORDER BY Value" def="private" />
+										<wap:rowcheck wapLabel="Rights" wapVar="Rights" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'ArticleRights'" order="ORDER BY Value" def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Modi</legend>
+									<wap:dataform id="formCustomerModi">
+										<wap:rowinput wapLabel="Tax id. no." wapVar="TaxId" />
+										<wap:rowinput wapLabel="RMandant no." wapVar="MandNr" />
+										<wap:rowflag wapLabel="Internet order" wapVar="ModeOrderInternet" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Flag'" order="ORDER BY Value" def="" />
+										<wap:rowflag wapLabel="Order confirmation" wapVar="ModeOrderConf" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'Flag'" order="ORDER BY Value" def="" />
+										<wap:rowoption wapLabel="Payment" wapVar="ModePay" wapMode="edit"
+											db="Options" key="Key" value="Value" cond="OptionName = 'ModePay'" order="ORDER BY Value" def="" />
+										<wap:rowinput wapLabel="Discount" wapVar="Discount" size="6" max="6" wapMode="edit" />
+										<wap:rowtext wapLabel="Remark(s)" wapVar="Remark" cols="64" rows="8" wapMode="edit" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Access</legend>
+									<wap:data>
+										<wap:dataform id="formCustomerZugriff">
+											<wap:rowinput wapLabel="Username" wapVar="UserName" wapMode="edit" />
+											<wap:rowdisplay wapLabel="Password" wapVar="Passwort" />
+											<wap:rowdisplay wapLabel="Activationkey" wapVar="ActivationKey" />
+										</wap:dataform>
+									</wap:data>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate form="formCustomerMain" />
+					<wap:btnUpdate forms="formCustomerMain,formCustomerModi,formCustomerZugriff" />
+				</wap:data>
+			</dojo:lcp>
+			<dojo:lcp title="Contacts">
+				<wap:grid class="CustomerContact" wapGridName="gridCustomerContact" wapFormName="formCustomerContact" wapTableName="TableCustomerContact" adder="true">
+					<wap:gridcol wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapVar="CustomerNo" wapLabel="Customer no." />
+					<wap:gridcol wapVar="CustomerContactNo" wapLabel="Contact no." />
+					<wap:gridcol wapVar="LastName" wapLabel="LastName" fnc="input" wapSize="32,64" />
+					<wap:gridcol wapVar="FirstName" wapLabel="First name" fnc="input" wapSize="32,64" />
+					<wap:gridcol wapVar="eMail" wapLabel="E-Mail" fnc="input" wapSize="32,64" />
+					<wap:gridcol fnc="edit,delete" wapLabel="Functions" />
+				</wap:grid>
+			</dojo:lcp>
+			<dojo:lcp title="Adresses">
+			<fieldset>
+				<legend>Delivery</legend>
+					<wap:grid class="LiefCustomer" adder="true">
+						<wap:gridcol wapVar="Id" wapLabel="Id" />
+						<wap:gridcol wapVar="CustomerNo" wapLabel="Cust.-No." />
+						<wap:gridcol wapVar="Company" wapLabel="Company" />
+						<wap:gridcol wapVar="City" wapLabel="City" />
+						<wap:gridcol wapVar="Address" wapLabel="Address" />
+						<wap:gridcol fnc="edit,delete" wapLabel="Functions" />
+					</wap:grid>
+			</fieldset>
+			<fieldset>
+				<legend>Invoice</legend>
+					<wap:grid class="RechCustomer" adder="true">
+						<wap:gridcol wapVar="Id" wapLabel="Id" />
+						<wap:gridcol wapVar="CustomerNo" wapLabel="Cust.-No." />
+						<wap:gridcol wapVar="Company" wapLabel="Company" />
+						<wap:gridcol wapVar="LastName" wapLabel="LastName" />
+						<wap:gridcol wapVar="FirstName" wapLabel="FirstName" />
+						<wap:gridcol fnc="edit,delete" wapLabel="Functions" />
+					</wap:grid>
+			</fieldset>
+			<fieldset>
+				<legend>Other</legend>
+					<wap:grid class="AddCustomer" adder="true">
+						<wap:gridcol wapVar="Id" wapLabel="Id" />
+						<wap:gridcol wapVar="CustomerNo" wapLabel="Cust.-No." />
+						<wap:gridcol wapVar="Company" wapLabel="Company" />
+						<wap:gridcol wapVar="LastName" wapLabel="LastName" />
+						<wap:gridcol wapVar="FirstName" wapLabel="FirstName" />
+						<wap:gridcol fnc="edit,delete" wapLabel="Functions" />
+					</wap:grid>
+			</fieldset>
+			</dojo:lcp>
+			<dojo:lcp title="Datamining">
+				<dojo:ltc>
+					<dojo:lcp title="Carts">
+					</dojo:lcp>
+					<dojo:lcp title="RFQs">
+					</dojo:lcp>
+					<dojo:lcp title="Offers">
+					</dojo:lcp>
+<!--
+					<dojo:lcp title="Orders">
+						<wap:btnmisc wapScrFnc="gridCustOrders.getStats" wapLabel="Refresh" />
+						<wap:dtvst eissClass="Stats" eissFnc="CustOrders">
+						</wap:dtvst>
+					</dojo:lcp>
+					<dojo:lcp title="Commissions">
+						<wap:btnmisc wapScrFnc="dtvCustComm.getStats" wapLabel="Refresh" />
+						<wap:dtvst eissClass="Stats" eissFnc="CustComm">
+						</wap:dtvst>
+					</dojo:lcp>
+					<dojo:lcp title="Delivery notes">
+						<wap:btnmisc wapScrFnc="dtvCustDlvr.getStats" wapLabel="Refresh" />
+						<wap:dtvst eissClass="Stats" eissFnc="CustDlvr">
+						</wap:dtvst>
+					</dojo:lcp>
+					<dojo:lcp title="Invoices">
+						<wap:btnmisc wapScrFnc="dtvCustInvoices.getStats" wapLabel="Refresh" />
+						<wap:dtvst eissClass="Stats" eissFnc="CustInvoices">
+						</wap:dtvst>
+					</dojo:lcp>
+					<dojo:lcp title="Reminders">
+					</dojo:lcp>
+-->
+				</dojo:ltc>
+			</dojo:lcp>
+			<dojo:lcp title="Help">
+				<dojo:ltc>
+					<dojo:lcp title="English">
+					This is the english help page.
+					</dojo:lcp>
+					<dojo:lcp title="German">
+						This is the german help page.
+					</dojo:lcp>
+				</dojo:ltc>
+			</dojo:lcp>
+		</dojo:ltc>
+	</dojo:lcp>
+</dojo:lbc>
+</html>

@@ -1,0 +1,55 @@
+<?php
+
+/**#!/usr/bin/php
+ *
+ * job_checkKB.php
+ *
+ * Dieser Job prueft alle offenen Bestellungen (KdBest) auf kommisionierbarkeit.
+ * Eine Bestellung ist kommissionierbar wenn alle Artikel in ausreichender Menge auf
+ * Lager sind.
+ * Dieser Job prueft ausschliesslich das Default Lager !
+ *
+ * Grober Abaluf ist wie folgt (Pseudo Code):
+ *
+ *	Fuer alle Bestellungen die nicht im Status "abgeschlossen/on-hold/storniert" sind
+ *		Fuer alle Positionen dieser Bestellung
+ *			Wenn Artikel kein DirektVersand-Artikel
+ *				Wenn Lagerbestand[Defaultlager] > noch zu liefernde Menge
+ *					"Lieferbare Positionen" ++
+ *				Sonst
+ *					"Nicht lieferbare Positionen" ++
+ *			Sonst
+ *				...
+ *		Wenn "Nicht lieferbare Positionen" == 0 ( Auftrag ist vollständig kommissionierbar )
+ *			...
+ *		Sonst
+ *			
+ */
+
+$pathC	=	"../phpconfig" ;
+$pathI	=	"../phpinc" ;
+set_include_path(get_include_path() . PATH_SEPARATOR . $pathC . PATH_SEPARATOR . $pathI);
+
+require_once( "config.inc.php") ; 
+
+/**
+ * establish connection to FrontEnd
+ */
+$myFE	=	new FrontEndConnect() ;
+
+/**
+ * get all "Customer Requests for Quotation"
+ */
+$myFE->getCustAll() ;
+
+/**
+ * get all "Customer Requests for Quotation"
+ */
+$myFE->getCuRfqtAll() ;
+
+/**
+ * get all "Customer Orders"
+ */
+$myFE->getCuOrdrAll() ;
+
+?>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource name="divProdGr">
+	<div id="infos">
+		<dynamic file="MyLinks.html" />
+		<dynamic file="ShoppingCartInfo.html" />
+		<object class="CustomerInfo" />
+	</div>
+</resource>

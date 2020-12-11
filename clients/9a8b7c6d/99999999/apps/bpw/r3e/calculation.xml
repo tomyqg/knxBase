@@ -1,0 +1,345 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Calculation</h1>
+		<wap:key>
+			<wap:keyform id="CalculationKeyData">
+				<wap:keyrow data-wap-label="Calculation id" data-wap-attr="CalculationId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay data-wap-label="Number" data-wap-attr="Number" colspan="4"/>
+				<wap:keydisplay data-wap-label="Trailer Manufacturer" data-wap-attr="TrailerManufacturer" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlCalculationMain">
+			<wap:tabContentPane id="tabPageCalculationSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="Calculation" data-wap-grid-name="gridCalculationOV">
+					<wap:gridcol data-wap-obj="Calculation" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Calculation" data-wap-attr="CalculationId" data-wap-label="Calculation Id." />
+					<wap:gridcol data-wap-obj="Calculation" data-wap-attr="Number" data-wap-label="Number" />
+					<wap:gridcol data-wap-obj="Calculation" data-wap-attr="TrailerManufacturer" data-wap-label="TrailerManufacturer" />
+					<wap:gridcol data-wap-obj="Calculation" data-wap-attr="MaxTotalWeight" data-wap-label="Max. total weight" />
+
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formCalculationMain">
+										<wap:rowinput data-wap-label="Date of issue" data-wap-attr="DateOfIssue" />
+										<wap:rowoption data-wap-label="Base of Calculation" data-wap-attr="BaseOfCalculation" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Zulassung' " data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption data-wap-label="Speedrange (km/h)" data-wap-attr="SpeedRange" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'SpeedRange' " data-wap-order="Value" data-wap-def="" />
+										<wap:rowoption id="myFZGSelect" data-wap-label="Trailer Type" data-wap-attr="filterTrailerTypeNo" data-wap-mode="edit"
+											data-wap-db="TrailerType" data-wap-key="TrailerTypeNo" data-wap-value="Description" data-wap-cond="1 = 1 " data-wap-order="TrailerTypeNo" data-wap-def="" onclick="screenCurrent.onSetTrailerTypeNo( this) ;"/>
+										<wap:rowoption data-wap-label="Trailer Axle Configuration" data-wap-attr="TrailerTypeId" data-wap-mode="edit"
+											data-wap-db="TrailerType" data-wap-key="TrailerTypeId" data-wap-value="Options" data-wap-cond="1 = 1 " data-wap-order="Description, OrderPos" data-wap-def="" />
+										<wap:rowflag data-wap-label="Four Brakes" data-wap-attr="FourBrakes" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Loads</legend>
+									<wap:dataform id="formCalculationLoads">
+										<wap:rowinput data-wap-label="Description" data-wap-attr="Description" />
+									</wap:dataform>
+								</fieldset>
+								<fieldset>
+									<legend>Checkers</legend>
+									<wap:dataform id="formCalculationCheckers">
+										<wap:rowoption data-wap-label="First" data-wap-attr="CheckerFirst"
+											data-wap-db="AppUser" data-wap-key="UserId" data-wap-value="Identification" data-wap-cond="not(Identification = 'admin') " data-wap-order="UserId" data-wap-def="" />
+										<wap:rowoption data-wap-label="Second" data-wap-attr="CheckerSecond"
+											data-wap-db="AppUser" data-wap-key="UserId" data-wap-value="Identification" data-wap-cond="not(Identification = 'admin') " data-wap-order="UserId" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Dates</legend>
+									<wap:dataform id="formCalculationDates">
+										<wap:rowinput data-wap-label="Date" data-wap-attr="Date" />
+										<wap:rowinput data-wap-label="Date printed" data-wap-attr="DatePrinted" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formCalculationMain" />
+					<wap:btnUpdate data-wap-forms="formCalculationMain,formCalculationValues,formCalculationValues1" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationAxles" data-wap-heading="Axle Units">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Trailer Data</legend>
+									<wap:grid data-wap-class="TrailerData" data-wap-grid-name="gridTrailerData">
+										<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+										<wap:gridcol data-wap-attr="TrailerDataId" data-wap-label="TrailerData Id." />
+										<wap:gridcol data-wap-attr="AxleNo" data-wap-label="AxleNo" />
+										<wap:gridcol data-wap-attr="Value1" data-wap-label="Value1" data-wap-fnc="input" data-wap-size="8,12" />
+										<wap:gridcol data-wap-attr="Value2" data-wap-label="Value2" data-wap-fnc="input" data-wap-size="8,12" />
+										<wap:gridcol data-wap-fnc="edit,delete" data-wap-label="Functions" />
+									</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Axle Unit(s)</legend>
+									<wap:dataform id="formCalculationAxle">
+										<wap:rowinput data-wap-label="Axle 1 Id" data-wap-attr="AxleUnit1Id" />
+										<wap:rowinput data-wap-label="Axle 2 Id" data-wap-attr="AxleUnit2Id" />
+										<wap:rowcheck data-wap-label="Liftable Axle(s)" data-wap-attr="LiftAxles" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'BrakeAxles'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Air Suspension Parameters front</legend>
+									<wap:dataform id="formCalculationAirSuspension">
+										<wap:rowflag data-wap-label="Air suspension configured" data-wap-attr="balgparameterausgewaehlt" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Air Suspension Parameters front</legend>
+									<wap:dataform id="formCalculationAirSuspensionFront">
+										<wap:rowinput data-wap-label="Air suspension type" data-wap-attr="balgtypvorne" />
+										<wap:rowinput data-wap-label="L1 vorne" data-wap-attr="balgL1vorne" />
+										<wap:rowinput data-wap-label="L2 vorne" data-wap-attr="balgL2vorne" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Air Suspension Parameters rear</legend>
+									<wap:dataform id="formCalculationAirSuspensionRear">
+										<wap:rowinput data-wap-label="Air suspension type" data-wap-attr="balgtyphinten" />
+										<wap:rowinput data-wap-label="L1 hinten" data-wap-attr="balgL1hinten" />
+										<wap:rowinput data-wap-label="L2 hinten" data-wap-attr="balgL2hinten" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationBrakes" data-wap-heading="Brakes">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Brake(s)</legend>
+									<wap:dataform id="formCalculationBrake">
+										<wap:rowinput data-wap-label="Brake 1 Id" data-wap-attr="Brake1Id" />
+										<wap:rowcheck data-wap-label="Brake 1 on Axle(s)" data-wap-attr="BrakeAxle1" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'BrakeAxles'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowinput data-wap-label="Brake 2 Id" data-wap-attr="Brake2Id" />
+										<wap:rowcheck data-wap-label="Brake 2 on Axle(s)" data-wap-attr="BrakeAxle2" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'BrakeAxles'" data-wap-order="Value" data-wap-def="" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationTyres" data-wap-heading="Tyres">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Tyre(s)</legend>
+									<wap:dataform id="formCalculationTyre">
+										<wap:rowinput data-wap-label="Tyre 1.s (smallest tyre brake 1)" data-wap-attr="Tyre1Id" />
+										<wap:rowinput data-wap-label="Tyre 1.s Rdyn" data-wap-attr="Tyre1Rdyn" />
+										<wap:rowinput data-wap-label="Tyre 1.s Rstat" data-wap-attr="Tyre1Rstat" />
+										<wap:rowinput data-wap-label="Tyre 1.l (largest tyre brake 1)" data-wap-attr="Tyre2Id" />
+										<wap:rowinput data-wap-label="Tyre 1.s Rdyn" data-wap-attr="Tyre2Rdyn" />
+										<wap:rowinput data-wap-label="Tyre 1.s Rstat" data-wap-attr="Tyre2Rstat" />
+										<wap:rowinput data-wap-label="Tyre 2.s (smallest tyre brake 2)" data-wap-attr="Tyre3Id" />
+										<wap:rowinput data-wap-label="Tyre 2.s Rdyn" data-wap-attr="Tyre3Rdyn" />
+										<wap:rowinput data-wap-label="Tyre 2.s Rstat" data-wap-attr="Tyre3Rstat" />
+										<wap:rowinput data-wap-label="Tyre 2.l (largest tyre brake 2)" data-wap-attr="Tyre4Id" />
+										<wap:rowinput data-wap-label="Tyre 2.s Rdyn" data-wap-attr="Tyre4Rdyn" />
+										<wap:rowinput data-wap-label="Tyre 2.s Rstat" data-wap-attr="Tyre4Rstat" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationBrakeSystem" data-wap-heading="Brake System">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Brake System</legend>
+									<wap:dataform id="formCalculationBrakeSystem">
+										<wap:rowinput data-wap-label="BrakeSystemId" data-wap-attr="BrakeSystemId" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Braking System Layout</legend>
+										<wap:grid data-wap-class="CValveSequence" data-wap-grid-name="gridCValveSequence">
+											<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+											<wap:gridcol data-wap-attr="ValveSequenceId" data-wap-label="Valve Sequence Id." />
+											<wap:gridcol data-wap-attr="BrakeSystemId" data-wap-label="BrakeSystem Id." />
+											<wap:gridcol data-wap-attr="ValveId" data-wap-label="Valve id." data-wap-fnc="input" data-wap-size="32,64" />
+											<wap:gridcol data-wap-attr="Description" data-wap-label="Description" data-wap-fnc="input" data-wap-size="32,64" />
+											<wap:gridcol data-wap-attr="AxleNo" data-wap-label="Axle no." />
+											<wap:gridcol data-wap-attr="ConnectedUp" data-wap-label="Connected up" />
+											<wap:gridcol data-wap-attr="ConnectedDown" data-wap-label="Connected down." />
+											<wap:gridcol data-wap-fnc="edit,delete" data-wap-label="Functions" />
+										</wap:grid>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationCylinders" data-wap-heading="Cylinders">
+				<wap:grid data-wap-class="Configuration" data-wap-grid-name="gridConfiguration" adder="true">
+					<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-attr="ConfigurationId" data-wap-label="Configuration Id." />
+					<wap:gridcol data-wap-attr="Axle" data-wap-label="Axle no." data-wap-fnc="input" data-wap-size="32,64" />
+					<wap:gridcol data-wap-attr="Count" data-wap-label="Count" data-wap-fnc="input" data-wap-size="32,64" />
+					<wap:gridcol data-wap-attr="LeverLength" data-wap-label="Lever length" />
+					<wap:gridcol data-wap-fnc="edit,delete" data-wap-label="Functions" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationParkedData" data-wap-heading="Miscellaneous">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Parking Data</legend>
+									<wap:dataform id="formCalculationParkingData">
+										<wap:rowflag data-wap-label="Option" data-wap-attr="eg" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowflag data-wap-label="Option" data-wap-attr="ece" data-wap-mode="edit"
+											data-wap-db="Options" data-wap-key="Key" data-wap-value="Value" data-wap-cond="OptionName = 'Flag'" data-wap-order="Value" data-wap-def="" />
+										<wap:rowdisplay data-wap-label="Checksum" data-wap-attr="Checksum" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageCalculationEvaluation" data-wap-heading="Evaluation">
+				<wap:tabContainer id="tabCntrlCalculationEvaluationMain">
+					<wap:tabContentPane id="tabPageCalculationEvaluationTyp0" data-wap-heading="Type 0">
+						<wap:data>
+							<fieldset>
+								<legend>Typ 0</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationTypI" data-wap-heading="Type I">
+						<wap:data>
+							<fieldset>
+								<legend>Typ 1</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationTypII" data-wap-heading="Type II">
+						<wap:data>
+							<fieldset>
+								<legend>Typ 2</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationTypIII" data-wap-heading="Type III">
+						<wap:data>
+							<fieldset>
+								<legend>Typ 3</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationTypIV" data-wap-heading="Kraftschlussbeiwert">
+						<wap:data>
+							<fieldset>
+								<legend>Kraftschlussbeiwert</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationDeceleration" data-wap-heading="Deceleration">
+						<wap:data>
+							<fieldset>
+								<legend>Abbremsung</legend>
+								<wap:dataform id="formCalculationEvalABB">
+									<wap:rowimage data-wap-label="Diagramm Abbremsung" data-wap-attr="ImageRefABB" data-wap-image-obj="Calculation" />
+								</wap:dataform>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationCylinderPressure" data-wap-heading="Cylinder Presure">
+						<wap:data>
+							<fieldset>
+								<legend>Zylinderdrücke</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationBrakeForce" data-wap-heading="Brake Force">
+						<wap:data>
+							<fieldset>
+								<legend>Bremskraft</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationALB" data-wap-heading="ALB">
+						<wap:data>
+							<fieldset>
+								<legend>ALB Leerlast</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageCalculationEvaluationLiftableAxles" data-wap-heading="Liftable Axles">
+						<wap:data>
+							<fieldset>
+								<legend>Liftable Axles</legend>
+							</fieldset>
+						</wap:data>
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>

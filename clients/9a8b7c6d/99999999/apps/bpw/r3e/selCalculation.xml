@@ -1,0 +1,28 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h2 class="page-title">Select a Calculation</h2>
+		<fieldset>
+			<legend>Selection Criteria</legend>
+			<wap:dataform id="formCalculationSelectFilter">
+				<wap:rowinput data-wap-label="Date of issue" data-wap-attr="DateOfIssue" />
+				<wap:rowinput data-wap-label="Calculation id" data-wap-attr="CalculationId" />
+			</wap:dataform>
+		</fieldset>
+		<wap:grid data-wap-class="Calculation" data-wap-grid-name="gridCalculationSelectOV">
+			<wap:gridcol data-wap-obj="Calculation" data-wap-attr="Id" data-wap-label="Id" />
+			<wap:gridcol data-wap-obj="Calculation" data-wap-attr="CalculationId" data-wap-label="Calculation Id." />
+			<wap:gridcol data-wap-obj="Calculation" data-wap-attr="Number" data-wap-label="Number" />
+			<wap:gridcol data-wap-obj="Calculation" data-wap-attr="TrailerManufacturer" data-wap-label="TrailerManufacturer" />
+			<wap:gridcol data-wap-obj="Calculation" data-wap-attr="MaxTotalWeight" data-wap-label="Max. total weight" />
+		</wap:grid>
+	</div>
+</html>

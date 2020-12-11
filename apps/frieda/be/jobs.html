@@ -1,0 +1,100 @@
+﻿<h3>Jobs für eigene Reaktionsteams</h3>
+
+	Jobs:<br/>
+	<table class="standard-table">
+		<!--Hole neuste 10 Einträge aus Datenbank, bei weiter Pfeil die nächsten 10, usw..-->
+		<!--ZeilenID = RequestID(TicketID (ticketXXXXX) + AlterVerantwortlicher(oldXXXX) + NeuerVerantwortlicher(newXXXXX)) aus Datenbank-->
+		<!--TODO: Bei Supervisor statt 'annehmen' -> Login-Arrow + 'zwangszuweisen'--> 
+		<tr> <th class="create-date-column">Erstelldatum</th> <th class="company-column">Firma</th> <th width="250px">Titel</th><th>Priorität</th></tr>
+		<tr id="job2141414" onclick="ClickJobEntry(this)"> <td class="create-date-column">17/2/2015</td> <td class="company-column">BPW</td> <td width="250px">EGBrake zeigt Fehlermeldung</td><td>Dringlich</td></tr>
+		<tr id="job2141415" onclick="ClickJobEntry(this)"> <td class="create-date-column">17/2/2015</td> <td class="company-column">Hegenscheidt</td> <td width="250px">Drucker XY ist kaputt</td><td>Erforderlich</td></tr>
+		<tr id="job2141416" onclick="ClickJobEntry(this)"> <td class="create-date-column">15/2/2015</td> <td class="company-column">Steinmüller</td> <td width="250px">Server XY stürzt ab</td><td>Dringlich</td></tr>
+		<tr id="job2141417" onclick="ClickJobEntry(this)"> <td class="create-date-column">15/2/2015</td> <td class="company-column">BPW</td> <td width="250px">Drucker XY ist kaputt</td><td>Erforderlich</td></tr>
+		<tr id="job2141418" onclick="ClickJobEntry(this)"> <td class="create-date-column">14/2/2015</td> <td class="company-column">Steinmüller</td> <td width="250px">EGBrake zeigt Fehlermeldung</td><td>Optional</td></tr>
+		<tr id="job2141419" onclick="ClickJobEntry(this)"> <td class="create-date-column">14/2/2015</td> <td class="company-column">Hegenscheidt</td> <td width="250px">Server XY stürzt ab</td><td>Optional</td></tr>
+		<tr id="job2141420" onclick="ClickJobEntry(this)"> <td class="create-date-column">14/2/2015</td> <td class="company-column">BPW</td> <td width="250px">Drucker XY ist kaputt</td><td>Dringlich</td></tr>
+		<tr id="job2141421" onclick="ClickJobEntry(this)"> <td class="create-date-column">12/2/2015</td> <td class="company-column">Hegenscheidt</td> <td width="250px">EGBrake zeigt Fehlermeldung</td><td>Erforderlich</td></tr>
+		<tr id="job2141422" onclick="ClickJobEntry(this)"> <td class="create-date-column">11/2/2015</td> <td class="company-column">BPW</td> <td width="250px">Drucker XY ist kaputt</td><td>Optional</td></tr>
+		<tr id="job2141423" onclick="ClickJobEntry(this)"> <td class="create-date-column">11/2/2015</td> <td class="company-column">Steinmüller</td> <td width="250px">Server XY stürzt ab</td><td>Dringlich</td></tr>
+	</table>
+	
+	<center>
+		<br/>
+		<img src="icons/Arrow-Left-256.png" class="scroll-button"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jobnr. <span id="job-nr-start">1</span> bis <span id="job-nr-end">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="icons/Arrow-Right-256.png" class="scroll-button"/>
+	</center>
+	
+	<div id="job-detail" style="display:none">
+		<br/>
+		<span style="font-weight:bold">ausgewählter Job:</span><br/>
+		<table class="detail-table">
+			<tr>
+				<td>
+					<p>Firma</p>
+					<span id="job-detail-company"></span>
+				</td>
+				<td>
+					<p>Erstelldatum</p>
+					<span id="job-detail-date"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>Titel</p>
+					<span id="job-detail-title"></span>
+				</td>
+				<td>
+					<p>Priorität</p>
+					<span id="job-detail-priority"></span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p>Beschreibung</p>
+					<!--TODO: Zeilenumbrüche in <br/> umwandeln!-->
+					<span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>Adresse</p>
+					<span>Waldweg 42</span>
+				</td>
+				<td>
+					<p>Ansprechpartner</p>
+					<span>Meier Müller Schulze</span>
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<fieldset style="display:inline-block">
+			<legend>Job annehmen</legend>
+			<!--Info anzeigen wenn Service Vertrag, ggf. bestimmten Vertrag auswählen-->Kunde hat Service Vertrag!<br/>
+			Ausführungszeitpunkt:
+			<select id="owntickets-newowner-select">
+				<!-- names from database-->
+				<option value="Sofort">Sofort</option>
+				<option value="erst Termin machen">erst Termin machen</option>
+				<option value="erst Angebot machen">erst Angebot machen</option>
+				<option value=">nur nach Rücksprache">nur nach Rücksprache</option>
+				<option value="Nie">Nie</option>
+			</select>
+			<input type="button" value="Job annehmen" onclick="">
+		</fieldset>
+		<br/><br/>
+		<!--nur sichtbar für supervisor:-->
+		<div>
+			<fieldset style="display:inline-block">
+				<legend>Job zwangszuweisen</legend>
+				neuer Bearbeiter:
+				<select id="owntickets-newowner-select">
+					<!-- names from database-->
+					<option value="Rosalina">Rosalina</option>
+					<option value="Wario">Wario</option>
+					<option value="Bowser">Bowser</option>
+					<option value="Luigi">Luigi</option>
+					<option value="Toad">Toad</option>
+				</select>
+				<input type="button" value="Job zuweisen" onclick="">
+			</fieldset>
+		</div>
+	</div>

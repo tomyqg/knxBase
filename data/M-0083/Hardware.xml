@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<KNX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CreatedBy="knxconv" ToolVersion="4.0.1986.49899" xmlns="http://knx.org/xml/project/11">
+  <ManufacturerData>
+    <Manufacturer RefId="M-0083">
+      <Hardware>
+        <Hardware Id="M-0083_H-63-0" Name="Temperaturregler/Sensor 2-fach UP" SerialNumber="63" VersionNumber="0" BusCurrent="5" HasIndividualAddress="true" HasApplicationProgram="true">
+          <Products>
+            <Product Id="M-0083_H-63-0_P-SCN.2DRT2UP.2E01" Text="Temperature controller / sensor 2-fold UP" OrderNumber="SCN-RT2UP.01" IsRailMounted="false" DefaultLanguage="en-US" Hash="JHpe9CmGdHJCLaIm4yKfRCeOh+Y=">
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationDate="2014-10-13" RegistrationSignature="KJXSA6p6rmhROSqH3b+Grd41I0GeBB624nf2dkm8KbrlsLYE3AXoEB/L33atpgfc4JOCNnBBY3LOrTtL1h5nxsfzo9q59nyKMGBEmfg83RkyJM5epNVLGMwyIFg46YkktXP6KvQ7heev5L+L5ZDCok6wnCwyVjTMtd4e92k/IXY=" />
+            </Product>
+          </Products>
+          <Hardware2Programs>
+            <Hardware2Program Id="M-0083_H-63-0_HP-0049-13-86F4" MediumTypes="MT-0" Hash="a8DW3MZs2+hqcxA4Ec4AJ/jIECQ=">
+              <ApplicationProgramRef RefId="M-0083_A-0049-13-86F4" />
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationNumber="2015/12179" RegistrationDate="2015-03-19" RegistrationSignature="tTPVbPCf6sTkeSLCx1GvbofLvuvdUReqtzvjx7/vz0kIL/2NzFQQU2oRBv5HM6+brOeaLS822hLlo20/8rNxoqAoDuEHD6xBACIhFcOQFsxBbtJ7WS6F0xfQjUlgJDw7ZeQ8x25e2sUBkOER5Xj4Dsixj63CbIraDfLZZRl2BdE=" />
+            </Hardware2Program>
+          </Hardware2Programs>
+        </Hardware>
+        <Hardware Id="M-0083_H-64-0" Name="Temperaturregler/Sensor 4-fach UP" SerialNumber="64" VersionNumber="0" BusCurrent="5" HasIndividualAddress="true" HasApplicationProgram="true">
+          <Products>
+            <Product Id="M-0083_H-64-0_P-SCN.2DRT4UP.2E01" Text="Temperature controller / sensor 4-fold UP" OrderNumber="SCN-RT4UP.01" IsRailMounted="false" DefaultLanguage="en-US" Hash="gtkN0jPAofEw6KtX9w13QWZZJvg=">
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationDate="2014-10-13" RegistrationSignature="IRaS7FOF6CmS9dsNtY3wcFCmjqHND2ixPF19OqZNViF8ryVmDKxV34T0yaVp/MttEfG77kAhyg6gYv71ubvpIrNDF8DaASgYoK2o/1loMJRi+cXGssbwxLN2cAuiP9Tj77UwWs7uWrjKDAofAd9ZZEXUP9cmtjYAuA+FUo9UUxk=" />
+            </Product>
+          </Products>
+          <Hardware2Programs>
+            <Hardware2Program Id="M-0083_H-64-0_HP-004A-13-C239" MediumTypes="MT-0" Hash="SvTfIsmePIG0ep0zFw2DpPmNnZ4=">
+              <ApplicationProgramRef RefId="M-0083_A-004A-13-C239" />
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationNumber="2015/12178" RegistrationDate="2015-03-19" RegistrationSignature="tuhSyDyh1KePzGdegUOqAjT7x75Qs8I2MtK1YljNP34hb9EC0RkEMpEagJ0sqOdVUN3EYnaE2RsexROEHHHRZqsYSwNNPa+GT8IV/bjuI7tK2iZB5RjoHbnonC7LmkLSqD4T7IMaZsOWW3om53xpNhoJXGYvacKtyJcb7FMP7xI=" />
+            </Hardware2Program>
+          </Hardware2Programs>
+        </Hardware>
+        <Hardware Id="M-0083_H-70-1" Name="Temperaturregler / -sensor 6-fach" SerialNumber="70" VersionNumber="1" BusCurrent="5" HasIndividualAddress="true" HasApplicationProgram="true">
+          <Products>
+            <Product Id="M-0083_H-70-1_P-SCN.2DRT6AP.2E01" Text="Temperature controller / sensor 6-fold AP" OrderNumber="SCN-RT6AP.01" IsRailMounted="false" DefaultLanguage="en-US" Hash="r+yPcgwIp8Ukde8Jnz/+PRL/pEY=">
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationSignature="lBf+b442fyBmkMFX08PDH3x9npY+ggaWWlbh7H4hzEyb60yC9g4M8GT4Tqry/ZEqYwCJu3M7NWODpNszD9kVxyE8QFX2fITdEG8Xhh68M/5hvvW6O/NDzsXAp8EiTqdUTAFPMEAXNZZrZ8so96wYjg2eWjleuikf/U8iOoA5jcs=" />
+            </Product>
+          </Products>
+          <Hardware2Programs>
+            <Hardware2Program Id="M-0083_H-70-1_HP-0043-13-34C2" MediumTypes="MT-0" Hash="O8wEwtZhTtNRM4O4f3BQvyXWjtA=">
+              <ApplicationProgramRef RefId="M-0083_A-0043-13-34C2" />
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationNumber="2015/12176" RegistrationDate="2015-03-19" RegistrationSignature="LmLh4D28h6CkHKPt2emPghB1yAIyuieNDbcK9hx9yuxYDX72TKDi0GVS0hfOReDF7QOFquxN+X/TFuPGU8dkXbqByXKSIg+D731x5qLXgosoG7Jdxj65pzC9I/6RogVHztDmoeYGPAasTY5cJcO1iuyWOzUP89wIzgleQkgClnQ=" />
+            </Hardware2Program>
+          </Hardware2Programs>
+        </Hardware>
+        <Hardware Id="M-0083_H-69-1" Name="Temperaturregler 6-fach" SerialNumber="69" VersionNumber="1" BusCurrent="5" HasIndividualAddress="true" HasApplicationProgram="true">
+          <Products>
+            <Product Id="M-0083_H-69-1_P-SCN.2DRT6REG.2E01" Text="Temperature controller 6-fold, 2SU MDRC" OrderNumber="SCN-RT6REG.01" IsRailMounted="true" WidthInMillimeter="0" DefaultLanguage="en-US" Hash="F0e0Sbm+Rkk4xeIgVV6HhCzYoQA=">
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationSignature="pLmt8NpaDuRDMd3N+Kp+6m2avJwAh33fZlEDmNXbF1LrX6JDOkXLu7R6SNTBqBGER2u1eNiry2UFFJ+eVMzM4cEHdfc+hOyOvC/g4GHfLqvcxf+ExJNyrnvwHaez6kN4USV/2bpIs3tw2xMERrWpPcbBkR+iUmimxQHTFQqLweM=" />
+            </Product>
+          </Products>
+          <Hardware2Programs>
+            <Hardware2Program Id="M-0083_H-69-1_HP-0042-13-7561" MediumTypes="MT-0" Hash="4zWUxp84VXqWaeEwOM2nWF0T6bk=">
+              <ApplicationProgramRef RefId="M-0083_A-0042-13-7561" />
+              <RegistrationInfo RegistrationStatus="Certified" RegistrationNumber="2015/12177" RegistrationDate="2015-03-19" RegistrationSignature="lqKWSfCiPYKr1811E0XgbYJgcrA7f/tGGKtIuERdRn61e2RqJUDKkwJ76p0ao6Fc4vR+fTewbd9ihcx0aNTnm4SEeb/jqmu2lNjtpLX10UlXOLKjsbdA6rnvggwrTOujrg/KK/Gr346DBwfo3b1lmYXCMGTmVW1ukTkRmmPgR5M=" />
+            </Hardware2Program>
+          </Hardware2Programs>
+        </Hardware>
+      </Hardware>
+      <Languages>
+        <Language Identifier="en-US">
+          <TranslationUnit RefId="M-0083_H-63-0_P-SCN.2DRT2UP.2E01">
+            <TranslationElement RefId="M-0083_H-63-0_P-SCN.2DRT2UP.2E01">
+              <Translation AttributeName="Text" Text="Temperature controller / sensor 2-fold UP" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-64-0_P-SCN.2DRT4UP.2E01">
+            <TranslationElement RefId="M-0083_H-64-0_P-SCN.2DRT4UP.2E01">
+              <Translation AttributeName="Text" Text="Temperature controller / sensor 4-fold UP" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-70-1_P-SCN.2DRT6AP.2E01">
+            <TranslationElement RefId="M-0083_H-70-1_P-SCN.2DRT6AP.2E01">
+              <Translation AttributeName="Text" Text="Temperature controller / sensor 6-fold AP" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-69-1_P-SCN.2DRT6REG.2E01">
+            <TranslationElement RefId="M-0083_H-69-1_P-SCN.2DRT6REG.2E01">
+              <Translation AttributeName="Text" Text="Temperature controller 6-fold, 2SU MDRC" />
+            </TranslationElement>
+          </TranslationUnit>
+        </Language>
+        <Language Identifier="de-DE">
+          <TranslationUnit RefId="M-0083_H-63-0_P-SCN.2DRT2UP.2E01">
+            <TranslationElement RefId="M-0083_H-63-0_P-SCN.2DRT2UP.2E01">
+              <Translation AttributeName="Text" Text="Temperaturregler / Sensor 2-fach UP" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-64-0_P-SCN.2DRT4UP.2E01">
+            <TranslationElement RefId="M-0083_H-64-0_P-SCN.2DRT4UP.2E01">
+              <Translation AttributeName="Text" Text="Temperaturregler / Sensor 4-fach UP" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-70-1_P-SCN.2DRT6AP.2E01">
+            <TranslationElement RefId="M-0083_H-70-1_P-SCN.2DRT6AP.2E01">
+              <Translation AttributeName="Text" Text="Temperaturregler / Sensor 6-fach AP" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-69-1_P-SCN.2DRT6REG.2E01">
+            <TranslationElement RefId="M-0083_H-69-1_P-SCN.2DRT6REG.2E01">
+              <Translation AttributeName="Text" Text="Temperaturregler 6-fach, 2TE REG" />
+            </TranslationElement>
+          </TranslationUnit>
+        </Language>
+      </Languages>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

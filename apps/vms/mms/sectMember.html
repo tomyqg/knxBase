@@ -1,0 +1,304 @@
+<div id="sectMember" class="container section">
+	<!--																		-->
+	<!-- editor: member contact													-->
+	<!--																		-->
+	<div class="ui modal">
+		<i class="close icon"></i>
+		<div class="ui icon header">
+			<i class="data icon"></i>
+			Mitglied Kontakte
+		</div>
+		<div class="content">
+			<form class="ui form">
+				<div class="two fields">
+					<div class="field">
+						<label>Nachname</label>
+						<input type="text" name="first-name" placeholder="Nachname" v-model.text="memberContact.LastName">
+					</div>
+					<div class="field">
+						<label>Vorname</label>
+						<input type="text" name="last-name" placeholder="Vorname" v-model.text="memberContact.FirstName">
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field">
+						<label>Telefon</label>
+						<input type="text" name="birthday" placeholder="Telefon" v-model.text="memberContact.Phone">
+					</div>
+					<div class="field">
+						<label>Mobil</label>
+						<input type="text" name="deathday" placeholder="Mobil" v-model.text="memberContact.Cellphone">
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field">
+						<label>E-Mail</label>
+						<input type="text" name="birthday" placeholder="email" v-model.text="memberContact.eMail">
+					</div>
+					<label for="hidden-new-file" class="ui icon button">
+						<i class="cloud icon"></i>
+						Open File
+					</label>
+<!--
+					<input type="file" id="hidden-new-file" style="display: none">
+-->
+					<input type="text" id="hidden-new-file" v-model.text="memberContact.Id">
+				</div>
+				<button class="ui primary button" onclick="return( saveEditor( event, 'MemberContact')) ;">Speichern</button>
+				<button class="ui button" onclick="return( abortEditor( event)) ;">Änderungen verwerfen</button>
+			</form>
+		</div>
+	</div>
+	<!--																		-->
+	<!-- head, showing actual MemberNo and some name information				-->
+	<!--																		-->
+	<div id="headMember">
+		<div class="ui labeled input">
+			<div class="ui label">Member No.:</div>&nbsp;
+			<button class="ui primary button" onClick="getMember( 'getJSONPrev') ;">-</button>&nbsp
+			<div class="ui icon input">
+				<input type="ui text" name="MemberNo" v-model.text="member.MemberNo" onkeyup="keyup( event) ;" />
+				<i class="search icon" onClick="getMember( 'getJSONThis') ;"></i>
+			</div>
+			&nbsp;&nbsp;
+			<button class="ui primary button" onClick="getMember( 'getJSONNext') ;">+</button>&nbsp;
+			{{ member.LastName }}<br/>&nbsp;{{ member.FirstName }}
+		</div>
+	</div>
+	<div class="ui horizontal divider">Daten zu diesem Mitglied</div>
+	<div class="ui top attached tabular menu">
+		<div id="tabMemberList" class="item" onclick="showTab( 'MemberList') ;">Übersicht</div>
+		<div id="tabMemberMain" class="item active" onclick="showTab( 'MemberMain') ;">Haupt</div>
+		<div id="tabMemberBanking" class="item" onclick="showTab( 'MemberBanking') ;">Banking</div>
+		<div id="tabMembership" class="item" onclick="showTab( 'Membership') ;">Mitgliedschaft</div>
+		<div id="tabMemberContacts" class="item" onclick="showTab( 'MemberContacts') ;">Contacts</div>
+	</div>
+	<!--																		-->
+	<!-- tab: dataMemberList													-->
+	<!--		member survey													-->
+	<!--																		-->
+	<div id="dataMemberList" class="ui bottom attached tab segment">
+		<div class="ui small enabled button" onClick="getMember( null, 'getList', 3) ;">
+			Liste neu laden ...
+		</div>
+		<table class="ui striped table">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Mitgliedsnr.</th>
+				<th>Name</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr v-for="member in memberList">
+				<td>{{ member.Id }}</td>
+				<td>{{ member.MemberNo }}</td>
+				<td>{{ member.LastName }}, {{ member.FirstName }}</td>
+				<td>{{ member.MemberNo }}
+					<div class="ui right floated small primary labeled icon button" :data-id="memberContact.Id" click='selectMember()'>
+						<i class="user icon"></i>Show details
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			<tfoot class="full-width">
+			<tr>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!--																		-->
+	<!-- tab: dataMemberMain													-->
+	<!--		member main data												-->
+	<!--																		-->
+	<div id="dataMemberMain" class="ui bottom attached tab active segment">
+		<form class="ui form" method="POST">
+			<div class="two fields">
+				<div class="field">
+					<label>Name</label>
+					<div class="two fields">
+						<div class="field">
+							<input type="text" name="first-name" placeholder="Name 1" v-model.text="member.LastName">
+						</div>
+						<div class="field">
+							<input type="text" name="last-name" placeholder="Name 2" v-model.text="member.FirstName">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="fields">
+				<div class="two wide field">
+					<label>PLZ</label>
+					<input type="text" name="ZIP" placeholder="Name 1" v-model.text="member.ZIP">
+				</div>
+				<div class="four wide field">
+					<label>Stadt</label>
+					<input type="text" name="City" placeholder="Name 2" v-model.text="member.City">
+				</div>
+				<div class="four wide field">
+					<label>Strasse</label>
+					<input type="text" name="Street" placeholder="Name 1" v-model.text="member.Street">
+				</div>
+				<div class="one wide field">
+					<label>Hausnummer</label>
+					<input type="text" name="Number" placeholder="Name 2" v-model.text="member.Number">
+				</div>
+			</div>
+			<div class="fields">
+				<div class="field">
+					<label>Telefon</label>
+					<input type="text" name="Phone" placeholder="Phone" v-model.text="member.Phone">
+				</div>
+				<div class="field">
+					<label>Fax</label>
+					<input type="text" name="Fax" placeholder="Fax" v-model.text="member.Fax">
+				</div>
+				<div class="field">
+					<label>Mobil</label>
+					<input type="text" name="Cellphone" placeholder="Cellphone" v-model.text="member.Cellphone">
+				</div>
+				<div class="field">
+					<label>URL</label>
+					<input type="text" name="URL" placeholder="URL" v-model.text="member.URL">
+				</div>
+				<div class="field">
+					<label>eMail</label>
+					<input type="text" name="eMail" placeholder="eMail" v-model.text="member.eMail">
+				</div>
+			</div>
+			<div class="fields">
+				<div class="field">
+					<label>Geburtstag</label>
+					<input type="text" name="DateOfBirth" placeholder="Geburtsdatum" v-model.text="member.DateOfBirth">
+				</div>
+				<div class="ui floating dropdown labeled search icon button">
+					<label>Geburtstag</label>
+					<i class="world icon"></i>
+					<span class="text">Select Language</span>
+					<div class="menu">
+						<div class="item">Arabic</div>
+						<div class="item">Chinese</div>
+						<div class="item">Danish</div>
+						<div class="item">Dutch</div>
+						<div class="item">English</div>
+						<div class="item">French</div>
+					</div>
+				</div>
+			</div>
+			<button class="ui primary button" onclick="return( save( event)) ;">Aktualisieren</button>
+			<button class="ui button" onclick="return( saveAsNew( event)) ;">Neu anlegen</button>
+			<button class="ui button">Änderungen verwerfen</button>
+		</form>
+	</div>
+	<!--																		-->
+	<!-- tab: dataMemberBanking													-->
+	<!--		member banking data												-->
+	<!--																		-->
+	<div id="dataMemberBanking" class="ui bottom attached tab segment">
+		<form class="ui form">
+			<div class="six fields">
+				<div class="inline field">
+					<label>Währung</label>
+					<select class="ui dropdown">
+						<option value="">Währung</option>
+						<option value="CLP">Chilenische Pesos</option>
+						<option value="USD">US $</option>
+						<option value="CAD">Kanadische $</option>
+						<option value="EUR">€</option>
+					</select>
+				</div>
+			</div>
+			<button class="ui primary button" onclick="return( save( e)) ;">Speichern</button>
+			<button class="ui button">Änderungen verwerfen</button>
+		</form>
+	</div>
+	<!--																		-->
+	<!-- data: dataMembership periods											-->
+	<!--		membership periods												-->
+	<!--																		-->
+	<div id="dataMembership" class="ui bottom attached tab segment">
+		<table class="ui striped table">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Eintritt</th>
+				<th>Austritt</th>
+				<th>Actions ...</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr v-for="memberPeriod in memberPeriods">
+				<td>{{ memberPeriod.Id }}</td>
+				<td>{{ memberPeriod.DateEntry }}</td>
+				<td>{{ memberPeriod.DateExit }}</td>
+				<td>
+					<div class="ui right floated small primary labeled icon button" onclick="openEditor( event, 'MemberPeriod') ;">
+						<i class="user icon"></i>Edit
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			<tfoot class="full-width">
+			<tr>
+				<th></th>
+				<th colspan="4">
+					<div class="ui right floated small primary labeled icon button" onclick="openEditor( event, 'MemberPeriod') ;">
+						<i class="user icon"></i> Add MemberPeriod
+					</div>
+					<div class="ui small  button">
+						Approve
+					</div>
+					<div class="ui small  disabled button">
+						Approve All
+					</div>
+				</th>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+	<!--																		-->
+	<!-- data: dataMemberContacts												-->
+	<!--		member contacts													-->
+	<!--																		-->
+	<div id="dataMemberContacts" class="ui bottom attached tab segment">
+		<table class="ui striped table">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>FirstName</th>
+				<th>Actions ...</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr v-for="memberContact in memberContacts">
+				<td>{{ memberContact.Id }}</td>
+				<td>{{ memberContact.LastName }}</td>
+				<td>{{ memberContact.FirstName }}</td>
+				<td>
+					<div class="ui right floated small primary labeled icon button" :data-id="memberContact.Id" onclick="openEditor(event, 'MemberContact');">
+						<i class="user icon"></i>Edit
+					</div>
+				</td>
+			</tr>
+			</tbody>
+			<tfoot class="full-width">
+			<tr>
+				<th></th>
+				<th colspan="4">
+					<div class="ui right floated small primary labeled icon button" :data-id="-1" onclick="openEditor( event, 'MemberContact') ;">
+						<i class="user icon"></i> Add Contact
+					</div>
+					<div class="ui small  button">
+						Approve
+					</div>
+					<div class="ui small  disabled button">
+						Approve All
+					</div>
+				</th>
+			</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>

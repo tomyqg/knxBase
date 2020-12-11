@@ -1,0 +1,69 @@
+﻿<h3>neues Ticket anlegen</h3>
+
+<br/>
+Achtung! <br/>
+Wenn du ein Ticket anlegst, wirst du automatisch der Verantwortliche!<br/>
+Wenn du stattdessen einem Reaktionsteam eine Aufgabe geben willst,<br/>
+erstelle einen Job.<br/>
+<br/>
+<fieldset style="display:inline-block">
+	<legend>neues Ticket anlegen</legend>
+	<form>
+		Titel:
+		<input id="new-job_title" size="50" placeholder="Produkt und Kurzbeschreibung"><br/>
+		Ticketbeschreibung:<br/>
+		<textarea id="new-job_description" rows="10" cols="50" placeholder="Beschreibung hinzufügen"></textarea>
+		<br/>
+		Kunde auswählen:
+		<select id="new-job_customer">
+			<!--fill select with customers from database, option-id should be customer id from database-->
+			<option value="Hegenscheidt">Hegenscheidt</option>
+			<option value="BPW">BPW</option>
+			<option value="Steinmüller">Steinmüller</option>
+			<option value="Fisia Babcock">Fisia Babcock</option>
+		</select>
+		Ansprechpartner:
+		<select id="new-job_customer-employee">
+			<!-- names from database-->
+			<!-- eingeschränkt durch ausgewählte Firma-->
+			<option value=""></option><!--empty option if no customer employee-->
+			<option value="Frau Maier">Frau Maier</option>
+			<option value="Frau Schulze">Frau Schulze</option>
+			<option value="Frau Müller">Frau Müller</option>
+		</select>
+		<br/>
+		<!--nur Reaktionsteams, in denen der aktuelle User auch Mitglied ist!-->
+		Reaktionsteam auswählen:
+		<select id="new-job_reactionteam">
+			<!-- names from database-->
+			<option value="Default">Default</option>
+			<option value="ReaktionsTeamName">Softwareentwicklung</option>
+			<option value="ReaktionsTeamName2">Druckertechnik</option>
+			<option value="ReaktionsTeamName3">Vertrieb</option>
+		</select>
+		<br/>
+		Priorität auswählen:
+		<select id="new-job_priority">
+			<!-- numbers and names from database-->
+			<option value="priority id">Dringlich</option>
+			<option value="priority id2">Erforderlich</option>
+			<option value="priority id3">Optional</option>
+		</select>
+		<br/>
+		<!--Info anzeigen wenn Service Vertrag, ggf. bestimmten Vertrag auswählen-->
+		Kunde hat Service Vertrag!<br/>
+
+		Ausführungszeitpunkt:
+		<select id="owntickets-newowner-select">
+			<!-- names from database-->
+			<option value="Sofort">Sofort</option>
+			<option value="erst Termin machen">erst Termin machen</option>
+			<option value="erst Angebot machen">erst Angebot machen</option>
+			<option value=">nur nach Rücksprache">nur nach Rücksprache</option>
+			<option value="Nie">Nie</option>
+		</select>
+		<br/><br/>
+		<input type="button" value="Ticket erstellen"><!-- do custom submit onclick + validation with javascript--> <input type="reset" value="Eingaben löschen">
+		<!-- create job too and add ticket to it (you need a job dataset to store all information-->
+	</form>
+</fieldset>

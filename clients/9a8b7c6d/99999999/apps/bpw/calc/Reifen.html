@@ -1,0 +1,33 @@
+<font style="color:red;font-weight:bold;">Dies ist eine Demo des Benutzerinterfaces <span style="text-decoration:underline;">ohne jegliche Berechnungs-funktion</span></font><br/>
+			
+			
+<input type="radio" data-dojo-type="dijit.form.RadioButton" name="tyre_all_or" id="tyre_all_or_1" value="Vorauswahl">Vorauswahl</input> 
+<br/>
+<input type="radio" data-dojo-type="dijit.form.RadioButton" name="tyre_all_or" id="tyre_all_or_2" value="alle Gutachten" checked="true">alle Gutachten</input> 
+		    
+<fieldset>
+	<legend>Reifen</legend>
+	&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+	<input id="tyre_benutzerdefiniert" data-dojo-type="dijit.form.CheckBox" value="benutzerdefiniert" checked="false"><label>benutzerdefiniert</label></input>
+	<br/><br/>
+	Auswahl:
+	
+	<p><font color="black">
+		<select id="tyre_select" size="3" data-dojo-type="dijit.form.Select" name="tyre_select" width="150" onchange="CheckTyre();overview_actualize();">
+			<option value="6,00 R 9">6,00 R 9</option>
+			<option value="6,00 R 10">6,00 R 10</option>
+		</select>
+	</font></p>
+	
+	<input id="gleiche Reifen" data-dojo-type="dijit.form.CheckBox" value="gleiche Reifen" checked="true"><label>gleiche Reifen</label></input>
+	
+	<br/><br/>
+	Reifenradius Rdyn [m]: 
+	<input type="text" data-dojo-type="dijit.form.TextBox" name="reifenradius_rdyn" id="reifenradius_rdyn" value="0,260" width="150"></input> 
+	
+	<br/><br/>
+	Reifenradius Rstat [m]:
+	<input type="text" data-dojo-type="dijit.form.TextBox" name="reifenradius_rstat" id="reifenradius_rstat" value="0,245" width="150"></input> 
+	
+	<br/>
+</fieldset>

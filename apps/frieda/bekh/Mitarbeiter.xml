@@ -1,0 +1,83 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div data-wap-type="screen" data-wap-name="Mitarbeiter">
+		<h1 class="page-title">Mitarbeiter</h1>
+		<wap:key>
+			<wap:keyform id="MitarbeiterKeyData">
+				<wap:keyrow wapLabel="Mitarbeiter no." wapVar="Id" prev="true" next="true" select="true" />
+				<wap:keydisplay wapLabel="Description" wapVar="Nachname" colspan="4"/>
+			</wap:keyform>
+		</wap:key>
+		<div id="tabCntrlMitarbeiterMain" class="wapTabContainer">
+			<ul class="wapTabMenu" wapTabCntrlId="tabCntrlMitarbeiterMain">
+				<li id="tabPageMitarbeiterSurvey" class="active" wapContentId="tabPageMitarbeiterSurveyContent" onClick="showTab( 'tabPageMitarbeiterSurvey') ;">Overview</li>
+				<li id="tabPageMitarbeiterMainData" class="" wapContentId="tabPageMitarbeiterMainDataContent" onClick="showTab( 'tabPageMitarbeiterMainData') ;">Main Data</li>
+				<li id="tabPageMitarbeiterRollen" class="" wapContentId="tabPageMitarbeiterRollenContent" onClick="showTab( 'tabPageMitarbeiterRollen') ;">Rollen</li>
+				<li id="tabPageMitarbeiterHelp" class="" wapContentId="tabPageMitarbeiterHelpContent" onClick="showTab( 'tabPageMitarbeiterHelp') ;">Help</li>
+			</ul>
+			<div class="clear"> </div>
+			<div id="tabPageMitarbeiterSurveyContent" class="wapTabContent">
+				<wap:grid wapClass="Mitarbeiter" wapGridName="gridMitarbeiterOV">
+					<wap:gridcol wapObj="Mitarbeiter" wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapObj="Mitarbeiter" wapVar="Vorname" wapLabel="Vorname" />
+					<wap:gridcol wapObj="Mitarbeiter" wapVar="Nachname" wapLabel="Nachname" />
+					<wap:gridcol wapObj="Mitarbeiter" wapVar="EmailAdresseOffice" wapLabel="e-Mail Büro" />
+					<wap:gridcol wapObj="Mitarbeiter" wapVar="EmailAdressePrivate" wapLabel="e-Mail Addresse privat" />
+				</wap:grid>
+			</div>
+			<div id="tabPageMitarbeiterMainDataContent" class="wapTabContent">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formMitarbeiterMain">
+										<wap:rowinput wapLabel="Vorname" wapVar="Vorname" />
+										<wap:rowinput wapLabel="Nachname" wapVar="Nachname" />
+										<wap:rowinput wapLabel="e-Mail Büro" wapVar="EmailAdresseOffice" />
+										<wap:rowinput wapLabel="e-Mail Addresse privat" wapVar="EmailAdressePrivate" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate forms="formMitarbeiterMain" />
+					<wap:btnUpdate forms="formMitarbeiterMain" />
+				</wap:data>
+			</div>
+			<div id="tabPageMitarbeiterRollenContent" class="wapTabContent">
+				<wap:grid wapClass="Rolle" wapGridName="gridMitarbeiterRollen" adder="true">
+					<wap:gridcol wapVar="Id" wapLabel="Id" />
+					<wap:gridcol wapVar="Rollenname" wapLabel="Rollenname" />
+					<wap:gridcol wapFunctions="edit,delete" wapLabel="Functions" />
+				</wap:grid>
+			</div>
+			<div id="tabPageMitarbeiterHelpContent" class="wapTabContent">
+				<div id="tabCntrlMitarbeiterHelpMain" class="wapTabContainer">
+					<ul class="wapTabMenu" wapTabCntrlId="tabCntrlMitarbeiterHelpMain">
+						<li id="tabPageMitarbeiterHelpDE" class="" wapContentId="tabPageMitarbeiterHelpDEContent" onClick="showTab( 'tabPageMitarbeiterHelpDE') ;">Deutsch</li>
+						<li id="tabPageMitarbeiterHelpEN" class="" wapContentId="tabPageMitarbeiterHelpENContent" onClick="showTab( 'tabPageMitarbeiterHelpEN') ;">English</li>
+						<li id="tabPageMitarbeiterHelpFR" class="" wapContentId="tabPageMitarbeiterHelpFRContent" onClick="showTab( 'tabPageMitarbeiterHelpFR') ;">Francais</li>
+					</ul>
+					<div class="clear"> </div>
+					<div class="wapTabTopBorder"> </div>
+					<div id="tabPageMitarbeiterHelpDEContent" class="wapTabContent">
+					Deutsch Hilfe.</div>
+					<div id="tabPageMitarbeiterHelpENContent" class="wapTabContent">
+					English help.</div>
+					<div id="tabPageMitarbeiterHelpFRContent" class="wapTabContent">
+					Aide francais.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

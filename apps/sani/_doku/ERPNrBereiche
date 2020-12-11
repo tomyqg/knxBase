@@ -1,0 +1,10 @@
+ERP Nummer Bereiche der Standardinstallation:
+
+
+Bereich				Anfang			Ende
+------------------------------------------------
+Kunde Nr.			999900000000	999909999999
+Lieferant Nr.		999910000000	999919999999
+Firma Nr.			999999000000	999999009999
+Filiale Nr.			999999010000	999999019999
+Kasse Nr.			999999020000	999999029999

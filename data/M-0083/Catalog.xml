@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<KNX xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CreatedBy="knxconv" ToolVersion="4.0.1986.49899" xmlns="http://knx.org/xml/project/11">
+  <ManufacturerData>
+    <Manufacturer RefId="M-0083">
+      <Catalog>
+        <CatalogSection Id="M-0083_CS-R.2001" Name="Control" Number="R 01" VisibleDescription="" DefaultLanguage="en-US">
+          <CatalogSection Id="M-0083_CS-R.2001-RT.20R04" Name="Temperature Controller flush mounted" Number="RT R04" VisibleDescription="" DefaultLanguage="en-US">
+            <CatalogItem Id="M-0083_H-63-0_HP-0049-13-86F4_CI-SCN.2DRT2UP.2E01-1" Name="Temperature controller / sensor 2-fold UP" Number="1" VisibleDescription="2 Channel Temperature Controller flush mounted" ProductRefId="M-0083_H-63-0_P-SCN.2DRT2UP.2E01" Hardware2ProgramRefId="M-0083_H-63-0_HP-0049-13-86F4" DefaultLanguage="en-US" />
+            <CatalogItem Id="M-0083_H-64-0_HP-004A-13-C239_CI-SCN.2DRT4UP.2E01-1" Name="Temperature controller / sensor 4-fold UP" Number="1" VisibleDescription="4 Channel Temperature Controller flush mounted" ProductRefId="M-0083_H-64-0_P-SCN.2DRT4UP.2E01" Hardware2ProgramRefId="M-0083_H-64-0_HP-004A-13-C239" DefaultLanguage="en-US" />
+          </CatalogSection>
+          <CatalogSection Id="M-0083_CS-R.2001-RT.20R06" Name="6 Channel Temperature Controller" Number="RT R06" VisibleDescription="" DefaultLanguage="en-US">
+            <CatalogItem Id="M-0083_H-69-1_HP-0042-13-7561_CI-SCN.2DRT6REG.2E01-1" Name="Temperature Controller 6-fold, 2SU MDRC" Number="1" VisibleDescription="6 Channel Temperature Controller MDRC" ProductRefId="M-0083_H-69-1_P-SCN.2DRT6REG.2E01" Hardware2ProgramRefId="M-0083_H-69-1_HP-0042-13-7561" DefaultLanguage="en-US" />
+            <CatalogItem Id="M-0083_H-70-1_HP-0043-13-34C2_CI-SCN.2DRT6AP.2E01-1" Name="Controller / Sensor 6-fold AP" Number="1" VisibleDescription="6 Channel Temperature Controller surface mounted" ProductRefId="M-0083_H-70-1_P-SCN.2DRT6AP.2E01" Hardware2ProgramRefId="M-0083_H-70-1_HP-0043-13-34C2" DefaultLanguage="en-US" />
+          </CatalogSection>
+        </CatalogSection>
+      </Catalog>
+      <Languages>
+        <Language Identifier="en-US">
+          <TranslationUnit RefId="M-0083_CS-R.2001">
+            <TranslationElement RefId="M-0083_CS-R.2001">
+              <Translation AttributeName="Name" Text="Control" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_CS-R.2001-RT.20R04">
+            <TranslationElement RefId="M-0083_CS-R.2001-RT.20R04">
+              <Translation AttributeName="Name" Text="Temperature Controller flush mounted" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-63-0_HP-0049-13-86F4_CI-SCN.2DRT2UP.2E01-1">
+            <TranslationElement RefId="M-0083_H-63-0_HP-0049-13-86F4_CI-SCN.2DRT2UP.2E01-1">
+              <Translation AttributeName="Name" Text="Temperature controller / sensor 2-fold UP" />
+              <Translation AttributeName="VisibleDescription" Text="2 Channel Temperature Controller flush mounted" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-64-0_HP-004A-13-C239_CI-SCN.2DRT4UP.2E01-1">
+            <TranslationElement RefId="M-0083_H-64-0_HP-004A-13-C239_CI-SCN.2DRT4UP.2E01-1">
+              <Translation AttributeName="Name" Text="Temperature controller / sensor 4-fold UP" />
+              <Translation AttributeName="VisibleDescription" Text="4 Channel Temperature Controller flush mounted" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_CS-R.2001-RT.20R06">
+            <TranslationElement RefId="M-0083_CS-R.2001-RT.20R06">
+              <Translation AttributeName="Name" Text="6 Channel Temperature Controller" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-69-1_HP-0042-13-7561_CI-SCN.2DRT6REG.2E01-1">
+            <TranslationElement RefId="M-0083_H-69-1_HP-0042-13-7561_CI-SCN.2DRT6REG.2E01-1">
+              <Translation AttributeName="Name" Text="Temperature Controller 6-fold, 2SU MDRC" />
+              <Translation AttributeName="VisibleDescription" Text="6 Channel Temperature Controller MDRC" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-70-1_HP-0043-13-34C2_CI-SCN.2DRT6AP.2E01-1">
+            <TranslationElement RefId="M-0083_H-70-1_HP-0043-13-34C2_CI-SCN.2DRT6AP.2E01-1">
+              <Translation AttributeName="Name" Text="Controller / Sensor 6-fold AP" />
+              <Translation AttributeName="VisibleDescription" Text="6 Channel Temperature Controller surface mounted" />
+            </TranslationElement>
+          </TranslationUnit>
+        </Language>
+        <Language Identifier="de-DE">
+          <TranslationUnit RefId="M-0083_CS-R.2001">
+            <TranslationElement RefId="M-0083_CS-R.2001">
+              <Translation AttributeName="Name" Text="Regelung" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_CS-R.2001-RT.20R04">
+            <TranslationElement RefId="M-0083_CS-R.2001-RT.20R04">
+              <Translation AttributeName="Name" Text="Temperaturregler für Unterputzmontage" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-63-0_HP-0049-13-86F4_CI-SCN.2DRT2UP.2E01-1">
+            <TranslationElement RefId="M-0083_H-63-0_HP-0049-13-86F4_CI-SCN.2DRT2UP.2E01-1">
+              <Translation AttributeName="Name" Text="Temperaturregler / Sensor 2-fach UP" />
+              <Translation AttributeName="VisibleDescription" Text="2 Kanal Temperaturregler für Unterputzmontage" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-64-0_HP-004A-13-C239_CI-SCN.2DRT4UP.2E01-1">
+            <TranslationElement RefId="M-0083_H-64-0_HP-004A-13-C239_CI-SCN.2DRT4UP.2E01-1">
+              <Translation AttributeName="Name" Text="Temperaturregler / Sensor 4-fach UP" />
+              <Translation AttributeName="VisibleDescription" Text="4 Kanal Temperaturregler für Unterputzmontage" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_CS-R.2001-RT.20R06">
+            <TranslationElement RefId="M-0083_CS-R.2001-RT.20R06">
+              <Translation AttributeName="Name" Text="6 Kanal Temperaturregler" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-69-1_HP-0042-13-7561_CI-SCN.2DRT6REG.2E01-1">
+            <TranslationElement RefId="M-0083_H-69-1_HP-0042-13-7561_CI-SCN.2DRT6REG.2E01-1">
+              <Translation AttributeName="Name" Text="Temperaturregler 6-fach, 2TE REG" />
+              <Translation AttributeName="VisibleDescription" Text="6 Kanal Temperaturregler REG" />
+            </TranslationElement>
+          </TranslationUnit>
+          <TranslationUnit RefId="M-0083_H-70-1_HP-0043-13-34C2_CI-SCN.2DRT6AP.2E01-1">
+            <TranslationElement RefId="M-0083_H-70-1_HP-0043-13-34C2_CI-SCN.2DRT6AP.2E01-1">
+              <Translation AttributeName="Name" Text="Temperaturregler / Sensor 6-fach AP" />
+              <Translation AttributeName="VisibleDescription" Text="6 Kanal Temperaturregler für Aufputzmontage" />
+            </TranslationElement>
+          </TranslationUnit>
+        </Language>
+      </Languages>
+    </Manufacturer>
+  </ManufacturerData>
+</KNX>

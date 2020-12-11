@@ -1,0 +1,72 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:dojo="http://www.openwap.org/dojo"
+        xmlns:wap="http://www.openwap.org/wap">
+<dojo:lbc style="width: 100%; height: 100%;">
+	<dojo:lcp data-dojo-props="region:'top', splitter:true" style="height: 150px;">
+		<wap:key>
+			<wap:keyform id="OptionGroupKeyData">
+				<wap:keyrow wapLabel="OptionGroup no." wapVar="OptionGroupName" prev="true" next="true" select="true" />
+			</wap:keyform>
+		</wap:key>
+	</dojo:lcp>
+	<dojo:lcp data-dojo-props="region:'center'">
+	        <dojo:ltc id="tcOptionGroupMain">
+	                <dojo:lcp title="Overview">
+	                        <wap:grid class="OptionGroup" wapGridName="gridOptionGroupOV" wapFormName="formOptionGroupOV" wapTableName="TableOptionGroupOV" >
+	                                <wap:gridcol wapObj="OptionGroup" wapVar="Id" wapLabel="Id" />
+	                                <wap:gridcol wapObj="OptionGroup" wapVar="OptionGroupName" wapLabel="OptionGroupName" />
+	                                <wap:gridcol wapObj="OptionGroup" wapVar="Key" wapLabel="Key" />
+	                                <wap:gridcol wapObj="OptionGroup" wapVar="Value" wapLabel="Value" />
+	                        </wap:grid>
+	                </dojo:lcp>
+			<dojo:lcp title="General" id="tcOptionGroupMain_cpGeneral">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formOptionGroupMain">
+										<wap:rowinput wapLabel="OptionGroup name" wapVar="OptionGroupName" wapMode="edit" />
+										<wap:rowinput wapLabel="OptionGroup key" wapVar="Key" wapMode="edit" />
+										<wap:rowinput wapLabel="OptionGroup value" wapVar="Value" wapMode="edit" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate form="formOptionGroupMain" />
+					<wap:btnUpdate forms="formOptionGroupMain" />
+				</wap:data>
+			</dojo:lcp>
+			<dojo:lcp title="Options">
+				<wap:grid class="Option" wapGridName="gridOption" wapFormName="formOption" wapTableName="TableOption" adder="true">
+			        <wap:gridcol wapObj="Option" wapVar="Id" wapLabel="Id" />
+			        <wap:gridcol wapObj="Option" wapVar="OptionName" wapLabel="OptionName" />
+			        <wap:gridcol wapObj="Option" wapVar="Key" wapLabel="Key" />
+			        <wap:gridcol wapObj="Option" wapVar="Value" wapLabel="Value" />
+					<wap:gridcol fnc="edit,delete" wapLabel="Functions" />
+				</wap:grid>
+			</dojo:lcp>
+			<dojo:lcp title="Help">
+				<dojo:ltc>
+					<dojo:lcp title="English">
+					This is the english help page.
+					</dojo:lcp>
+					<dojo:lcp title="German">
+						This is the german help page.
+					</dojo:lcp>
+				</dojo:ltc>
+			</dojo:lcp>
+		</dojo:ltc>
+	</dojo:lcp>
+</dojo:lbc>
+</html>

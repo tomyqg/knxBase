@@ -1,0 +1,26 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<wap:module name="ModUser" />
+	<wap:screen name="Calendar" />
+	<wap:wapScreen data-wap-module="ModUser" data-wap-screen="Calendar" data-wap-core-object="Calendar" data-wap-core-object-key="CalendarId" >
+		<h1 class="page-title">User Calendar</h1>
+        	<wap:key>
+        		<wap:keyform id="CalendarKeyData">
+        			<wap:keyrow data-wap-label="Calendar id" data-wap-attr="CalendarId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+        		</wap:keyform>
+        	</wap:key>
+                <wap:tabContainer id="tabCntrlCalendarMain" data-wap-active-tab-onload="tabPageCalendarSurveyEntry">
+                        <wap:tabContentPane id="tabPageCalendarSurvey" data-wap-heading="Overview">
+				<div id="modUser_mainCalendar"></div>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</wap:wapScreen>
+</html>

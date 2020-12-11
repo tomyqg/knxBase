@@ -1,0 +1,97 @@
+<!--
+Example for an XML file describing a screen
+
+Note:
+All Ids will be automatically assigned is not given. Manual assignment is only needed in case
+the node must be looked up, as it's for example sometimes needed to locate a tab in a tab container
+ -->
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wap="http://www.openwap.org/wap">
+	<div>
+		<h1 class="page-title">Tyres</h1>
+		<wap:key>
+			<wap:keyform id="TyreKeyData">
+				<wap:keyrow data-wap-label="Tyre no." data-wap-attr="TyreId" data-wap-prev="true" data-wap-next="true" data-wap-select="true" />
+				<wap:keydisplay colspan="4" data-wap-label="Description" data-wap-attr="Description"/>
+			</wap:keyform>
+		</wap:key>
+		<wap:tabContainer id="tabCntrlTyreMain">
+			<wap:tabContentPane id="tabPageTyreSurvey" data-wap-heading="Overview">
+				<wap:grid data-wap-class="Tyre" data-wap-grid-name="gridTyreOV"  >
+					<wap:gridcol data-wap-obj="Tyre" data-wap-attr="Id" data-wap-label="Id" />
+					<wap:gridcol data-wap-obj="Tyre" data-wap-attr="TyreId" data-wap-label="Tyre Id." />
+					<wap:gridcol data-wap-obj="Tyre" data-wap-attr="Description" data-wap-label="Description" data-wap-align="right"/>
+					<wap:gridcol data-wap-obj="Tyre" data-wap-attr="RDyn" data-wap-label="&#x00D8;-dynamic" />
+					<wap:gridcol data-wap-obj="Tyre" data-wap-attr="RStat" data-wap-label="&#x00D8;-static" />
+				</wap:grid>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageTyreMainData" data-wap-heading="MainData">
+				<wap:data>
+					<table>
+						<tr>
+							<td valign="top">
+								<fieldset>
+									<legend>Main</legend>
+									<wap:dataform id="formTyreMain">
+										<wap:rowinput data-wap-label="Description" data-wap-attr="Description" />
+										<wap:rowdisplay data-wap-label="Manufacturer Id." data-wap-attr="ManufacturerId" />
+<!--
+										<wap:rowoption data-wap-label="Manufacturer" data-wap-attr="ManufacturerId" data-wap-mode="edit"
+											data-wap-db="Manufacturer" data-wap-key="h_id" data-wap-value="h_bezeichnung" data-wap-cond="" data-wap-order="h_id" data-wap-def="#.00000001" />
+										<wap:rowdisplay data-wap-label="Tyre type" data-wap-attr="TyreTypeId" />
+										<wap:rowoption data-wap-label="Tyre type" data-wap-attr="TyreTypeId" data-wap-mode="edit"
+											data-wap-db="t_bremstyp" data-wap-key="bt_id" data-wap-value="bt_bezeichnung" data-wap-cond="" data-wap-order="bt_id" data-wap-def="EUR" />
+-->
+									</wap:dataform>
+								</fieldset>
+							</td>
+							<td valign="top">
+								<fieldset>
+									<legend>Logistic Data</legend>
+									<wap:dataform id="formTyreLogistics">
+										<wap:rowdisplay data-wap-label="LastUpdate" data-wap-attr="LastUpdate" />
+										<wap:rowinput data-wap-label="Authority" data-wap-attr="Authority" />
+										<wap:rowinput data-wap-label="Location" data-wap-attr="Location" />
+										<wap:rowinput data-wap-label="UserId" data-wap-attr="UserId" />
+										<wap:rowinput data-wap-label="Local" data-wap-attr="Local" />
+										<wap:rowinput data-wap-label="Current" data-wap-attr="Current" />
+										<wap:rowdisplay data-wap-label="LastUpdateTicks" data-wap-attr="LastUpdateTicks" />
+									</wap:dataform>
+								</fieldset>
+							</td>
+						</tr>
+					</table>
+					<wap:btnCreate data-wap-forms="formTyreMain,formTyreValues,formTyreValues1" />
+					<wap:btnUpdate data-wap-forms="formTyreMain,formTyreValues,formTyreValues1" />
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageTyreAssessments" data-wap-heading="Assessments">
+				<wap:data>
+					<fieldset>
+						<legend>Brake Pads</legend>
+						<wap:grid data-wap-class="Assessment" data-wap-grid-name="gridTyreAssessments" data-wap-adder="true">
+							<wap:gridcol data-wap-attr="Id" data-wap-label="Id" />
+							<wap:gridcol data-wap-attr="AssessmentId" data-wap-label="Assessment Id." data-wap-link-to="assessment" />
+							<wap:gridcol data-wap-attr="ProtocolNo" data-wap-label="Protocol no." />
+							<wap:gridcol data-wap-functions="edit,delete" data-wap-label="Functions" />
+						</wap:grid>
+					</fieldset>
+				</wap:data>
+			</wap:tabContentPane>
+			<wap:tabContentPane id="tabPageTyreHelp" data-wap-heading="Help">
+				<wap:tabContainer id="tabCntrlTyreHelpMain">
+					<wap:tabContentPane id="tabPageTyreHelpDE" data-wap-heading="Deutsch">
+						Deutsch Hilfe.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageTyreHelpEN" data-wap-heading="English">
+						English help.
+					</wap:tabContentPane>
+					<wap:tabContentPane id="tabPageTyreHelpFR" data-wap-heading="Francais">
+						Aide francais.
+					</wap:tabContentPane>
+				</wap:tabContainer>
+			</wap:tabContentPane>
+		</wap:tabContainer>
+	</div>
+</html>
